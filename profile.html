@@ -4,158 +4,67 @@
   <link rel="icon" href="img/logoosn.png" type="image/x-icon" style="width: 100px;">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/style/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-    <title>Помощник для вас : Туры по городам и странам</title>
-  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <title>Личный кабинет | Туры Везде</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Mulish', sans-serif; background: linear-gradient(135deg, #bcddff54, #98dbb8a1); padding: 20px; }
+        .profile-container { max-width: 800px; margin: 80px auto 20px; background: white; border-radius: 30px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        h1 { color: #1b5031; margin-bottom: 30px; border-bottom: 3px solid #e3f7ee; padding-bottom: 15px; }
+        .user-info { background: #e3f7ee; padding: 20px; border-radius: 20px; margin-bottom: 30px; }
+        .user-info p { font-size: 1.2rem; margin-bottom: 10px; }
+        .route-section h2 { color: #333; margin-bottom: 20px; }
+        .route-item { background: #f8f9fa; padding: 15px; border-radius: 12px; margin-bottom: 10px; border-left: 4px solid #2e8d53; }
+        .logout-btn { background: #e74c3c; color: white; border: none; padding: 12px 25px; border-radius: 50px; font-size: 1rem; cursor: pointer; margin-top: 20px; }
+        .logout-btn:hover { background: #c0392b; }
+        .back-link { margin-top: 20px; display: inline-block; color: #2e8d53; text-decoration: none; }
+    </style>
 </head>
 <body>
-
-       <header class="header">
-      <div class="header-left">
-            <a href="about.html">Главная</a>
-                <a href="about.html">О нас</a>
-                <a href="planner.html">Конструктор маршрутов</a>
-               
-            </div>
-                    <div class="header-logo"><img src="img/logo.png" alt=""></div>
-                            
-                            <div class="header-right"> 
-                                <a style="margin-right: 20px; margin-top:11px;" href="locals.html">Места от жителей</a>
-                            <a class="lihka">Войти</a>
-                            </div>
-    </header>
-    
-
-
-
-
-
-
-
-
-    
-    <footer>
-        <div class="footer-container">
-            <!-- Верхняя часть футера с основными секциями -->
-            <div class="footer-top">
-                <!-- Секция 1: Логотип и описание -->
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <a href="#" class="logo-link">
-                            <i class="fas fa-globe-europe logo-icon"></i>
-                            <span class="logo-text">TourExplorer</span>
-                        </a>
-                        <p class="footer-description">
-                            Мы предоставляем лучшие туристические услуги с 2010 года. 
-                            Наша цель - сделать ваш отдых незабываемым и комфортным.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Секция 2: Контактная информация -->
-                <div class="footer-section">
-                    <h3 class="section-title">Контактная информация</h3>
-                    <ul class="contact-list">
-                        <li class="contact-item">
-                            <i class="fas fa-phone-alt contact-icon"></i>
-                            <div class="contact-text">
-                                <a href="tel:+78001234567" class="phone-link">+7 (800) 123-45-67</a>
-                                <div class="social-text">Бесплатный звонок по России</div>
-                            </div>
-                        </li>
-                        <li class="contact-item">
-                            <i class="fas fa-map-marker-alt contact-icon"></i>
-                            <div class="contact-text">
-                                <div class="address-container">
-                                    <span class="address-text">г. Москва, ул. Туристическая, д. 15, офис 304</span>
-                                    <div class="map-tooltip">
-                                        Наш офис находится в центре Москвы, рядом со станцией метро "Туристическая"
-                                    </div>
-                                </div>
-                                <div class="social-text">Пн-Пт: 9:00-19:00, Сб: 10:00-17:00</div>
-                            </div>
-                        </li>
-                        <li class="contact-item">
-                            <i class="fas fa-envelope contact-icon"></i>
-                            <div class="contact-text">
-                                <a href="mailto:info@tourexplorer.ru" class="phone-link">info@tourexplorer.ru</a>
-                                <div class="social-text">Электронная почта для связи</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Секция 3: Социальные сети -->
-                <div class="footer-section">
-                    <h3 class="section-title">Мы в соцсетях</h3>
-                    <p class="footer-description">Подписывайтесь на нас в социальных сетях, чтобы быть в курсе акций и новых туров:</p>
-                    <div class="social-links">
-                        <a href="https://t.me/tourexplorer" class="social-link" target="_blank" title="Телеграм">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                        <a href="https://vk.com/tourexplorer" class="social-link" target="_blank" title="ВКонтакте">
-                            <i class="fab fa-vk"></i>
-                        </a>
-                        <a href="https://ok.ru/tourexplorer" class="social-link" target="_blank" title="Одноклассники">
-                            <i class="fab fa-odnoklassniki"></i>
-                        </a>
-                        <a href="https://www.youtube.com/tourexplorer" class="social-link" target="_blank" title="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="https://instagram.com/tourexplorer" class="social-link" target="_blank" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                    <div class="social-text">Нажмите на иконку для перехода в соцсеть</div>
-                </div>
-
-                <!-- Секция 4: Подписка на рассылку -->
-                <div class="footer-section">
-                    <h3 class="section-title">Подписка на новости</h3>
-                    <p class="footer-description">Подпишитесь на нашу рассылку, чтобы первыми узнавать о новых турах и специальных предложениях:</p>
-                    <form class="newsletter-form" id="newsletter-form">
-                        <input type="email" class="newsletter-input" placeholder="Ваш email" required>
-                        <button type="submit" class="newsletter-btn">Подписаться</button>
-                    </form>
-                    <div class="social-text">Мы не рассылаем спам и храним ваши данные в безопасности</div>
-                </div>
-            </div>
-
-            <!-- Нижняя часть футера -->
-            <div class="footer-bottom">
-                <div class="copyright">
-                    <p>&copy; 2023 TourExplorer. Все права защищены.</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#" class="footer-link">Политика конфиденциальности</a>
-                    <a href="#" class="footer-link">Пользовательское соглашение</a>
-                    <a href="#" class="footer-link">Карта сайта</a>
-                    <a href="#" class="footer-link">О компании</a>
-                </div>
-            </div>
+    <div class="profile-container">
+        <h1><i class="bi bi-person-circle"></i> Личный кабинет</h1>
+        <div class="user-info" id="userInfo"></div>
+        <div class="route-section">
+            <h2><i class="bi bi-signpost-split"></i> Ваш сохраненный маршрут</h2>
+            <div id="userRoute"></div>
         </div>
-    </footer>
+        <button class="logout-btn" id="logoutBtn">Выйти</button>
+        <br>
+        <a href="index.html" class="back-link"><i class="bi bi-arrow-left"></i> На главную</a>
+    </div>
 
-    <!-- Кнопка "Наверх" -->
-    <a href="#" class="back-to-top" id="backToTop">
-        <i class="fas fa-chevron-up"></i>
-    </a>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('current_user'));
+            const userInfoDiv = document.getElementById('userInfo');
+            const userRouteDiv = document.getElementById('userRoute');
+            const logoutBtn = document.getElementById('logoutBtn');
 
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
 
+            userInfoDiv.innerHTML = `<p><strong>Имя:</strong> ${currentUser.name}</p><p><strong>Email:</strong> ${currentUser.email}</p>`;
 
+            const userRoute = JSON.parse(localStorage.getItem('user_route')) || [];
+            if (userRoute.length === 0) {
+                userRouteDiv.innerHTML = '<p>У вас пока нет сохраненного маршрута.</p>';
+            } else {
+                userRouteDiv.innerHTML = '';
+                userRoute.forEach((place, index) => {
+                    userRouteDiv.innerHTML += `<div class="route-item"><strong>${index+1}.</strong> ${place.name}</div>`;
+                });
+            }
 
-
-
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('current_user');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
 </body>
 </html>
-<script src="script.js"></script>
-<script src="bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script> 
-
-
-

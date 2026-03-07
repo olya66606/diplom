@@ -51,171 +51,64 @@
 
 
 
-
-
-        <section class="places-section">
-            <h2>Секретные места в любимых городах</h2>
-            
-            <div class="places-grid">
-
-                <div class="place-card" data-place-id="spb1">
-                    <div class="place-image" style="background-image: url('https://images.unsplash.com/photo-1559598467-f8b76c8155d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                        <span class="place-city"><i class="fas fa-location-dot"></i> Санкт-Петербург</span>
-                    </div>
-                    <div class="place-content">
-                        <h3>Двор Капеллы</h3>
-                        <div class="place-location">
-                            <i class="fas fa-map-pin"></i>
-                            <span>ул. Большая Конюшенная, 11</span>
-                        </div>
-                        
-                        <div class="place-rating">
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
+   <!-- НОВЫЙ БЛОК: Слайдер мест -->
+    <section class="places-section">
+        <div class="container">
+            <h2>Секретные места в Санкт-Петербурге</h2>
+            <div class="swiper placesSwiper">
+                <div class="swiper-wrapper">
+                    <!-- Слайд 1: Двор Капеллы -->
+                    <div class="swiper-slide">
+                        <div class="place-card">
+                            <div class="place-image" style="background-image: url('https://images.unsplash.com/photo-1559598467-f8b76c8155d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                                <span class="place-city"><i class="fas fa-location-dot"></i> Санкт-Петербург</span>
                             </div>
-                            <span class="rating-value">4.8</span>
-                            <span class="reviews-count">(43 отзыва)</span>
+                            <div class="place-content">
+                                <h3>Двор Капеллы</h3>
+                                <div class="place-location"><i class="fas fa-map-pin"></i><span>ул. Большая Конюшенная, 11</span></div>
+                                <div class="place-rating">
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                                    <span class="rating-value">4.8</span><span class="reviews-count">(43 отзыва)</span>
+                                </div>
+                                <p class="place-description">Скрытый от глаз туристов дворик в самом центре города. Здесь можно услышать, как музыканты репетируют в стенах Капеллы.</p>
+                                <div class="reviews-section">
+                                    <div class="reviews-container">
+                                        <div class="review-item"><div class="review-header"><span class="review-author"> Анна С.</span><span class="review-date">2 дня назад</span></div><div class="review-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="review-text">Потрясающее место! Атмосфера невероятная.</div></div>
+                                        <div class="review-item"><div class="review-header"><span class="review-author"> Михаил</span><span class="review-date">1 неделя назад</span></div><div class="review-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><div class="review-text">Красиво, но в выходные много людей.</div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <p class="place-description">
-                            Скрытый от глаз туристов дворик в самом центре города. Здесь можно услышать, как музыканты репетируют в стенах Капеллы. Особенно красиво вечером, когда зажигаются фонари и звучит орган.
-                        </p>
-                        
-                    
-                        <div class="reviews-section">
-
-                            
-                            <div class="reviews-container">
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <span class="review-author"> Анна С.</span>
-                                        <span class="review-date">2 дня назад</span>
-                                    </div>
-                                    <div class="review-rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="review-text">
-                                        Потрясающее место! Атмосфера невероятная. Сидели там с подругой до позднего вечера. Обязательно возьмите с собой термос с чаем!
-                                    </div>
+                    </div>
+                    <!-- Слайд 2: Патриаршие пруды (добавим как питерское место для примера) -->
+                    <div class="swiper-slide">
+                        <div class="place-card">
+                            <div class="place-image" style="background-image: url('https://images.unsplash.com/photo-1513326738677-b964603b136d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                                <span class="place-city"><i class="fas fa-location-dot"></i> Санкт-Петербург</span>
+                            </div>
+                            <div class="place-content">
+                                <h3>Новая Голландия</h3>
+                                <div class="place-location"><i class="fas fa-map-pin"></i><span>наб. Адмиралтейского канала, 2</span></div>
+                                <div class="place-rating">
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                    <span class="rating-value">4.9</span><span class="reviews-count">(67 отзывов)</span>
                                 </div>
-                                
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <span class="review-author"> Михаил</span>
-                                        <span class="review-date">1 неделя назад</span>
-                                    </div>
-                                    <div class="review-rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                    <div class="review-text">
-                                        Красиво, но в выходные много людей. Лучше приходить в будни утром. Тогда можно поймать момент, когда играет орган.
-                                    </div>
-                                </div>
-                                
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <span class="review-author"> Елена</span>
-                                        <span class="review-date">2 недели назад</span>
-                                    </div>
-                                    <div class="review-rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="review-text">
-                                        Местные действительно знают толк в красивых местах. Спасибо, что поделились! Теперь это мое любимое место в Петербурге.
+                                <p class="place-description">Остров с парком, арт-пространством и кафе. Любимое место отдыха петербуржцев.</p>
+                                <div class="reviews-section">
+                                    <div class="reviews-container">
+                                        <div class="review-item"><div class="review-header"><span class="review-author"> Дмитрий</span><span class="review-date">3 дня назад</span></div><div class="review-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="review-text">Отличное место для прогулок, особенно летом.</div></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-    
-                <div class="place-card" data-place-id="msk1">
-                    <div class="place-image" style="background-image: url('https://images.unsplash.com/photo-1513326738677-b964603b136d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                        <span class="place-city"><i class="fas fa-location-dot"></i> Москва</span>
-                    </div>
-                    <div class="place-content">
-                        <h3>Патриаршие пруды</h3>
-                        <div class="place-location">
-                            <i class="fas fa-map-pin"></i>
-                            <span>Патриарший пер., 1-3</span>
-                        </div>
-                        
-                        <div class="place-rating">
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="rating-value">4.9</span>
-                            <span class="reviews-count">(67 отзывов)</span>
-                        </div>
-                        
-                        <p class="place-description">
-                            Не только место из романа Булгакова, но и уютный уголок для прогулок местных жителей. Здесь есть атмосферное кафе, где подают лучший кофе в районе, а летом можно кататься на лодках.
-                        </p>
-                        
-                        <div class="reviews-section">
-                            
-                            <div class="reviews-container">
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <span class="review-author"> Дмитрий</span>
-                                        <span class="review-date">3 дня назад</span>
-                                    </div>
-                                    <div class="review-rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="review-text">
-                                        Живу рядом, хожу сюда каждый день. Особенно красиво зимой, когда каток заливают. Летом - рай для фотографов.
-                                    </div>
-                                </div>
-                                
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <span class="review-author"> Ольга</span>
-                                        <span class="review-date">1 неделя назад</span>
-                                    </div>
-                                    <div class="review-rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                    <div class="review-text">
-                                        Красиво, но дорого. Цены в кафе кусаются. Но атмосфера того стоит, особенно на закате.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-        </section>
-
+        </div>
+    </section>
         <section class="review-form-section" id="reviewForm">
             <h2>Поделись своим секретным местом</h2>
             <p>Расскажи о месте, которое знают только местные жители. Твой отзыв увидят другие путешественники.</p>
@@ -1371,5 +1264,24 @@ body{
             window.addEventListener('load', checkVisibility);
             window.addEventListener('scroll', checkVisibility);
             checkVisibility();
+        });
+
+
+
+          document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация Swiper
+            const swiper = new Swiper('.placesSwiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                breakpoints: {
+                    768: { slidesPerView: 2 }
+                }
+            });
+
+            // Логика для формы отзыва (можно оставить как в вашем оригинале)
+            // ... (ваш код для отправки отзыва)
         });
     </script>

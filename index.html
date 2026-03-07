@@ -16,7 +16,7 @@
 </head>
 <body>
 
-       <header class="header">
+      <header class="header" id="mainHeader">
       <div class="header-left">
             <a href="index.html">Главная</a>
                 <a href="about.html">О нас</a>
@@ -25,9 +25,11 @@
             </div>
                     <div class="header-logo"><img src="img/logo.png" alt=""></div>
                             
-                            <div class="header-right"> 
-                                <a style="margin-right: 20px; margin-top:11px;" href="locals.html">Места от жителей</a>
-                            <a class="lihka">Войти</a>
+                            <div class="header-right" id="headerRight"> 
+                                <!-- Места от жителей - скрыта по умолчанию -->
+                                <a style="margin-right: 20px; margin-top:11px; display: none;" href="locals.html" id="localsLink">Места от жителей</a>
+                                <!-- Кнопка Войти/Имя пользователя -->
+                                <a class="lihka" id="authButton" href="login.html">Войти</a>
                             </div>
     </header>
     
@@ -36,7 +38,7 @@
         <p style="color: rgb(37, 66, 52); width:500px;">Путешествуй  и открывай мир  и  <b style="color: #2e8d53;">Себя</b> в нём</p>
         <p style="color: rgb(0, 0, 0); font-size: 25px; width: 500px;">Пройди опрос и подбери для <br> себя наиболее удобный маршрут,если 
              созданный маршрут не удовлетворяет можно создать свой личный</p>
-        <a href="#opros"  style="color: #1c5633;" class="btn1">Пройти опрос <i class="bi bi-arrow-up-right"></i></a>
+        <a href="#surveyBlock"  style="color: #1c5633;" class="btn1">Пройти опрос <i class="bi bi-arrow-up-right"></i></a>
     </div>
          <div class="banner-right">
             <img class="foto1"  src="img/yaponia.jpg" alt="">
@@ -46,264 +48,174 @@
     </section>
 
 
-   <div class="opros" id="opros">
-<h1 style="color: rgb(37, 66, 52); width:500px;">ПОМОГИ НАМ И МЫ ПОМОЖЕМ ТЕБЕ</h1>
-        <div class="opros-left">
-            <h2 class="form-title">Планирование поездки</h2>
+   <!-- ОБНОВЛЕННЫЙ БЛОК ОПРОСА -->
+   <div class="survey-block" id="surveyBlock">
+        <div class="survey-container">
+            <h1 class="survey-main-title">ПОМОГИ НАМ И МЫ ПОМОЖЕМ ТЕБЕ</h1>
+            <div class="survey-content">
+                <!-- Левая часть: форма -->
+                <div class="survey-form-container">
+                    <h2 class="survey-form-title">Планирование поездки</h2>
+                    
+                    <div class="survey-form-group">
+                        <label for="country">Страна посещения:</label>
+                        <select id="country" name="country">
+                            <option value="Италия">Италия</option>
+                            <option value="Франция">Франция</option>
+                            <option value="Япония">Япония</option>
+                            <option value="Турция">Турция</option>
+                        </select>
+                    </div>
 
-            <div class="form-group">
-                <label for="country">Страна посещения:</label>
-                <select id="country" name="country">
-                    <option value="Италия">Италия</option>
-                    <option value="Франция">Франция</option>
-                    <option value="Япония">Япония</option>
-                    <option value="Турция">Турция</option>
-                </select>
-            </div>
+                    <div class="survey-form-group">
+                        <span class="survey-label">Количество человек:</span>
+                        <div class="survey-radio-group">
+                            <label><input type="radio" name="travelers" value="1" checked> 1</label>
+                            <label><input type="radio" name="travelers" value="2"> 2</label>
+                            <label><input type="radio" name="travelers" value="3-5"> 3-5</label>
+                            <label><input type="radio" name="travelers" value="6+"> 6+</label>
+                        </div>
+                    </div>
 
-            <!-- Количество человек (Radio) -->
-            <div class="form-group">
-                <span class="label-like">Количество человек:</span>
-                <div class="radio-group">
-                    <label><input type="radio" name="travelers" value="1" checked> 1</label>
-                    <label><input type="radio" name="travelers" value="2"> 2</label>
-                    <label><input type="radio" name="travelers" value="3-5"> 3-5</label>
-                    <label><input type="radio" name="travelers" value="6+"> 6+</label>
+                    <div class="survey-form-group">
+                        <label for="budget">Бюджет ($): <span id="budget-value">500</span></label>
+                        <input type="range" id="budget" name="budget" min="100" max="5000" value="500" step="50">
+                    </div>
+
+                    <div class="survey-form-group">
+                        <label>Даты поездки:</label>
+                        <div class="survey-date-group">
+                            <input type="date" id="start-date" name="start-date">
+                            <span>—</span>
+                            <input type="date" id="end-date" name="end-date">
+                        </div>
+                    </div>
+
+                    <div class="survey-form-group">
+                        <span class="survey-label">Что интересует:</span>
+                        <div class="survey-checkbox-group">
+                            <label><input type="checkbox" name="interests" value="Достопримечательности" checked> Достопримечательности</label>
+                            <label><input type="checkbox" name="interests" value="Развлечения"> Развлечения</label>
+                            <label><input type="checkbox" name="interests" value="Музеи"> Музеи</label>
+                            <label><input type="checkbox" name="interests" value="Фотографии"> Фотографии</label>
+                        </div>
+                    </div>
+
+                    <div class="survey-form-group">
+                        <label for="additional-info">Дополнительная информация:</label>
+                        <textarea id="additional-info" name="additional-info" rows="3" placeholder="Напишите, что еще хотели бы..."></textarea>
+                    </div>
+
+                    <div class="survey-form-actions">
+                        <button type="button" id="reset-form" class="survey-btn survey-btn-secondary">Сбросить</button>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Бюджет (Бегунок Range) -->
-            <div class="form-group">
-                <label for="budget">Бюджет ($): <span id="budget-value">500</span></label>
-                <input type="range" id="budget" name="budget" min="100" max="5000" value="500" step="50">
-            </div>
-
-            <!-- Даты поездки (Date) -->
-            <div class="form-group">
-                <label for="start-date">Даты поездки (с - по):</label>
-                <div class="date-group">
-                    <input type="date" id="start-date" name="start-date">
-                    <span>—</span>
-                    <input type="date" id="end-date" name="end-date">
+                <!-- Правая часть: сводка -->
+                <div class="survey-summary-container">
+                    <h2 class="survey-summary-title">Ваш выбор</h2>
+                    <div id="summary-content" class="survey-summary-content">
+                        <div class="summary-item"><span class="summary-label">Страна:</span> <span class="summary-value" id="summary-country">Италия</span></div>
+                        <div class="summary-item"><span class="summary-label">Человек:</span> <span class="summary-value" id="summary-travelers">1</span></div>
+                        <div class="summary-item"><span class="summary-label">Бюджет:</span> <span class="summary-value">$<span id="summary-budget">500</span></span></div>
+                        <div class="summary-item"><span class="summary-label">Даты:</span> <span class="summary-value" id="summary-dates">не выбраны</span></div>
+                        <div class="summary-item"><span class="summary-label">Интересы:</span> <span class="summary-value" id="summary-interests">Достопримечательности</span></div>
+                        <div class="summary-item"><span class="summary-label">Доп. инфо:</span> <span class="summary-value" id="summary-additional">—</span></div>
+                    </div>
+                    <div class="survey-summary-actions">
+                        <button type="button" id="submit-btn" class="survey-btn survey-btn-primary">Отправить</button>
+                    </div>
                 </div>
-            </div>
-
-            <!-- Интересы (Чекбоксы) -->
-            <div class="form-group">
-                <span class="label-like">Что интересует:</span>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="interests" value="Достопримечательности" checked> Достопримечательности</label>
-                    <label><input type="checkbox" name="interests" value="Развлечения"> Развлечения</label>
-                    <label><input type="checkbox" name="interests" value="Музеи"> Музеи</label>
-                    <label><input type="checkbox" name="interests" value="Фотографии"> Фотографии</label>
-                </div>
-            </div>
-
-            <!-- Дополнительная информация (Textarea) -->
-            <div class="form-group">
-                <label for="additional-info">Дополнительная информация:</label>
-                <textarea id="additional-info" name="additional-info" rows="3" placeholder="Напишите, что еще хотели бы..."></textarea>
-            </div>
-
-            <!-- Кнопки управления формой -->
-            <div class="form-actions">
-                <button type="button" id="reset-form" class="btn btn-secondary">Сбросить форму</button>
-            </div>
-        </div>
-
-        <div class="opros-right">
-            <h2 class="summary-title">Ваш выбор</h2>
-
-            <!-- Здесь будет динамически дублироваться информация из левой формы -->
-            <div id="summary-content" class="summary-content">
-                <p><strong>Страна:</strong> <span id="summary-country">Италия</span></p>
-                <p><strong>Человек:</strong> <span id="summary-travelers">1</span></p>
-                <p><strong>Бюджет:</strong> $<span id="summary-budget">500</span></p>
-                <p><strong>Даты:</strong> <span id="summary-dates">не выбраны</span></p>
-                <p><strong>Интересы:</strong> <span id="summary-interests">Достопримечательности</span></p>
-                <p><strong>Доп. инфо:</strong> <span id="summary-additional">—</span></p>
-            </div>
-
-            <!-- Кнопки правого блока -->
-            <div class="summary-actions">
-                <button type="button" id="submit-btn" class="btn btn-primary">Отправить</button>
-               
-        </div>
-   
-
-
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h3>Детали вашей поездки</h3>
-            <div id="modal-body">
-                <!-- Сюда JavaScript вставит данные из формы -->
-            </div>
-             <button href type="button" id="details-btn" class="btn btn-secondary">Подробнее</button>
             </div>
         </div>
     </div>
 
- </div>
-
-
-
-
+    <!-- Модальное окно (оставлено без изменений) -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Детали вашей поездки</h3>
+            <div id="modal-body"></div>
+            <button type="button" id="details-btn" class="btn btn-secondary">Подробнее</button>
+        </div>
+    </div>
 
 
     <div id="tours-container" class="tours-container">
-
         <header class="section-header">
             <h1>Популярные туры</h1>
-            <p>Откройте для себя лучшие направления для вашего  путешествия</p>
+            <p>Откройте для себя лучшие направления для вашего путешествия</p>
         </header>
  
         <div class="tour-card">
             <div class="popular-badge">Популярный</div>
-            
             <div class="tour-card-content">
                 <div class="tour-info">
-                    <div class="tour-title">
-                        <h2>Отдых на Мальдивах</h2>
-                    </div>
-                    <div class="tour-subtitle">
-                        <i class="fas fa-map-marker-alt"></i> Мальдивские острова, Индийский океан
-                    </div>
+                    <div class="tour-title"><h2>Отдых на Мальдивах</h2></div>
+                    <div class="tour-subtitle"><i class="fas fa-map-marker-alt"></i> Мальдивские острова, Индийский океан</div>
                     <div class="tour-rating">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="rating-value">4.7</span>
-                        <span class="reviews-count">(124 отзыва)</span>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        <span class="rating-value">4.7</span><span class="reviews-count">(124 отзыва)</span>
                     </div>
-                    <p class="tour-description">
-                        Райские острова с белоснежными пляжами, бирюзовой водой и богатым подводным миром. 
-                        Идеально подходит для романтического отдыха и дайвинга. Проживание в роскошных бунгало 
-                        над водой с прямым доступом к океану.
-                    </p>
+                    <p class="tour-description">Райские острова с белоснежными пляжами, бирюзовой водой и богатым подводным миром. Идеально подходит для романтического отдыха и дайвинга.</p>
                     <div class="entertainments">
                         <h3><i class="fas fa-glass-cheers"></i> Развлечения</h3>
                         <div class="entertainment-tags">
-                            <span class="tag">Пляжный отдых</span>
-                            <span class="tag">Дайвинг</span>
-                            <span class="tag">SPA</span>
-                            <span class="tag">Романтический ужин</span>
-                            <span class="tag">Снорклинг</span>
+                            <span class="tag">Пляжный отдых</span><span class="tag">Дайвинг</span><span class="tag">SPA</span><span class="tag">Романтический ужин</span><span class="tag">Снорклинг</span>
                         </div>
                     </div>
                     <div class="tour-meta">
-                        <div class="price">
-                            <span class="price-amount">189 900 ₽</span>
-                            <span class="price-note">за человека</span>
-                        </div>
-                        <div class="duration">
-                            <span class="duration-value"><i class="far fa-calendar-alt"></i> 10 дней / 9 ночей</span>
-                            <span class="duration-note">Вылет из Москвы</span>
-                        </div>
+                        <div class="price"><span class="price-amount">189 900 ₽</span><span class="price-note">за человека</span></div>
+                        <div class="duration"><span class="duration-value"><i class="far fa-calendar-alt"></i> 10 дней / 9 ночей</span><span class="duration-note">Вылет из Москвы</span></div>
                     </div>
                     <div class="tour-actions">
-                        <button class="btn btn-primary add-to-cart-btn">
-                            <i class="fas fa-cart-plus"></i> Добавить в корзину
-                        </button>
-                        <a href="planner.html" class="btn btn-secondary details-btn">
-                            <i class="fas fa-info-circle"></i> Подробнее
-                        </a>
+                        <button class="btn btn-primary add-to-cart-btn"><i class="fas fa-cart-plus"></i> Добавить в корзину</button>
+                        <a href="planner.html" class="btn btn-secondary details-btn"><i class="fas fa-info-circle"></i> Подробнее</a>
                     </div>
                 </div>
                 <div class="tour-carousel">
-                    <div class="carousel-container" data-carousel="1">
-                        <div class="carousel-track">
-                            <div class="carousel-slide" style="background-image: url(img/yaponia.jpg);">
-                            </div>
-                        </div>
-                    </div>
+                    <div class="carousel-container" data-carousel="1"><div class="carousel-track"><div class="carousel-slide" style="background-image: url(img/yaponia.jpg);"></div></div></div>
                 </div>
             </div>
         </div>
         
-
         <div class="tour-card">
             <div class="popular-badge">Хит продаж</div>
-            
             <div class="tour-card-content">
                 <div class="tour-info">
-                    <div class="tour-title">
-                        <h2>Культура Японии</h2>
-                    </div>
-                    <div class="tour-subtitle">
-                        <i class="fas fa-map-marker-alt"></i> Токио, Киото, Осака, Япония
-                    </div>
+                    <div class="tour-title"><h2>Культура Японии</h2></div>
+                    <div class="tour-subtitle"><i class="fas fa-map-marker-alt"></i> Токио, Киото, Осака, Япония</div>
                     <div class="tour-rating">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <span class="rating-value">4.9</span>
-                        <span class="reviews-count">(156 отзывов)</span>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="rating-value">4.9</span><span class="reviews-count">(156 отзывов)</span>
                     </div>
-
-                    <p class="tour-description">
-                        Погружение в уникальную культуру страны восходящего солнца. 
-                        Посещение древних храмов Киото, современных районов Токио, 
-                        чайная церемония, суши-мастер-класс, наблюдение за цветением сакуры.
-                    </p>
+                    <p class="tour-description">Погружение в уникальную культуру страны восходящего солнца. Посещение древних храмов Киото, современных районов Токио, чайная церемония.</p>
                     <div class="entertainments">
                         <h3><i class="fas fa-glass-cheers"></i> Развлечения</h3>
                         <div class="entertainment-tags">
-                            <span class="tag">Экскурсии</span>
-                            <span class="tag">Гастрономия</span>
-                            <span class="tag">Шоппинг</span>
-                            <span class="tag">Культурные мероприятия</span>
-                            <span class="tag">Мастер-классы</span>
+                            <span class="tag">Экскурсии</span><span class="tag">Гастрономия</span><span class="tag">Шоппинг</span><span class="tag">Культурные мероприятия</span><span class="tag">Мастер-классы</span>
                         </div>
                     </div>
                     <div class="tour-meta">
-                        <div class="price">
-                            <span class="price-amount">145 000 ₽</span>
-                            <span class="price-note">за человека</span>
-                        </div>
-                        <div class="duration">
-                            <span class="duration-value"><i class="far fa-calendar-alt"></i> 12 дней / 11 ночей</span>
-                            <span class="duration-note">Вылет из Москвы</span>
-                        </div>
+                        <div class="price"><span class="price-amount">145 000 ₽</span><span class="price-note">за человека</span></div>
+                        <div class="duration"><span class="duration-value"><i class="far fa-calendar-alt"></i> 12 дней / 11 ночей</span><span class="duration-note">Вылет из Москвы</span></div>
                     </div>
                     <div class="tour-actions">
-                        <button class="btn btn-primary add-to-cart-btn">
-                            <i class="fas fa-cart-plus"></i> Добавить в корзину
-                        </button>
-                         <a href="planner.html" class="btn btn-secondary details-btn">
-                            <i class="fas fa-info-circle"></i> Подробнее
-                        </a>
+                        <button class="btn btn-primary add-to-cart-btn"><i class="fas fa-cart-plus"></i> Добавить в корзину</button>
+                        <a href="planner.html" class="btn btn-secondary details-btn"><i class="fas fa-info-circle"></i> Подробнее</a>
                     </div>
                 </div>
                 <div class="tour-carousel">
-                    <div class="carousel-container" data-carousel="3">
-                        <div class="carousel-track">
-                            <div class="carousel-slide" style="background-image: url(img/kaliningrad.jpg);">
-                            </div>
-                        </div>
-                    </div>
-
+                    <div class="carousel-container" data-carousel="3"><div class="carousel-track"><div class="carousel-slide" style="background-image: url(img/kaliningrad.jpg);"></div></div></div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                  </div>  </div>  </div>
 
-
-
-
- <div class="vivod">
+    <div class="vivod">
         <h1>Статистика и информация о турах</h1>
-        
         <div class="main-block">
-        
-            
             <div class="small-container stat-container">
                 <h2 class="container-title">Довольные пользователи</h2>
                 <div class="stat-value">100+</div>
@@ -319,7 +231,6 @@
                 <div class="stat-value">97%</div>
                 <div class="stat-label">в данный период поездки ожидания дождя</div>
             </div>
-
             <div class="small-container stat-container">
                 <h2 class="container-title">Рекомендуемая длительность</h2>
                 <div class="stat-value">6 дней</div>
@@ -332,145 +243,69 @@
             </div>
             <div class="small-container poll-container">
                 <h2 class="container-title">Уровень удовлетворенности</h2>
-                <div class="circle-poll">
-                    <div class="circle-poll-value">8.7</div>
-                </div>
+                <div class="circle-poll"><div class="circle-poll-value">8.7</div></div>
                 <div class="stat-label">средняя оценка туров (из 10)</div>
             </div>
             <div class="small-container poll-container">
                 <h2 class="container-title">Заполненность туров</h2>
-                <div class="linear-poll">
-                    <div class="linear-poll-fill"></div>
-                </div>
+                <div class="linear-poll"><div class="linear-poll-fill"></div></div>
                 <div class="stat-label">65% туров заполнены на ближайший месяц</div>
                 <div class="row-poll">
-                    <div class="row-poll-item">
-                        <div class="row-poll-value">85%</div>
-                        <div class="row-poll-label">Весна</div>
-                    </div>
-                    <div class="row-poll-item">
-                        <div class="row-poll-value">92%</div>
-                        <div class="row-poll-label">Лето</div>
-                    </div>
-                    <div class="row-poll-item">
-                        <div class="row-poll-value">45%</div>
-                        <div class="row-poll-label">Зима</div>
-                    </div>
+                    <div class="row-poll-item"><div class="row-poll-value">85%</div><div class="row-poll-label">Весна</div></div>
+                    <div class="row-poll-item"><div class="row-poll-value">92%</div><div class="row-poll-label">Лето</div></div>
+                    <div class="row-poll-item"><div class="row-poll-value">45%</div><div class="row-poll-label">Зима</div></div>
                 </div>
             </div>
             <div class="small-container poll-container">
                 <h2 class="container-title">Предпочтения туристов</h2>
                 <div class="row-poll">
-                    <div class="row-poll-item">
-                        <div class="row-poll-value">42%</div>
-                        <div class="row-poll-label">Горы</div>
-                    </div>
-                    <div class="row-poll-item">
-                        <div class="row-poll-value">28%</div>
-                        <div class="row-poll-label">Море</div>
-                    </div>
-                    <div class="row-poll-item">
-                        <div class="row-poll-value">30%</div>
-                        <div class="row-poll-label">Города</div>
-                    </div>
+                    <div class="row-poll-item"><div class="row-poll-value">42%</div><div class="row-poll-label">Горы</div></div>
+                    <div class="row-poll-item"><div class="row-poll-value">28%</div><div class="row-poll-label">Море</div></div>
+                    <div class="row-poll-item"><div class="row-poll-value">30%</div><div class="row-poll-label">Города</div></div>
                 </div>
                 <div class="stat-label">распределение по типам туров</div>
             </div>
             <div class="small-container">
                 <h2 class="container-title">Критерии выбора тура</h2>
                 <ul class="criteria-list">
-                    <li class="criteria-item">
-                        <i class="fas fa-check-circle criteria-icon"></i>
-                        <span>Соответствие цены и качества</span>
-                    </li>
-                    <li class="criteria-item">
-                        <i class="fas fa-check-circle criteria-icon"></i>
-                        <span>Наличие положительных отзывов</span>
-                    </li>
-                    <li class="criteria-item">
-                        <i class="fas fa-check-circle criteria-icon"></i>
-                        <span>Комфортные условия проживания</span>
-                    </li>
-                    <li class="criteria-item">
-                        <i class="fas fa-check-circle criteria-icon"></i>
-                        <span>Интересная экскурсионная программа</span>
-                    </li>
-                    <li class="criteria-item">
-                        <i class="fas fa-check-circle criteria-icon"></i>
-                        <span>Безопасность и надежность</span>
-                    </li>
+                    <li class="criteria-item"><i class="fas fa-check-circle criteria-icon"></i><span>Соответствие цены и качества</span></li>
+                    <li class="criteria-item"><i class="fas fa-check-circle criteria-icon"></i><span>Наличие положительных отзывов</span></li>
+                    <li class="criteria-item"><i class="fas fa-check-circle criteria-icon"></i><span>Комфортные условия проживания</span></li>
+                    <li class="criteria-item"><i class="fas fa-check-circle criteria-icon"></i><span>Интересная экскурсионная программа</span></li>
+                    <li class="criteria-item"><i class="fas fa-check-circle criteria-icon"></i><span>Безопасность и надежность</span></li>
                 </ul>
             </div>
             <div class="small-container highlight">
                 <h2 class="container-title">Советы по документам и погоде</h2>
-                <div class="weather-icon">
-                    <i class="fas fa-cloud-sun-rain"></i>
-                </div>
+                <div class="weather-icon"><i class="fas fa-cloud-sun-rain"></i></div>
                 <ul class="advice-list">
-                    <li class="advice-item">
-                        <i class="fas fa-passport advice-icon"></i>
-                        <span>Проверьте срок действия загранпаспорта (минимум 6 месяцев после поездки)</span>
-                    </li>
-                    <li class="advice-item">
-                        <i class="fas fa-umbrella advice-icon"></i>
-                        <span>Возьмите зонт и дождевик, вероятность осадков 97%</span>
-                    </li>
-                    <li class="advice-item">
-                        <i class="fas fa-temperature-low advice-icon"></i>
-                        <span>Температура воздуха: днём +15...+20°C, ночью +5...+10°C</span>
-                    </li>
-                    <li class="advice-item">
-                        <i class="fas fa-suitcase-rolling advice-icon"></i>
-                        <span>Рекомендуем взять удобную обувь для пеших экскурсий</span>
-                    </li>
+                    <li class="advice-item"><i class="fas fa-passport advice-icon"></i><span>Проверьте срок действия загранпаспорта</span></li>
+                    <li class="advice-item"><i class="fas fa-umbrella advice-icon"></i><span>Возьмите зонт и дождевик, вероятность осадков 97%</span></li>
+                    <li class="advice-item"><i class="fas fa-temperature-low advice-icon"></i><span>Температура воздуха: днём +15...+20°C, ночью +5...+10°C</span></li>
+                    <li class="advice-item"><i class="fas fa-suitcase-rolling advice-icon"></i><span>Рекомендуем взять удобную обувь</span></li>
                 </ul>
             </div>
         </div>
-</div>
-
-
+    </div>
 
     <footer>
         <div class="footer-container">
             <div class="footer-top">
                 <div style="width: 300px;" class="footer-section">
                     <div class="footer-logo">
-                        <a href="#" class="logo-link">
-                            <span class="logo-text">Туры Везде</span>
-                        </a>
-                        <p class="footer-description">
-                            Мы предоставляем лучшие туристические услуги с 2026 года. 
-                            Наша цель - сделать ваш отдых незабываемым и комфортным.
-                        </p>
+                        <a href="#" class="logo-link"><span class="logo-text">Туры Везде</span></a>
+                        <p class="footer-description">Мы предоставляем лучшие туристические услуги с 2026 года. Наша цель - сделать ваш отдых незабываемым и комфортным.</p>
                     </div>
                 </div>
-
-                <div style="width: 300px;   align-items: center;" class="footer-section">
+                <div style="width: 300px; align-items: center;" class="footer-section">
                     <h3 class="section-title">Контактная информация</h3>
-                    <ul class="contact-list" style="text-align: center; ">
-                        <li class="contact-item">
-                            <i class="fas fa-phone-alt contact-icon"></i>
-                            <div class="contact-text">
-                                <a href="tel:+78001234567" class="phone-link"  style="color: black;">+7 (800) 123-45-67</a>
-                                <div class="social-text">Бесплатный звонок по России</div>
-                            </div>
-                        </li>
-                        <li class="contact-item">
-                            <i class="fas fa-map-marker-alt contact-icon"></i>
-                            <div class="contact-text">
-                                <div class="social-text">Пн-Пт: 9:00-19:00, Сб: 10:00-17:00</div>
-                            </div>
-                        </li>
-                        <li class="contact-item">
-                            <i class="fas fa-envelope contact-icon"></i>
-                            <div class="contact-text">
-                                <a href="mailto:info@tourexplorer.ru" class="phone-link"  style="color: black;">info@tourexplorer.ru</a>
-                                <div class="social-text">Электронная почта для связи</div>
-                            </div>
-                        </li>
+                    <ul class="contact-list" style="text-align: center;">
+                        <li class="contact-item"><i class="fas fa-phone-alt contact-icon"></i><div class="contact-text"><a href="tel:+78001234567" class="phone-link" style="color: black;">+7 (800) 123-45-67</a><div class="social-text">Бесплатный звонок по России</div></div></li>
+                        <li class="contact-item"><i class="fas fa-map-marker-alt contact-icon"></i><div class="contact-text"><div class="social-text">Пн-Пт: 9:00-19:00, Сб: 10:00-17:00</div></div></li>
+                        <li class="contact-item"><i class="fas fa-envelope contact-icon"></i><div class="contact-text"><a href="mailto:info@tourexplorer.ru" class="phone-link" style="color: black;">info@tourexplorer.ru</a><div class="social-text">Электронная почта для связи</div></div></li>
                     </ul>
                 </div>
-                <div  style="width: 500px;"class="footer-section">
+                <div style="width: 500px;"class="footer-section">
                     <h3 class="section-title">Подписка на новости</h3>
                     <p class="footer-description">Подпишитесь на нашу рассылку, чтобы первыми узнавать о новых турах и специальных предложениях:</p>
                     <form class="newsletter-form" id="newsletter-form">
@@ -481,30 +316,21 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <div class="copyright"> 
-                    <p>&copy; 2026 Туры везде. Все права защищены.</p>
-                </div>
+                <div class="copyright"><p>&copy; 2026 Туры везде. Все права защищены.</p></div>
                 <div class="footer-links">
                     <a href="#" class="footer-link">Политика конфиденциальности</a>
                     <a href="#" class="footer-link">Пользовательское соглашение</a>
                     <a href="#" class="footer-link">Карта сайта</a>
                     <a href="#" class="footer-link">О компании</a>
+                    <a href="profile.html" class="footer-link">Личный кабинет</a>
                 </div>
             </div>
         </div>
     </footer>
 
-
-
-
-
-
-
-
 </body>
 </html>
 <script src="script.js"></script>
-<script src="bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script> 
-
+  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script> 
 
 

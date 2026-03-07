@@ -209,3 +209,35 @@ document.addEventListener('DOMContentLoaded', function() {
     if (startDate) startDate.min = today;
     if (endDate) endDate.min = today;
 });
+
+
+
+
+
+
+ // Логика для отображения кнопки "Места от жителей" и изменения кнопки входа
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('current_user'));
+            const localsLink = document.getElementById('localsLink');
+            const authButton = document.getElementById('authButton');
+
+            if (currentUser) {
+                // Пользователь залогинен
+                if (localsLink) {
+                    localsLink.style.display = 'inline-block'; // Показываем ссылку
+                }
+                if (authButton) {
+                    authButton.textContent = currentUser.name || 'Профиль';
+                    authButton.href = 'profile.html'; // Меняем ссылку на личный кабинет
+                }
+            } else {
+                // Пользователь не залогинен
+                if (localsLink) {
+                    localsLink.style.display = 'none'; // Скрываем ссылку
+                }
+                if (authButton) {
+                    authButton.textContent = 'Войти';
+                    authButton.href = 'login.html';
+                }
+            }
+        });
