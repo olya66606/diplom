@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head >
-  <link rel="icon" href="img/logoosn.png" type="image/x-icon" style="width: 100px;">
+<head>
+  <link rel="icon" href="img/logoosn.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <title>Конструктор маршрутов | Туры Везде</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Mulish', sans-serif; background: linear-gradient(135deg, #bcddff54, #98dbb8a1); }
-        /* Стили header (можно скопировать из style.css) - для краткости я их опущу, но они должны быть */
-        .header { border-radius: 12px; padding: 0 25px; height: 70px; display: flex; align-items: center; justify-content: space-between; margin: 0 auto; width: 100%; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: white; transition: all 0.3s ease; }
+        body { 
+            font-family: 'Mulish', sans-serif; 
+            background: linear-gradient(135deg, #bcddff54, #98dbb8a1);
+            padding-top: 90px;
+        }
+        
+        .header {
+            border-radius: 12px;
+            padding: 0 25px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 auto;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
         .header-left { display: flex; align-items: center; gap: 20px; width: 800px; }
         .header a { color: #246d3e; text-decoration: none; font-size: 23px; transition: color 0.3s ease; font-family: "Mulish", sans-serif; font-weight: 500; }
         .header-logo>img { margin: 0 auto; height: 70px; width: 100px; display: flex; margin-right: 350px; }
         .header-right>.lihka { background: #00a3c400; color: #246d3e; border: 2px solid #246d3e; border-radius: 50px; padding: 10px; font-size: 23px; width: 200px; text-align: center; }
-        body { padding-top: 90px; }
-        
-        /* Стили планировщика */
+
         .planner-container {
             max-width: 1400px;
             margin: 20px auto;
@@ -31,109 +48,213 @@
             grid-template-columns: 1fr 2fr 1fr;
             gap: 20px;
         }
+        
         .planner-section {
             background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            height: fit-content;
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             max-height: calc(100vh - 120px);
             overflow-y: auto;
         }
+        
         .planner-section h2 {
             color: #1b5031;
             font-size: 1.5rem;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #e3f7ee;
+            border-bottom: 3px solid #98dbb8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+        
         #map {
             height: 400px;
             width: 100%;
-            border-radius: 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
             z-index: 1;
+        }
+        
+        .city-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
             margin-bottom: 20px;
         }
-        .place-item {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-left: 4px solid #2e8d53;
-            transition: transform 0.2s;
+        
+        .city-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+        
+        .city-info p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .place-item {
+            background: #f8faff;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
         .place-item:hover {
             transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
         }
+        
         .place-item h3 {
             font-size: 1.2rem;
-            margin-bottom: 5px;
             color: #333;
+            margin-bottom: 8px;
         }
-        .place-item .place-address {
+        
+        .place-address {
             color: #666;
             font-size: 0.9rem;
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
-        .place-item .place-rating {
+        
+        .place-rating {
             color: #f39c12;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-        }
-        .place-item .place-review {
-            color: #555;
-            font-size: 0.9rem;
-            font-style: italic;
             margin-bottom: 10px;
-            padding: 8px;
-            background: #e3f7ee;
-            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
-        .place-item .add-to-route-btn {
-            background: #1b5031;
+        
+        .place-review {
+            background: white;
+            padding: 12px;
+            border-radius: 15px;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 12px;
+            border: 1px solid #e0e7ff;
+        }
+        
+        .add-to-route-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            width: 100%;
-        }
-        .place-item .add-to-route-btn:hover {
-            background: #2e8d53;
-        }
-        .route-item {
-            background: #e3f7ee;
-            border-radius: 10px;
             padding: 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .add-to-route-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .route-item {
+            background: #f8faff;
+            border-radius: 15px;
+            padding: 15px;
             margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-left: 4px solid #98dbb8;
         }
-        .route-item .remove-btn {
+        
+        .route-item span {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .remove-btn {
             background: none;
             border: none;
-            color: #e74c3c;
-            font-size: 1.2rem;
+            color: #ff6b6b;
+            font-size: 1.3rem;
             cursor: pointer;
+            transition: all 0.3s;
         }
+        
+        .remove-btn:hover {
+            color: #ee5253;
+            transform: scale(1.1);
+        }
+        
         .clear-route-btn {
-            background: #e74c3c;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5253 100%);
             color: white;
             border: none;
-            padding: 10px;
-            border-radius: 25px;
+            padding: 15px;
+            border-radius: 15px;
             width: 100%;
             margin-top: 15px;
             cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
         }
+        
+        .clear-route-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+        
+        .back-to-survey {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .back-to-survey:hover {
+            transform: translateX(-5px);
+        }
+        
         @media (max-width: 992px) {
             .planner-container {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        footer {
+            background: white;
+            padding: 40px 20px 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #666;
         }
     </style>
 </head>
@@ -146,132 +267,234 @@
         </div>
         <div class="header-logo"><img src="img/logo.png" alt=""></div>
         <div class="header-right"> 
-            <a style="margin-right: 20px; margin-top:11px;" href="locals.html" id="localsLink">Места от жителей</a>
+            <a style="margin-right: 20px; margin-top:11px; display: none;" href="locals.html" id="localsLink">Места от жителей</a>
             <a class="lihka" id="authButton" href="login.html">Войти</a>
         </div>
     </header>
 
     <div class="planner-container">
-        <!-- Список достопримечательностей -->
+        <!-- Левая колонка: список мест -->
         <div class="planner-section">
-            <h2><i class="bi bi-building"></i> Достопримечательности СПб</h2>
+            <a href="index.html#surveyBlock" class="back-to-survey"><i class="bi bi-arrow-left"></i> Вернуться к опросу</a>
+            <h2><i class="bi bi-building"></i> <span id="cityName">Достопримечательности</span></h2>
+            <div class="city-info" id="cityInfo">
+                <h3><i class="bi bi-info-circle"></i> Информация о поездке</h3>
+                <p id="infoTravelers"><i class="bi bi-people"></i> Количество человек: 1</p>
+                <p id="infoBudget"><i class="bi bi-wallet2"></i> Бюджет: 30 000 ₽</p>
+                <p id="infoDates"><i class="bi bi-calendar"></i> Даты: не выбраны</p>
+                <p id="infoInterests"><i class="bi bi-heart"></i> Интересы: Достопримечательности</p>
+            </div>
             <div id="placesList"></div>
         </div>
 
-        <!-- Карта -->
+        <!-- Центральная колонка: карта -->
         <div class="planner-section">
             <h2><i class="bi bi-map"></i> Интерактивная карта</h2>
             <div id="map"></div>
-            <p style="color:#666; font-size:0.9rem;">* Нажмите на место в списке, чтобы увидеть его на карте.</p>
+            <p style="color:#666; font-size:0.9rem; margin-top: 10px;">* Нажмите на место в списке, чтобы увидеть его на карте</p>
         </div>
 
-        <!-- Построенный маршрут -->
+        <!-- Правая колонка: маршрут -->
         <div class="planner-section">
             <h2><i class="bi bi-signpost-split"></i> Ваш маршрут</h2>
             <div id="routeList"></div>
-            <button class="clear-route-btn" id="clearRouteBtn">Очистить маршрут</button>
+            <button class="clear-route-btn" id="clearRouteBtn"><i class="bi bi-trash"></i> Очистить маршрут</button>
         </div>
     </div>
 
     <footer>
-        <!-- Здесь ваш футер (скопируйте из index.html) -->
-        <div class="footer-container">...</div>
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Туры везде. Все права защищены.</p>
+            </div>
+        </div>
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Логика шапки (скопировать из index.html) ---
-            const currentUser = JSON.parse(localStorage.getItem('current_user'));
-            const localsLink = document.getElementById('localsLink');
-            const authButton = document.getElementById('authButton');
-            if (currentUser) { if (localsLink) localsLink.style.display = 'inline-block'; if (authButton) { authButton.textContent = currentUser.name || 'Профиль'; authButton.href = 'profile.html'; } }
-            else { if (localsLink) localsLink.style.display = 'none'; if (authButton) { authButton.textContent = 'Войти'; authButton.href = 'login.html'; } }
+            // Данные о городах и достопримечательностях
+            const citiesData = {
+                'saint-petersburg': {
+                    name: 'Санкт-Петербург',
+                    center: [59.9343, 30.3351],
+                    zoom: 12,
+                    places: [
+                        { id: 1, name: 'Государственный Эрмитаж', coords: [59.9402, 30.3141], address: 'Дворцовая пл., 2', rating: 4.9, review: 'Великолепная коллекция искусства! Один из лучших музеев мира.' },
+                        { id: 2, name: 'Петропавловская крепость', coords: [59.9501, 30.3166], address: 'Петропавловская крепость, 3', rating: 4.7, review: 'Историческое место, откуда начался город. Красивый вид на Неву.' },
+                        { id: 3, name: 'Исаакиевский собор', coords: [59.9340, 30.3062], address: 'Исаакиевская пл., 4', rating: 4.8, review: 'Потрясающая архитектура и колоннада с видом на город.' },
+                        { id: 4, name: 'Храм Спаса на Крови', coords: [59.9401, 30.3287], address: 'наб. канала Грибоедова, 2Б', rating: 4.9, review: 'Сказочный храм, очень красиво внутри и снаружи.' },
+                        { id: 5, name: 'Русский музей', coords: [59.9376, 30.3325], address: 'Инженерная ул., 4', rating: 4.7, review: 'Огромная коллекция русского искусства. Рекомендую.' },
+                        { id: 6, name: 'Кунсткамера', coords: [59.9416, 30.3044], address: 'Университетская наб., 3', rating: 4.5, review: 'Очень интересный музей антропологии.' },
+                        { id: 7, name: 'Казанский собор', coords: [59.9343, 30.3248], address: 'Казанская пл., 2', rating: 4.8, review: 'Величественный собор с колоннадой.' },
+                        { id: 8, name: 'Невский проспект', coords: [59.9343, 30.3351], address: 'Невский пр.', rating: 4.8, review: 'Главная улица города, всегда многолюдно и красиво.' }
+                    ]
+                },
+                'kaliningrad': {
+                    name: 'Калининград',
+                    center: [54.7104, 20.4522],
+                    zoom: 12,
+                    places: [
+                        { id: 101, name: 'Кафедральный собор', coords: [54.7065, 20.5115], address: 'о. Канта', rating: 4.9, review: 'Символ города, усыпальница Канта, органные концерты.' },
+                        { id: 102, name: 'Музей янтаря', coords: [54.7181, 20.4985], address: 'пл. Маршала Василевского, 1', rating: 4.7, review: 'Уникальная коллекция янтаря в башне Дона.' },
+                        { id: 103, name: 'Рыбная деревня', coords: [54.7062, 20.5108], address: 'ул. Октябрьская', rating: 4.8, review: 'Квартал в довоенном стиле, смотровая башня.' },
+                        { id: 104, name: 'Форт №11 "Дёнхофф"', coords: [54.7602, 20.5377], address: 'ул. Энергетиков, 21', rating: 4.6, review: 'Хорошо сохранившийся форт, можно заказать экскурсию.' },
+                        { id: 105, name: 'Куршская коса', coords: [55.1648, 20.8518], address: 'национальный парк', rating: 4.9, review: 'Уникальное место с танцующим лесом и дюнами.' },
+                        { id: 106, name: 'Верхнее озеро', coords: [54.7186, 20.5146], address: 'парк', rating: 4.6, review: 'Живописное место для прогулок с фонтанами.' }
+                    ]
+                },
+                'moscow': {
+                    name: 'Москва',
+                    center: [55.7558, 37.6173],
+                    zoom: 12,
+                    places: [
+                        { id: 201, name: 'Красная площадь', coords: [55.7542, 37.6215], address: 'Красная пл.', rating: 4.9, review: 'Главная площадь страны, Кремль, собор Василия Блаженного.' },
+                        { id: 202, name: 'Московский Кремль', coords: [55.7520, 37.6175], address: 'Кремль', rating: 4.9, review: 'Древняя крепость, резиденция президента.' },
+                        { id: 203, name: 'Третьяковская галерея', coords: [55.7415, 37.6208], address: 'Лаврушинский пер., 10', rating: 4.8, review: 'Крупнейшее собрание русского искусства.' }
+                    ]
+                },
+                'kazan': {
+                    name: 'Казань',
+                    center: [55.7887, 49.1221],
+                    zoom: 12,
+                    places: [
+                        { id: 301, name: 'Казанский Кремль', coords: [55.7999, 49.1065], address: 'Кремль', rating: 4.8, review: 'Уникальный архитектурный комплекс.' },
+                        { id: 302, name: 'Мечеть Кул-Шариф', coords: [55.7983, 49.1051], address: 'Кремль', rating: 4.9, review: 'Главная мечеть Татарстана.' }
+                    ]
+                },
+                'sochi': {
+                    name: 'Сочи',
+                    center: [43.6028, 39.7342],
+                    zoom: 12,
+                    places: [
+                        { id: 401, name: 'Олимпийский парк', coords: [43.4098, 39.9567], address: 'Адлер', rating: 4.7, review: 'Объекты Олимпиады 2014.' },
+                        { id: 402, name: 'Красная Поляна', coords: [43.6822, 40.2056], address: 'Красная Поляна', rating: 4.8, review: 'Горнолыжный курорт.' }
+                    ]
+                }
+            };
 
-            // --- Данные о местах (Санкт-Петербург) ---
-            const places = [
-                { id: 1, name: 'Государственный Эрмитаж', coords: [59.9402, 30.3141], address: 'Дворцовая пл., 2', rating: 4.9, review: 'Великолепная коллекция искусства! Обязательно к посещению.' },
-                { id: 2, name: 'Петропавловская крепость', coords: [59.9501, 30.3166], address: 'Петропавловская крепость, 3', rating: 4.7, review: 'Историческое место, откуда начался город. Красивый вид на Неву.' },
-                { id: 3, name: 'Исаакиевский собор', coords: [59.9340, 30.3062], address: 'Исаакиевская пл., 4', rating: 4.8, review: 'Потрясающая архитектура и колоннада с видом на город.' },
-                { id: 4, name: 'Храм Спаса на Крови', coords: [59.9401, 30.3287], address: 'наб. канала Грибоедова, 2Б', rating: 4.9, review: 'Сказочный храм, очень красиво внутри и снаружи.' },
-                { id: 5, name: 'Русский музей', coords: [59.9376, 30.3325], address: 'Инженерная ул., 4', rating: 4.7, review: 'Огромная коллекция русского искусства. Рекомендую.' },
-                { id: 6, name: 'Кунсткамера', coords: [59.9416, 30.3044], address: 'Университетская наб., 3', rating: 4.5, review: 'Очень интересный музей антропологии. Не для слабонервных.)' },
-            ];
+            // ПОЛУЧАЕМ ДАННЫЕ ИЗ localStorage
+            const savedData = JSON.parse(localStorage.getItem('selected_city'));
+            
+            // Определяем ID города (из сохраненных данных или из URL параметра)
+            let cityId = 'saint-petersburg'; // По умолчанию
+            
+            // Сначала проверяем URL параметры
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlCity = urlParams.get('city');
+            
+            if (urlCity && citiesData[urlCity]) {
+                cityId = urlCity;
+            } else if (savedData && savedData.cityId && citiesData[savedData.cityId]) {
+                cityId = savedData.cityId;
+            }
+            
+            console.log('Загружаем город:', cityId); // Для отладки
+            
+            // Получаем данные города
+            const city = citiesData[cityId] || citiesData['saint-petersburg'];
+            
+            // Обновляем информацию на странице
+            document.getElementById('cityName').textContent = city.name;
+            
+            // Если есть сохраненные данные из опроса, отображаем их
+            if (savedData) {
+                document.getElementById('infoTravelers').innerHTML = `<i class="bi bi-people"></i> Количество человек: ${savedData.travelers || '1'}`;
+                document.getElementById('infoBudget').innerHTML = `<i class="bi bi-wallet2"></i> Бюджет: ${savedData.budgetFormatted || '30 000'} ₽`;
+                document.getElementById('infoDates').innerHTML = `<i class="bi bi-calendar"></i> Даты: ${savedData.dates || 'не выбраны'}`;
+                document.getElementById('infoInterests').innerHTML = `<i class="bi bi-heart"></i> Интересы: ${savedData.interests || 'Достопримечательности'}`;
+            }
 
-            const placesListDiv = document.getElementById('placesList');
-            const routeListDiv = document.getElementById('routeList');
-            const clearBtn = document.getElementById('clearRouteBtn');
-            let currentRoute = JSON.parse(localStorage.getItem('user_route')) || [];
-
-            // --- Инициализация карты ---
-            const map = L.map('map').setView([59.9343, 30.3351], 12);
+            // Инициализация карты
+            const map = L.map('map').setView(city.center, city.zoom);
+            
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution: '&copy; OpenStreetMap contributors'
             }).addTo(map);
 
-            const markers = {};
-            places.forEach(place => {
-                const marker = L.marker(place.coords).addTo(map).bindPopup(`<b>${place.name}</b><br>${place.address}`);
-                markers[place.id] = marker;
-            });
+            // Массив для маркеров
+            const markers = [];
 
-            // --- Функция отображения списка мест ---
+            // Функция для отображения списка мест
             function renderPlacesList() {
-                placesListDiv.innerHTML = '';
-                places.forEach(place => {
+                const placesList = document.getElementById('placesList');
+                placesList.innerHTML = '';
+                
+                city.places.forEach(place => {
                     const placeDiv = document.createElement('div');
                     placeDiv.className = 'place-item';
+                    placeDiv.dataset.id = place.id;
                     placeDiv.innerHTML = `
                         <h3>${place.name}</h3>
                         <div class="place-address"><i class="bi bi-geo-alt"></i> ${place.address}</div>
                         <div class="place-rating"><i class="bi bi-star-fill"></i> ${place.rating}</div>
                         <div class="place-review">"${place.review}"</div>
-                        <button class="add-to-route-btn" data-id="${place.id}">+ Добавить в маршрут</button>
+                        <button class="add-to-route-btn" data-id="${place.id}"><i class="bi bi-plus-circle"></i> Добавить в маршрут</button>
                     `;
+                    
+                    // При клике на карточку (не на кнопку) центрируем карту
                     placeDiv.addEventListener('click', function(e) {
-                        if (e.target.tagName !== 'BUTTON') {
+                        if (e.target.tagName !== 'BUTTON' && !e.target.closest('button')) {
                             map.setView(place.coords, 16);
-                            markers[place.id].openPopup();
+                            const marker = markers.find(m => m.placeId === place.id);
+                            if (marker) marker.openPopup();
                         }
                     });
-                    placesListDiv.appendChild(placeDiv);
+                    
+                    placesList.appendChild(placeDiv);
+                    
+                    // Создаем маркер для карты
+                    const marker = L.marker(place.coords).addTo(map)
+                        .bindPopup(`<b>${place.name}</b><br>${place.address}<br>⭐ ${place.rating}`);
+                    marker.placeId = place.id;
+                    markers.push(marker);
                 });
-
+                
                 // Добавляем обработчики на кнопки
                 document.querySelectorAll('.add-to-route-btn').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
                         const placeId = parseInt(this.dataset.id);
-                        const place = places.find(p => p.id === placeId);
-                        if (!currentRoute.find(item => item.id === placeId)) {
-                            currentRoute.push(place);
-                            localStorage.setItem('user_route', JSON.stringify(currentRoute));
-                            renderRouteList();
-                        } else {
-                            alert('Это место уже в маршруте!');
-                        }
+                        const place = city.places.find(p => p.id === placeId);
+                        if (place) addToRoute(place);
                     });
                 });
             }
 
-            // --- Функция отображения маршрута ---
+            // Управление маршрутом
+            let currentRoute = JSON.parse(localStorage.getItem('user_route')) || [];
+            
+            function addToRoute(place) {
+                if (!currentRoute.find(item => item.id === place.id)) {
+                    currentRoute.push(place);
+                    localStorage.setItem('user_route', JSON.stringify(currentRoute));
+                    renderRouteList();
+                    
+                    // Визуальная обратная связь
+                    alert(`"${place.name}" добавлен в маршрут!`);
+                } else {
+                    alert('Это место уже в маршруте!');
+                }
+            }
+            
             function renderRouteList() {
-                routeListDiv.innerHTML = '';
+                const routeList = document.getElementById('routeList');
                 if (currentRoute.length === 0) {
-                    routeListDiv.innerHTML = '<p style="color:#999;">Маршрут пуст. Добавьте места из списка.</p>';
+                    routeList.innerHTML = '<p style="color:#999; text-align:center; padding:20px;">Маршрут пуст. Добавьте места из списка.</p>';
                     return;
                 }
+                
+                routeList.innerHTML = '';
                 currentRoute.forEach((place, index) => {
-                    const routeItem = document.createElement('div');
-                    routeItem.className = 'route-item';
-                    routeItem.innerHTML = `
-                        <span><strong>${index+1}.</strong> ${place.name}</span>
-                        <button class="remove-btn" data-id="${place.id}"><i class="bi bi-trash"></i></button>
+                    const item = document.createElement('div');
+                    item.className = 'route-item';
+                    item.innerHTML = `
+                        <span><i class="bi bi-${index+1}-circle"></i> ${place.name}</span>
+                        <button class="remove-btn" data-id="${place.id}"><i class="bi bi-x-circle"></i></button>
                     `;
-                    routeListDiv.appendChild(routeItem);
+                    routeList.appendChild(item);
                 });
-
+                
                 document.querySelectorAll('.remove-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const placeId = parseInt(this.dataset.id);
@@ -281,13 +504,35 @@
                     });
                 });
             }
-
-            clearBtn.addEventListener('click', function() {
-                currentRoute = [];
-                localStorage.setItem('user_route', JSON.stringify(currentRoute));
-                renderRouteList();
+            
+            document.getElementById('clearRouteBtn').addEventListener('click', function() {
+                if (confirm('Очистить весь маршрут?')) {
+                    currentRoute = [];
+                    localStorage.setItem('user_route', JSON.stringify(currentRoute));
+                    renderRouteList();
+                }
             });
 
+            // Проверка авторизации
+            const currentUser = JSON.parse(localStorage.getItem('current_user'));
+            const localsLink = document.getElementById('localsLink');
+            const authButton = document.getElementById('authButton');
+
+            if (currentUser) {
+                if (localsLink) localsLink.style.display = 'inline-block';
+                if (authButton) {
+                    authButton.textContent = currentUser.name || 'Профиль';
+                    authButton.href = 'profile.html';
+                }
+            } else {
+                if (localsLink) localsLink.style.display = 'none';
+                if (authButton) {
+                    authButton.textContent = 'Войти';
+                    authButton.href = 'login.html';
+                }
+            }
+
+            // Инициализация
             renderPlacesList();
             renderRouteList();
         });
