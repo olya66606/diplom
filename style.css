@@ -110,9 +110,9 @@ body{
     margin: 500px 10px 100px 101px;
 }
 
-.btn1{
+.oprosbtn{
     width: 250px;
-    height: 100px;
+    height: 40px;
     font-size: 25px;
     border-radius: 50px;
     padding: 10px;
@@ -124,11 +124,13 @@ body{
     background-color: white;
     transition: all 0.3s;
 }
-.btn1:hover {
+.oprosbtn:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
-
+.oprosbtn > i{
+    margin-left: 26px;
+}
 .bi{
     border: 1px solid #38af66;
     background-color: #38af66;
