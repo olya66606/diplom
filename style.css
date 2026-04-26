@@ -1,5 +1,5 @@
 
-        *{
+*{
     margin: 0;
     padding: 0;
 }
@@ -9,19 +9,13 @@ body{
 }
 
 .header {
-    border-radius: 12px;
     padding: 0 25px;
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
+    width: 1850px;
     background-color: white;
     transition: all 0.3s ease;
 }
@@ -68,13 +62,26 @@ body{
     text-align: center;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .banner {
     background: url(img/fonbaner.jpg);
     background-size: cover;
     background-position: center;
     width: 100%;
     height: 880px;
-    margin-top: 70px;
     display: flex;
     justify-content: space-around;
 }
@@ -111,31 +118,28 @@ body{
 }
 
 .oprosbtn{
-    width: 250px;
-    height: 40px;
+    width: 230px;
+    height: 36px;
     font-size: 25px;
     border-radius: 50px;
     padding: 10px;
-    gap: 20px;
     border: none;
     margin-left:-20px;
-    margin-top: 30px;
+    margin-top: 20px;
+    text-align: center;
     text-decoration: none;
-    background-color: white;
-    transition: all 0.3s;
+    background-color: rgba(255, 255, 255, 0.774);
 }
+
 .oprosbtn:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
-.oprosbtn > i{
-    margin-left: 26px;
-}
 .bi{
-    border: 1px solid #75a0fd;
-    background-color: #75a0fd;
+    border: 1px solid #3a7562;
+    background-color:  #3a7562;
     border-radius: 50px;
-    padding:8px 10px;
+    padding:5px 5%;
     color: #ffffff;
 }
 
@@ -143,44 +147,42 @@ body{
     margin-left: -200px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Стили для опроса */
+
+
+
 .survey-block {
-    margin-top: 50px;
-    padding: 80px 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-.survey-block::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    transform: rotate(45deg);
-}
-
-.survey-container {
-    max-width: 1300px;
+    width: 1800px;
     margin: 0 auto;
-    position: relative;
-    z-index: 2;
 }
 
 .survey-main-title {
     text-align: center;
     color: rgb(46, 97, 80);
     font-size: 2.5rem;
-    margin-bottom: 50px;
-    letter-spacing: 1px;
 }
 
-.survey-content {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 30px;
+.survey-content{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.survey-form-container{
+    width: 1100px;
 }
 
 .survey-form-container,
@@ -193,30 +195,15 @@ body{
     transition: transform 0.3s;
 }
 
-.survey-form-container:hover,
-.survey-summary-container:hover {
-    transform: translateY(-5px);
-}
+
 
 .survey-form-title,
 .survey-summary-title {
     font-size: 1.8rem;
-    color: #333;
+    color: #242424;
     margin-bottom: 30px;
     padding-bottom: 15px;
-    border-bottom: 3px solid #667eea;
-    position: relative;
-}
-
-.survey-form-title::after,
-.survey-summary-title::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background: #764ba2;
+    border-bottom: 3px solid #10533fbe;
 }
 
 .survey-form-group {
@@ -368,6 +355,8 @@ body{
     margin-left: 10px;
 }
 
+
+
 /* Модальное окно */
 .modal {
     display: none;
@@ -407,6 +396,21 @@ body{
     color: #999;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Популярные туры */
 .tours-container {
     max-width: 1200px;
@@ -415,6 +419,7 @@ body{
 }
 
 .section-header {
+     margin-top: 100px;
     text-align: center;
     margin-bottom: 50px;
 }
@@ -566,7 +571,193 @@ body{
 }
 
 
-/* Футер */
+
+
+
+
+
+
+
+
+
+
+
+
+ .vivod {
+     width: 1300px;
+     margin: 0 auto;
+     display: flex;
+    flex-direction: column;
+ }
+
+  h1 {
+    margin-top: 100px;
+     text-align: center;
+     margin-bottom: 30px;
+     color: #10533fbe;
+     font-size: 2.5rem;
+ }
+  .main-block {
+    display: flex;
+  }
+
+
+  .small-container {
+     background-color: rgba(255, 255, 255, 0.9);
+     border-radius: 12px;
+     padding: 20px;
+     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+     backdrop-filter: blur(5px);
+ }
+
+  .small-container:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+ }
+
+
+   .container-title {
+     font-size: 1.2rem;
+     font-weight: 600;
+     color: #2c3e50;
+     margin-bottom: 15px;
+     padding-bottom: 8px;
+     border-bottom: 2px solid #3498db;
+ }
+
+
+   .stat-container .stat-value {
+     font-size: 2.5rem;
+     font-weight: 700;
+     color: #3498db;
+     margin-bottom: 5px;
+ }
+
+  .stat-container .stat-label {
+     font-size: 1rem;
+     color: #555;
+ }
+
+  .poll-container {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+
+  .circle-poll {
+     width: 120px;
+     height: 120px;
+     border-radius: 50%;
+     background: conic-gradient(#3498db 0% 75%, #ecf0f1 75% 100%);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-bottom: 15px;
+     position: relative;
+ }
+
+  .circle-poll::before {
+     content: '';
+     position: absolute;
+     width: 90px;
+     height: 90px;
+     background-color: white;
+     border-radius: 50%;
+ }
+
+  .circle-poll-value {
+     position: relative;
+     font-size: 2rem;
+     font-weight: 700;
+     color: #2c3e50;
+ }
+
+  .linear-poll {
+     width: 100%;
+     height: 20px;
+     background-color: #ecf0f1;
+     border-radius: 10px;
+     overflow: hidden;
+     margin-bottom: 10px;
+ }
+
+  .linear-poll-fill {
+     height: 100%;
+     background: linear-gradient(to right, #3498db, #2ecc71);
+     width: 65%;
+     border-radius: 10px;
+ }
+
+  .row-poll {
+     display: flex;
+     justify-content: space-between;
+     width: 100%;
+     margin-top: 10px;
+ }
+
+  .row-poll-item {
+     text-align: center;
+     padding: 8px;
+     background-color: #f8f9fa;
+     border-radius: 8px;
+     flex: 1;
+     margin: 0 5px;
+ }
+
+  .row-poll-value {
+     font-weight: 700;
+     font-size: 1.2rem;
+     color: #2c3e50;
+ }
+
+  .row-poll-label {
+     font-size: 0.8rem;
+     color: #7f8c8d;
+ }
+
+
+   .criteria-list, .advice-list {
+     list-style-type: none;
+ }
+
+  .criteria-item, .advice-item {
+     padding: 10px 0;
+     border-bottom: 1px dashed #ecf0f1;
+     display: flex;
+     align-items: center;
+ }
+
+  .criteria-item:last-child, .advice-item:last-child {
+     border-bottom: none;
+ }
+
+  .criteria-icon, .advice-icon {
+     margin-right: 10px;
+     color: #3498db;
+     font-size: 1.2rem;
+ }
+
+  /* Адаптивность */
+ @media (max-width: 992px) {
+     .main-block {
+         grid-template-columns: repeat(2, 1fr);
+     }
+ }
+
+  @media (max-width: 768px) {
+     .main-block {
+         grid-template-columns: 1fr;
+     }
+     
+     h1 {
+         font-size: 2rem;
+     }
+ }
+
+
+  
+* Футер */
 footer {
     background: white;
     padding: 60px 20px 20px;
@@ -659,1173 +850,6 @@ footer {
 }
 
 
-/* opros  */
-  
-  .opros {
-    display: flex;
-    gap: 30px;
-    width: 100%;
-    background-color: #fff;
-    border-radius: 28px;
-    box-shadow: 0 20px 40px -10px rgba(0,20,30,0.2);
-    padding-top:  100px;
-}
 
 
-.opros-left,
-.opros-right {
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 25px;
-}
 
-.opros-left {
-    border: 1px solid #e9edf4;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-}
-
-.opros-right {
-    background: linear-gradient(145deg, #f8faff, #f0f4fe);
-    border: 1px solid #d9e2ef;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Заголовки */
-.form-title, .summary-title {
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-    color: #1a2b3c;
-    border-bottom: 3px solid #aac9ff;
-    padding-bottom: 10px;
-}
-
-.summary-title {
-    border-bottom-color: #6c8fc9;
-}
-
-/* ========================================= */
-/* СТИЛИ ДЛЯ ЛЕВОЙ ФОРМЫ                     */
-/* ========================================= */
-
-/* Группа полей */
-.form-group {
-    margin-bottom: 22px;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Общий стиль для подписей */
-.form-group label,
-.form-group .label-like {
-    font-weight: 500;
-    color: #2c3e50;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-}
-
-/* Поля ввода, select, textarea */
-.form-group select,
-.form-group input[type="date"],
-.form-group textarea {
-    padding: 12px 15px;
-    border: 1px solid #d0dae8;
-    border-radius: 16px;
-    font-size: 1rem;
-    background-color: #ffffff;
-    transition: border 0.15s, box-shadow 0.15s;
-    width: 100%;
-}
-
-.form-group select:focus,
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #4f7ec9;
-    box-shadow: 0 0 0 4px rgba(79, 126, 201, 0.15);
-}
-
-/* Группа radio и checkbox */
-.radio-group,
-.checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    align-items: center;
-    background: #f9fcff;
-    padding: 12px 15px;
-    border-radius: 20px;
-    border: 1px solid #e2eaf5;
-}
-
-.radio-group label,
-.checkbox-group label {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-weight: 400;
-    color: #1e293b;
-    cursor: pointer;
-    margin-bottom: 0;
-}
-
-/* Группа для дат */
-.date-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.date-group input[type="date"] {
-    flex: 1;
-}
-
-/* Бегунок (range) */
-.form-group input[type="range"] {
-    width: 100%;
-    margin-top: 5px;
-    accent-color: #4f7ec9; /* Цвет бегунка для современных браузеров */
-}
-
-#budget-value {
-    font-weight: 700;
-    color: #1e3a6b;
-    background: #e5efff;
-    padding: 4px 12px;
-    border-radius: 30px;
-    margin-left: 10px;
-}
-
-/* Текстовая область */
-.form-group textarea {
-    resize: vertical;
-    min-height: 80px;
-    font-family: inherit;
-}
-
-/* Кнопки формы */
-.form-actions {
-    margin-top: 20px;
-}
-
-.btn {
-    padding: 14px 28px;
-    border: none;
-    border-radius: 40px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
-    display: inline-block;
-    text-align: center;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 14px rgba(0,50,100,0.2);
-}
-
-.btn:active {
-    transform: translateY(0);
-}
-
-.btn-primary {
-    background: #1e3a6b;
-    color: white;
-}
-
-.btn-primary:hover {
-    background: #143157;
-}
-
-.btn-secondary {
-    background: #e2e9f3;
-    color: #1f3a5f;
-}
-
-.btn-secondary:hover {
-    background: #cad8ea;
-}
-
-/* ========================================= */
-/* СТИЛИ ДЛЯ ПРАВОГО БЛОКА (Саммари)         */
-/* ========================================= */
-.summary-content {
-    flex: 1;
-    background-color: white;
-    border-radius: 24px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 10px rgba(0,20,40,0.04);
-    border: 1px solid #dfe8f2;
-}
-
-.summary-content p {
-    font-size: 1.1rem;
-    margin-bottom: 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed #cbd6e6;
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-}
-
-.summary-content p:last-child {
-    border-bottom: none;
-}
-
-.summary-content strong {
-    min-width: 110px;
-    color: #1e3a5f;
-}
-
-.summary-content span {
-    color: #0b1c33;
-    font-weight: 500;
-    word-break: break-word;
-}
-
-.summary-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
-    margin-top: auto;
-}
-
-/* ========================================= */
-/* МОДАЛЬНОЕ ОКНО                            */
-/* ========================================= */
-.modal {
-    display: none; /* Скрыто по умолчанию */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(4px);
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: auto;
-    padding: 30px;
-    border-radius: 36px;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: 0 30px 60px rgba(0,10,30,0.4);
-    position: relative;
-    animation: modalFadeIn 0.3s;
-}
-
-@keyframes modalFadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-.close-modal {
-    color: #aaa;
-    float: right;
-    font-size: 32px;
-    font-weight: bold;
-    cursor: pointer;
-    line-height: 1;
-    position: absolute;
-    top: 15px;
-    right: 25px;
-}
-
-.close-modal:hover {
-    color: #000;
-}
-
-#modal-body {
-    margin-top: 20px;
-    line-height: 1.7;
-    font-size: 1.1rem;
-}
-
-/* ========================================= */
-/* АДАПТИВНОСТЬ (Мобильные устройства)       */
-/* ========================================= */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    .travel-planner {
-        grid-template-columns: 1fr; /* Одна колонка на мобильных */
-        gap: 20px;
-        padding: 20px;
-    }
-
-    .planner-form, .planner-summary {
-        padding: 20px;
-    }
-
-    .date-group {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .date-group span {
-        display: none; /* Убираем дефис на мобильных */
-    }
-
-    .radio-group,
-    .checkbox-group {
-        gap: 12px;
-    }
-
-    .summary-content p {
-        flex-direction: column;
-        gap: 4px;
-    }
-
-    .summary-content strong {
-        min-width: auto;
-    }
-
-    .summary-actions {
-        flex-direction: column;
-    }
-
-    .btn {
-        width: 100%;
-    }
-}
-
-/* Небольшая подстройка для планшетов */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .travel-planner {
-        gap: 20px;
-        padding: 25px;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-/* карточки */
-        .tours-container {
-            width: 100%;
-            margin: 0 auto;
-            margin-top: 50px;
-        }
-        
-       
-        .section-header {
-            margin-bottom: 40px;
-            padding-left: 50px;
-        }
-        
-        .section-header h1 {
-            color: #1c3f34;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-header p {
-            color: #121715;
-            font-size: 1.1rem;
-            max-width: 600px;
-        }
-        
-
-        .tour-card {
-            background-color: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            margin-bottom: 40px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .tour-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-        }
-
-        .tour-card-content {
-            display: flex;
-            flex-wrap: wrap;
-            min-height: 350px;
-        }
-
-        .tour-info {
-            flex: 1;
-            min-width: 300px;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .tour-carousel {
-            flex: 1;
-            min-width: 300px;
-            position: relative;
-            overflow: hidden;
-            background-color: #f5f7fa;
-        }
-
-        .carousel-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        
-        .carousel-track {
-            display: flex;
-            height: 100%;
-            transition: transform 0.5s ease-in-out;
-        }
-        
-        .carousel-slide {
-            min-width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-        }
-
-        .carousel-indicators {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            z-index: 10;
-        }
-        
-        .carousel-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .carousel-indicator.active {
-            background-color: white;
-        }
-
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.8);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 10;
-            color: #2c3e50;
-            font-size: 1.2rem;
-        }
-        
-        .carousel-btn:hover {
-            background-color: white;
-            transform: translateY(-50%) scale(1.1);
-        }
-        
-        .carousel-btn.prev {
-            left: 15px;
-        }
-        
-        .carousel-btn.next {
-            right: 15px;
-        }
-
-        .tour-title {
-            color: #2c3e50;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .tour-subtitle {
-            color: #3498db;
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .tour-subtitle i {
-            margin-right: 8px;
-        }
-
-        .tour-description {
-            color: #555;
-            margin-bottom: 25px;
-            line-height: 1.7;
-            flex-grow: 1;
-        }
-
-        .entertainments {
-            margin-bottom: 25px;
-        }
-        
-        .entertainments h3 {
-            color: #2c3e50;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .entertainments h3 i {
-            margin-right: 8px;
-            color: #3498db;
-        }
-        
-        .entertainment-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        
-        .tag {
-            background-color: #eef5f9;
-            color: #3498db;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        
-        .tour-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-        }
-        
-        .price {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .price-amount {
-            color: #2c3e50;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-        
-        .price-note {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-        
-        .duration {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-        
-        .duration-value {
-            color: #2c3e50;
-            font-size: 1.3rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-        }
-        
-        .duration-value i {
-            margin-right: 6px;
-            color: #3498db;
-        }
-        
-        .duration-note {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-        
-        .tour-actions {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .btn {
-            padding: 14px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(to right, #3498db, #2980b9);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: linear-gradient(to right, #2980b9, #2573a7);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-        }
-        
-        .btn-secondary {
-            background-color: #f0f4f8;
-            color: #2c3e50;
-            border: 2px solid #e1e8ed;
-        }
-        
-        .btn-secondary:hover {
-            background-color: #e4eaf1;
-            transform: translateY(-2px);
-        }
-        
-        .btn i {
-            margin-right: 8px;
-        }
-        
-
-        .popular-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(to right, #e74c3c, #c0392b);
-            color: white;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            z-index: 10;
-            box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
-        }
-        
-
-        .tour-rating {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .stars {
-            color: #f1c40f;
-            margin-right: 10px;
-        }
-        
-        .rating-value {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        
-        .reviews-count {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            margin-left: 5px;
-        }
-        
-        @media (max-width: 992px) {
-            .tour-card-content {
-                flex-direction: column;
-            }
-            
-            .tour-info, .tour-carousel {
-                min-width: 100%;
-            }
-            
-            .tour-carousel {
-                height: 300px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .section-header h1 {
-                font-size: 2rem;
-            }
-            
-            .tour-title {
-                font-size: 1.5rem;
-            }
-            
-            .tour-meta {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
-            .duration {
-                align-items: flex-start;
-            }
-            
-            .tour-actions {
-                flex-direction: column;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            body {
-                padding: 15px;
-            }
-            
-            .tour-info {
-                padding: 20px;
-            }
-            
-            .price-amount {
-                font-size: 1.5rem;
-            }
-            
-            .duration-value {
-                font-size: 1.1rem;
-            }
-            
-            .btn {
-                padding: 12px 20px;
-            }
-        }
-
-        
-    
-
-
-
- /* .container */
-
-
-        .vivod {
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #2c3e50;
-            font-size: 2.5rem;
-        }
-
-        .main-block {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-            position: relative;
-            padding: 20px;
-            border-radius: 15px;
-            overflow: hidden;
-            min-height: 800px;
-        }
-
-
-        .background-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            opacity: 0.7;
-        }
-
-        .small-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .small-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-
-        .container-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #3498db;
-        }
-
-
-        .stat-container .stat-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #3498db;
-            margin-bottom: 5px;
-        }
-
-        .stat-container .stat-label {
-            font-size: 1rem;
-            color: #555;
-        }
-
-        .poll-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .circle-poll {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: conic-gradient(#3498db 0% 75%, #ecf0f1 75% 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        .circle-poll::before {
-            content: '';
-            position: absolute;
-            width: 90px;
-            height: 90px;
-            background-color: white;
-            border-radius: 50%;
-        }
-
-        .circle-poll-value {
-            position: relative;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #2c3e50;
-        }
-
-        .linear-poll {
-            width: 100%;
-            height: 20px;
-            background-color: #ecf0f1;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-
-        .linear-poll-fill {
-            height: 100%;
-            background: linear-gradient(to right, #3498db, #2ecc71);
-            width: 65%;
-            border-radius: 10px;
-        }
-
-        .row-poll {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .row-poll-item {
-            text-align: center;
-            padding: 8px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            flex: 1;
-            margin: 0 5px;
-        }
-
-        .row-poll-value {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #2c3e50;
-        }
-
-        .row-poll-label {
-            font-size: 0.8rem;
-            color: #7f8c8d;
-        }
-
-
-        .criteria-list, .advice-list {
-            list-style-type: none;
-        }
-
-        .criteria-item, .advice-item {
-            padding: 10px 0;
-            border-bottom: 1px dashed #ecf0f1;
-            display: flex;
-            align-items: center;
-        }
-
-        .criteria-item:last-child, .advice-item:last-child {
-            border-bottom: none;
-        }
-
-        .criteria-icon, .advice-icon {
-            margin-right: 10px;
-            color: #3498db;
-            font-size: 1.2rem;
-        }
-
-        /* Адаптивность */
-        @media (max-width: 992px) {
-            .main-block {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-block {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-        }
-
-
-
-
-
-
-
-
-        /* Стили для футера */
-
-
-        footer {
-            background-color: #ffffff;
-            padding: 40px 0 20px;
-            margin-top: auto;
-        }
-
-        .footer-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .footer-top {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .footer-logo {
-            margin-bottom: 20px;
-        }
-
-        .logo-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-             color: #273f3c;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            transition: color 0.3s;
-        }
- 
-        .contact-list{
-            width: 300px;
-            text-align: center;
-            margin-left: -30px;
-        }
-        .logo-link:hover {
-            color: #273f3c;
-        }
-
-        .logo-icon {
-            font-size: 2.2rem;
-            margin-right: 10px;
-            color: #273f3c;
-        }
-
-        .logo-text {
-            font-size: 1.8rem;
-        }
-
-        .footer-description {
-            font-size: 0.95rem;
-            line-height: 1.7;
-           color: #273f3c;
-            margin-bottom: 20px;
-        }
-
-
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #22352b;
-            color: #273f3c;
-        }
-
-
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .contact-icon {
-            font-size: 1.2rem;
-              color: #273f3c;
-            margin-right: 12px;
-            margin-top: 3px;
-            width: 20px;
-        }
-
-        .contact-text {
-            color: #050505;
-            line-height: 1.5;
-        }
-
-        .phone-link, .address-text {
-            color: #bdc3c7;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .phone-link:hover {
-            color: #3498db;
-        }
-
-       
-
-
-        .social-text {
-            margin-top: 5px;
-            font-size: 0.85rem;
-            color: #000000;
-        }
-
-        .newsletter-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .newsletter-input {
-            padding: 12px 15px;
-            border: none;
-            border-radius: 4px;
-            background-color: #62af89a9;
-            color: #ffffff;
-            font-size: 1rem;
-        }
-
-   .newsletter-input::placeholder {
-        color: rgb(0, 0, 0);
-        }
-
-        .newsletter-btn {
-            padding: 12px 15px;
-            background-color:  #3a805f;
-            color: #264436;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .newsletter-btn:hover {
-            background-color: #4d8172;
-        }
-
-
-    
-.footer-bottom {
-    text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-    color: #666;
-}
-
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
-
-.footer-links a {
-    color: #666;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.footer-links a:hover {
-    color: #667eea;
-}
