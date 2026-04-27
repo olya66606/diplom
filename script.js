@@ -90,45 +90,54 @@
             return cities[cityId] || 'Санкт-Петербург';
         }
 
-        // Функция загрузки туров
-        function loadTours(cityId) {
-            const toursGrid = document.getElementById('tours-grid');
-            const toursTitle = document.getElementById('tours-title');
-            const toursSubtitle = document.getElementById('tours-subtitle');
-            
-            const cityName = getCityDisplayName(cityId);
-            
-            toursTitle.textContent = `Популярные туры в ${cityName}`;
-            toursSubtitle.textContent = `Откройте для себя лучшие маршруты по ${cityName}`;
-            
-            const tours = toursData[cityId] || toursData['saint-petersburg'];
-            
-            toursGrid.innerHTML = tours.map(tour => `
-                <div class="tour-card">
-                    <div class="tour-image" style="background-image: url('${tour.image}')">
-                        <span class="tour-badge">${tour.badge}</span>
-                    </div>
-                    <div class="tour-content">
-                        <h3>${tour.title}</h3>
-                        <div class="tour-location"><i class="bi bi-geo-alt"></i> ${tour.location}</div>
-                        <div class="tour-rating">
-                            <div class="stars">${'★'.repeat(Math.floor(tour.rating))}${tour.rating % 1 >= 0.5 ? '½' : ''}</div>
-                            <span>${tour.rating} (${tour.reviews} отзывов)</span>
-                        </div>
-                        <p class="tour-description">${tour.description}</p>
-                        <div class="tour-meta">
-                            <div class="tour-price">${tour.price} ₽ <span>за чел.</span></div>
-                            <div class="tour-duration"><i class="bi bi-clock"></i> ${tour.duration} дня</div>
-                        </div>
-                        <div class="tour-actions">
-                            <a href="planner.html?city=${cityId}" class="tour-btn tour-btn-primary">Выбрать</a>
-                            <button class="tour-btn tour-btn-secondary"><i class="bi bi-bookmark"></i></button>
-                        </div>
-                    </div>
+    // Функция загрузки туров
+function loadTours(cityId) {
+    const toursGrid = document.getElementById('tours-grid');
+    const toursTitle = document.getElementById('tours-title');
+    const toursSubtitle = document.getElementById('tours-subtitle');
+    const toursContainer = document.getElementById('toursContainer');
+    
+    const cityName = getCityDisplayName(cityId);
+    
+    toursTitle.textContent = `Популярные туры в ${cityName}`;
+    toursSubtitle.textContent = `Откройте для себя лучшие маршруты по ${cityName}`;
+    
+    const tours = toursData[cityId] || toursData['saint-petersburg'];
+    
+    toursGrid.innerHTML = tours.map(tour => `
+        <div class="tour-card">
+            <div class="tour-image" style="background-image: url('${tour.image}')">
+                <span class="tour-badge">${tour.badge}</span>
+            </div>
+            <div class="tour-content">
+                <h3>${tour.title}</h3>
+                <div class="tour-location"><i class="bi bi-geo-alt"></i> ${tour.location}</div>
+                <div class="tour-rating">
+                    <div class="stars">${'★'.repeat(Math.floor(tour.rating))}${tour.rating % 1 >= 0.5 ? '½' : ''}</div>
+                    <span>${tour.rating} (${tour.reviews} отзывов)</span>
                 </div>
-            `).join('');
-        }
-
+                <p class="tour-description">${tour.description}</p>
+                <div class="tour-meta">
+                    <div class="tour-price">${tour.price} ₽ <span>за чел.</span></div>
+                    <div class="tour-duration"><i class="bi bi-clock"></i> ${tour.duration} дня</div>
+                </div>
+                <div class="tour-actions">
+                    <a href="planner.html?city=${cityId}" class="tour-btn tour-btn-primary">Выбрать</a>
+                    <button class="tour-btn tour-btn-secondary"><i class="bi bi-bookmark"></i></button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    // ПОКАЗЫВАЕМ блок с турами (убираем класс hidden)
+    if (toursContainer) {
+        toursContainer.classList.remove('hidden');
+        // Плавно прокручиваем к турам
+        setTimeout(() => {
+            toursContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+    }
+}
         // Логика опроса
         document.addEventListener('DOMContentLoaded', function() {
             // Получаем элементы
@@ -588,3 +597,311 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+
+
+
+
+
+// =========================================
+// НОВЫЙ СТИЛЬНЫЙ ОПРОС (КАРТОЧКИ)
+// =========================================
+
+// Данные ответов
+let answers = {
+    city: null,
+    travelers: null,
+    budget: 30000,
+    startDate: null,
+    endDate: null,
+    interests: []
+};
+
+let currentStep = 1;
+const totalSteps = 5;
+
+// Функция обновления сводки
+function updateSurveySummary() {
+    const cityName = answers.city ? getCityDisplayName(answers.city) : 'не выбран';
+    document.getElementById('summary-country').textContent = cityName;
+    document.getElementById('summary-travelers').textContent = answers.travelers || 'не выбрано';
+    document.getElementById('summary-budget').textContent = answers.budget.toLocaleString('ru-RU');
+    
+    let datesText = 'не выбраны';
+    if (answers.startDate && answers.endDate) {
+        datesText = `${answers.startDate} — ${answers.endDate}`;
+    }
+    document.getElementById('summary-dates').textContent = datesText;
+    
+    let interestsText = answers.interests.length > 0 ? answers.interests.join(', ') : 'не выбраны';
+    document.getElementById('summary-interests').textContent = interestsText;
+}
+
+// Переход на шаг
+function goToStep(step) {
+    document.querySelectorAll('.question-card').forEach((card, i) => {
+        card.classList.toggle('active', i + 1 === step);
+    });
+    document.querySelectorAll('.step').forEach((s, i) => {
+        s.classList.toggle('active', i + 1 === step);
+    });
+    document.getElementById('current-step-text').textContent = `Шаг ${step} из ${totalSteps}`;
+    document.getElementById('prev-btn').disabled = step === 1;
+    
+    const nextBtn = document.getElementById('next-btn');
+    const submitBtn = document.getElementById('submit-survey-btn');
+    if (step === totalSteps) {
+        nextBtn.style.display = 'none';
+        submitBtn.style.display = 'flex';
+    } else {
+        nextBtn.style.display = 'flex';
+        submitBtn.style.display = 'none';
+    }
+    currentStep = step;
+}
+
+// Функция загрузки туров (без автоматической прокрутки)
+function loadToursWithShow(cityId) {
+    const toursGrid = document.getElementById('tours-grid');
+    const toursTitle = document.getElementById('tours-title');
+    const toursSubtitle = document.getElementById('tours-subtitle');
+    const toursContainer = document.getElementById('toursContainer');
+    
+    const cityName = getCityDisplayName(cityId);
+    
+    toursTitle.textContent = `Популярные туры в ${cityName}`;
+    toursSubtitle.textContent = `Откройте для себя лучшие маршруты по ${cityName}`;
+    
+    const tours = toursData[cityId] || toursData['saint-petersburg'];
+    
+    toursGrid.innerHTML = tours.map(tour => `
+        <div class="tour-card">
+            <div class="tour-image" style="background-image: url('${tour.image}')">
+                <span class="tour-badge">${tour.badge}</span>
+            </div>
+            <div class="tour-content">
+                <h3>${tour.title}</h3>
+                <div class="tour-location"><i class="bi bi-geo-alt"></i> ${tour.location}</div>
+                <div class="tour-rating">
+                    <div class="stars">${'★'.repeat(Math.floor(tour.rating))}${tour.rating % 1 >= 0.5 ? '½' : ''}</div>
+                    <span>${tour.rating} (${tour.reviews} отзывов)</span>
+                </div>
+                <p class="tour-description">${tour.description}</p>
+                <div class="tour-meta">
+                    <div class="tour-price">${tour.price} ₽ <span>за чел.</span></div>
+                    <div class="tour-duration"><i class="bi bi-clock"></i> ${tour.duration} дня</div>
+                </div>
+                <div class="tour-actions">
+                    <a href="planner.html?city=${cityId}" class="tour-btn tour-btn-primary">Выбрать</a>
+                    <button class="tour-btn tour-btn-secondary"><i class="bi bi-bookmark"></i></button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    // ПОКАЗЫВАЕМ блок с турами (без прокрутки!)
+    if (toursContainer) {
+        toursContainer.classList.remove('hidden');
+        // scrollIntoView удален - страница не прокручивается
+    }
+}
+
+// Инициализация нового опроса
+function initNewSurvey() {
+    // Обработчики выбора города
+    document.querySelectorAll('.city-option').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.city-option').forEach(b => b.classList.remove('selected'));
+            this.classList.add('selected');
+            answers.city = this.dataset.city;
+            updateSurveySummary();
+            loadToursWithShow(answers.city); // Теперь показывает туры
+        });
+    });
+    
+    // Обработчики выбора количества человек
+    document.querySelectorAll('.travelers-option').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.travelers-option').forEach(b => b.classList.remove('selected'));
+            this.classList.add('selected');
+            answers.travelers = this.dataset.travelers;
+            updateSurveySummary();
+        });
+    });
+    
+    // Бюджет
+    const budgetSlider = document.getElementById('budget-step');
+    const budgetDisplay = document.getElementById('budget-value-display');
+    if (budgetSlider) {
+        budgetSlider.addEventListener('input', function() {
+            answers.budget = parseInt(this.value);
+            budgetDisplay.textContent = answers.budget.toLocaleString('ru-RU') + ' ₽';
+            updateSurveySummary();
+        });
+    }
+    
+    // Пресеты бюджета
+    document.querySelectorAll('.budget-preset').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const val = parseInt(this.dataset.budget);
+            if (budgetSlider) {
+                budgetSlider.value = val;
+                answers.budget = val;
+                budgetDisplay.textContent = val.toLocaleString('ru-RU') + ' ₽';
+                updateSurveySummary();
+            }
+        });
+    });
+    
+    // Даты
+    const startDateInput = document.getElementById('start-date-step');
+    const endDateInput = document.getElementById('end-date-step');
+    if (startDateInput) {
+        startDateInput.addEventListener('change', function() {
+            answers.startDate = this.value;
+            updateSurveySummary();
+        });
+    }
+    if (endDateInput) {
+        endDateInput.addEventListener('change', function() {
+            answers.endDate = this.value;
+            updateSurveySummary();
+        });
+    }
+    
+    // Интересы
+    document.querySelectorAll('.interest-option').forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.classList.toggle('selected');
+            const interest = this.dataset.interest;
+            if (answers.interests.includes(interest)) {
+                answers.interests = answers.interests.filter(i => i !== interest);
+            } else {
+                answers.interests.push(interest);
+            }
+            updateSurveySummary();
+        });
+    });
+    
+    // Кнопки навигации
+    document.getElementById('next-btn')?.addEventListener('click', () => {
+        if (currentStep < totalSteps) goToStep(currentStep + 1);
+    });
+    document.getElementById('prev-btn')?.addEventListener('click', () => {
+        if (currentStep > 1) goToStep(currentStep - 1);
+    });
+    
+    // Кнопка отправки
+    document.getElementById('submit-survey-btn')?.addEventListener('click', function() {
+        const cityId = answers.city || 'saint-petersburg';
+        const cityName = getCityDisplayName(cityId);
+        
+        const surveyData = {
+            cityId: cityId,
+            cityName: cityName,
+            travelers: answers.travelers || '1',
+            budget: answers.budget,
+            budgetFormatted: answers.budget.toLocaleString('ru-RU'),
+            startDate: answers.startDate,
+            endDate: answers.endDate,
+            dates: (answers.startDate && answers.endDate) ? `${answers.startDate} — ${answers.endDate}` : 'не выбраны',
+            interests: answers.interests.join(', ') || 'Достопримечательности'
+        };
+        
+        localStorage.setItem('selected_city', JSON.stringify(surveyData));
+        localStorage.setItem('selected_city_for_locals', cityId);
+        
+        const modalBody = document.getElementById('modal-body');
+        if (modalBody) {
+            modalBody.innerHTML = `
+                <p><strong>Город:</strong> ${cityName}</p>
+                <p><strong>Человек:</strong> ${answers.travelers || '1'}</p>
+                <p><strong>Бюджет:</strong> ${answers.budget.toLocaleString('ru-RU')} ₽</p>
+                <p><strong>Даты:</strong> ${surveyData.dates}</p>
+                <p><strong>Интересы:</strong> ${surveyData.interests}</p>
+                <p><em>Данные сохранены! Перейдите в конструктор.</em></p>
+            `;
+        }
+        const modal = document.getElementById('myModal');
+        if (modal) modal.style.display = 'flex';
+    });
+    
+    // Кнопка сброса
+    document.getElementById('reset-form')?.addEventListener('click', function() {
+        // Сброс данных
+        answers = {
+            city: null,
+            travelers: null,
+            budget: 30000,
+            startDate: null,
+            endDate: null,
+            interests: []
+        };
+        
+        // Сброс UI
+        document.querySelectorAll('.city-option, .travelers-option, .interest-option').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        if (budgetSlider) {
+            budgetSlider.value = 30000;
+            budgetDisplay.textContent = '30 000 ₽';
+        }
+        if (startDateInput) startDateInput.value = '';
+        if (endDateInput) endDateInput.value = '';
+        
+        updateSurveySummary();
+        goToStep(1);
+        
+        // СКРЫВАЕМ блок с турами
+        const toursContainer = document.getElementById('toursContainer');
+        if (toursContainer) {
+            toursContainer.classList.add('hidden');
+        }
+    });
+    
+    // Установка минимальных дат
+    const today = new Date().toISOString().split('T')[0];
+    if (startDateInput) startDateInput.min = today;
+    if (endDateInput) endDateInput.min = today;
+    
+    // Инициализация
+    updateSurveySummary();
+    goToStep(1);
+}
+
+// Запускаем новый опрос после загрузки страницы
+document.addEventListener('DOMContentLoaded', function() {
+    // Проверяем, есть ли элементы нового опроса
+    if (document.querySelector('.question-card')) {
+        initNewSurvey();
+    }
+});
+
+
+// Открытие модального окна (в обработчике submit-survey-btn)
+document.getElementById('submit-survey-btn')?.addEventListener('click', function() {
+    // ... код сохранения данных ...
+    
+    const modal = document.getElementById('myModal');
+    if (modal) {
+        modal.style.display = 'flex';  // ИЛИ modal.classList.add('show');
+    }
+});
+
+// Закрытие модального окна
+const closeModal = document.querySelector('.close-modal');
+if (closeModal) {
+    closeModal.addEventListener('click', function() {
+        const modal = document.getElementById('myModal');
+        if (modal) {
+            modal.style.display = 'none';  // ИЛИ modal.classList.remove('show');
+        }
+    });
+}
+
+// Закрытие при клике вне модального окна
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('myModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';  // ИЛИ modal.classList.remove('show');
+    }
+});

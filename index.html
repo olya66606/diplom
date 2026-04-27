@@ -40,236 +40,382 @@
     </section>
 
 
-    <div class="survey-block" id="surveyBlock">
-            <h1  class="survey-main-title">Пройди опрос и мы поможем тебе</h1>
-            <div class="survey-content">
-                <div class="survey-form-container">
-                    <h2 class="survey-form-title">Планирование поездки</h2>
-                    
-                    <div class="survey-form-group">
-                        <label for="country">Выберите город:</label>
-                        <select id="country" name="country">
-                            <option value="saint-petersburg">Санкт-Петербург</option>
-                            <option value="kaliningrad">Калининград</option>
-                        </select>
-                    </div>
-
-                    <div class="survey-form-group">
-                        <span class="survey-label">Количество человек:</span>
-                        <div class="survey-radio-group">
-                            <label><input type="radio" name="travelers" value="1" checked> 1</label>
-                            <label><input type="radio" name="travelers" value="2"> 2</label>
-                            <label><input type="radio" name="travelers" value="3-5"> 3-5</label>
-                            <label><input type="radio" name="travelers" value="6+"> 6+</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-form-group">
-                        <label for="budget">Бюджет: <span id="budget-value">30 000 ₽</span></label>
-                        <input type="range" id="budget" name="budget" min="10000" max="200000" value="30000" step="5000">
-                    </div>
-
-                    <div class="survey-form-group">
-                        <label>Даты поездки:</label>
-                        <div class="survey-date-group">
-                            <input type="date" id="start-date" name="start-date">
-                            <span>—</span>
-                            <input type="date" id="end-date" name="end-date">
-                        </div>
-                    </div>
-
-                    <div class="survey-form-group">
-                        <span class="survey-label">Что интересует:</span>
-                        <div class="survey-checkbox-group">
-                            <label><input type="checkbox" name="interests" value="Достопримечательности" checked> Достопримечательности</label>
-                            <label><input type="checkbox" name="interests" value="Музеи"> Музеи</label>
-                            <label><input type="checkbox" name="interests" value="Парки"> Парки</label>
-                            <label><input type="checkbox" name="interests" value="Еда"> Еда</label>
-                            <label><input type="checkbox" name="interests" value="Шоппинг"> Шоппинг</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-form-group">
-                        <label for="additional-info">Дополнительная информация:</label>
-                        <textarea id="additional-info" name="additional-info" rows="3" placeholder="Напишите, что еще хотели бы..."></textarea>
-                    </div>
-
-                    <div class="survey-form-actions">
-                        <button type="button" id="reset-form" class="survey-btn survey-btn-secondary">Сбросить</button>
-                    </div>
-                </div>
-
-                <div class="survey-summary-container">
-                    <h2 class="survey-summary-title">Ваш выбор</h2>
-                    <div id="summary-content" class="survey-summary-content">
-                        <div class="summary-item"><span class="summary-label">Город:</span> <span class="summary-value" id="summary-country">Санкт-Петербург</span></div>
-                        <div class="summary-item"><span class="summary-label">Человек:</span> <span class="summary-value" id="summary-travelers">1</span></div>
-                        <div class="summary-item"><span class="summary-label">Бюджет:</span> <span class="summary-value"><span id="summary-budget">30 000</span> ₽</span></div>
-                        <div class="summary-item"><span class="summary-label">Даты:</span> <span class="summary-value" id="summary-dates">не выбраны</span></div>
-                        <div class="summary-item"><span class="summary-label">Интересы:</span> <span class="summary-value" id="summary-interests">Достопримечательности</span></div>
-                        <div class="summary-item"><span class="summary-label">Доп. инфо:</span> <span class="summary-value" id="summary-additional">—</span></div>
-                    </div>
-                    <div class="survey-summary-actions">
-                        <button type="button" id="submit-btn" class="survey-btn survey-btn-primary">Подобрать маршрут</button>
-                    </div>
-                </div>
-            </div>
+<div class="survey-block" id="surveyBlock">
+    <div class="survey-container">
+        <div class="survey-main-header">
+            <h1 class="survey-main-title">Пройди опрос и мы поможем тебе</h1>
+            <p class="survey-main-subtitle">Расскажи о своих планах - мы подберем лучший маршрут</p>
         </div>
-    </div>
-
-  
-    <div class="tours-container">
-        <header class="section-header">
-            <h1 id="tours-title">Популярные туры в Санкт-Петербург</h1>
-            <p id="tours-subtitle">Откройте для себя лучшие маршруты по выбранному направлению</p>
-        </header>
         
-        <div class="tours-grid" id="tours-grid">
-            <!-- Туры будут загружаться динамически через JavaScript -->
-        </div>
-   
-
-    <!-- Модальное окно -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h3>Детали вашей поездки</h3>
-            <div id="modal-body"></div>
-            <a href="planner.html" class="survey-btn survey-btn-primary" style="display: block; text-align: center; margin-top: 20px; text-decoration: none;">Перейти в конструктор</a>
-        </div>
-    </div>
-
- </div>
-
-
- <div class="vivod">
-        <h1>Статистика и информация о турах</h1> 
-        <div class="main-block">
-        <div class="main-block-top">
-            <div class="small-container stat-container">
-                <h2 class="container-title">Рекомендуемая длительность</h2>
-                <div class="stat-value">6 дней</div>
-                <div class="stat-label">максимальное комфортное число дней</div>
-            </div>
-            <div class="small-container stat-container">
-                <h2 class="container-title">Отзывы клиентов</h2>
-                <div class="stat-value">85+</div>
-                <div class="stat-label">положительных отзывов о турах</div>
-            </div>
-            <div class="small-container poll-container">
-                <h2 class="container-title">Уровень удовлетворенности</h2>
-                <div class="circle-poll">
-                    <div class="circle-poll-value">8.7</div>
-                </div>
-                <div class="stat-label">средняя оценка туров (из 10)</div>
-            </div>
-        </div>
-            <div class="main-block-bottom">
-            <div class="small-container poll-container">
-                <h2 class="container-title">Заполненность туров</h2>
-                <div class="linear-poll">
-                    <div class="linear-poll-fill"></div>
-                </div>
-                <div class="stat-label">65% туров заполнены на ближайший месяц</div>
-                <div class="row-poll">
-                    <div class="row-poll-item">
-                        <div class="row-poll-value">85%</div>
-                        <div class="row-poll-label">Весна</div>
+        <div class="survey-card-wrapper">
+            <!-- Левая область с карточками вопросов -->
+            <div class="survey-questions-area">
+                <!-- Индикатор прогресса -->
+                <div class="progress-indicator">
+                    <div class="progress-steps">
+                        <span class="step active" data-step="1">1</span>
+                        <span class="step-line"></span>
+                        <span class="step" data-step="2">2</span>
+                        <span class="step-line"></span>
+                        <span class="step" data-step="3">3</span>
+                        <span class="step-line"></span>
+                        <span class="step" data-step="4">4</span>
+                        <span class="step-line"></span>
+                        <span class="step" data-step="5">5</span>
                     </div>
-                    <div class="row-poll-item">
-                        <div class="row-poll-value">92%</div>
-                        <div class="row-poll-label">Лето</div>
-                    </div>
-                    <div class="row-poll-item">
-                        <div class="row-poll-value">45%</div>
-                        <div class="row-poll-label">Зима</div>
+                    <div class="progress-text">
+                        <span id="current-step-text">Шаг 1 из 5</span>
                     </div>
                 </div>
-            </div>
-            <div class="small-container">
-                <h2 class="container-title">Критерии выбора тура</h2>
-                <ul class="criteria-list">
-                    <li class="criteria-item">
-                        <i class="fas fa-check-circle criteria-icon"></i>
-                        <span>Соответствие цены и качества</span>
-                    </li>
-                    <li class="criteria-item">
-                        <i class="fas fa-check-circle criteria-icon"></i>
-                        <span>Наличие положительных отзывов</span>
-                    </li>
-                    <li class="criteria-item">
-                        <i class="fas fa-check-circle criteria-icon"></i>
-                        <span>Комфортные условия проживания</span>
-                    </li>
-                    <li class="criteria-item">
-                        <i class="fas fa-check-circle criteria-icon"></i>
-                        <span>Интересная экскурсионная программа</span>
-                    </li>
-                    <li class="criteria-item">
-                        <i class="fas fa-check-circle criteria-icon"></i>
-                        <span>Безопасность и надежность</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="small-container highlight">
-                <h2 class="container-title">Советы по документам и погоде</h2>
-                <div class="weather-icon">
-                    <i class="fas fa-cloud-sun-rain"></i>
+
+                <!-- Вопрос 1: Город -->
+                <div class="question-card active" data-step="1">
+                    <div class="question-icon">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+                    <h3 class="question-title">Куда хочешь отправиться?</h3>
+                    <p class="question-desc">Выбери город для твоего путешествия</p>
+                    <div class="question-options">
+                        <div class="city-buttons">
+                            <button class="city-option" data-city="saint-petersburg">
+                                <i class="bi bi-building"></i> Санкт-Петербург
+                            </button>
+                            <button class="city-option" data-city="kaliningrad">
+                                <i class="bi bi-tree"></i> Калининград
+                            </button>
+                            <button class="city-option" data-city="moscow">
+                                <i class="bi bi-star"></i> Москва
+                            </button>
+                            <button class="city-option" data-city="kazan">
+                                <i class="bi bi-flag"></i> Казань
+                            </button>
+                            <button class="city-option" data-city="sochi">
+                                <i class="bi bi-sun"></i> Сочи
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <ul class="advice-list">
-                    <li class="advice-item">
-                        <i class="fas fa-passport advice-icon"></i>
-                        <span>Проверьте срок действия загранпаспорта (минимум 6 месяцев после поездки)</span>
-                    </li>
-                    <li class="advice-item">
-                        <i class="fas fa-umbrella advice-icon"></i>
-                        <span>Возьмите зонт и дождевик, вероятность осадков 97%</span>
-                    </li>
-                    <li class="advice-item">
-                        <i class="fas fa-temperature-low advice-icon"></i>
-                        <span>Температура воздуха: днём +15...+20°C, ночью +5...+10°C</span>
-                    </li>
-                    <li class="advice-item">
-                        <i class="fas fa-suitcase-rolling advice-icon"></i>
-                        <span>Рекомендуем взять удобную обувь для пеших экскурсий</span>
-                    </li>
-                </ul>
+
+                <!-- Вопрос 2: Количество человек -->
+                <div class="question-card" data-step="2">
+                    <div class="question-icon">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <h3 class="question-title">Сколько вас?</h3>
+                    <p class="question-desc">Укажи количество путешественников</p>
+                    <div class="question-options">
+                        <div class="travelers-buttons">
+                            <button class="travelers-option" data-travelers="1">1</button>
+                            <button class="travelers-option" data-travelers="2">2</button>
+                            <button class="travelers-option" data-travelers="3-5">3-5</button>
+                            <button class="travelers-option" data-travelers="6+">6+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Вопрос 3: Бюджет -->
+                <div class="question-card" data-step="3">
+                    <div class="question-icon">
+                        <i class="bi bi-wallet2"></i>
+                    </div>
+                    <h3 class="question-title">Какой бюджет?</h3>
+                    <p class="question-desc">Выбери комфортную сумму на поездку</p>
+                    <div class="question-options">
+                        <div class="budget-slider-container">
+                            <div class="budget-values">
+                                <span>10 000 ₽</span>
+                                <span id="budget-value-display">30 000 ₽</span>
+                                <span>200 000 ₽</span>
+                            </div>
+                            <input type="range" id="budget-step" min="10000" max="200000" value="30000" step="5000">
+                            <div class="budget-presets">
+                                <button class="budget-preset" data-budget="20000">20 000 ₽</button>
+                                <button class="budget-preset" data-budget="50000">50 000 ₽</button>
+                                <button class="budget-preset" data-budget="100000">100 000 ₽</button>
+                                <button class="budget-preset" data-budget="150000">150 000 ₽</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Вопрос 4: Даты -->
+                <div class="question-card" data-step="4">
+                    <div class="question-icon">
+                        <i class="bi bi-calendar3"></i>
+                    </div>
+                    <h3 class="question-title">Когда планируешь?</h3>
+                    <p class="question-desc">Выбери даты поездки</p>
+                    <div class="question-options">
+                        <div class="dates-container">
+                            <div class="date-input-group">
+                                <label>Дата начала</label>
+                                <input type="date" id="start-date-step" class="date-input">
+                            </div>
+                            <div class="date-input-group">
+                                <label>Дата окончания</label>
+                                <input type="date" id="end-date-step" class="date-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Вопрос 5: Интересы -->
+                <div class="question-card" data-step="5">
+                    <div class="question-icon">
+                        <i class="bi bi-heart-fill"></i>
+                    </div>
+                    <h3 class="question-title">Что интересует?</h3>
+                    <p class="question-desc">Выбери то, что хочешь увидеть</p>
+                    <div class="question-options">
+                        <div class="interests-buttons">
+                            <button class="interest-option" data-interest="Достопримечательности">
+                                <i class="bi bi-buildings"></i> Достопримечательности
+                            </button>
+                            <button class="interest-option" data-interest="Музеи">
+                                <i class="bi bi-bank"></i> Музеи
+                            </button>
+                            <button class="interest-option" data-interest="Парки">
+                                <i class="bi bi-flower1"></i> Парки
+                            </button>
+                            <button class="interest-option" data-interest="Еда">
+                                <i class="bi bi-cup-straw"></i> Еда
+                            </button>
+                            <button class="interest-option" data-interest="Шоппинг">
+                                <i class="bi bi-bag"></i> Шоппинг
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Кнопки навигации -->
+                <div class="navigation-buttons">
+                    <button id="prev-btn" class="nav-btn nav-prev" disabled>
+                        <i class="bi bi-arrow-left"></i> Назад
+                    </button>
+                    <button id="next-btn" class="nav-btn nav-next">
+                        Далее <i class="bi bi-arrow-right"></i>
+                    </button>
+                    <button id="submit-survey-btn" class="nav-btn nav-submit" style="display: none;">
+                        Подобрать маршрут <i class="bi bi-check-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Правая панель - сводка -->
+            <div class="survey-summary-container">
+                <h2 class="survey-summary-title">Твой выбор</h2>
+                <div id="summary-content" class="survey-summary-content">
+                    <div class="summary-item">
+                        <span class="summary-label">Город:</span>
+                        <span class="summary-value" id="summary-country">не выбран</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Человек:</span>
+                        <span class="summary-value" id="summary-travelers">не выбрано</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Бюджет:</span>
+                        <span class="summary-value"><span id="summary-budget">30 000</span> ₽</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Даты:</span>
+                        <span class="summary-value" id="summary-dates">не выбраны</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Интересы:</span>
+                        <span class="summary-value" id="summary-interests">не выбраны</span>
+                    </div>
+                </div>
+                <div class="survey-summary-footer">
+                    <button type="button" id="reset-form" class="reset-btn">
+                        <i class="bi bi-arrow-repeat"></i> Сбросить всё
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Модальное окно - должно быть скрыто изначально -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3>Детали вашей поездки</h3>
+        <div id="modal-body"></div>
+        <a href="planner.html" class="survey-btn survey-btn-primary" style="display: block; text-align: center; margin-top: 20px; text-decoration: none;">Перейти в конструктор</a>
+    </div>
+</div>
+
+
+<div class="tours-container hidden" id="toursContainer">
+    <div class="section-header">
+        <h1 id="tours-title">Популярные туры</h1>
+        <p id="tours-subtitle">Откройте для себя лучшие маршруты</p>
+    </div>
+    <div class="tours-grid" id="tours-grid">
+        <!-- Туры будут загружаться динамически -->
+    </div>
+</div>
+
+
+<div class="vivod">
+    <h1>Статистика и информация о турах</h1>
+    
+    <div class="stats-grid">
+        <!-- Ряд 1 -->
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="bi bi-calendar-check"></i>
+            </div>
+            <div class="stat-value">6 дней</div>
+            <div class="stat-label">Рекомендуемая длительность</div>
+            <div class="stat-desc">максимальное комфортное число дней</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="bi bi-chat-dots"></i>
+            </div>
+            <div class="stat-value">85+</div>
+            <div class="stat-label">Отзывы клиентов</div>
+            <div class="stat-desc">положительных отзывов о турах</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="bi bi-star-fill"></i>
+            </div>
+            <div class="stat-value">8.7</div>
+            <div class="stat-label">Уровень удовлетворенности</div>
+            <div class="stat-desc">средняя оценка туров (из 10)</div>
+        </div>
+
+        <!-- Ряд 2 -->
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="bi bi-graph-up"></i>
+            </div>
+            <div class="stat-value">65%</div>
+            <div class="stat-label">Заполненность туров</div>
+            <div class="stat-desc">туров заполнены на ближайший месяц</div>
+            <div class="stat-bars">
+                <div class="stat-bar">
+                    <span>Весна</span>
+                    <div class="bar"><div class="bar-fill" style="width: 85%"></div></div>
+                    <span>85%</span>
+                </div>
+                <div class="stat-bar">
+                    <span>Лето</span>
+                    <div class="bar"><div class="bar-fill" style="width: 92%"></div></div>
+                    <span>92%</span>
+                </div>
+                <div class="stat-bar">
+                    <span>Зима</span>
+                    <div class="bar"><div class="bar-fill" style="width: 45%"></div></div>
+                    <span>45%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="bi bi-pie-chart"></i>
+            </div>
+            <div class="stat-value">Горы 42%</div>
+            <div class="stat-label">Предпочтения туристов</div>
+            <div class="stat-desc">распределение по типам туров</div>
+            <div class="stat-pie">
+                <div class="pie-item">
+                    <div class="pie-color" style="background: #3498db"></div>
+                    <span>Горы 42%</span>
+                </div>
+                <div class="pie-item">
+                    <div class="pie-color" style="background: #2ecc71"></div>
+                    <span>Море 28%</span>
+                </div>
+                <div class="pie-item">
+                    <div class="pie-color" style="background: #e74c3c"></div>
+                    <span>Города 30%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="bi bi-check-circle"></i>
+            </div>
+            <div class="stat-value">Критерии выбора</div>
+            <div class="stat-label">Что важно для туристов</div>
+            <ul class="criteria-list">
+                <li><i class="bi bi-check-lg"></i> Соответствие цены и качества</li>
+                <li><i class="bi bi-check-lg"></i> Положительные отзывы</li>
+                <li><i class="bi bi-check-lg"></i> Комфортные условия</li>
+                <li><i class="bi bi-check-lg"></i> Интересная программа</li>
+                <li><i class="bi bi-check-lg"></i> Безопасность и надежность</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
     <footer>
         <div class="footer-container">
             <div class="footer-top">
-                <div class="footer-section">
-                    <h3>Туры Везде</h3>
-                    <p class="footer-description">Мы предоставляем лучшие туристические услуги с 2026 года. Наша цель - сделать ваш отдых незабываемым и комфортным.</p>
+                <div style="width: 300px;" class="footer-section">
+                    <div class="footer-logo">
+                        <a href="#" class="logo-link">
+                            <span class="logo-text">Туры Везде</span>
+                        </a>
+                        <p class="footer-description">
+                            Мы предоставляем лучшие туристические услуги с 2026 года. 
+                            Наша цель - сделать ваш отдых незабываемым и комфортным.
+                        </p>
+                    </div>
                 </div>
+
                 <div class="footer-section">
-                    <h3>Контактная информация</h3>
-                    <ul class="contact-list">
-                        <li class="contact-item"><i class="bi bi-telephone"></i> +7 (800) 123-45-67</li>
-                        <li class="contact-item"><i class="bi bi-envelope"></i> info@tourexplorer.ru</li>
-                        <li class="contact-item"><i class="bi bi-clock"></i> Пн-Пт: 9:00-19:00</li>
+                    <h3 class="section-title">Контактная информация</h3>
+                    <ul class="contact-list" style="text-align: center; ">
+                        <li class="contact-item">
+                            <i class="fas fa-phone-alt contact-icon"></i>
+                            <div class="contact-text">
+                                <a href="tel:+78001234567" class="phone-link"  style="color: black;">+7 (800) 123-45-67</a>
+                                <div class="social-text">Бесплатный звонок по России</div>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <div class="contact-text">
+                                <div class="social-text">Пн-Пт: 9:00-19:00, Сб: 10:00-17:00</div>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <div class="contact-text">
+                                <a href="mailto:info@tourexplorer.ru" class="phone-link"  style="color: black;">info@tourexplorer.ru</a>
+                                <div class="social-text">Электронная почта для связи</div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Подписка на новости</h3>
+                <div  style="width: 300px;"class="footer-section">
+                    <h3 class="section-title">Подписка на новости</h3>
+                    <p class="footer-description">Подпишитесь на нашу рассылку, чтобы первыми узнавать о новых турах и специальных предложениях:</p>
                     <form class="newsletter-form" id="newsletter-form">
                         <input type="email" class="newsletter-input" placeholder="Ваш email" required>
-                        <button type="submit" class="newsletter-btn">Подписаться</button>
+                        <button type="submit" class="newsletter-btn" style="color: black;">Подписаться</button>
                     </form>
+                    <div class="social-text">Мы не рассылаем спам и храним ваши данные в безопасности</div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Туры везде. Все права защищены.</p>
+                <div class="copyright"> 
+                    <p>&copy; 2026 Туры везде. Все права защищены.</p>
+                </div>
                 <div class="footer-links">
-                    <a href="#">Политика конфиденциальности</a>
-                    <a href="#">Пользовательское соглашение</a>
-                    <a href="#">О компании</a>
-                    <a href="profile.html">Личный кабинет</a>
+                    <a href="#" class="footer-link">Политика конфиденциальности</a>
+                    <a href="#" class="footer-link">Пользовательское соглашение</a>
+                    <a href="#" class="footer-link">Карта сайта</a>
+                    <a href="#" class="footer-link">О компании</a>
                 </div>
             </div>
         </div>
