@@ -85,7 +85,7 @@ body{
     display: flex;
     justify-content: space-around;
 }
-        
+
 .banner-left{
     font-size: 60px;
     font-weight: 500;
@@ -142,7 +142,7 @@ body{
     color: #ffffff;
 }
 
-.banner-right{  
+.banner-right{
     margin-left: -400px;
 }
 
@@ -150,13 +150,10 @@ body{
 
 
 
-/* ========================================= */
-/* СТИЛЬНЫЙ БЛОК ОПРОСА (как vivod) */
-/* ========================================= */
-
+/* opros */
 .survey-block {
     max-width: 1400px;
-    margin: 80px auto;
+    margin: 200px auto;
     padding: 0 20px;
 }
 
@@ -197,7 +194,6 @@ body{
     box-shadow: 0 20px 40px rgba(0,0,0,0.12);
 }
 
-/* Индикатор прогресса */
 .progress-indicator {
     margin-bottom: 35px;
 }
@@ -430,33 +426,17 @@ body{
     border-radius: 50px;
     font-size: 1rem;
     font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-family: 'Mulish', sans-serif;
-    background: #f8f9fc;
+    background: #ffffff;
     border: none;
-    color: #666;
 }
 
-.nav-btn:hover:not(:disabled) {
-    background: #e8ecf1;
-    transform: translateY(-2px);
-}
 
-.nav-next, .nav-submit {
-    background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
-    color: white;
-}
 
-.nav-next:hover, .nav-submit:hover {
+.nav-next:hover, .nav-submit:hover, .nav-prev:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 20px rgba(46,141,83,0.4);
 }
 
-.nav-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
 
 /* Правая панель - сводка */
 .survey-summary-container {
@@ -556,9 +536,7 @@ body{
 
 
 
-/* ========================================= */
-/* СТИЛЬНЫЙ БЛОК ТУРОВ (как vivod) */
-/* ========================================= */
+/* tyri */
 
 .tours-container {
     max-width: 1400px;
@@ -750,12 +728,10 @@ body{
     transform: translateY(-2px);
 }
 
-/* ========================================= */
-/* МОДАЛЬНОЕ ОКНО - СКРЫТО ПО УМОЛЧАНИЮ */
-/* ========================================= */
+
 
 .modal {
-    display: none;  /* ВАЖНО: скрыто по умолчанию */
+    display: none; 
     position: fixed;
     z-index: 2000;
     left: 0;
@@ -769,7 +745,7 @@ body{
 }
 
 .modal.show {
-    display: flex;  /* Показываем только когда есть класс show */
+    display: flex; 
 }
 
 .modal-content {
@@ -827,21 +803,18 @@ body{
 
 
 
-/* ========================================= */
-/* АДАПТИВНОСТЬ */
-/* ========================================= */
 
 @media (max-width: 1024px) {
     .survey-card-wrapper {
         grid-template-columns: 1fr;
         gap: 25px;
     }
-    
+
     .tours-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
-    
+
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
@@ -854,34 +827,34 @@ body{
     .vivod h1 {
         font-size: 1.8rem;
     }
-    
+
     .survey-main-subtitle,
     .section-header p {
         font-size: 1rem;
     }
-    
+
     .survey-questions-area,
     .survey-summary-container,
     .stat-card {
         padding: 25px;
     }
-    
+
     .question-title {
         font-size: 1.5rem;
     }
-    
+
     .city-option,
     .travelers-option,
     .interest-option {
         padding: 8px 16px;
         font-size: 0.85rem;
     }
-    
+
     .tours-grid,
     .stats-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .dates-container {
         flex-direction: column;
     }
@@ -891,17 +864,17 @@ body{
     .progress-steps {
         display: none;
     }
-    
+
     .progress-text {
         display: block;
         text-align: center;
     }
-    
+
     .navigation-buttons {
         flex-direction: column;
         gap: 12px;
     }
-    
+
     .nav-btn {
         width: 100%;
         text-align: center;
@@ -915,9 +888,7 @@ body{
 
 
 
-/* ========================================= */
-/* СТАТИСТИКА - 3 КАРТОЧКИ В РЯД */
-/* ========================================= */
+/* vivod */
 
 .vivod {
     max-width: 1400px;
@@ -1080,7 +1051,7 @@ body{
     .stats-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .vivod h1 {
         font-size: 2rem;
     }
@@ -1089,145 +1060,141 @@ body{
 
 
 
+/* podval */
+
+    footer {
+        background-color: #ffffff;
+        padding: 40px 0 20px;
+        margin-top: auto;
+    }
+
+     .footer-container {
+        width: 1800px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-b;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+     .footer-top {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+     .footer-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+     .footer-logo {
+        margin-bottom: 20px;
+    }
+
+     .logo-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+         color: #273f3c;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        transition: color 0.3s;
+    }
+
+     .contact-list{
+        width: 300px;
+        text-align: center;
+        margin-left: -30px;
+    }
+    .logo-link:hover {
+        color: #273f3c;
+    }
+
+     .logo-icon {
+        font-size: 2.2rem;
+        margin-right: 10px;
+        color: #273f3c;
+    }
+
+     .logo-text {
+        font-size: 1.8rem;
+    }
+
+     .footer-description {
+        font-size: 0.95rem;
+        line-height: 1.7;
+       color: #273f3c;
+        margin-bottom: 20px;
+    }
 
 
-        /* Стили для футера */
-
-
-        footer {
-            background-color: #ffffff;
-            padding: 40px 0 20px;
-            margin-top: auto;
-        }
-
-        .footer-container {
-            width: 1800px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-b;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .footer-top {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .footer-logo {
-            margin-bottom: 20px;
-        }
-
-        .logo-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-             color: #273f3c;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            transition: color 0.3s;
-        }
- 
-        .contact-list{
-            width: 300px;
-            text-align: center;
-            margin-left: -30px;
-        }
-        .logo-link:hover {
-            color: #273f3c;
-        }
-
-        .logo-icon {
-            font-size: 2.2rem;
-            margin-right: 10px;
-            color: #273f3c;
-        }
-
-        .logo-text {
-            font-size: 1.8rem;
-        }
-
-        .footer-description {
-            font-size: 0.95rem;
-            line-height: 1.7;
-           color: #273f3c;
-            margin-bottom: 20px;
-        }
-
-
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #22352b;
-            color: #273f3c;
-        }
+      .section-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #22352b;
+        color: #273f3c;
+    }
 
 
 
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
+       .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
 
-        .contact-icon {
-            font-size: 1.2rem;
-              color: #273f3c;
-            margin-right: 12px;
-            margin-top: 3px;
-            width: 20px;
-        }
+     .contact-icon {
+        font-size: 1.2rem;
+          color: #273f3c;
+        margin-right: 12px;
+        margin-top: 3px;
+        width: 20px;
+    }
 
-        .contact-text {
-            color: #050505;
-            line-height: 1.5;
-        }
+     .contact-text {
+        color: #050505;
+        line-height: 1.5;
+    }
 
-        .phone-link, .address-text {
-            color: #bdc3c7;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+     .phone-link, .address-text {
+        color: #bdc3c7;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
 
-        .phone-link:hover {
-            color: #3498db;
-        }
-
-       
+     .phone-link:hover {
+        color: #3498db;
+    }
 
 
-        .social-text {
-            margin-top: 5px;
-            font-size: 0.85rem;
-            color: #000000;
-        }
 
-        .newsletter-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+       .social-text {
+        margin-top: 5px;
+        font-size: 0.85rem;
+        color: #000000;
+    }
 
-        .newsletter-input {
-            padding: 12px 15px;
-            border: none;
-            border-radius: 4px;
-            background-color: #62af89a9;
-            color: #ffffff;
-            font-size: 1rem;
-        }
+     .newsletter-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 
-   .newsletter-input::placeholder {
+     .newsletter-input {
+        padding: 12px 15px;
+        border: none;
+        border-radius: 4px;
+        background-color: #62af89a9;
+        color: #ffffff;
+        font-size: 1rem;
+    }
+
+.newsletter-input::placeholder {
         color: rgb(0, 0, 0);
         }
 
@@ -1276,33 +1243,33 @@ body{
             transition: color 0.3s;
         }
 
-    
+
 
 @media (max-width: 768px) {
     .survey-content {
         grid-template-columns: 1fr;
     }
-    
+
     .banner {
         height: auto;
         flex-direction: column;
         padding: 20px;
     }
-    
+
     .banner-left {
         margin: 30px auto;
         width: 100%;
         text-align: center;
         font-size: 40px;
     }
-    
+
     .banner-right {
         margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
     }
-    
+
     .foto1, .foto2, .foto3 {
         margin: 10px !important;
         width: 280px;
