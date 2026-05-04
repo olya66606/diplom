@@ -7,23 +7,26 @@ body{
   background: linear-gradient(135deg, #bcddff54, #98dbb8a1);
   font-family: "Mulish", sans-serif;
 }
-
 .header {
-    padding: 0 25px;
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-    width: 1850px;
+    width: 100%;
     background-color: white;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     width: 800px;
 }
 
@@ -63,9 +66,20 @@ body{
 }
 
 
+/* Скрытая шапка */
+.header.header-hidden {
+    transform: translateY(-100%);
+}
 
+/* Тень при скролле */
+.header.scrolled {
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
 
-
+/* Анимация */
+.header {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
 
 
 

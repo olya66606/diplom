@@ -930,3 +930,64 @@ window.addEventListener('click', function(event) {
         modal.style.display = 'none';  // ИЛИ modal.classList.remove('show');
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =========================================
+// ШАПКА: ПРИЛИПАЕТ К ВЕРХУ + СКРЫТИЕ ПРИ СКРОЛЛЕ
+// =========================================
+
+let lastScrollY = 0;
+let ticking = false;
+const header = document.querySelector('.header');
+
+if (header) {
+    // Добавляем класс scrolled при скролле
+    function addScrolledClass() {
+        if (window.scrollY > 10) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+    
+    // Функция скрытия/показа шапки
+    function handleHeaderVisibility() {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY > 100 && currentScrollY > lastScrollY) {
+            // Скролл ВНИЗ - скрываем шапку
+            header.classList.add('header-hidden');
+        } else if (currentScrollY < lastScrollY) {
+            // Скролл ВВЕРХ - показываем шапку
+            header.classList.remove('header-hidden');
+        }
+        
+        lastScrollY = currentScrollY;
+        addScrolledClass();
+        ticking = false;
+    }
+    
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(handleHeaderVisibility);
+            ticking = true;
+        }
+    });
+    
+    // Вызываем при загрузке
+    addScrolledClass();
+}
