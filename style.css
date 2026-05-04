@@ -134,7 +134,7 @@ body{
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
-.bi{
+.bi-arrow-up-right{
     border: 1px solid #3a7562;
     background-color:  #3a7562;
     border-radius: 50px;
@@ -162,6 +162,12 @@ body{
     margin-bottom: 50px;
 }
 
+.bi-arrow-left, .bi-arrow-right {
+    color: #000000;
+    font-size: 1.5rem;
+    
+}
+
 .survey-main-title {
     font-size: 2.5rem;
     color: #1b5031;
@@ -175,15 +181,21 @@ body{
 }
 
 .survey-card-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 0.8fr;
+    display: flex;
+    width: 1600px;
+    justify-content: space-around;
     gap: 30px;
 }
 
-/* Левая область с карточками вопросов */
+
+.survey-summary-container{
+    width: 400px;
+    margin-right: 150px;
+}
 .survey-questions-area {
     background: white;
     border-radius: 24px;
+   width: 700px; 
     padding: 35px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
@@ -237,20 +249,14 @@ body{
     color: #888;
 }
 
-/* Карточки вопросов */
 .question-card {
     display: none;
-    animation: fadeIn 0.4s ease;
 }
 
 .question-card.active {
     display: block;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateX(15px); }
-    to { opacity: 1; transform: translateX(0); }
-}
 
 .question-icon {
     font-size: 2.5rem;
@@ -271,7 +277,6 @@ body{
     font-size: 1rem;
 }
 
-/* Кнопки вариантов ответов */
 .city-buttons, .travelers-buttons, .interests-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -310,8 +315,6 @@ body{
 .city-option i, .interest-option i {
     font-size: 1.2rem;
 }
-
-/* Слайдер бюджета */
 .budget-slider-container {
     padding: 15px 0;
 }
@@ -365,7 +368,6 @@ body{
     padding: 8px 18px;
     border-radius: 30px;
     font-size: 0.85rem;
-    cursor: pointer;
     transition: all 0.2s;
     font-family: 'Mulish', sans-serif;
 }
@@ -376,7 +378,6 @@ body{
     border-color: #2e8d53;
 }
 
-/* Даты */
 .dates-container {
     display: flex;
     gap: 20px;
@@ -396,7 +397,7 @@ body{
 }
 
 .date-input {
-    width: 100%;
+    width: 300px;
     padding: 14px 18px;
     border: 2px solid #e8ecf1;
     border-radius: 16px;
@@ -407,12 +408,9 @@ body{
 }
 
 .date-input:focus {
-    outline: none;
     border-color: #2e8d53;
     box-shadow: 0 0 0 3px rgba(46,141,83,0.1);
 }
-
-/* Навигационные кнопки */
 .navigation-buttons {
     display: flex;
     justify-content: space-between;
@@ -430,23 +428,16 @@ body{
     border: none;
 }
 
-
-
 .nav-next:hover, .nav-submit:hover, .nav-prev:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 20px rgba(46,141,83,0.4);
 }
 
-
-/* Правая панель - сводка */
 .survey-summary-container {
     background: white;
     border-radius: 24px;
     padding: 35px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    height: fit-content;
-    position: sticky;
-    top: 100px;
     transition: all 0.3s ease;
 }
 
@@ -485,7 +476,7 @@ body{
 }
 
 .summary-value {
-    color: #2e8d53;
+    color: #192e21;
     font-weight: 600;
     text-align: right;
 }
@@ -498,8 +489,6 @@ body{
     width: 100%;
     font-size: 0.95rem;
     font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s;
     font-family: 'Mulish', sans-serif;
     color: #666;
     display: flex;
@@ -507,12 +496,6 @@ body{
     justify-content: center;
     gap: 8px;
 }
-
-.reset-btn:hover {
-    background: #e8ecf1;
-    transform: translateY(-2px);
-}
-
 
 
 
