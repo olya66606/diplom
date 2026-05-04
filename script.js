@@ -55,7 +55,7 @@
                 {
                     id: 5,
                     title: 'Куршская коса',
-                    image: 'img/kurshskaya.jpg',
+                    image: 'img/kyrshckaya.webp',
                     location: 'Куршская коса',
                     rating: 4.9,
                     reviews: 112,
@@ -67,7 +67,7 @@
                 {
                     id: 6,
                     title: 'Калининградские форты',
-                    image: 'img/fort.jpg',
+                    image: 'img/fort.webp',
                     location: 'Калининград',
                     rating: 4.6,
                     reviews: 67,
@@ -270,6 +270,31 @@ function loadTours(cityId) {
 
     
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
 // Отправка формы - СОХРАНЯЕМ ВСЕ ДАННЫЕ В localStorage
 submitBtn.addEventListener('click', function() {
     const cityId = countrySelect.value;
