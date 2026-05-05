@@ -28,6 +28,7 @@ body{
     align-items: center;
     gap: 10px;
     width: 800px;
+    padding-left: 20px;
 }
 
 .header a {
@@ -65,18 +66,19 @@ body{
     text-align: center;
 }
 
+.header-right{
+    padding-right: 30px;
+}
 
-/* Скрытая шапка */
 .header.header-hidden {
     transform: translateY(-100%);
 }
 
-/* Тень при скролле */
 .header.scrolled {
     box-shadow: 0 2px 15px rgba(0,0,0,0.1);
 }
 
-/* Анимация */
+
 .header {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
 }
@@ -98,6 +100,7 @@ body{
     height: 880px;
     display: flex;
     justify-content: space-around;
+    margin-top: 70px;
 }
 
 .banner-left{
@@ -1262,3 +1265,557 @@ body{
 
 
 
+
+/*АДАПТИВНОСТЬ  */
+
+
+@media (max-width: 1024px) {
+  
+    .header {
+        width: 100%;
+        padding: 0 20px;
+    }
+    
+    .header-left {
+        width: auto;
+        gap: 15px;
+    }
+    
+    .header a {
+        font-size: 18px;
+    }
+    
+    .header-logo > img {
+        margin-right: 0;
+        height: 55px;
+        width: 80px;
+    }
+    
+    .header-right > .lihka {
+        font-size: 18px;
+        width: 150px;
+        padding: 8px;
+    }
+    
+
+    .banner {
+        height: auto;
+        flex-direction: column;
+        padding: 40px 20px;
+        margin-top: 70px;
+    }
+    
+    .banner-left {
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+        font-size: 45px;
+        align-items: center;
+    }
+    
+    .banner-left p {
+        width: 100% !important;
+        text-align: center;
+    }
+    
+    .banner-left p:first-child {
+        font-size: 45px;
+        width: 100% !important;
+    }
+    
+    .banner-left p:last-of-type {
+        font-size: 20px;
+    }
+    
+    .banner-right {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-left: 0;
+    }
+    
+    .foto1, .foto2, .foto3 {
+        margin: 0 !important;
+        position: static !important;
+    }
+    
+    .foto1 {
+        width: 280px;
+        height: auto;
+    }
+    
+    .foto2, .foto3 {
+        width: 200px;
+        height: auto;
+    }
+    
+    .oprosbtn {
+        margin: 20px auto 0;
+        width: 200px;
+        font-size: 20px;
+    }
+    
+
+    .survey-block {
+        margin: 80px auto;
+    }
+    
+    .survey-card-wrapper {
+        flex-direction: column;
+        width: 100%;
+        gap: 25px;
+    }
+    
+    .survey-questions-area {
+        width: 100%;
+        padding: 25px;
+    }
+    
+    .survey-summary-container {
+        width: 100%;
+        margin-right: 0;
+    }
+    
+    .question-title {
+        font-size: 1.5rem;
+    }
+    
+    .date-input {
+        width: 100%;
+    }
+    
+
+    .tours-container {
+        margin: 60px auto;
+    }
+    
+    .tours-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .tour-card {
+        width: calc(50% - 15px);
+        min-width: 280px;
+    }
+    
+    .section-header h1 {
+        font-size: 2rem;
+    }
+    
+    .vivod {
+        margin: 80px auto;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    /* Футер */
+    .footer-container {
+        width: 100%;
+        padding: 0 20px;
+    }
+    
+    .footer-top {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 768px) {
+  
+    .header {
+        flex-direction: column;
+        height: auto;
+        padding: 12px 15px;
+    }
+    
+    .header-left {
+        width: 100%;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .header a {
+        font-size: 16px;
+    }
+    
+    .header-logo {
+        margin: 5px 0;
+    }
+    
+    .header-logo > img {
+        height: 50px;
+        width: 70px;
+    }
+    
+    .header-right {
+        width: 100%;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .header-right > .lihka {
+        font-size: 16px;
+        width: 130px;
+        padding: 6px;
+    }
+    
+    body {
+        padding-top: 130px;
+    }
+    
+
+    .banner {
+        padding: 30px 15px;
+    }
+    
+    .banner-left {
+        font-size: 32px;
+    }
+    
+    .banner-left p:first-child {
+        font-size: 32px;
+    }
+    
+    .banner-left p:last-of-type {
+        font-size: 16px;
+    }
+    
+    .foto1 {
+        width: 250px;
+    }
+    
+    .foto2, .foto3 {
+        width: 170px;
+    }
+    
+    .oprosbtn {
+        width: 180px;
+        font-size: 18px;
+        padding: 10px;
+    }
+    
+    /* Опрос */
+    .survey-main-title {
+        font-size: 1.8rem;
+    }
+    
+    .survey-main-subtitle {
+        font-size: 1rem;
+    }
+    
+    .survey-questions-area {
+        padding: 20px;
+    }
+    
+    .progress-steps {
+        display: none;
+    }
+    
+    .progress-text {
+        display: block;
+        text-align: center;
+    }
+    
+    .question-title {
+        font-size: 1.3rem;
+    }
+    
+    .question-desc {
+        font-size: 0.9rem;
+    }
+    
+    .city-option, .travelers-option, .interest-option {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .date-input-group {
+        width: 100%;
+    }
+    
+    .date-input {
+        width: 100%;
+        padding: 12px;
+    }
+    
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .nav-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .survey-summary-container {
+        padding: 20px;
+    }
+    
+    .summary-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .summary-value {
+        text-align: left;
+    }
+    
+  
+    .tours-grid {
+        flex-direction: column;
+    }
+    
+    .tour-card {
+        width: 100%;
+    }
+    
+    .tour-image {
+        height: 200px;
+    }
+    
+    .tour-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    .tour-price {
+        font-size: 1.3rem;
+    }
+    
+    .section-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .section-header p {
+        font-size: 1rem;
+    }
+    
+    .tour-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .vivod h1 {
+        font-size: 1.8rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    
+    .stat-value {
+        font-size: 2rem;
+    }
+    
+    .stat-label {
+        font-size: 1rem;
+    }
+    
+  
+    .modal-content {
+        padding: 25px;
+        margin: 20px;
+        width: auto;
+    }
+    
+    .modal-content h3 {
+        font-size: 1.3rem;
+    }
+    
+  
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .footer-section {
+        width: 100% !important;
+        align-items: center;
+    }
+    
+    .contact-list {
+        margin-left: 0 !important;
+    }
+    
+    .contact-item {
+        justify-content: center;
+    }
+    
+    .newsletter-form {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+@media (max-width: 480px) {
+  
+    .header-left {
+        gap: 12px;
+    }
+    
+    .header a {
+        font-size: 14px;
+    }
+    
+    .header-right > .lihka {
+        width: 110px;
+        font-size: 14px;
+    }
+    .header-right{
+         margin-left: 200px;
+    }
+    
+    body {
+        padding-top: 140px;
+    }
+    
+
+    .banner-left {
+        font-size: 28px;
+    }
+    
+    .banner-left p:first-child {
+        font-size: 28px;
+    }
+    
+    .foto1, .foto2, .foto3 {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+    }
+    
+
+    .survey-block {
+        margin: 40px 10px auto;
+        width: 300px;
+    }
+    
+    .survey-main-title {
+        font-size: 1.5rem;
+    }
+    
+    .question-title {
+        font-size: 1.2rem;
+    }
+    
+    .city-buttons, .travelers-buttons, .interests-buttons {
+        gap: 10px;
+    }
+    
+    .city-option, .travelers-option, .interest-option {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .budget-presets {
+        gap: 8px;
+    }
+    
+    .budget-preset {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+    
+  
+    .tour-content {
+        padding: 18px;
+    }
+    
+    .tour-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .tour-price {
+        font-size: 1.2rem;
+    }
+    
+  
+    .vivod h1 {
+        font-size: 1.5rem;
+    }
+    
+    .stat-icon {
+        font-size: 2rem;
+    }
+    
+    .stat-value {
+        font-size: 1.8rem;
+    }
+    
+ 
+    .footer-description {
+        font-size: 0.85rem;
+    }
+    
+    .section-title {
+        font-size: 1.1rem;
+    }
+    
+    .newsletter-input, .newsletter-btn {
+        padding: 10px;
+    }
+    
+    .copyright {
+        font-size: 0.75rem;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+    .survey-card-wrapper {
+        gap: 20px;
+    }
+    
+    .survey-questions-area {
+        width: 60%;
+    }
+    
+    .survey-summary-container {
+        width: 35%;
+    }
+    
+    .tours-grid {
+        gap: 20px;
+    }
+    
+    .stats-grid {
+        gap: 20px;
+    }
+}
+
+
+@media (min-width: 1400px) {
+    .survey-card-wrapper {
+        justify-content: center;
+    }
+    
+    .survey-questions-area {
+        width: 800px;
+    }
+    
+    .survey-summary-container {
+        width: 400px;
+    }
+}
