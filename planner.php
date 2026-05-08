@@ -1,3 +1,6 @@
+<?php
+require_once 'includes/auth_functions.php';
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -9,40 +12,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <title>Конструктор маршрутов | Туры Везде</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            font-family: 'Mulish', sans-serif; 
+            font-family: 'Mulish', sans-serif;
             background: linear-gradient(135deg, #bcddff54, #98dbb8a1);
             padding-top: 90px;
         }
-        
-        /* Header */
-        .header {
-            border-radius: 12px;
-            padding: 0 25px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 0 auto;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background-color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-        }
-        .header-left { display: flex; align-items: center; gap: 20px; width: 800px; }
-        .header a { color: #246d3e; text-decoration: none; font-size: 23px; transition: color 0.3s ease; font-family: "Mulish", sans-serif; font-weight: 500; }
-        .header a:hover { color: #267946; }
-        .header-logo>img { margin: 0 auto; height: 70px; width: 100px; display: flex; margin-right: 350px; }
-        .header-right>.lihka { background: #00a3c400; color: #246d3e; border: 2px solid #246d3e; border-radius: 50px; padding: 10px; font-size: 23px; width: 200px; text-align: center; }
-
         /* Planner Container */
         .planner-container {
             max-width: 1400px;
@@ -646,17 +624,8 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-left">
-            <a href="index.php">Главная</a>
-            <a href="about.php">О нас</a>
-            <a href="planner.php" style="color: #267946;">Конструктор</a>
-        </div>
-        <div class="header-logo"><img src="img/logo.png" alt="Logo"></div>
-        <div class="header-right"> 
-            <a class="lihka" id="authButton" href="login.php">Войти</a>
-        </div>
-    </header>
+
+    <?php include 'includes/header.php'; ?>
 
     <div class="planner-container">
         <!-- Информация о поездке -->
@@ -792,26 +761,7 @@
         </div>
     </div>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-section">
-                    <h3>🌍 Туры Везде</h3>
-                    <p>Лучшие туристические услуги с 2026 года</p>
-                </div>
-                <div class="footer-section">
-                    <h3>📞 Контакты</h3>
-                    <ul class="contact-list">
-                        <li class="contact-item"><i class="bi bi-telephone"></i> +7 (800) 123-45-67</li>
-                        <li class="contact-item"><i class="bi bi-envelope"></i> info@tourexplorer.ru</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Туры везде. Все права защищены.</p>
-            </div>
-        </div>
-    </footer>
+    <?php include 'includes/footer.php'; ?>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>

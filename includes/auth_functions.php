@@ -3,6 +3,11 @@
  * Функции для аутентификации и работы с пользователями
  */
 
+// Запускаем сессию в самом начале
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once __DIR__ . '/../config/db.php';
 
 /**
@@ -52,7 +57,6 @@ function loginUser($email, $password) {
     }
     
     // Создаем сессию
-    session_start();
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['user_name'] = $user['name'];
     $_SESSION['user_email'] = $user['email'];
@@ -68,10 +72,6 @@ function loginUser($email, $password) {
  * Проверка, авторизован ли пользователь
  */
 function isLoggedIn() {
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    
     return isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
 }
 
@@ -79,23 +79,59 @@ function isLoggedIn() {
  * Получение данных текущего пользователя
  */
 function getCurrentUser() {
-    if (!isLoggedIn()) {
+    if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
         return null;
     }
     
-    return [
-        'id' => $_SESSION['user_id'],
-        'name' => $_SESSION['user_name'],
-        'email' => $_SESSION['user_email']
-    ];
+    $pdo = getDbConnection();
+    $stmt = $pdo->prepare("SELECT id, name, email, role FROM users WHERE id = ?");
+    $stmt->execute([$_SESSION['user_id']]);
+    $user = $stmt->fetch();
+    
+    if ($user) {
+        $_SESSION['user_name'] = $user['name'];
+        $_SESSION['user_email'] = $user['email'];
+        $_SESSION['user_role'] = $user['role'];
+        return $user;
+    }
+    
+    return null;
 }
 
 /**
  * Выход из системы
  */
 function logoutUser() {
-    session_start();
-    session_destroy();
+    if (session_status() !== PHP_SESSION_NONE) {
+        $_SESSION = array();
+        session_destroy();
+    }
+}
+
+/**
+ * Проверка, является ли пользователь администратором
+ */
+function isAdmin() {
+    if (!isLoggedIn()) {
+        return false;
+    }
+    
+    if (!isset($_SESSION['user_role'])) {
+        $user = getCurrentUser();
+        if (!$user) return false;
+    }
+    
+    return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
+}
+
+/**
+ * Защита админ-страницы - только для администраторов
+ */
+function requireAdmin() {
+    if (!isAdmin()) {
+        header('Location: /index.php');
+        exit;
+    }
 }
 
 /**

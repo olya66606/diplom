@@ -11,6 +11,11 @@ require_once __DIR__ . '/auth_functions.php';
     <div class="header-right"> 
         <?php if (isLoggedIn()): ?>
             <a style="margin-right: 20px; margin-top:11px;" href="locals.php" id="localsLink">Места от жителей</a>
+            <?php if (isAdmin()): ?>
+                <a style="margin-right: 20px; margin-top:11px; color: #d35400;" href="admin/dashboard.php">
+                    <i class="bi bi-gear-fill"></i> Админ-панель
+                </a>
+            <?php endif; ?>
             <a style="margin-right: 20px; margin-top:11px;" href="profile.php">
                 <i class="bi bi-person-circle"></i> <?= htmlspecialchars(getCurrentUser()['name']) ?>
             </a>
