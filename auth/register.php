@@ -1,7 +1,44 @@
+<?php
+require_once '../includes/auth_functions.php';
+
+$error = '';
+$success = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $passwordConfirm = $_POST['password_confirm'] ?? '';
+    
+    // Валидация
+    if (empty($name) || empty($email) || empty($password)) {
+        $error = 'Все поля обязательны для заполнения';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'Неверный формат email';
+    } elseif (strlen($password) < 6) {
+        $error = 'Пароль должен быть не менее 6 символов';
+    } elseif ($password !== $passwordConfirm) {
+        $error = 'Пароли не совпадают';
+    } else {
+        $result = registerUser($name, $email, $password);
+        
+        if ($result['success']) {
+            // Автоматический вход после регистрации
+            $loginResult = loginUser($email, $password);
+            if ($loginResult['success']) {
+                header('Location: ../index.php');
+                exit;
+            }
+        } else {
+            $error = $result['message'];
+        }
+    }
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <link rel="icon" href="img/logoosn.png" type="image/x-icon">
+    <link rel="icon" href="../img/logoosn.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -100,6 +137,12 @@
             text-align: center;
             font-weight: 500;
         }
+        .success-message {
+            color: #28a745;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: 500;
+        }
         .back-home {
             text-align: center;
             margin-top: 20px;
@@ -113,63 +156,37 @@
 <body>
     <div class="auth-container">
         <h2>Регистрация</h2>
-        <form id="registerForm">
+        <?php if ($error): ?>
+            <div class="error-message"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
+        <?php if ($success): ?>
+            <div class="success-message"><?= htmlspecialchars($success) ?></div>
+        <?php endif; ?>
+        <form method="POST" action="">
             <div class="form-group">
                 <label for="name">Имя</label>
-                <input type="text" id="name" placeholder="Иван" required>
+                <input type="text" id="name" name="name" placeholder="Иван" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="your@email.com" required>
+                <input type="email" id="email" name="email" placeholder="your@email.com" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
             </div>
             <div class="form-group">
                 <label for="password">Пароль</label>
-                <input type="password" id="password" placeholder="Минимум 6 символов" required>
+                <input type="password" id="password" name="password" placeholder="Минимум 6 символов" required>
+            </div>
+            <div class="form-group">
+                <label for="password_confirm">Повторите пароль</label>
+                <input type="password" id="password_confirm" name="password_confirm" placeholder="Повторите пароль" required>
             </div>
             <button type="submit" class="btn">Зарегистрироваться</button>
-            <div id="registerError" class="error-message"></div>
         </form>
         <div class="auth-link">
-            Уже есть аккаунт? <a href="login.html">Войти</a>
+            Уже есть аккаунт? <a href="login.php">Войти</a>
         </div>
         <div class="back-home">
-            <a href="index.html"><i class="bi bi-arrow-left"></i> На главную</a>
+            <a href="../index.php"><i class="bi bi-arrow-left"></i> На главную</a>
         </div>
     </div>
-
-    <script>
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const errorDiv = document.getElementById('registerError');
-
-            if (password.length < 6) {
-                errorDiv.textContent = 'Пароль должен быть не менее 6 символов.';
-                return;
-            }
-
-            // Получаем пользователей из localStorage
-            const users = JSON.parse(localStorage.getItem('tour_users')) || [];
-
-            // Проверяем, существует ли уже такой пользователь
-            if (users.find(u => u.email === email)) {
-                errorDiv.textContent = 'Пользователь с таким email уже существует.';
-                return;
-            }
-
-            // Добавляем нового пользователя
-            const newUser = { name, email, password }; // Опять же, в реальности пароль хешируют
-            users.push(newUser);
-            localStorage.setItem('tour_users', JSON.stringify(users));
-
-            // Сразу логиним пользователя
-            localStorage.setItem('current_user', JSON.stringify({ name, email }));
-
-            // Перенаправляем на главную
-            window.location.href = 'index.html';
-        });
-    </script>
 </body>
 </html>

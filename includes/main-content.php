@@ -1,45 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <link rel="icon" href="img/logoosn.png" type="image/x-icon">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-    <title>Помощник для вас : Туры по городам и странам</title>
-</head>
-<body>
-
-    <header class="header" id="mainHeader">
-        <div class="header-left">
-            <a href="index.html">Главная</a>
-            <a href="about.html">О нас</a>
-            <a href="planner.html">Конструктор маршрутов</a>
-        </div>
-        <div class="header-logo"><img src="img/logo.png" alt=""></div>
-        <div class="header-right" id="headerRight"> 
-            <a style="margin-right: 20px; margin-top:11px; display: none;" href="locals.html" id="localsLink">Места от жителей</a>
-            <a class="lihka" id="authButton" href="login.html">Войти</a>
-        </div>
-    </header>
-    
-    <section class="banner">
-        <div class="banner-left">
-            <p style="color: rgb(0, 0, 0); width:500px;">Путешествуй и открывай мир и <b style="color: #30794c;">Себя</b> в нём</p>
-            <p style="color: rgb(0, 0, 0); font-size: 25px; width: 500px;">Пройди опрос и подбери для себя наиболее удобный маршрут, если созданный маршрут не удовлетворяет можно создать свой личный</p>
-            <a href="#surveyBlock" style="color: #1c5633;" class="oprosbtn">Пройти опрос <i class="bi bi-arrow-up-right"></i></a>
-        </div>
-        <div class="banner-right">
-            <img class="foto1" src="img/yaponia.jpg" alt="">
-            <img class="foto2" src="img/piter.jpg" alt="">
-            <img class="foto3" src="img/kaliningrad.jpg" alt="">
-        </div>
-    </section>
-
-
 <div class="survey-block" id="surveyBlock">
     <div class="survey-container">
         <div class="survey-main-header">
@@ -235,13 +193,13 @@
     </div>
 </div>
 
-<!-- Модальное окно - должно быть скрыто изначально -->
+<!-- Модальное окно -->
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
         <h3>Детали вашей поездки</h3>
         <div id="modal-body"></div>
-        <a href="planner.html" class="survey-btn survey-btn-primary" style="display: block; text-align: center; margin-top: 20px;  color: #153321;">Перейти в конструктор</a>
+        <a href="planner.php" class="survey-btn survey-btn-primary" style="display: block; text-align: center; margin-top: 20px; color: #153321;">Перейти в конструктор</a>
     </div>
 </div>
 
@@ -355,71 +313,3 @@
         </div>
     </div>
 </div>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-top">
-                <div style="width: 300px;" class="footer-section">
-                    <div class="footer-logo">
-                        <a href="#" class="logo-link">
-                            <span class="logo-text">Туры Везде</span>
-                        </a>
-                        <p class="footer-description">
-                            Мы предоставляем лучшие туристические услуги с 2026 года. 
-                            Наша цель - сделать ваш отдых незабываемым и комфортным.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="footer-section">
-                    <h3 class="section-title">Контактная информация</h3>
-                    <ul class="contact-list" style="text-align: center; ">
-                        <li class="contact-item">
-                            <i class="fas fa-phone-alt contact-icon"></i>
-                            <div class="contact-text">
-                                <a href="tel:+78001234567" class="phone-link"  style="color: black;">+7 (800) 123-45-67</a>
-                                <div class="social-text">Бесплатный звонок по России</div>
-                            </div>
-                        </li>
-                        <li class="contact-item">
-                            <i class="fas fa-map-marker-alt contact-icon"></i>
-                            <div class="contact-text">
-                                <div class="social-text">Пн-Пт: 9:00-19:00, Сб: 10:00-17:00</div>
-                            </div>
-                        </li>
-                        <li class="contact-item">
-                            <i class="fas fa-envelope contact-icon"></i>
-                            <div class="contact-text">
-                                <a href="mailto:info@tourexplorer.ru" class="phone-link"  style="color: black;">info@tourexplorer.ru</a>
-                                <div class="social-text">Электронная почта для связи</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div  style="width: 300px;"class="footer-section">
-                    <h3 class="section-title">Подписка на новости</h3>
-                    <p class="footer-description">Подпишитесь на нашу рассылку, чтобы первыми узнавать о новых турах и специальных предложениях:</p>
-                    <form class="newsletter-form" id="newsletter-form">
-                        <input type="email" class="newsletter-input" placeholder="Ваш email" required>
-                        <button type="submit" class="newsletter-btn" style="color: black;">Подписаться</button>
-                    </form>
-                    <div class="social-text">Мы не рассылаем спам и храним ваши данные в безопасности</div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="copyright"> 
-                    <p>&copy; 2026 Туры везде. Все права защищены.</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#" class="footer-link">Политика конфиденциальности</a>
-                    <a href="#" class="footer-link">Пользовательское соглашение</a>
-                    <a href="#" class="footer-link">Карта сайта</a>
-                    <a href="#" class="footer-link">О компании</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>

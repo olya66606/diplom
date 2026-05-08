@@ -354,24 +354,32 @@ submitBtn.addEventListener('click', function() {
                 }
             });
 
-            // Проверка авторизации
-            const currentUser = JSON.parse(localStorage.getItem('current_user'));
-            const localsLink = document.getElementById('localsLink');
-            const authButton = document.getElementById('authButton');
+            // Проверка авторизации через API
+            fetch('/api/check_auth.php')
+                .then(response => response.json())
+                .then(data => {
+                    const localsLink = document.getElementById('localsLink');
+                    const authButton = document.getElementById('authButton');
 
-            if (currentUser) {
-                if (localsLink) localsLink.style.display = 'inline-block';
-                if (authButton) {
-                    authButton.textContent = currentUser.name || 'Профиль';
-                    authButton.href = 'profile.html';
-                }
-            } else {
-                if (localsLink) localsLink.style.display = 'none';
-                if (authButton) {
-                    authButton.textContent = 'Войти';
-                    authButton.href = 'login.html';
-                }
-            }
+                    if (data.authenticated) {
+                        // Пользователь залогинен
+                        if (localsLink) localsLink.style.display = 'inline-block';
+                        if (authButton) {
+                            authButton.textContent = 'Выйти';
+                            authButton.href = '/auth/logout.php';
+                        }
+                    } else {
+                        // Пользователь не залогинен
+                        if (localsLink) localsLink.style.display = 'none';
+                        if (authButton) {
+                            authButton.textContent = 'Войти';
+                            authButton.href = '/auth/login.php';
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка проверки авторизации:', error);
+                });
 
             // Устанавливаем минимальные даты
             const today = new Date().toISOString().split('T')[0];
@@ -592,36 +600,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
-
-
-
- // Логика для отображения кнопки "Места от жителей" и изменения кнопки входа
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentUser = JSON.parse(localStorage.getItem('current_user'));
-            const localsLink = document.getElementById('localsLink');
-            const authButton = document.getElementById('authButton');
-
-            if (currentUser) {
-                // Пользователь залогинен
-                if (localsLink) {
-                    localsLink.style.display = 'inline-block'; // Показываем ссылку
-                }
-                if (authButton) {
-                    authButton.textContent = currentUser.name || 'Профиль';
-                    authButton.href = 'profile.html'; // Меняем ссылку на личный кабинет
-                }
-            } else {
-                // Пользователь не залогинен
-                if (localsLink) {
-                    localsLink.style.display = 'none'; // Скрываем ссылку
-                }
-                if (authButton) {
-                    authButton.textContent = 'Войти';
-                    authButton.href = 'login.html';
-                }
-            }
-        });
 
 
 

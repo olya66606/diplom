@@ -1,7 +1,36 @@
+<?php
+require_once '../includes/auth_functions.php';
+
+// Если пользователь уже авторизован - перенаправляем на главную
+if (isLoggedIn()) {
+    header('Location: ../index.php');
+    exit;
+}
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    
+    if (empty($email) || empty($password)) {
+        $error = 'Заполните все поля';
+    } else {
+        $result = loginUser($email, $password);
+        
+        if ($result['success']) {
+            header('Location: ../index.php');
+            exit;
+        } else {
+            $error = $result['message'];
+        }
+    }
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <link rel="icon" href="img/logoosn.png" type="image/x-icon">
+    <link rel="icon" href="../img/logoosn.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -113,46 +142,26 @@
 <body>
     <div class="auth-container">
         <h2>Вход</h2>
-        <form id="loginForm">
+        <?php if ($error): ?>
+            <div class="error-message"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
+        <form method="POST" action="">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="your@email.com" required>
+                <input type="email" id="email" name="email" placeholder="your@email.com" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
             </div>
             <div class="form-group">
                 <label for="password">Пароль</label>
-                <input type="password" id="password" placeholder="••••••••" required>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
             </div>
             <button type="submit" class="btn">Войти</button>
-            <div id="loginError" class="error-message"></div>
         </form>
         <div class="auth-link">
-            Нет аккаунта? <a href="register.html">Зарегистрироваться</a>
+            Нет аккаунта? <a href="register.php">Зарегистрироваться</a>
         </div>
         <div class="back-home">
-            <a href="index.html"><i class="bi bi-arrow-left"></i> На главную</a>
+            <a href="../index.php"><i class="bi bi-arrow-left"></i> На главную</a>
         </div>
     </div>
-
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const errorDiv = document.getElementById('loginError');
-
-            // Получаем пользователей из localStorage
-            const users = JSON.parse(localStorage.getItem('tour_users')) || [];
-            const user = users.find(u => u.email === email && u.password === password); // В реальном проекте пароли не хранят так!
-
-            if (user) {
-                // Сохраняем информацию о текущем пользователе
-                localStorage.setItem('current_user', JSON.stringify({ name: user.name, email: user.email }));
-                // Перенаправляем на главную или в личный кабинет
-                window.location.href = 'index.html';
-            } else {
-                errorDiv.textContent = 'Неверный email или пароль.';
-            }
-        });
-    </script>
 </body>
 </html>
