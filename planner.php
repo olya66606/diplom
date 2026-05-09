@@ -181,44 +181,48 @@ require_once 'includes/auth_functions.php';
         
         .cards-stack-container {
             position: relative;
-            height: 550px;
+            height: 650px;
             width: 100%;
-            max-width: 450px;
-            margin: 0 auto;
+            max-width: 500px;
+            margin: 0 auto 20px;
+            padding-bottom: 60px;
         }
         
         .tinder-card {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
+            max-width: 480px;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 24px;
             overflow: hidden;
-            cursor: grab;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            left: 50%;
+            transform: translateX(-50%);
+            transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        .tinder-card.animating {
+            pointer-events: none;
         }
         
         .tinder-card:active {
-            cursor: grabbing;
+            cursor: pointer;
         }
         
-        .tinder-card.dragging {
-            transition: none;
+        .tinder-card.slide-left {
+            transform: translateX(-50%) translateX(-500px) rotate(-30deg) !important;
+            opacity: 0;
         }
         
-        .tinder-card.swiping-right {
-            box-shadow: 0 0 0 5px rgba(46,141,83,0.3);
-        }
-        
-        .tinder-card.swiping-left {
-            box-shadow: 0 0 0 5px rgba(255,107,107,0.3);
+        .tinder-card.slide-right {
+            transform: translateX(-50%) translateX(500px) rotate(30deg) !important;
+            opacity: 0;
         }
         
         .card-image {
-            height: 300px;
+            height: 280px;
             background-size: cover;
             background-position: center;
             position: relative;
@@ -250,13 +254,15 @@ require_once 'includes/auth_functions.php';
         
         .card-content {
             padding: 20px;
+            overflow-y: auto;
+            max-height: 280px;
         }
         
         .card-title {
             font-size: 1.4rem;
             color: #1b5031;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         
         .card-location {
@@ -288,38 +294,46 @@ require_once 'includes/auth_functions.php';
         .card-description {
             color: #555;
             font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         
         .card-review {
             background: #f8f9fc;
             padding: 12px;
-            border-radius: 12px;
+            border-radius: 10px;
             font-style: italic;
             color: #666;
             font-size: 0.85rem;
             border-left: 3px solid #2e8d53;
+            margin-bottom: 12px;
         }
         
         .card-actions {
             display: flex;
             gap: 15px;
-            margin-top: 15px;
+            margin-top: 12px;
             justify-content: center;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
         }
         
         .card-action-btn {
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             border: none;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
+            position: relative;
         }
         
         .btn-dislike {
@@ -331,7 +345,8 @@ require_once 'includes/auth_functions.php';
         .btn-dislike:hover {
             background: #ff6b6b;
             color: white;
-            transform: scale(1.1);
+            transform: scale(1.15);
+            box-shadow: 0 5px 15px rgba(255,107,107,0.3);
         }
         
         .btn-like {
@@ -343,29 +358,30 @@ require_once 'includes/auth_functions.php';
         .btn-like:hover {
             background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
             color: white;
-            transform: scale(1.1);
+            transform: scale(1.15);
+            box-shadow: 0 5px 15px rgba(46,141,83,0.3);
         }
         
         .btn-add {
             background: #f8f9fc;
-            color: #246d3e;
-            border: 2px solid #246d3e;
+            color: #2e8d53;
+            border: 2px solid #2e8d53;
         }
         
         .btn-add:hover {
-            background: #246d3e;
+            background: #2e8d53;
             color: white;
-            transform: scale(1.1);
+            transform: scale(1.15);
+            box-shadow: 0 5px 15px rgba(46,141,83,0.3);
         }
         
         /* Stack Indicator */
         .stack-indicator {
-            position: absolute;
-            bottom: -40px;
-            left: 50%;
-            transform: translateX(-50%);
+            text-align: center;
             color: #888;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            margin-bottom: 15px;
         }
         
         /* Selected Places */
@@ -520,33 +536,6 @@ require_once 'includes/auth_functions.php';
             to { transform: translateX(0); opacity: 1; }
         }
         
-        /* Swipe Indicators */
-        .swipe-indicator {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 3rem;
-            font-weight: 800;
-            opacity: 0;
-            transition: opacity 0.2s;
-            z-index: 10;
-            padding: 20px;
-            border: 4px solid;
-            border-radius: 12px;
-        }
-        
-        .swipe-like {
-            left: 20px;
-            color: #2e8d53;
-            border-color: #2e8d53;
-        }
-        
-        .swipe-dislike {
-            right: 20px;
-            color: #ff6b6b;
-            border-color: #ff6b6b;
-        }
-        
         /* Route Marker Styles */
         .route-marker {
             background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
@@ -578,7 +567,12 @@ require_once 'includes/auth_functions.php';
             .header-right { display: none; }
             
             .cards-stack-container {
-                height: 600px;
+                height: 700px;
+                padding-bottom: 80px;
+            }
+            
+            .tinder-card {
+                max-width: 420px;
             }
             
             .route-stats {
@@ -1113,8 +1107,6 @@ require_once 'includes/auth_functions.php';
                         <div class="card-image" style="background-image: url('${place.image}')">
                             <span class="card-badge">${place.price || 'Цена по запросу'}</span>
                             <span class="card-category"><i class="bi ${getCategoryIcon(place.category)}"></i> ${getCategoryName(place.category)}</span>
-                            <div class="swipe-indicator swipe-like">LIKE</div>
-                            <div class="swipe-indicator swipe-dislike">NOPE</div>
                         </div>
                         <div class="card-content">
                             <h3 class="card-title">${place.name}</h3>
@@ -1126,122 +1118,68 @@ require_once 'includes/auth_functions.php';
                             <p class="card-description">${place.description}</p>
                             <div class="card-review">"${place.review}"</div>
                             <div class="card-actions">
-                                <button class="card-action-btn btn-dislike" onclick="swipeCard('left')"><i class="bi bi-x-lg"></i></button>
-                                <button class="card-action-btn btn-add" onclick="addToRouteFromCard(${place.id})"><i class="bi bi-plus-lg"></i></button>
-                                <button class="card-action-btn btn-like" onclick="swipeCard('right')"><i class="bi bi-heart-fill"></i></button>
+                                <button class="card-action-btn btn-dislike" onclick="swipeCard('left')" title="Пропустить"><i class="bi bi-x-lg"></i></button>
+                                <button class="card-action-btn btn-like" onclick="swipeCard('right')" title="❤️ Нравится - добавить в список"><i class="bi bi-heart-fill"></i></button>
+                                <button class="card-action-btn btn-add" onclick="addToRouteFromCard(${place.id})" title="➕ На карту и в список"><i class="bi bi-plus-lg"></i></button>
                             </div>
                         </div>
                     `;
                     
                     container.appendChild(card);
-                    initCardDrag(card, i);
                 }
                 
                 document.getElementById('stackIndicator').textContent = `Осталось карточек: ${cardStack.length}`;
             }
             
-            // Инициализация drag для карточки
-            function initCardDrag(card, index) {
-                if (index !== 0) return;
-                
-                let startX = 0;
-                let currentX = 0;
-                let isDragging = false;
-                
-                card.addEventListener('mousedown', startDrag);
-                card.addEventListener('touchstart', startDrag);
-                
-                function startDrag(e) {
-                    isDragging = true;
-                    startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-                    card.classList.add('dragging');
-                }
-                
-                document.addEventListener('mousemove', drag);
-                document.addEventListener('touchmove', drag);
-                
-                function drag(e) {
-                    if (!isDragging) return;
-                    
-                    currentX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-                    const diff = currentX - startX;
-                    const rotate = diff * 0.05;
-                    
-                    card.style.transform = `translateX(${diff}px) rotate(${rotate}deg)`;
-                    
-                    // Показываем индикаторы
-                    const likeIndicator = card.querySelector('.swipe-like');
-                    const dislikeIndicator = card.querySelector('.swipe-dislike');
-                    
-                    if (diff > 50) {
-                        likeIndicator.style.opacity = Math.min(diff / 100, 1);
-                        dislikeIndicator.style.opacity = 0;
-                        card.classList.add('swiping-right');
-                    } else if (diff < -50) {
-                        dislikeIndicator.style.opacity = Math.min(Math.abs(diff) / 100, 1);
-                        likeIndicator.style.opacity = 0;
-                        card.classList.add('swiping-left');
-                    } else {
-                        likeIndicator.style.opacity = 0;
-                        dislikeIndicator.style.opacity = 0;
-                        card.classList.remove('swiping-right', 'swiping-left');
-                    }
-                }
-                    
-                document.addEventListener('mouseup', endDrag);
-                document.addEventListener('touchend', endDrag);
-                
-                function endDrag(e) {
-                    if (!isDragging) return;
-                    isDragging = false;
-                    card.classList.remove('dragging');
-                    
-                    const diff = currentX - startX;
-                    
-                    if (diff > 100) {
-                        swipeCard('right');
-                    } else if (diff < -100) {
-                        swipeCard('left');
-                    } else {
-                        card.style.transform = '';
-                        card.classList.remove('swiping-right', 'swiping-left');
-                        card.querySelector('.swipe-like').style.opacity = 0;
-                        card.querySelector('.swipe-dislike').style.opacity = 0;
-                    }
-                    
-                    document.removeEventListener('mousemove', drag);
-                    document.removeEventListener('touchmove', drag);
-                    document.removeEventListener('mouseup', endDrag);
-                    document.removeEventListener('touchend', endDrag);
-                }
-            }
-            
-            // Свайп карточки
+            // Свайп карточки по кнопкам
             window.swipeCard = function(direction) {
                 const card = document.querySelector('.tinder-card');
                 if (!card || cardStack.length === 0) return;
                 
+                // Блокируем повторные клики
+                if (card.classList.contains('animating')) return;
+                
                 const place = cardStack[0];
+                card.classList.add('animating');
                 
                 if (direction === 'right') {
-                    card.style.transform = 'translateX(500px) rotate(30deg)';
-                    card.style.opacity = '0';
+                    // ЛАЙК - добавляет в список внизу (без карты)
+                    card.classList.add('slide-right');
+                    
                     setTimeout(() => {
                         cardStack.shift();
                         selectedPlaces.push(place);
                         localStorage.setItem('selected_places', JSON.stringify(selectedPlaces));
                         updateSelectedPlaces();
-                        updateRouteOnMap();
-                        showNotification(`✓ ${place.name} добавлено в маршрут`);
+                        showNotification(`❤️ ${place.name} добавлено в список`);
                         renderCards();
                     }, 300);
                 } else {
-                    card.style.transform = 'translateX(-500px) rotate(-30deg)';
-                    card.style.opacity = '0';
+                    // КРЕСТИК - просто удаляет карточку
+                    card.classList.add('slide-left');
+                    
                     setTimeout(() => {
                         cardStack.shift();
                         renderCards();
                     }, 300);
+                }
+            };
+            
+            // Добавить на карту и в список
+            window.addToRouteFromCard = function(placeId) {
+                const place = allPlaces.find(p => p.id === placeId);
+                if (place && !selectedPlaces.find(p => p.id === placeId)) {
+                    selectedPlaces.push(place);
+                    localStorage.setItem('selected_places', JSON.stringify(selectedPlaces));
+                    updateSelectedPlaces();
+                    updateRouteOnMap();
+                    
+                    // Центрируем карту на месте
+                    map.setView(place.coords, 16);
+                    
+                    showNotification(`➕ ${place.name} добавлено в маршрут!`);
+                } else if (place) {
+                    showNotification('Уже добавлено в маршрут', true);
                 }
             };
             
@@ -1254,7 +1192,7 @@ require_once 'includes/auth_functions.php';
                     updateSelectedPlaces();
                     updateRouteOnMap();
                     showNotification(`✓ ${place.name} добавлено в маршрут`);
-                } else {
+                } else if (place) {
                     showNotification('Уже добавлено в маршрут', true);
                 }
             };
