@@ -573,7 +573,10 @@ body{
 
 .tours-grid {
     display: flex;
+    height: 600px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 30px;
+    justify-items: stretch;
 }
 
 .tour-card {
@@ -582,6 +585,10 @@ body{
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .tour-card:hover {
@@ -607,6 +614,9 @@ body{
 
 .tour-content {
     padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .tour-content h3 {
@@ -676,6 +686,7 @@ body{
 .tour-actions {
     display: flex;
     gap: 12px;
+    margin-top: auto;
 }
 
 .tour-btn {
@@ -689,6 +700,7 @@ body{
     text-decoration: none;
     font-size: 0.9rem;
     font-family: 'Mulish', sans-serif;
+    flex-grow: 1;
 }
 
 .tour-btn-primary {
@@ -754,7 +766,7 @@ body{
         transform: translateY(0) scale(1);
     }
 }
-
+    
 .close-modal {
     position: absolute;
     right: 20px;
@@ -794,7 +806,7 @@ body{
         grid-template-columns: 1fr;
         gap: 25px;
     }
-
+    
     .tours-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;

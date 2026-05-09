@@ -159,6 +159,14 @@ require_once 'includes/auth_functions.php';
                         { id: 101, name: 'Рыбная деревня', image: 'https://images.unsplash.com/photo-1598908311172-d99e5e9b8c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'ул. Октябрьская', rating: 4.8, reviews: 56, description: 'Квартал в довоенном стиле.', reviewsList: [{ author: 'Алексей', date: '1 неделя назад', rating: 5, text: 'Очень атмосферное место.' }] },
                         { id: 102, name: 'Амалиенау', image: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'район Амалиенау', rating: 4.9, reviews: 34, description: 'Старый немецкий район с виллами.', reviewsList: [{ author: 'Иван', date: '3 дня назад', rating: 5, text: 'Лучшее место для прогулок.' }] }
                     ]
+                },
+                'kazan': {
+                    name: 'Казань',
+                    places: [
+                        { id: 201, name: 'Двор Земледельцев', image: 'https://images.unsplash.com/photo-1598908311172-d99e5e9b8c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'ул. Бутлерова, 27', rating: 4.8, reviews: 78, description: 'Знаменитое здание с большим деревом в центре.', reviewsList: [{ author: 'Рустем', date: '4 дня назад', rating: 5, text: 'Очень красиво!' }, { author: 'Лилия', date: '2 недели назад', rating: 4, text: 'Интересная архитектура.' }] },
+                        { id: 202, name: 'Улица Баумана', image: 'https://images.unsplash.com/photo-1513326738677-b964603b136d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'ул. Баумана', rating: 4.9, reviews: 234, description: 'Главная пешеходная улица Казани.', reviewsList: [{ author: 'Светлана', date: '1 день назад', rating: 5, text: 'Отличное место для прогулок.' }] },
+                        { id: 203, name: 'Остров Свияжск', image: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'остров Свияжск', rating: 4.9, reviews: 156, description: 'Исторический остров-заповедник.', reviewsList: [{ author: 'Александр', date: '5 дней назад', rating: 5, text: 'Уникальное место!' }] }
+                    ]
                 }
             };
 

@@ -112,6 +112,62 @@ const toursData = {
                     groupSize: 'до 12 человек',
                     difficulty: 'Средний'
                 }
+            ],
+            'kazan': [
+                {
+                    id: 7,
+                    title: 'Историческая Казань',
+                    image: 'img/kazan.jpg',
+                    location: 'Казань',
+                    rating: 4.8,
+                    reviews: 156,
+                    description: 'Казанский Кремль, Благовещенский собор, башня Сююмбике, храм Кул Шариф.',
+                    price: '19000',
+                    duration: 3,
+                    badge: 'Популярный',
+                    places: ['Казанский Кремль', 'Благовещенский собор', 'Башня Сююмбике', 'Храм Кул Шариф', 'Дворец Земледельцев'],
+                    includes: ['Проживание в центре', 'Экскурсии с гидом', 'Входные билеты', 'Обеды'],
+                    schedule: ['День 1: Кремль, Кул Шариф', 'День 2: Дворец Земледельцев, ул. Баумана', 'День 3: Отправление'],
+                    totalTime: '16-18 часов',
+                    groupSize: 'до 15 человек',
+                    difficulty: 'Легкий'
+                },
+                {
+                    id: 8,
+                    title: 'Казань - третий столичный город',
+                    image: 'img/kazan2.jpg',
+                    location: 'Казань',
+                    rating: 4.9,
+                    reviews: 134,
+                    description: 'Остров-град Свияжск, Раифский монастырь, Болгар, Ватутинский бор.',
+                    price: '24000',
+                    duration: 4,
+                    badge: 'Хит',
+                    places: ['Остров Свияжск', 'Раифский монастырь', 'Храм всех религий', 'Казанская крепость', 'Национальный музей'],
+                    includes: ['Проживание 4*', 'Трансфер', 'Экскурсии с гидом', 'Питание'],
+                    schedule: ['День 1: Свияжск, Раифа', 'День 2: Храм всех религий', 'День 3: Музеи Казани', 'День 4: Отправление'],
+                    totalTime: '20-22 часа',
+                    groupSize: 'до 12 человек',
+                    difficulty: 'Средний'
+                },
+                {
+                    id: 9,
+                    title: 'Болгар и Свияжск',
+                    image: 'img/kazan3.jpg',
+                    location: 'Казань',
+                    rating: 4.7,
+                    reviews: 98,
+                    description: 'Древний Болгар, остров Свияжск, традиционная татарская кухня.',
+                    price: '21000',
+                    duration: 2,
+                    badge: 'Исторический',
+                    places: ['Болгарский заповедник', 'Белая мечеть', 'Остров Свияжск', 'Успенский собор', 'Судостроительный центр'],
+                    includes: ['Проживание', 'Трансфер на автобусе', 'Экскурсии', 'Трапеза в ресторане'],
+                    schedule: ['День 1: Болгар, Белая мечеть', 'День 2: Свияжск, возвращение'],
+                    totalTime: '14-16 часов',
+                    groupSize: 'до 20 человек',
+                    difficulty: 'Средний'
+                }
             ]
         };
 
@@ -120,6 +176,7 @@ const toursData = {
             const cities = {
                 'saint-petersburg': 'Санкт-Петербург',
                 'kaliningrad': 'Калининград',
+                'kazan': 'Казань',
             };
             return cities[cityId] || 'Санкт-Петербург';
         }
@@ -139,7 +196,7 @@ function loadTours(cityId) {
     const tours = toursData[cityId] || toursData['saint-petersburg'];
     
     toursGrid.innerHTML = tours.map(tour => `
-        <div class="tour-card">
+        <div class="tour-card" style="height: 100%;">
             <div class="tour-image" style="background-image: url('${tour.image}')">
                 <span class="tour-badge">${tour.badge}</span>
             </div>
@@ -711,7 +768,7 @@ function loadToursWithShow(cityId) {
     const tours = toursData[cityId] || toursData['saint-petersburg'];
     
     toursGrid.innerHTML = tours.map(tour => `
-        <div class="tour-card">
+        <div class="tour-card" style="height: 100%;">
             <div class="tour-image" style="background-image: url('${tour.image}')">
                 <span class="tour-badge">${tour.badge}</span>
             </div>

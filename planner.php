@@ -915,6 +915,94 @@ require_once 'includes/auth_functions.php';
                         price: '200-600 ₽'
                     }
                 ]
+            },
+            'kazan': {
+                center: [55.7887, 49.1229],
+                zoom: 13,
+                restaurants: [
+                    {
+                        id: 1,
+                        name: 'Ресторан "Тюльпан"',
+                        location: 'ул. Баумана, 53',
+                        coords: [55.7887, 49.1229],
+                        rating: 4.7,
+                        reviews: 234,
+                        description: 'Татарская и европейская кухня в современном интерьере.',
+                        review: 'Отличная чак-чак и эчпочмаки!',
+                        image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600',
+                        price: '2000-3500 ₽'
+                    }
+                ],
+                museums: [
+                    {
+                        id: 101,
+                        name: 'Национальный музей РТ',
+                        location: 'ул. Баумана, 64',
+                        coords: [55.7850, 49.1250],
+                        rating: 4.6,
+                        reviews: 1543,
+                        description: 'Коллекция истории и культуры Татарстана.',
+                        review: 'Интересная экспозиция о татарской культуре.',
+                        image: 'https://images.unsplash.com/photo-1518972458042-16b6830324da?w=600',
+                        price: '300 ₽'
+                    }
+                ],
+                parks: [
+                    {
+                        id: 201,
+                        name: 'Парк Тысячелетия',
+                        location: 'ул. Девятаева, 3',
+                        coords: [55.7920, 49.1350],
+                        rating: 4.7,
+                        reviews: 3421,
+                        description: 'Современный парк с фонтанами и аллеями.',
+                        review: 'Отличное место для прогулок!',
+                        image: 'https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?w=600',
+                        price: 'Бесплатно'
+                    }
+                ],
+                attractions: [
+                    {
+                        id: 301,
+                        name: 'Казанский Кремль',
+                        location: 'Кремль',
+                        coords: [55.7961, 49.1094],
+                        rating: 4.9,
+                        reviews: 25432,
+                        description: 'Объект Всемирного наследия ЮНЕСКО.',
+                        review: 'Обязательно к посещению!',
+                        image: 'https://images.unsplash.com/photo-1564858051047-2f213095da05?w=600',
+                        price: '200 ₽'
+                    }
+                ],
+                hotels: [
+                    {
+                        id: 401,
+                        name: 'Отель "Шампань"',
+                        location: 'ул. Пушкина, 23',
+                        coords: [55.7870, 49.1210],
+                        rating: 4.5,
+                        reviews: 876,
+                        description: 'Комфортабельный отель в центре города.',
+                        review: 'Отличный сервис и удобное расположение.',
+                        image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600',
+                        price: 'от 8000 ₽/ночь'
+                    }
+                ],
+                cafes: [
+                    {
+                        id: 501,
+                        name: 'Кофейня "Бахетле"',
+                        location: 'ул. Баумана, 11',
+                        coords: [55.7860, 49.1200],
+                        rating: 4.6,
+                        reviews: 1234,
+                        description: 'Украинская и татарская кухня.',
+                        review: 'Вкусные вареники и пельмени!',
+                        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600',
+                        price: '500-1200 ₽'
+                    }
+                ]
             }
         };
 
@@ -922,12 +1010,12 @@ require_once 'includes/auth_functions.php';
         document.addEventListener('DOMContentLoaded', function() {
             // Получаем данные из localStorage
             const savedData = JSON.parse(localStorage.getItem('selected_city'));
-            const cityId = 'saint-petersburg';
+            const cityId = savedData?.cityId || 'saint-petersburg';
             const city = placesData[cityId];
             
             // Заполняем информацию о поездке
             if (savedData) {
-                document.getElementById('cityName').textContent = 'Санкт-Петербург';
+                document.getElementById('cityName').textContent = savedData.cityName || 'Санкт-Петербург';
                 document.getElementById('travelersCount').textContent = (savedData.travelers || '1') + ' чел.';
                 document.getElementById('budgetAmount').textContent = (savedData.budgetFormatted || '30 000') + ' ₽';
                 document.getElementById('travelDates').textContent = savedData.dates || 'не выбраны';
