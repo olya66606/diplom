@@ -1,6 +1,6 @@
 
-        // Данные для туров
-        const toursData = {
+// Данные для туров
+const toursData = {
             'saint-petersburg': [
                 {
                     id: 1,
@@ -10,9 +10,15 @@
                     rating: 4.8,
                     reviews: 124,
                     description: 'Главные достопримечательности: Эрмитаж, Петропавловская крепость, Исаакиевский собор, Невский проспект.',
-                    price: '25 000',
+                    price: '25000',
                     duration: 3,
-                    badge: 'Популярный'
+                    badge: 'Популярный',
+                    places: ['Эрмитаж - один из крупнейших музеев мира', 'Петропавловская крепость - исторический центр', 'Исаакиевский собор - величественный храм', 'Невский проспект - главная улица', 'Храм Спаса на Крови'],
+                    includes: ['Проживание в отеле 4*', 'Экскурсии с гидом', 'Трансфер', 'Входные билеты'],
+                    schedule: ['День 1: Прибытие, Невский проспект', 'День 2: Эрмитаж, Петропавловская крепость', 'День 3: Исаакиевский собор, отправление'],
+                    totalTime: '18-20 часов',
+                    groupSize: 'до 15 человек',
+                    difficulty: 'Легкий'
                 },
                 {
                     id: 2,
@@ -22,9 +28,15 @@
                     rating: 4.9,
                     reviews: 98,
                     description: 'Музеи, театры, дворцы. Русский музей, Мариинский театр, Юсуповский дворец.',
-                    price: '32 000',
+                    price: '32000',
                     duration: 4,
-                    badge: 'Хит'
+                    badge: 'Хит',
+                    places: ['Русский музей', 'Мариинский театр', 'Юсуповский дворец', 'Новая Голландия', 'Летний сад'],
+                    includes: ['Проживание в отеле 5*', 'Билеты в Мариинский театр', 'Гид-искусствовед', 'Ужины в ресторанах'],
+                    schedule: ['День 1: Русский музей', 'День 2: Юсуповский дворец, театр', 'День 3: Новая Голландия', 'День 4: Отправление'],
+                    totalTime: '22-25 часов',
+                    groupSize: 'до 12 человек',
+                    difficulty: 'Легкий'
                 },
                 {
                     id: 3,
@@ -34,9 +46,15 @@
                     rating: 4.7,
                     reviews: 156,
                     description: 'Петергоф, Царское село, Павловск. Фонтаны и дворцово-парковые ансамбли.',
-                    price: '28 000',
+                    price: '28000',
                     duration: 2,
-                    badge: 'Экскурсионный'
+                    badge: 'Экскурсионный',
+                    places: ['Петергоф с фонтанами', 'Царское село', 'Екатерининский дворец', 'Янтарная комната', 'Павловск'],
+                    includes: ['Проживание 4*', 'Трансфер на автобусе', 'Экскурсии с гидом', 'Входные билеты'],
+                    schedule: ['День 1: Петергоф, Кронштадт', 'День 2: Царское село, Павловск'],
+                    totalTime: '14-16 часов',
+                    groupSize: 'до 20 человек',
+                    difficulty: 'Средний'
                 }
             ],
             'kaliningrad': [
@@ -48,9 +66,15 @@
                     rating: 4.7,
                     reviews: 89,
                     description: 'Кафедральный собор, остров Канта, Рыбная деревня, Музей янтаря.',
-                    price: '22 000',
+                    price: '22000',
                     duration: 3,
-                    badge: 'Исторический'
+                    badge: 'Исторический',
+                    places: ['Кафедральный собор', 'Остров Канта', 'Рыбная деревня', 'Музей янтаря', 'Форт №5'],
+                    includes: ['Проживание в центре', 'Экскурсии с гидом', 'Дегустация янтаря', 'Обеды'],
+                    schedule: ['День 1: Собор, Канта, Рыбная деревня', 'День 2: Музей янтаря, Форт', 'День 3: Отправление'],
+                    totalTime: '12-14 часов',
+                    groupSize: 'до 15 человек',
+                    difficulty: 'Легкий'
                 },
                 {
                     id: 5,
@@ -60,9 +84,15 @@
                     rating: 4.9,
                     reviews: 112,
                     description: 'Национальный парк, Танцующий лес, Высота Эфа, птичья станция.',
-                    price: '18 000',
+                    price: '18000',
                     duration: 1,
-                    badge: 'Природный'
+                    badge: 'Природный',
+                    places: ['Танцующий лес', 'Высота Эфа', 'Птичья станция', 'Зеленоградск', 'Озеро Лебедь'],
+                    includes: ['Трансфер из Калининграда', 'Экскурсия по нац. парку', 'Подъем на высоту Эфа', 'Обед'],
+                    schedule: ['День 1: Танцующий лес, Высота Эфа, возвращение'],
+                    totalTime: '8-10 часов',
+                    groupSize: 'до 10 человек',
+                    difficulty: 'Средний'
                 },
                 {
                     id: 6,
@@ -72,13 +102,17 @@
                     rating: 4.6,
                     reviews: 67,
                     description: 'Форт №11, Форт №5, Фридландские ворота, Башня Врангеля.',
-                    price: '20 000',
+                    price: '20000',
                     duration: 2,
-                    badge: 'Фортификационный'
+                    badge: 'Фортификационный',
+                    places: ['Форт №11 Дёнхофф', 'Форт №5', 'Фридландские ворота', 'Башня Врангеля', 'Башня Кёниг'],
+                    includes: ['Трансфер между фортами', 'Гид-историк', 'Входные билеты', 'Фотосессия'],
+                    schedule: ['День 1: Форт №11, Форт №5, ворота', 'День 2: Башни, отправление'],
+                    totalTime: '10-12 часов',
+                    groupSize: 'до 12 человек',
+                    difficulty: 'Средний'
                 }
-            ],
-
-       
+            ]
         };
 
         // Функция для получения названия города
@@ -90,7 +124,7 @@
             return cities[cityId] || 'Санкт-Петербург';
         }
 
-    // Функция загрузки туров
+// Функция загрузки туров (для старого опроса)
 function loadTours(cityId) {
     const toursGrid = document.getElementById('tours-grid');
     const toursTitle = document.getElementById('tours-title');
@@ -118,12 +152,12 @@ function loadTours(cityId) {
                 </div>
                 <p class="tour-description">${tour.description}</p>
                 <div class="tour-meta">
-                    <div class="tour-price">${tour.price} ₽ <span>за чел.</span></div>
+                    <div class="tour-price">${parseInt(tour.price).toLocaleString('ru-RU')} ₽ <span>за чел.</span></div>
                     <div class="tour-duration"><i class="bi bi-clock"></i> ${tour.duration} дня</div>
                 </div>
                 <div class="tour-actions">
-                    <a href="planner.html?city=${cityId}" class="tour-btn tour-btn-primary">Выбрать</a>
-                    <button class="tour-btn tour-btn-secondary"><i class="bi bi-bookmark"></i></button>
+                    <button class="tour-btn tour-btn-primary" onclick="showTourDetails(${tour.id})">Получить подробнее</button>
+                    <button class="tour-btn tour-btn-secondary" onclick="saveTour(${tour.id})"><i class="bi bi-bookmark"></i></button>
                 </div>
             </div>
         </div>
@@ -662,7 +696,7 @@ function goToStep(step) {
     currentStep = step;
 }
 
-// Функция загрузки туров (без автоматической прокрутки)
+// Функция загрузки туров (для нового опроса - без прокрутки)
 function loadToursWithShow(cityId) {
     const toursGrid = document.getElementById('tours-grid');
     const toursTitle = document.getElementById('tours-title');
@@ -690,12 +724,12 @@ function loadToursWithShow(cityId) {
                 </div>
                 <p class="tour-description">${tour.description}</p>
                 <div class="tour-meta">
-                    <div class="tour-price">${tour.price} ₽ <span>за чел.</span></div>
+                    <div class="tour-price">${parseInt(tour.price).toLocaleString('ru-RU')} ₽ <span>за чел.</span></div>
                     <div class="tour-duration"><i class="bi bi-clock"></i> ${tour.duration} дня</div>
                 </div>
                 <div class="tour-actions">
-                    <a href="planner.html?city=${cityId}" class="tour-btn tour-btn-primary">Выбрать</a>
-                    <button class="tour-btn tour-btn-secondary"><i class="bi bi-bookmark"></i></button>
+                    <button class="tour-btn tour-btn-primary" onclick="showTourDetails(${tour.id})">Получить подробнее</button>
+                    <button class="tour-btn tour-btn-secondary" onclick="saveTour(${tour.id})"><i class="bi bi-bookmark"></i></button>
                 </div>
             </div>
         </div>
@@ -704,7 +738,6 @@ function loadToursWithShow(cityId) {
     // ПОКАЗЫВАЕМ блок с турами (без прокрутки!)
     if (toursContainer) {
         toursContainer.classList.remove('hidden');
-        // scrollIntoView удален - страница не прокручивается
     }
 }
 
@@ -925,47 +958,113 @@ window.addEventListener('click', function(event) {
 
 
 // =========================================
-// ШАПКА: ПРИЛИПАЕТ К ВЕРХУ + СКРЫТИЕ ПРИ СКРОЛЛЕ
+// МОДАЛЬНОЕ ОКНО ТУРА + СОХРАНЕНИЕ
 // =========================================
 
-let lastScrollY = 0;
-let ticking = false;
-const header = document.querySelector('.header');
+let tourModal = null;
 
-if (header) {
-    // Добавляем класс scrolled при скролле
-    function addScrolledClass() {
-        if (window.scrollY > 10) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
+function showTourDetails(tourId) {
+    // Находим тур по ID
+    const allTours = Object.values(toursData).flat();
+    const tour = allTours.find(t => t.id === tourId);
+    
+    if (!tour) return;
+    
+    // Создаем модальное окно если нет
+    if (!tourModal) {
+        tourModal = document.createElement('div');
+        tourModal.id = 'tourModal';
+        tourModal.className = 'tour-modal';
+        tourModal.innerHTML = '<div class="tour-modal-content"><span class="tour-modal-close">&times;</span><div class="tour-modal-body"></div></div>';
+        document.body.appendChild(tourModal);
+        
+        tourModal.querySelector('.tour-modal-close').addEventListener('click', () => {
+            tourModal.style.display = 'none';
+        });
+        
+        tourModal.addEventListener('click', (e) => {
+            if (e.target === tourModal) tourModal.style.display = 'none';
+        });
     }
     
-    // Функция скрытия/показа шапки
-    function handleHeaderVisibility() {
-        const currentScrollY = window.scrollY;
-        
-        if (currentScrollY > 100 && currentScrollY > lastScrollY) {
-            // Скролл ВНИЗ - скрываем шапку
-            header.classList.add('header-hidden');
-        } else if (currentScrollY < lastScrollY) {
-            // Скролл ВВЕРХ - показываем шапку
-            header.classList.remove('header-hidden');
-        }
-        
-        lastScrollY = currentScrollY;
-        addScrolledClass();
-        ticking = false;
-    }
+    const modalBody = tourModal.querySelector('.tour-modal-body');
+    modalBody.innerHTML = `
+        <div class="tour-modal-header">
+            <div class="tour-modal-image" style="background-image: url('${tour.image}')"></div>
+            <div class="tour-modal-info">
+                <h2>${tour.title}</h2>
+                <div class="tour-modal-meta">
+                    <span class="tour-badge">${tour.badge}</span>
+                    <span class="tour-rating"><i class="bi bi-star-fill"></i> ${tour.rating} (${tour.reviews})</span>
+                </div>
+            </div>
+        </div>
+        <div class="tour-modal-body-content">
+            <div class="tour-modal-section">
+                <h3><i class="bi bi-map"></i> Места программы</h3>
+                <ul class="tour-places-list">${tour.places.map(p => `<li><i class="bi bi-geo-alt"></i> ${p}</li>`).join('')}</ul>
+            </div>
+            <div class="tour-modal-section">
+                <h3><i class="bi bi-check-circle"></i> Что входит</h3>
+                <ul class="tour-includes-list">${tour.includes.map(i => `<li><i class="bi bi-check-lg"></i> ${i}</li>`).join('')}</ul>
+            </div>
+            <div class="tour-modal-section">
+                <h3><i class="bi bi-calendar-event"></i> Программа по дням</h3>
+                <div class="tour-schedule">${tour.schedule.map((d, i) => `<div class="schedule-day"><strong>День ${i+1}:</strong> ${d}</div>`).join('')}</div>
+            </div>
+            <div class="tour-modal-stats">
+                <div class="tour-stat"><i class="bi bi-clock-history"></i><div><strong>Время:</strong><span>${tour.totalTime}</span></div></div>
+                <div class="tour-stat"><i class="bi bi-people"></i><div><strong>Группа:</strong><span>${tour.groupSize}</span></div></div>
+                <div class="tour-stat"><i class="bi bi-pedestrian"></i><div><strong>Нагрузка:</strong><span>${tour.difficulty}</span></div></div>
+                <div class="tour-stat"><i class="bi bi-cash-coin"></i><div><strong>Цена:</strong><span>${parseInt(tour.price).toLocaleString('ru-RU')} ₽</span></div></div>
+            </div>
+            <div class="tour-modal-actions">
+                <button class="tour-modal-btn-save" onclick="saveTour(${tour.id})"><i class="bi bi-bookmark-check"></i> Сохранить тур</button>
+                <button class="tour-modal-btn-close">Закрыть</button>
+            </div>
+        </div>
+    `;
     
-    window.addEventListener('scroll', function() {
-        if (!ticking) {
-            requestAnimationFrame(handleHeaderVisibility);
-            ticking = true;
-        }
+    tourModal.style.display = 'flex';
+    tourModal.querySelector('.tour-modal-btn-close').addEventListener('click', () => {
+        tourModal.style.display = 'none';
     });
-    
-    // Вызываем при загрузке
-    addScrolledClass();
+}
+
+function saveTour(tourId) {
+    fetch('/api/check_auth.php')
+        .then(response => response.json())
+        .then(data => {
+            if (!data.authenticated) {
+                alert('Пожалуйста, войдите в аккаунт, чтобы сохранить тур');
+                window.location.href = 'auth/login.php';
+                return;
+            }
+            
+            const allTours = Object.values(toursData).flat();
+            const tour = allTours.find(t => t.id === tourId);
+            if (!tour) return;
+            
+            fetch('/api/save_tour.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    tour_id: tour.id,
+                    tour_title: tour.title,
+                    tour_image: tour.image,
+                    tour_price: tour.price,
+                    tour_duration: tour.duration
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                  
+                } else {
+                   
+                }
+            })
+            .catch(error => alert('Ошибка при сохранении'));
+        })
+        .catch(error => alert('Ошибка проверки авторизации'));
 }

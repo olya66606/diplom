@@ -35,20 +35,5 @@ require_once 'includes/auth_functions.php';
     <?php include 'includes/footer.php'; ?>
 
   <script src="script.js"></script>
-  <script>
-    // Проверка авторизации для отображения/скрытия ссылок
-    document.addEventListener('DOMContentLoaded', function() {
-        const localsLink = document.getElementById('localsLink');
-        const authButton = document.getElementById('authButton');
-        
-        <?php if (isLoggedIn()): ?>
-            if (localsLink) localsLink.style.display = 'block';
-            if (authButton) authButton.style.display = 'none';
-        <?php else: ?>
-            if (localsLink) localsLink.style.display = 'none';
-            if (authButton) authButton.style.display = 'block';
-        <?php endif; ?>
-    });
-  </script>
 </body>
 </html>

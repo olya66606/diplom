@@ -19,9 +19,10 @@ require_once __DIR__ . '/auth_functions.php';
             <a style="margin-right: 20px; margin-top:11px;" href="profile.php">
                 <i class="bi bi-person-circle"></i> <?= htmlspecialchars(getCurrentUser()['name']) ?>
             </a>
-            <a class="lihka" href="auth/logout.php">Выйти</a>
+        
         <?php else: ?>
             <a class="lihka" id="authButton" href="auth/login.php">Войти</a>
         <?php endif; ?>
     </div>
 </header>
+
