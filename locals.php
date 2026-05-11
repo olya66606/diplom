@@ -160,12 +160,12 @@ require_once 'includes/auth_functions.php';
                         { id: 102, name: 'Амалиенау', image: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'район Амалиенау', rating: 4.9, reviews: 34, description: 'Старый немецкий район с виллами.', reviewsList: [{ author: 'Иван', date: '3 дня назад', rating: 5, text: 'Лучшее место для прогулок.' }] }
                     ]
                 },
-                'kazan': {
-                    name: 'Казань',
+                'japan': {
+                    name: 'Япония',
                     places: [
-                        { id: 201, name: 'Двор Земледельцев', image: 'https://images.unsplash.com/photo-1598908311172-d99e5e9b8c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'ул. Бутлерова, 27', rating: 4.8, reviews: 78, description: 'Знаменитое здание с большим деревом в центре.', reviewsList: [{ author: 'Рустем', date: '4 дня назад', rating: 5, text: 'Очень красиво!' }, { author: 'Лилия', date: '2 недели назад', rating: 4, text: 'Интересная архитектура.' }] },
-                        { id: 202, name: 'Улица Баумана', image: 'https://images.unsplash.com/photo-1513326738677-b964603b136d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'ул. Баумана', rating: 4.9, reviews: 234, description: 'Главная пешеходная улица Казани.', reviewsList: [{ author: 'Светлана', date: '1 день назад', rating: 5, text: 'Отличное место для прогулок.' }] },
-                        { id: 203, name: 'Остров Свияжск', image: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'остров Свияжск', rating: 4.9, reviews: 156, description: 'Исторический остров-заповедник.', reviewsList: [{ author: 'Александр', date: '5 дней назад', rating: 5, text: 'Уникальное место!' }] }
+                        { id: 201, name: 'Храм Сэнсо-дзи', image: 'https://images.unsplash.com/photo-1564858051047-2f213095da05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'Асакуса, Токио', rating: 4.9, reviews: 1234, description: 'Древнейший храм Токио с воротами Раймон.', reviewsList: [{ author: 'Yuki', date: '2 дня назад', rating: 5, text: 'Невероятная атмосфера!' }, { author: 'Takeshi', date: '1 неделя назад', rating: 5, text: 'Лучший храм в Токио.' }] },
+                        { id: 202, name: 'Район Шибуя', image: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'Шибуя, Токио', rating: 4.8, reviews: 2345, description: 'Знаменитый перекресток и неоновые огни.', reviewsList: [{ author: 'Hiroshi', date: '3 дня назад', rating: 5, text: 'Очень красиво вечером!' }] },
+                        { id: 203, name: 'Бамбуковый лес Араторити', image: 'https://images.unsplash.com/photo-1493976040807-0c3cb6fa165d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'Арасияма, Киото', rating: 4.9, reviews: 987, description: 'Уникальный бамбуковый лес в Киото.', reviewsList: [{ author: 'Kenji', date: '5 дней назад', rating: 5, text: 'Успокаивающая атмосфера!' }] }
                     ]
                 }
             };

@@ -170,132 +170,249 @@ require_once 'includes/auth_functions.php';
             transform: translateY(-2px);
         }
         
-        /* Tinder Cards Stack */
-        .cards-stack-section {
+        /* Category Tabs Navigation */
+        .category-tabs {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .category-tab {
+            padding: 14px 32px;
+            border-radius: 50px;
+            border: 2px solid #e8ecf1;
             background: white;
-            border-radius: 24px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            margin-bottom: 25px;
-        }
-        
-        .cards-stack-container {
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Mulish', sans-serif;
+            transition: all 0.3s;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
             position: relative;
-            height: 650px;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto 20px;
-            padding-bottom: 60px;
+            overflow: hidden;
         }
         
-        .tinder-card {
-            position: absolute;
-            width: 100%;
-            max-width: 480px;
+        .category-tab:hover {
+            border-color: #2e8d53;
+            background: #f0fff4;
+            transform: translateY(-2px);
+        }
+        
+        .category-tab.active {
+            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 8px 25px rgba(46,141,83,0.35);
+            transform: translateY(-3px);
+        }
+        
+        .category-tab .tab-count {
+            background: rgba(255,255,255,0.25);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        
+        .category-tab.active .tab-count {
+            background: rgba(255,255,255,0.35);
+        }
+        
+        /* Carousel Navigation */
+        .carousel-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .carousel-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #e8ecf1;
+            background: white;
+            color: #2e8d53;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .carousel-btn:hover {
+            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            border-color: transparent;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(46,141,83,0.3);
+        }
+        
+        .carousel-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .carousel-counter {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2e8d53;
+        }
+        
+        /* Carousel Container */
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            padding: 0 20px;
+        }
+        
+        .carousel-card {
+            flex: 0 0 420px;
             background: white;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            left: 50%;
-            transform: translateX(-50%);
-            transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
-            user-select: none;
-            -webkit-user-select: none;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+            transition: all 0.3s;
+            cursor: grab;
         }
         
-        .tinder-card.animating {
-            pointer-events: none;
+        .carousel-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.18);
         }
         
-        .tinder-card:active {
-            cursor: pointer;
-        }
-        
-        .tinder-card.slide-left {
-            transform: translateX(-50%) translateX(-500px) rotate(-30deg) !important;
-            opacity: 0;
-        }
-        
-        .tinder-card.slide-right {
-            transform: translateX(-50%) translateX(500px) rotate(30deg) !important;
-            opacity: 0;
+        .carousel-card:active {
+            cursor: grabbing;
         }
         
         .card-image {
-            height: 280px;
+            height: 300px;
             background-size: cover;
             background-position: center;
             position: relative;
         }
         
+        .card-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);
+        }
+        
         .card-badge {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 20px;
+            right: 20px;
             background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
             color: white;
-            padding: 6px 16px;
+            padding: 10px 20px;
             border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.85rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 20px rgba(46,141,83,0.45);
+            z-index: 2;
+            backdrop-filter: blur(10px);
         }
         
         .card-category {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.98);
+            color: #2e8d53;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+        
+        .card-rating-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2;
+        }
+        
+        .card-rating-badge {
+            background: rgba(255,255,255,0.98);
+            padding: 10px 18px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .card-rating-badge .stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+        
+        .card-rating-badge .rating-value {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #1b5031;
+        }
+        
+        .card-rating-badge .rating-count {
+            font-size: 0.85rem;
+            color: #888;
         }
         
         .card-content {
-            padding: 20px;
-            overflow-y: auto;
-            max-height: 280px;
+            padding: 28px;
         }
         
         .card-title {
-            font-size: 1.4rem;
+            font-size: 1.7rem;
             color: #1b5031;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 10px;
+            line-height: 1.25;
         }
         
         .card-location {
             color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .card-rating {
+            font-size: 1rem;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 12px;
-        }
-        
-        .stars {
-            color: #ffc107;
-            font-size: 1.1rem;
-        }
-        
-        .rating-text {
-            color: #666;
-            font-size: 0.85rem;
         }
         
         .card-description {
-            color: #555;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 12px;
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.65;
+            margin-bottom: 18px;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -303,76 +420,110 @@ require_once 'includes/auth_functions.php';
         }
         
         .card-review {
-            background: #f8f9fc;
-            padding: 12px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf1 100%);
+            padding: 18px;
+            border-radius: 18px;
             font-style: italic;
-            color: #666;
-            font-size: 0.85rem;
-            border-left: 3px solid #2e8d53;
-            margin-bottom: 12px;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border-left: 4px solid #2e8d53;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
         .card-actions {
             display: flex;
-            gap: 15px;
-            margin-top: 12px;
+            gap: 20px;
             justify-content: center;
-            padding-top: 12px;
-            border-top: 1px solid #eee;
+            padding-top: 20px;
+            border-top: 2px solid #f0f2f5;
         }
         
         .card-action-btn {
-            width: 55px;
-            height: 55px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             border: none;
             cursor: pointer;
-            font-size: 1.4rem;
+            font-size: 1.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
+            background: white;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+        
+        .card-action-btn:hover {
+            transform: scale(1.2) translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+        
+        .card-action-btn:active {
+            transform: scale(0.95);
         }
         
         .btn-dislike {
-            background: #f8f9fc;
             color: #ff6b6b;
-            border: 2px solid #ff6b6b;
+            border: 2px solid #ffe0e0;
         }
         
         .btn-dislike:hover {
             background: #ff6b6b;
+            border-color: #ff6b6b;
             color: white;
-            transform: scale(1.15);
-            box-shadow: 0 5px 15px rgba(255,107,107,0.3);
+            box-shadow: 0 8px 25px rgba(255,107,107,0.45);
         }
         
         .btn-like {
-            background: #f8f9fc;
             color: #2e8d53;
-            border: 2px solid #2e8d53;
+            border: 2px solid #d4f0e4;
         }
         
         .btn-like:hover {
             background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            border-color: transparent;
             color: white;
-            transform: scale(1.15);
-            box-shadow: 0 5px 15px rgba(46,141,83,0.3);
+            box-shadow: 0 8px 25px rgba(46,141,83,0.45);
         }
         
         .btn-add {
-            background: #f8f9fc;
             color: #2e8d53;
-            border: 2px solid #2e8d53;
+            border: 2px solid #d4f0e4;
         }
         
         .btn-add:hover {
             background: #2e8d53;
+            border-color: #2e8d53;
             color: white;
-            transform: scale(1.15);
-            box-shadow: 0 5px 15px rgba(46,141,83,0.3);
+            box-shadow: 0 8px 25px rgba(46,141,83,0.45);
+        }
+        
+        /* Tooltip на кнопках */
+        .card-action-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+        }
+        
+        .card-action-btn:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-8px);
         }
         
         /* Stack Indicator */
@@ -566,13 +717,37 @@ require_once 'includes/auth_functions.php';
             .header-logo>img { margin-right: auto; }
             .header-right { display: none; }
             
-            .cards-stack-container {
-                height: 700px;
-                padding-bottom: 80px;
+            .cards-stack-section {
+                padding: 20px;
             }
             
-            .tinder-card {
-                max-width: 420px;
+            .carousel-card {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+            
+            .card-image {
+                height: 260px;
+            }
+            
+            .card-title {
+                font-size: 1.4rem;
+            }
+            
+            .card-content {
+                padding: 20px;
+            }
+            
+            .card-action-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .carousel-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
             }
             
             .route-stats {
@@ -581,6 +756,15 @@ require_once 'includes/auth_functions.php';
             
             .action-buttons {
                 flex-direction: column;
+            }
+            
+            .category-tabs {
+                gap: 10px;
+            }
+            
+            .category-tab {
+                padding: 10px 20px;
+                font-size: 0.9rem;
             }
         }
         
@@ -698,25 +882,21 @@ require_once 'includes/auth_functions.php';
             </div>
         </div>
 
-        <!-- Tinder-карточки -->
+        <!-- Карусель мест -->
         <div class="cards-stack-section">
-            <div class="section-header">
-                <h2><i class="bi bi-heart-fill"></i> Нравится / Не нравится</h2>
+            <div class="carousel-nav">
+                <button class="carousel-btn" id="prevCarouselBtn" onclick="moveCarousel(-1)">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <span class="carousel-counter" id="carouselCounter">1 / 10</span>
+                <button class="carousel-btn" id="nextCarouselBtn" onclick="moveCarousel(1)">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
             </div>
-            <div class="cards-stack-container" id="cardsStack">
-                <!-- Карточки будут добавлены через JS -->
-            </div>
-            <div class="stack-indicator" id="stackIndicator">Осталось карточек: 0</div>
-            <div class="action-buttons">
-                <button class="action-btn btn-secondary" id="prevCardBtn">
-                    <i class="bi bi-arrow-left"></i> Назад
-                </button>
-                <button class="action-btn btn-secondary" id="randomCardBtn">
-                    <i class="bi bi-shuffle"></i> Случайная
-                </button>
-                <button class="action-btn btn-secondary" id="resetCardsBtn">
-                    <i class="bi bi-arrow-clockwise"></i> Сброс
-                </button>
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Карточки будут добавлены через JS -->
+                </div>
             </div>
         </div>
 
@@ -910,91 +1090,91 @@ require_once 'includes/auth_functions.php';
                     }
                 ]
             },
-            'kazan': {
-                center: [55.7887, 49.1229],
-                zoom: 13,
+            'japan': {
+                center: [35.6762, 139.6503],
+                zoom: 10,
                 restaurants: [
                     {
                         id: 1,
-                        name: 'Ресторан "Тюльпан"',
-                        location: 'ул. Баумана, 53',
-                        coords: [55.7887, 49.1229],
-                        rating: 4.7,
-                        reviews: 234,
-                        description: 'Татарская и европейская кухня в современном интерьере.',
-                        review: 'Отличная чак-чак и эчпочмаки!',
-                        image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600',
-                        price: '2000-3500 ₽'
+                        name: 'Ресторан "Суши Мастер"',
+                        location: 'Токио, район Гиндза',
+                        coords: [35.6719, 139.7650],
+                        rating: 4.8,
+                        reviews: 542,
+                        description: 'Традиционные суши и сашими от шеф-повара.',
+                        review: 'Лучшие суши в Токио!',
+                        image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=600',
+                        price: '5000-10000 ¥'
                     }
                 ],
                 museums: [
                     {
                         id: 101,
-                        name: 'Национальный музей РТ',
-                        location: 'ул. Баумана, 64',
-                        coords: [55.7850, 49.1250],
-                        rating: 4.6,
-                        reviews: 1543,
-                        description: 'Коллекция истории и культуры Татарстана.',
-                        review: 'Интересная экспозиция о татарской культуре.',
-                        image: 'https://images.unsplash.com/photo-1518972458042-16b6830324da?w=600',
-                        price: '300 ₽'
+                        name: 'Национальный музей Токио',
+                        location: 'Парк Уэно',
+                        coords: [35.7188, 139.7767],
+                        rating: 4.7,
+                        reviews: 3421,
+                        description: 'Крупнейшая коллекция японского искусства.',
+                        review: 'Невероятная экспозиция!',
+                        image: 'https://images.unsplash.com/photo-1524413840807-0c3cb6fa165d?w=600',
+                        price: '1000 ¥'
                     }
                 ],
                 parks: [
                     {
                         id: 201,
-                        name: 'Парк Тысячелетия',
-                        location: 'ул. Девятаева, 3',
-                        coords: [55.7920, 49.1350],
-                        rating: 4.7,
-                        reviews: 3421,
-                        description: 'Современный парк с фонтанами и аллеями.',
-                        review: 'Отличное место для прогулок!',
-                        image: 'https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?w=600',
+                        name: 'Парк Уэно',
+                        location: 'Токио',
+                        coords: [35.7148, 139.7739],
+                        rating: 4.8,
+                        reviews: 12543,
+                        description: 'Знаменитый парк с сакурой весной.',
+                        review: 'Лучшее место для ханами!',
+                        image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600',
                         price: 'Бесплатно'
                     }
                 ],
                 attractions: [
                     {
                         id: 301,
-                        name: 'Казанский Кремль',
-                        location: 'Кремль',
-                        coords: [55.7961, 49.1094],
+                        name: 'Храм Сэнсо-дзи',
+                        location: 'Асакуса',
+                        coords: [35.7148, 139.7967],
                         rating: 4.9,
                         reviews: 25432,
-                        description: 'Объект Всемирного наследия ЮНЕСКО.',
-                        review: 'Обязательно к посещению!',
-                        image: 'https://images.unsplash.com/photo-1564858051047-2f213095da05?w=600',
-                        price: '200 ₽'
+                        description: 'Древнейший храм Токио.',
+                        review: 'Великолепная атмосфера!',
+                        image: 'https://images.unsplash.com/photo-1528360983277-13d9b152c6d4?w=600',
+                        price: 'Бесплатно'
                     }
                 ],
                 hotels: [
                     {
                         id: 401,
-                        name: 'Отель "Шампань"',
-                        location: 'ул. Пушкина, 23',
-                        coords: [55.7870, 49.1210],
-                        rating: 4.5,
-                        reviews: 876,
-                        description: 'Комфортабельный отель в центре города.',
-                        review: 'Отличный сервис и удобное расположение.',
+                        name: 'Отель "Цукишира"',
+                        location: 'Токио',
+                        coords: [35.6654, 139.7830],
+                        rating: 4.6,
+                        reviews: 1876,
+                        description: 'Современный отель в центре.',
+                        review: 'Отличный сервис!',
                         image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600',
-                        price: 'от 8000 ₽/ночь'
+                        price: 'от 15000 ¥/ночь'
                     }
                 ],
                 cafes: [
                     {
                         id: 501,
-                        name: 'Кофейня "Бахетле"',
-                        location: 'ул. Баумана, 11',
-                        coords: [55.7860, 49.1200],
-                        rating: 4.6,
-                        reviews: 1234,
-                        description: 'Украинская и татарская кухня.',
-                        review: 'Вкусные вареники и пельмени!',
+                        name: 'Кафе "Антенна"',
+                        location: 'Сибуя',
+                        coords: [35.6595, 139.7004],
+                        rating: 4.5,
+                        reviews: 987,
+                        description: 'Традиционные японские десерты.',
+                        review: 'Вкусный моти!',
                         image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600',
-                        price: '500-1200 ₽'
+                        price: '500-1500 ¥'
                     }
                 ]
             }
@@ -1058,7 +1238,7 @@ require_once 'includes/auth_functions.php';
                 ];
                 
                 cardStack = [...allPlaces];
-                renderCards();
+                renderCarousel();
             }
             
             // Получение иконки категории
@@ -1087,84 +1267,107 @@ require_once 'includes/auth_functions.php';
                 return names[category] || 'Место';
             }
             
-            // Отрисовка карточек
-            function renderCards() {
-                const container = document.getElementById('cardsStack');
-                container.innerHTML = '';
+            // Карусель
+            let currentCarouselIndex = 0;
+            
+            // Отрисовка карусели
+            function renderCarousel() {
+                const track = document.getElementById('carouselTrack');
+                track.innerHTML = '';
                 
-                const visibleCards = Math.min(cardStack.length, 3);
-                
-                for (let i = visibleCards - 1; i >= 0; i--) {
-                    const place = cardStack[i];
+                cardStack.forEach((place, index) => {
                     const card = document.createElement('div');
-                    card.className = 'tinder-card';
-                    card.style.zIndex = visibleCards - i;
-                    card.style.transform = `scale(${1 - i * 0.05}) translateY(${i * 10}px)`;
+                    card.className = 'carousel-card';
                     
                     const stars = '★'.repeat(Math.floor(place.rating)) + (place.rating % 1 >= 0.5 ? '½' : '');
                     
                     card.innerHTML = `
                         <div class="card-image" style="background-image: url('${place.image}')">
+                            <div class="card-image-overlay"></div>
                             <span class="card-badge">${place.price || 'Цена по запросу'}</span>
                             <span class="card-category"><i class="bi ${getCategoryIcon(place.category)}"></i> ${getCategoryName(place.category)}</span>
+                            <div class="card-rating-overlay">
+                                <div class="card-rating-badge">
+                                    <span class="stars">${stars}</span>
+                                    <span class="rating-value">${place.rating}</span>
+                                    <span class="rating-count">(${place.reviews})</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-content">
                             <h3 class="card-title">${place.name}</h3>
                             <div class="card-location"><i class="bi bi-geo-alt"></i> ${place.location}</div>
-                            <div class="card-rating">
-                                <div class="stars">${stars}</div>
-                                <span class="rating-text">${place.rating} (${place.reviews} отзывов)</span>
-                            </div>
                             <p class="card-description">${place.description}</p>
                             <div class="card-review">"${place.review}"</div>
                             <div class="card-actions">
-                                <button class="card-action-btn btn-dislike" onclick="swipeCard('left')" title="Пропустить"><i class="bi bi-x-lg"></i></button>
-                                <button class="card-action-btn btn-like" onclick="swipeCard('right')" title="❤️ Нравится - добавить в список"><i class="bi bi-heart-fill"></i></button>
-                                <button class="card-action-btn btn-add" onclick="addToRouteFromCard(${place.id})" title="➕ На карту и в список"><i class="bi bi-plus-lg"></i></button>
+                                <button class="card-action-btn btn-dislike" onclick="dislikeCard(${index})" data-tooltip="Пропустить" title="Пропустить"><i class="bi bi-x-lg"></i></button>
+                                <button class="card-action-btn btn-like" onclick="likeCard(${index})" data-tooltip="Нравится" title="❤️ Нравится - добавить в список"><i class="bi bi-heart-fill"></i></button>
+                                <button class="card-action-btn btn-add" onclick="addToRouteFromCard(${place.id})" data-tooltip="Добавить" title="➕ На карту и в список"><i class="bi bi-plus-lg"></i></button>
                             </div>
                         </div>
                     `;
                     
-                    container.appendChild(card);
-                }
+                    track.appendChild(card);
+                });
                 
-                document.getElementById('stackIndicator').textContent = `Осталось карточек: ${cardStack.length}`;
+                updateCarouselCounter();
+                updateCarouselButtons();
             }
             
-            // Свайп карточки по кнопкам
-            window.swipeCard = function(direction) {
-                const card = document.querySelector('.tinder-card');
-                if (!card || cardStack.length === 0) return;
+            // Движение карусели
+            window.moveCarousel = function(direction) {
+                const track = document.getElementById('carouselTrack');
+                const cardWidth = 450; // 420px + 30px gap
                 
-                // Блокируем повторные клики
-                if (card.classList.contains('animating')) return;
+                currentCarouselIndex += direction;
                 
-                const place = cardStack[0];
-                card.classList.add('animating');
+                // Ограничения
+                const maxIndex = Math.max(0, cardStack.length - 3);
+                currentCarouselIndex = Math.max(0, Math.min(currentCarouselIndex, maxIndex));
                 
-                if (direction === 'right') {
-                    // ЛАЙК - добавляет в список внизу (без карты)
-                    card.classList.add('slide-right');
-                    
-                    setTimeout(() => {
-                        cardStack.shift();
-                        selectedPlaces.push(place);
-                        localStorage.setItem('selected_places', JSON.stringify(selectedPlaces));
-                        updateSelectedPlaces();
-                        showNotification(`❤️ ${place.name} добавлено в список`);
-                        renderCards();
-                    }, 300);
-                } else {
-                    // КРЕСТИК - просто удаляет карточку
-                    card.classList.add('slide-left');
-                    
-                    setTimeout(() => {
-                        cardStack.shift();
-                        renderCards();
-                    }, 300);
-                }
+                track.style.transform = `translateX(-${currentCarouselIndex * cardWidth}px)`;
+                
+                updateCarouselCounter();
+                updateCarouselButtons();
             };
+                
+            // Обновление счётчика
+            function updateCarouselCounter() {
+                const counter = document.getElementById('carouselCounter');
+                if (counter) {
+                    counter.textContent = `${currentCarouselIndex + 1} / ${cardStack.length}`;
+                }
+            }
             
+            // Обновление кнопок
+            function updateCarouselButtons() {
+                const prevBtn = document.getElementById('prevCarouselBtn');
+                const nextBtn = document.getElementById('nextCarouselBtn');
+                
+                if (prevBtn) prevBtn.disabled = currentCarouselIndex === 0;
+                if (nextBtn) {
+                    const maxIndex = Math.max(0, cardStack.length - 3);
+                    nextBtn.disabled = currentCarouselIndex >= maxIndex;
+                }
+            }
+            
+            // Лайк карточки
+            window.likeCard = function(cardIndex) {
+                const place = cardStack[cardIndex];
+                selectedPlaces.push(place);
+                localStorage.setItem('selected_places', JSON.stringify(selectedPlaces));
+                updateSelectedPlaces();
+                showNotification(`❤️ ${place.name} добавлено в список`);
+            };
+                
+            // Дизлайк карточки
+            window.dislikeCard = function(cardIndex) {
+                const place = cardStack[cardIndex];
+                cardStack.splice(cardIndex, 1);
+                renderCarousel();
+                showNotification(`❌ ${place.name} пропущено`);
+            };
+                
             // Добавить на карту и в список
             window.addToRouteFromCard = function(placeId) {
                 const place = allPlaces.find(p => p.id === placeId);
@@ -1175,23 +1378,11 @@ require_once 'includes/auth_functions.php';
                     updateRouteOnMap();
                     
                     // Центрируем карту на месте
-                    map.setView(place.coords, 16);
+                    if (map) {
+                        map.setView(place.coords, 16);
+                    }
                     
                     showNotification(`➕ ${place.name} добавлено в маршрут!`);
-                } else if (place) {
-                    showNotification('Уже добавлено в маршрут', true);
-                }
-            };
-            
-            // Добавить в маршрут из карточки
-            window.addToRouteFromCard = function(placeId) {
-                const place = allPlaces.find(p => p.id === placeId);
-                if (place && !selectedPlaces.find(p => p.id === placeId)) {
-                    selectedPlaces.push(place);
-                    localStorage.setItem('selected_places', JSON.stringify(selectedPlaces));
-                    updateSelectedPlaces();
-                    updateRouteOnMap();
-                    showNotification(`✓ ${place.name} добавлено в маршрут`);
                 } else if (place) {
                     showNotification('Уже добавлено в маршрут', true);
                 }
@@ -1362,28 +1553,9 @@ require_once 'includes/auth_functions.php';
                     cardStack = allPlaces.filter(p => p.category === category);
                 }
                 
-                currentCardIndex = 0;
-                renderCards();
+                currentCarouselIndex = 0;
+                renderCarousel();
                 showNotification(`Показаны: ${tab.textContent.trim()}`);
-            });
-            
-            // Кнопки управления карточками
-            document.getElementById('prevCardBtn').addEventListener('click', function() {
-                showNotification('Функция в разработке');
-            });
-            
-            document.getElementById('randomCardBtn').addEventListener('click', function() {
-                if (cardStack.length > 0) {
-                    const randomIndex = Math.floor(Math.random() * cardStack.length);
-                    cardStack = [cardStack[randomIndex], ...cardStack.filter((_, i) => i !== randomIndex)];
-                    renderCards();
-                }
-            });
-            
-            document.getElementById('resetCardsBtn').addEventListener('click', function() {
-                cardStack = [...allPlaces];
-                renderCards();
-                showNotification('Список сброшен');
             });
             
             // Кнопки управления маршрутом

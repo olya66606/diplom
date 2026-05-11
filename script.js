@@ -113,57 +113,57 @@ const toursData = {
                     difficulty: 'Средний'
                 }
             ],
-            'kazan': [
+            'japan': [
                 {
                     id: 7,
-                    title: 'Историческая Казань',
-                    image: 'img/kazan.jpg',
-                    location: 'Казань',
-                    rating: 4.8,
-                    reviews: 156,
-                    description: 'Казанский Кремль, Благовещенский собор, башня Сююмбике, храм Кул Шариф.',
-                    price: '19000',
-                    duration: 3,
+                    title: 'Токио - Сердце Японии',
+                    image: 'img/tokio.webp',
+                    location: 'Токио, Япония',
+                    rating: 4.9,
+                    reviews: 234,
+                    description: 'Погрузитесь в мир неоновых огней, древних храмов и современной культуры.',
+                    price: '85000',
+                    duration: 7,
                     badge: 'Популярный',
-                    places: ['Казанский Кремль', 'Благовещенский собор', 'Башня Сююмбике', 'Храм Кул Шариф', 'Дворец Земледельцев'],
-                    includes: ['Проживание в центре', 'Экскурсии с гидом', 'Входные билеты', 'Обеды'],
-                    schedule: ['День 1: Кремль, Кул Шариф', 'День 2: Дворец Земледельцев, ул. Баумана', 'День 3: Отправление'],
+                    places: ['Храм Сэнсо-дзи', 'Башня Токио', 'Район Шибуя', 'Императорский дворец'],
+                    includes: ['Проживание в отеле 4*', 'Экскурсии с гидом', 'Входные билеты', 'Обеды'],
+                    schedule: ['День 1: Прибытие в Токио, Кремль', 'День 2: Шибуя и Харадзюку', 'День 3: Отправление'],
                     totalTime: '16-18 часов',
                     groupSize: 'до 15 человек',
                     difficulty: 'Легкий'
                 },
                 {
                     id: 8,
-                    title: 'Казань - третий столичный город',
-                    image: 'img/kazan2.jpg',
-                    location: 'Казань',
+                    title: 'Киото - Древняя столица',
+                    image: 'img/kioto.jpg',
+                    location: 'Киото, Япония',
                     rating: 4.9,
-                    reviews: 134,
-                    description: 'Остров-град Свияжск, Раифский монастырь, Болгар, Ватутинский бор.',
-                    price: '24000',
-                    duration: 4,
+                    reviews: 198,
+                    description: 'Тысячи храмов, сады дзен и район гейш Гион.',
+                    price: '95000',
+                    duration: 7,
                     badge: 'Хит',
-                    places: ['Остров Свияжск', 'Раифский монастырь', 'Храм всех религий', 'Казанская крепость', 'Национальный музей'],
+                    places: ['Золотой павильон', 'Бамбуковый лес', 'Храм Фусими Инари', 'Район Гион'],
                     includes: ['Проживание 4*', 'Трансфер', 'Экскурсии с гидом', 'Питание'],
-                    schedule: ['День 1: Свияжск, Раифа', 'День 2: Храм всех религий', 'День 3: Музеи Казани', 'День 4: Отправление'],
+                    schedule: ['День 1: Храмы Киото', 'День 2: Бамбуковый лес', 'День 3: Музеи', 'День 4: Отправление'],
                     totalTime: '20-22 часа',
                     groupSize: 'до 12 человек',
                     difficulty: 'Средний'
                 },
                 {
                     id: 9,
-                    title: 'Болгар и Свияжск',
-                    image: 'img/kazan3.jpg',
-                    location: 'Казань',
-                    rating: 4.7,
-                    reviews: 98,
-                    description: 'Древний Болгар, остров Свияжск, традиционная татарская кухня.',
-                    price: '21000',
-                    duration: 2,
-                    badge: 'Исторический',
-                    places: ['Болгарский заповедник', 'Белая мечеть', 'Остров Свияжск', 'Успенский собор', 'Судостроительный центр'],
+                    title: 'Осака - Кухня Японии',
+                    image: 'img/osaka.jpg',
+                    location: 'Осака, Япония',
+                    rating: 4.8,
+                    reviews: 176,
+                    description: 'Уличная еда, современный шопинг и замок Осаки.',
+                    price: '78000',
+                    duration: 6,
+                    badge: 'Гастрономический',
+                    places: ['Замок Осаки', 'Район Дотонбори', 'Аквариум', 'Университетский район'],
                     includes: ['Проживание', 'Трансфер на автобусе', 'Экскурсии', 'Трапеза в ресторане'],
-                    schedule: ['День 1: Болгар, Белая мечеть', 'День 2: Свияжск, возвращение'],
+                    schedule: ['День 1: Замок Осаки', 'День 2: Дотонбори'],
                     totalTime: '14-16 часов',
                     groupSize: 'до 20 человек',
                     difficulty: 'Средний'
@@ -171,15 +171,160 @@ const toursData = {
             ]
         };
 
-        // Функция для получения названия города
-        function getCityDisplayName(cityId) {
-            const cities = {
-                'saint-petersburg': 'Санкт-Петербург',
-                'kaliningrad': 'Калининград',
-                'kazan': 'Казань',
-            };
-            return cities[cityId] || 'Санкт-Петербург';
+// Функция для получения названия города
+function getCityDisplayName(cityId) {
+    const cities = {
+        'saint-petersburg': 'Санкт-Петербург',
+        'kaliningrad': 'Калининград',
+        'japan': 'Япония',
+    };
+    return cities[cityId] || 'Санкт-Петербург';
+}
+    
+// Функция расчёта статистики по турам
+function calculateTourStats(cityId) {
+    const tours = toursData[cityId] || toursData['saint-petersburg'];
+    
+    if (tours.length === 0) {
+        return null;
+    }
+    
+    // Расчёт статистики
+    const totalTours = tours.length;
+    const totalReviews = tours.reduce((sum, tour) => sum + tour.reviews, 0);
+    const avgRating = (tours.reduce((sum, tour) => sum + tour.rating, 0) / totalTours).toFixed(1);
+    const minPrice = Math.min(...tours.map(t => parseInt(t.price)));
+    const maxPrice = Math.max(...tours.map(t => parseInt(t.price)));
+    const avgPrice = Math.round(tours.reduce((sum, tour) => sum + parseInt(tour.price), 0) / totalTours);
+    const totalDays = tours.reduce((sum, tour) => sum + tour.duration, 0);
+    const avgDuration = (totalDays / totalTours).toFixed(1);
+    
+    // Распределение по категориям (badges)
+    const categories = {};
+    tours.forEach(tour => {
+        const badge = tour.badge || 'Другое';
+        categories[badge] = (categories[badge] || 0) + 1;
+    });
+    
+    return {
+        totalTours,
+        totalReviews,
+        avgRating,
+        minPrice,
+        maxPrice,
+        avgPrice,
+        avgDuration,
+        categories
+    };
+}
+
+// Функция обновления статистики в блоке vivod
+function updateTourStatsBlock(cityId) {
+    const stats = calculateTourStats(cityId);
+    const cityName = getCityDisplayName(cityId);
+    
+    if (!stats) return;
+    
+    // Обновляем значения статистики
+    const statDuration = document.getElementById('statDuration');
+    const statDurationDesc = document.getElementById('statDurationDesc');
+    const statReviews = document.getElementById('statReviews');
+    const statRating = document.getElementById('statRating');
+    const statFillRate = document.getElementById('statFillRate');
+    const barSpring = document.getElementById('barSpring');
+    const barSummer = document.getElementById('barSummer');
+    const barWinter = document.getElementById('barWinter');
+    const springPercent = document.getElementById('springPercent');
+    const summerPercent = document.getElementById('summerPercent');
+    const winterPercent = document.getElementById('winterPercent');
+    const statTopCategory = document.getElementById('statTopCategory');
+    const pieCategory1 = document.getElementById('pieCategory1');
+    const pieCategory2 = document.getElementById('pieCategory2');
+    const pieCategory3 = document.getElementById('pieCategory3');
+    
+    // Длительность тура
+    if (statDuration) {
+        statDuration.textContent = `${stats.avgDuration} дн.`;
+    }
+    if (statDurationDesc) {
+        statDurationDesc.textContent = `средняя длительность туров в ${cityName}`;
+    }
+    
+    // Отзывы
+    if (statReviews) {
+        statReviews.textContent = `${stats.totalReviews}+`;
+    }
+    
+    // Рейтинг
+    if (statRating) {
+        statRating.textContent = stats.avgRating;
+    }
+    
+    // Заполненность (имитация на основе сезона)
+    const fillRate = Math.floor(60 + Math.random() * 30); // 60-90%
+    if (statFillRate) {
+        statFillRate.textContent = `${fillRate}%`;
+    }
+    
+    // Бары по сезонам (случайные значения вокруг fillRate)
+    const springFill = Math.min(95, Math.max(40, fillRate + (Math.random() * 20 - 10)));
+    const summerFill = Math.min(95, Math.max(50, fillRate + (Math.random() * 20 - 5)));
+    const winterFill = Math.min(95, Math.max(30, fillRate + (Math.random() * 20 - 20)));
+    
+    if (barSpring) barSpring.style.width = `${springFill}%`;
+    if (barSummer) barSummer.style.width = `${summerFill}%`;
+    if (barWinter) barWinter.style.width = `${winterFill}%`;
+    
+    if (springPercent) springPercent.textContent = `${Math.round(springFill)}%`;
+    if (summerPercent) summerPercent.textContent = `${Math.round(summerFill)}%`;
+    if (winterPercent) winterPercent.textContent = `${Math.round(winterFill)}%`;
+    
+    // Категории туров
+    const categoryEntries = Object.entries(stats.categories);
+    if (categoryEntries.length > 0) {
+        // Сортируем по количеству
+        categoryEntries.sort((a, b) => b[1] - a[1]);
+        
+        const totalCategories = categoryEntries.reduce((sum, [, count]) => sum + count, 0);
+        
+        if (categoryEntries[0]) {
+            const topCat = categoryEntries[0];
+            const topPercent = Math.round((topCat[1] / totalCategories) * 100);
+            if (statTopCategory) {
+                statTopCategory.textContent = `${topCat[0]} ${topPercent}%`;
+            }
         }
+        
+        // Обновляем pie chart
+        if (categoryEntries[0]) {
+            const cat1 = categoryEntries[0];
+            const pct1 = Math.round((cat1[1] / totalCategories) * 100);
+            if (pieCategory1) pieCategory1.textContent = `${cat1[0]} ${pct1}%`;
+        }
+        
+        if (categoryEntries[1]) {
+            const cat2 = categoryEntries[1];
+            const pct2 = Math.round((cat2[1] / totalCategories) * 100);
+            if (pieCategory2) pieCategory2.textContent = `${cat2[0]} ${pct2}%`;
+        } else {
+            if (pieCategory2) pieCategory2.textContent = 'Стандарт 28%';
+        }
+        
+        if (categoryEntries[2]) {
+            const cat3 = categoryEntries[2];
+            const pct3 = Math.round((cat3[1] / totalCategories) * 100);
+            if (pieCategory3) pieCategory3.textContent = `${cat3[0]} ${pct3}%`;
+        } else {
+            if (pieCategory3) pieCategory3.textContent = 'Эксклюзив 30%';
+        }
+    }
+
+    // Показываем блок (убираем hidden если был)
+    const vivodBlock = document.getElementById('tourStatsContainer');
+    if (vivodBlock) {
+        vivodBlock.style.display = 'block';
+    }
+}
 
 // Функция загрузки туров (для старого опроса)
 function loadTours(cityId) {
@@ -220,6 +365,9 @@ function loadTours(cityId) {
         </div>
     `).join('');
     
+    // Обновляем статистику
+    updateTourStatsBlock(cityId);
+    
     // ПОКАЗЫВАЕМ блок с турами (убираем класс hidden)
     if (toursContainer) {
         toursContainer.classList.remove('hidden');
@@ -240,7 +388,7 @@ function loadTours(cityId) {
             const endDate = document.getElementById('end-date');
             const interestCheckboxes = document.querySelectorAll('input[name="interests"]');
             const additionalInfo = document.getElementById('additional-info');
-            
+
             // Элементы сводки
             const summaryCountry = document.getElementById('summary-country');
             const summaryTravelers = document.getElementById('summary-travelers');
@@ -792,6 +940,9 @@ function loadToursWithShow(cityId) {
         </div>
     `).join('');
     
+    // Обновляем статистику
+    updateTourStatsBlock(cityId);
+    
     // ПОКАЗЫВАЕМ блок с турами (без прокрутки!)
     if (toursContainer) {
         toursContainer.classList.remove('hidden');
@@ -976,7 +1127,8 @@ document.getElementById('submit-survey-btn')?.addEventListener('click', function
     
     const modal = document.getElementById('myModal');
     if (modal) {
-        modal.style.display = 'flex';  // ИЛИ modal.classList.add('show');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
     }
 });
 
@@ -986,7 +1138,8 @@ if (closeModal) {
     closeModal.addEventListener('click', function() {
         const modal = document.getElementById('myModal');
         if (modal) {
-            modal.style.display = 'none';  // ИЛИ modal.classList.remove('show');
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
         }
     });
 }
@@ -995,7 +1148,8 @@ if (closeModal) {
 window.addEventListener('click', function(event) {
     const modal = document.getElementById('myModal');
     if (event.target === modal) {
-        modal.style.display = 'none';  // ИЛИ modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
     }
 });
 
@@ -1083,8 +1237,11 @@ function showTourDetails(tourId) {
     `;
     
     tourModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
     tourModal.querySelector('.tour-modal-btn-close').addEventListener('click', () => {
         tourModal.style.display = 'none';
+        document.body.style.overflow = '';
     });
 }
 

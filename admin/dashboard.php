@@ -29,279 +29,446 @@ $recentUsers = $stmt->fetchAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
     <title>Админ-панель | Туры Везде</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Mulish', sans-serif; background: #f5f6fa; }
-        
-        .admin-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .admin-header-content {
+        .admin-dashboard {
             max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .admin-header h1 { font-size: 24px; }
-        
-        .admin-nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background 0.3s;
-        }
-        
-        .admin-nav a:hover { background: rgba(255,255,255,0.2); }
-        
-        .admin-container {
-            max-width: 1400px;
-            margin: 30px auto;
+            margin: 100px auto;
             padding: 0 20px;
         }
         
-        .stats-grid {
+        .admin-dashboard-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .admin-dashboard-header h1 {
+            font-size: 2.5rem;
+            color: #1b5031;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .admin-dashboard-header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .admin-stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
         }
         
-        .stat-card {
+        .admin-stat-card {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
         
-        .stat-card:hover { transform: translateY(-5px); }
+        .admin-stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
         
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
+        .admin-stat-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            margin-bottom: 15px;
+            font-size: 2rem;
+            flex-shrink: 0;
         }
         
-        .stat-icon.blue { background: #e3f2fd; color: #2196f3; }
-        .stat-icon.green { background: #e8f5e9; color: #4caf50; }
-        .stat-icon.orange { background: #fff3e0; color: #ff9800; }
-        .stat-icon.purple { background: #f3e5f5; color: #9c27b0; }
+        .admin-stat-icon.blue {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: white;
+        }
         
-        .stat-value { font-size: 32px; font-weight: 700; color: #333; }
-        .stat-label { color: #666; margin-top: 5px; }
+        .admin-stat-icon.green {
+            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            color: white;
+        }
+        
+        .admin-stat-icon.orange {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            color: white;
+        }
+        
+        .admin-stat-icon.purple {
+            background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+            color: white;
+        }
+        
+        .admin-stat-content {
+            flex: 1;
+        }
+        
+        .admin-stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1b5031;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .admin-stat-label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
         
         .admin-section {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
         
-        .section-title {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #333;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 10px;
+        .admin-section-header {
+            margin-bottom: 30px;
         }
         
-        .quick-actions {
+        .admin-section-title {
+            font-size: 1.8rem;
+            color: #1b5031;
+            margin-bottom: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .admin-section-subtitle {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .admin-quick-actions {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
         }
         
-        .action-btn {
+        .admin-action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            min-height: 150px;
+        }
+        
+        .admin-action-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(46,141,83,0.3);
+        }
+        
+        .admin-action-btn i {
+            font-size: 3rem;
+        }
+        
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .admin-table th {
+            text-align: left;
+            padding: 18px 15px;
+            background: #f8f9fc;
+            color: #1b5031;
+            font-weight: 700;
+            font-size: 1rem;
+            border-bottom: 2px solid #e8ecf1;
+        }
+        
+        .admin-table td {
+            padding: 18px 15px;
+            border-bottom: 1px solid #e8ecf1;
+            color: #555;
+            font-size: 0.95rem;
+        }
+        
+        .admin-table tr:hover {
+            background: #f8f9fc;
+        }
+        
+        .admin-user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .admin-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        .admin-user-name {
+            font-weight: 600;
+            color: #1b5031;
+        }
+        
+        .admin-user-email {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .admin-role-badge {
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .admin-role-badge-admin {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
             color: white;
-            text-decoration: none;
-            border-radius: 12px;
+        }
+        
+        .admin-role-badge-user {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: white;
+        }
+        
+        .admin-nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .admin-nav-btn {
+            padding: 14px 32px;
+            border-radius: 50px;
             font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-        
-        .action-btn i { font-size: 24px; }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-        
-        th {
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .role-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .role-badge.admin { background: #ffe0b2; color: #e65100; }
-        .role-badge.user { background: #e3f2fd; color: #1976d2; }
-        
-        .btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
             text-decoration: none;
-            display: inline-block;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
+            font-family: 'Mulish', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
         }
         
-        .btn:hover { opacity: 0.8; }
+        .admin-nav-btn-primary {
+            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            color: white;
+        }
         
-        .btn-primary { background: #667eea; color: white; }
-        .btn-danger { background: #e74c3c; color: white; }
-        .btn-success { background: #27ae60; color: white; }
+        .admin-nav-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46,141,83,0.4);
+        }
         
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #667eea;
-            text-decoration: none;
+        .admin-nav-btn-secondary {
+            background: #f8f9fc;
+            color: #666;
+            border: 2px solid #e8ecf1;
+        }
+        
+        .admin-nav-btn-secondary:hover {
+            background: #e8ecf1;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .admin-dashboard {
+                margin: 60px auto;
+            }
+            
+            .admin-dashboard-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .admin-stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-section {
+                padding: 20px;
+            }
+            
+            .admin-table {
+                font-size: 0.85rem;
+            }
+            
+            .admin-nav-buttons {
+                flex-direction: column;
+            }
+            
+            .admin-nav-btn {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="admin-header">
-        <div class="admin-header-content">
+    <div class="admin-dashboard">
+        <div class="admin-dashboard-header">
             <h1><i class="bi bi-gear-fill"></i> Админ-панель</h1>
-            <div class="admin-nav">
-                <a href="/../admin/dashboard.php">Главная</a>
-                <a href="/../admin/users.php">Пользователи</a>
-                <a href="/../admin/tours.php">Туры</a>
-                <a href="/../admin/routes.php">Карточки маршрутов</a>
-                <a href="/../admin/reviews.php">Отзывы</a>
-                <a href="/../index.php"><i class="bi bi-arrow-left"></i> На сайт</a>
-                <a href="auth/logout.php">Выйти</a>
-            </div>
+            <p>Управляйте сайтом и контентом</p>
         </div>
-    </div>
 
-    <div class="admin-container">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon blue"><i class="bi bi-people"></i></div>
-                <div class="stat-value"><?= $usersCount ?></div>
-                <div class="stat-label">Пользователей</div>
+        <div class="admin-stats-grid">
+            <div class="admin-stat-card">
+                <div class="admin-stat-icon blue">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <div class="admin-stat-content">
+                    <div class="admin-stat-value"><?= $usersCount ?></div>
+                    <div class="admin-stat-label">Пользователей</div>
+                </div>
             </div>
             
-            <div class="stat-card">
-                <div class="stat-icon green"><i class="bi bi-map"></i></div>
-                <div class="stat-value"><?= $toursCount ?></div>
-                <div class="stat-label">Туров</div>
+            <div class="admin-stat-card">
+                <div class="admin-stat-icon green">
+                    <i class="bi bi-map-fill"></i>
+                </div>
+                <div class="admin-stat-content">
+                    <div class="admin-stat-value"><?= $toursCount ?></div>
+                    <div class="admin-stat-label">Туров</div>
+                </div>
             </div>
             
-            <div class="stat-card">
-                <div class="stat-icon orange"><i class="bi bi-chat-dots"></i></div>
-                <div class="stat-value"><?= $reviewsPending ?></div>
-                <div class="stat-label">Отзывов на модерации</div>
+            <div class="admin-stat-card">
+                <div class="admin-stat-icon orange">
+                    <i class="bi bi-chat-dots-fill"></i>
+                </div>
+                <div class="admin-stat-content">
+                    <div class="admin-stat-value"><?= $reviewsPending ?></div>
+                    <div class="admin-stat-label">Отзывов на модерации</div>
+                </div>
             </div>
             
-            <div class="stat-card">
-                <div class="stat-icon purple"><i class="bi bi-person-badge"></i></div>
-                <div class="stat-value"><?= count($recentUsers) ?></div>
-                <div class="stat-label">Последних пользователей</div>
+            <div class="admin-stat-card">
+                <div class="admin-stat-icon purple">
+                    <i class="bi bi-person-badge-fill"></i>
+                </div>
+                <div class="admin-stat-content">
+                    <div class="admin-stat-value"><?= count($recentUsers) ?></div>
+                    <div class="admin-stat-label">Новых пользователей</div>
+                </div>
             </div>
         </div>
 
         <div class="admin-section">
-            <h2 class="section-title"><i class="bi bi-lightning-charge"></i> Быстрые действия</h2>
-            <div class="quick-actions">
-                <a href="/../admin/tours.php" class="action-btn">
-                    <i class="bi bi-plus-circle"></i>
+            <div class="admin-section-header">
+                <h2 class="admin-section-title">
+                    <i class="bi bi-lightning-charge-fill"></i> Быстрые действия
+                </h2>
+                <p class="admin-section-subtitle">Доступные операции управления</p>
+            </div>
+            <div class="admin-quick-actions">
+                <a href="tours.php" class="admin-action-btn">
+                    <i class="bi bi-plus-circle-fill"></i>
                     <span>Добавить тур</span>
                 </a>
-                <a href="/../admin/routes.php" class="action-btn">
+                <a href="routes.php" class="admin-action-btn">
                     <i class="bi bi-card-list"></i>
-                    <span>Управление карточками</span>
+                    <span>Карточки маршрутов</span>
                 </a>
-                <a href="/../admin/users.php" class="action-btn">
-                    <i class="bi bi-person-plus"></i>
-                    <span>Добавить пользователя</span>
+                <a href="users.php" class="admin-action-btn">
+                    <i class="bi bi-person-plus-fill"></i>
+                    <span>Пользователи</span>
                 </a>
-                <a href="/../admin/reviews.php" class="action-btn">
-                    <i class="bi bi-check-circle"></i>
+                <a href="reviews.php" class="admin-action-btn">
+                    <i class="bi bi-check-circle-fill"></i>
                     <span>Модерация отзывов</span>
                 </a>
             </div>
         </div>
 
         <div class="admin-section">
-            <h2 class="section-title"><i class="bi bi-clock-history"></i> Последние пользователи</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Имя</th>
-                        <th>Email</th>
-                        <th>Роль</th>
-                        <th>Дата регистрации</th>
-                        <th>Действия</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($recentUsers as $u): ?>
-                    <tr>
-                        <td><?= $u['id'] ?></td>
-                        <td><?= htmlspecialchars($u['name']) ?></td>
-                        <td><?= htmlspecialchars($u['email']) ?></td>
-                        <td>
-                            <span class="role-badge <?= $u['role'] ?>"><?= $u['role'] ?></span>
-                        </td>
-                        <td><?= date('d.m.Y H:i', strtotime($u['created_at'])) ?></td>
-                        <td>
-                            <a href="admin/users.php?edit=<?= $u['id'] ?>" class="btn btn-primary">
-                                <i class="bi bi-pencil"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+            <div class="admin-section-header">
+                <h2 class="admin-section-title">
+                    <i class="bi bi-clock-history"></i> Последние пользователи
+                </h2>
+                <p class="admin-section-subtitle">Недавно зарегистрировавшиеся</p>
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Пользователь</th>
+                            <th>Email</th>
+                            <th>Роль</th>
+                            <th>Дата регистрации</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($recentUsers as $u): ?>
+                        <tr>
+                            <td><?= $u['id'] ?></td>
+                            <td>
+                                <div class="admin-user-info">
+                                    <div class="admin-user-avatar">
+                                        <?= strtoupper(substr($u['name'], 0, 1)) ?>
+                                    </div>
+                                    <div>
+                                        <div class="admin-user-name"><?= htmlspecialchars($u['name']) ?></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="admin-user-email"><?= htmlspecialchars($u['email']) ?></td>
+                            <td>
+                                <span class="admin-role-badge admin-role-badge-<?= $u['role'] ?>">
+                                    <?= $u['role'] === 'admin' ? 'Админ' : 'Пользователь' ?>
+                                </span>
+                            </td>
+                            <td><?= date('d.m.Y H:i', strtotime($u['created_at'])) ?></td>
+                            <td>
+                                <a href="users.php?edit=<?= $u['id'] ?>" class="admin-nav-btn admin-nav-btn-secondary" style="padding: 8px 16px;">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <a href="index.php" class="back-link"><i class="bi bi-arrow-left"></i> Вернуться на сайт</a>
+        <div class="admin-nav-buttons">
+            <a href="../index.php" class="admin-nav-btn admin-nav-btn-primary">
+                <i class="bi bi-house-door"></i> На сайт
+            </a>
+            <a href="logout.php" class="admin-nav-btn admin-nav-btn-secondary">
+                <i class="bi bi-box-arrow-right"></i> Выйти
+            </a>
+        </div>
     </div>
 </body>
 </html>

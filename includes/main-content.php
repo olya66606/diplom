@@ -50,8 +50,8 @@
                             <button class="city-option" data-city="kaliningrad">
                                 <i class="bi bi-tree"></i> Калининград
                             </button>  
-                            <button class="city-option" data-city="kazan">
-                                <i class="bi bi-flag"></i> Казань
+                            <button class="city-option" data-city="japan">
+                                <i class="bi bi-flag"></i> Япония
                             </button>
                             <button class="city-option" data-city="moscow">
                                 <i class="bi bi-star"></i> Москва
@@ -208,9 +208,15 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
-        <h3>Детали вашей поездки</h3>
+        <div class="modal-header-custom">
+            <h3><i class="bi bi-receipt"></i> Детали вашей поездки</h3>
+        </div>
         <div id="modal-body"></div>
-        <a href="planner.php" class="survey-btn survey-btn-primary" style="display: block; text-align: center; margin-top: 20px; color: #153321;">Перейти в конструктор</a>
+        <div class="modal-footer-custom">
+            <a href="planner.php" class="modal-btn modal-btn-primary">
+                <i class="bi bi-map-fill"></i> Перейти в конструктор
+            </a>
+        </div>
     </div>
 </div>
 
@@ -226,7 +232,7 @@
 </div>
 
 
-<div class="vivod">
+<div class="vivod" id="tourStatsContainer">
     <h1>Статистика и информация о турах</h1>
     
     <div class="stats-grid">
@@ -235,16 +241,16 @@
             <div class="stat-icon">
                 <i class="bi bi-calendar-check"></i>
             </div>
-            <div class="stat-value">6 дней</div>
+            <div class="stat-value" id="statDuration">6 дней</div>
             <div class="stat-label">Рекомендуемая длительность</div>
-            <div class="stat-desc">максимальное комфортное число дней</div>
+            <div class="stat-desc" id="statDurationDesc">максимальное комфортное число дней</div>
         </div>
 
         <div class="stat-card">
             <div class="stat-icon">
                 <i class="bi bi-chat-dots"></i>
             </div>
-            <div class="stat-value">85+</div>
+            <div class="stat-value" id="statReviews">85+</div>
             <div class="stat-label">Отзывы клиентов</div>
             <div class="stat-desc">положительных отзывов о турах</div>
         </div>
@@ -253,7 +259,7 @@
             <div class="stat-icon">
                 <i class="bi bi-star-fill"></i>
             </div>
-            <div class="stat-value">8.7</div>
+            <div class="stat-value" id="statRating">8.7</div>
             <div class="stat-label">Уровень удовлетворенности</div>
             <div class="stat-desc">средняя оценка туров (из 10)</div>
         </div>
@@ -263,24 +269,24 @@
             <div class="stat-icon">
                 <i class="bi bi-graph-up"></i>
             </div>
-            <div class="stat-value">65%</div>
+            <div class="stat-value" id="statFillRate">65%</div>
             <div class="stat-label">Заполненность туров</div>
             <div class="stat-desc">туров заполнены на ближайший месяц</div>
             <div class="stat-bars">
                 <div class="stat-bar">
                     <span>Весна</span>
-                    <div class="bar"><div class="bar-fill" style="width: 85%"></div></div>
-                    <span>85%</span>
+                    <div class="bar"><div class="bar-fill" id="barSpring" style="width: 85%"></div></div>
+                    <span id="springPercent">85%</span>
                 </div>
                 <div class="stat-bar">
                     <span>Лето</span>
-                    <div class="bar"><div class="bar-fill" style="width: 92%"></div></div>
-                    <span>92%</span>
+                    <div class="bar"><div class="bar-fill" id="barSummer" style="width: 92%"></div></div>
+                    <span id="summerPercent">92%</span>
                 </div>
                 <div class="stat-bar">
                     <span>Зима</span>
-                    <div class="bar"><div class="bar-fill" style="width: 45%"></div></div>
-                    <span>45%</span>
+                    <div class="bar"><div class="bar-fill" id="barWinter" style="width: 45%"></div></div>
+                    <span id="winterPercent">45%</span>
                 </div>
             </div>
         </div>
@@ -289,21 +295,21 @@
             <div class="stat-icon">
                 <i class="bi bi-pie-chart"></i>
             </div>
-            <div class="stat-value">Город 42%</div>
+            <div class="stat-value" id="statTopCategory">Город 42%</div>
             <div class="stat-label">Предпочтения туристов</div>
             <div class="stat-desc">распределение по типам туров</div>
-            <div class="stat-pie">
+            <div class="stat-pie" id="categoriesPie">
                 <div class="pie-item">
                     <div class="pie-color" style="background: #29e486"></div>
-                    <span>Город 42%</span>
+                    <span id="pieCategory1">Город 42%</span>
                 </div>
                 <div class="pie-item">
                     <div class="pie-color" style="background: #207936"></div>
-                    <span>Поселки 28%</span>
+                    <span id="pieCategory2">Поселки 28%</span>
                 </div>
                 <div class="pie-item">
                     <div class="pie-color" style="background: #1e7036"></div>
-                    <span>Область 30%</span>
+                    <span id="pieCategory3">Область 30%</span>
                 </div>
             </div>
         </div>
@@ -324,6 +330,8 @@
         </div>
     </div>
 </div>
+
+
 <script src="js/script.js"></script>
 </body>
 </html>

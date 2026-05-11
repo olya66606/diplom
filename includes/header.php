@@ -10,16 +10,15 @@ require_once __DIR__ . '/auth_functions.php';
     <div class="header-logo"><img src="img/logo.png" alt=""></div>
     <div class="header-right"> 
         <?php if (isLoggedIn()): ?>
-            <a style="margin-right: 20px; margin-top:11px;" href="locals.php" id="localsLink">Места от жителей</a>
+            <a href="locals.php" id="localsLink" class="header-link">Места от жителей</a>
             <?php if (isAdmin()): ?>
-                <a style="margin-right: 20px; margin-top:11px; color: #d35400;" href="admin/dashboard.php">
-                    <i class="bi bi-gear-fill"></i> Админ-панель
+                <a href="admin/dashboard.php" class="header-link header-link-admin">
+                    <i class="bi bi-gear-fill"></i> Админка
                 </a>
             <?php endif; ?>
-            <a style="margin-right: 20px; margin-top:11px;" href="profile.php">
+            <a href="profile.php" class="header-link">
                 <i class="bi bi-person-circle"></i> <?= htmlspecialchars(getCurrentUser()['name']) ?>
             </a>
-        
         <?php else: ?>
             <a class="lihka" id="authButton" href="auth/login.php">Войти</a>
         <?php endif; ?>
