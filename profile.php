@@ -9,13 +9,14 @@ $user = getCurrentUser();
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <link rel="icon" href="/img/logoosn.png" type="image/x-icon" style="width: 100px;">
+  <link rel="icon" href="img/logoosn.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <title>Личный кабинет | Туры Везде</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -48,237 +49,6 @@ $user = getCurrentUser();
         .btn-delete-tour { background: #fee; color: #e74c3c; border: 2px solid #e74c3c; }
         .btn-delete-tour:hover { background: #e74c3c; color: white; }
         .no-tours { text-align: center; padding: 40px; background: #f8f9fc; border-radius: 20px; color: #999; }
-
-        /* Стили для футера */
-        footer {
-            background-color: #ffffff;
-            padding: 40px 0 20px;
-            margin-top: auto;
-        }
-
-        .footer-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-b;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .footer-top {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .footer-logo {
-            margin-bottom: 20px;
-        }
-
-        .logo-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: #273f3c;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            transition: color 0.3s;
-        }
- 
-        .contact-list {
-            width: 300px;
-            text-align: center;
-            margin-left: -30px;
-        }
-
-        .logo-link:hover {
-            color: #273f3c;
-        }
-
-        .logo-icon {
-            font-size: 2.2rem;
-            margin-right: 10px;
-            color: #273f3c;
-        }
-
-        .logo-text {
-            font-size: 1.8rem;
-        }
-
-        .footer-description {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: #273f3c;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #22352b;
-            color: #273f3c;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .contact-icon {
-            font-size: 1.2rem;
-            color: #273f3c;
-            margin-right: 12px;
-            margin-top: 3px;
-            width: 20px;
-        }
-
-        .contact-text {
-            color: #050505;
-            line-height: 1.5;
-        }
-
-        .phone-link, .address-text {
-            color: #bdc3c7;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .phone-link:hover {
-            color: #3498db;
-        }
-
-        .social-text {
-            margin-top: 5px;
-            font-size: 0.85rem;
-            color: #000000;
-        }
-
-        .newsletter-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .newsletter-input {
-            padding: 12px 15px;
-            border: none;
-            border-radius: 4px;
-            background-color: #62af89a9;
-            color: #ffffff;
-            font-size: 1rem;
-        }
-
-        .newsletter-input::placeholder {
-            color: rgb(0, 0, 0);
-        }
-
-        .newsletter-btn {
-            padding: 12px 15px;
-            background-color: #3a805f;
-            color: #264436;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .newsletter-btn:hover {
-            background-color: #4d8172;
-        }
-
-        .footer-bottom {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 20px;
-            border-top: 1px solid #34495e;
-            text-align: center;
-        }
-
-        .copyright {
-            color: #000000;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .footer-link {
-            color: #000000;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        .header {
-            padding: 0 25px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 0 auto;
-            width: 1850px;
-            background-color: white;
-            transition: all 0.3s ease;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            width: 800px;
-        }
-
-        .header a {
-            color: #246d3e;
-            text-decoration: none;
-            font-size: 23px;
-            transition: color 0.3s ease;
-            font-family: "Mulish", sans-serif;
-            font-weight: 500;
-        }
-
-        .header a:hover {
-            color: #267946;
-        }
-
-        .header-logo>img {
-            margin: 0 auto;
-            height: 70px;
-            width: 100px;
-            display: flex;
-            margin-right: 350px;
-        }
-
-        .header-right>.lihka {
-            background: #00a3c400;
-            color: #246d3e;
-            border: 2px solid #246d3e;
-            border-radius: 50px;
-            font-family: "Mulish", sans-serif;
-            font-weight: 500;
-            border-radius: 50px;
-            padding: 10px;
-            font-size: 23px;
-            width: 200px;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -318,9 +88,7 @@ $user = getCurrentUser();
             const logoutBtn = document.getElementById('logoutBtn');
 
             logoutBtn.addEventListener('click', function() {
-                if (confirm('Вы уверены, что хотите выйти?')) {
-                    window.location.href = 'auth/logout.php';
-                }
+                window.location.href = 'auth/logout.php';
             });
             
             // Загрузка сохраненных туров

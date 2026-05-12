@@ -135,7 +135,7 @@ $pendingCount = $stmt->fetch()['count'];
                                 <?= $r['is_approved'] ? 'Скрыть' : 'Одобрить' ?>
                             </button>
                         </form>
-                        <a href="?delete=<?= $r['id'] ?>" class="admin-review-btn admin-review-btn-delete" onclick="return confirm('Удалить отзыв?')">
+                        <a href="?delete=<?= $r['id'] ?>" class="admin-review-btn admin-review-btn-delete">
                             <i class="bi bi-trash"></i> Удалить
                         </a>
                     </div>
