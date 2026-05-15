@@ -106,7 +106,7 @@ require_once 'includes/auth_functions.php';
 </html>
 <style>
     
-/* about */
+
 
 
 .container {
@@ -179,7 +179,6 @@ p {
 
 
 
-/* cartochki */
 
 
 .cartochki{
@@ -248,7 +247,7 @@ p {
 
 .cta-button {
     display: inline-block;
-    background-color: #1b5031;
+    background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
     color: white;
     padding: 12px 30px;
     border-radius: 30px;
@@ -262,7 +261,7 @@ p {
 }
 
 .cta-button:hover {
-    background-color: #1a5f7a;
+    background:  linear-gradient(135deg, #266d59 0%, #399741 100%);
     transform: scale(1.05);
 }
 

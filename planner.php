@@ -21,14 +21,14 @@ require_once 'includes/auth_functions.php';
             background: linear-gradient(135deg, #bcddff54, #98dbb8a1);
             padding-top: 90px;
         }
-        /* Planner Container */
+      
         .planner-container {
             max-width: 1400px;
             margin: 20px auto;
             padding: 0 20px;
         }
         
-        /* Info Block */
+       
         .info-block {
             background: white;
             border-radius: 24px;
@@ -127,7 +127,7 @@ require_once 'includes/auth_functions.php';
         }
         
         .map-btn:hover, .map-btn.active {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             border-color: transparent;
             color: white;
         }
@@ -164,7 +164,7 @@ require_once 'includes/auth_functions.php';
         }
         
         .category-tab:hover, .category-tab.active {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background:  linear-gradient(135deg, #266d59 0%, #3d9244 100%);
             border-color: transparent;
             color: white;
             transform: translateY(-2px);
@@ -204,7 +204,7 @@ require_once 'includes/auth_functions.php';
         }
         
         .category-tab.active {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background:  linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             border-color: transparent;
             color: white;
             box-shadow: 0 8px 25px rgba(46,141,83,0.35);
@@ -249,7 +249,7 @@ require_once 'includes/auth_functions.php';
         }
         
         .carousel-btn:hover {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background:  linear-gradient(135deg, #266d59 0%, #3fa147 100%);
             border-color: transparent;
             color: white;
             transform: scale(1.1);
@@ -268,7 +268,7 @@ require_once 'includes/auth_functions.php';
             color: #2e8d53;
         }
         
-        /* Carousel Container */
+
         .carousel-wrapper {
             position: relative;
             overflow: hidden;
@@ -321,7 +321,7 @@ require_once 'includes/auth_functions.php';
             position: absolute;
             top: 20px;
             right: 20px;
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background:  linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: white;
             padding: 10px 20px;
             border-radius: 30px;
@@ -483,7 +483,7 @@ require_once 'includes/auth_functions.php';
         }
         
         .btn-like:hover {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             border-color: transparent;
             color: white;
             box-shadow: 0 8px 25px rgba(46,141,83,0.45);
@@ -500,8 +500,7 @@ require_once 'includes/auth_functions.php';
             color: white;
             box-shadow: 0 8px 25px rgba(46,141,83,0.45);
         }
-        
-        /* Tooltip на кнопках */
+
         .card-action-btn::after {
             content: attr(data-tooltip);
             position: absolute;
@@ -526,7 +525,7 @@ require_once 'includes/auth_functions.php';
             transform: translateX(-50%) translateY(-8px);
         }
         
-        /* Stack Indicator */
+       
         .stack-indicator {
             text-align: center;
             color: #888;
@@ -535,7 +534,7 @@ require_once 'includes/auth_functions.php';
             margin-bottom: 15px;
         }
         
-        /* Selected Places */
+    
         .selected-places-section {
             background: white;
             border-radius: 24px;
@@ -573,7 +572,7 @@ require_once 'includes/auth_functions.php';
         }
         
         .place-number {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background:  linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: white;
             width: 32px;
             height: 32px;
@@ -597,9 +596,9 @@ require_once 'includes/auth_functions.php';
             transform: scale(1.2);
         }
         
-        /* Route Stats */
+  
         .route-stats {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: white;
             padding: 20px;
             border-radius: 16px;
@@ -623,7 +622,7 @@ require_once 'includes/auth_functions.php';
             opacity: 0.9;
         }
         
-        /* Action Buttons */
+  
         .action-buttons {
             display: flex;
             gap: 15px;
@@ -647,7 +646,7 @@ require_once 'includes/auth_functions.php';
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background:  linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: white;
         }
         
@@ -667,7 +666,6 @@ require_once 'includes/auth_functions.php';
             transform: translateY(-2px);
         }
         
-        /* Toast Notification */
         .toast-notification {
             position: fixed;
             bottom: 30px;
@@ -687,7 +685,7 @@ require_once 'includes/auth_functions.php';
             to { transform: translateX(0); opacity: 1; }
         }
         
-        /* Route Marker Styles */
+   
         .route-marker {
             background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
             color: white;
@@ -711,7 +709,7 @@ require_once 'includes/auth_functions.php';
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5253 100%);
         }
         
-        /* Responsive */
+      
         @media (max-width: 768px) {
             .header-left { width: auto; }
             .header-logo>img { margin-right: auto; }
@@ -768,7 +766,7 @@ require_once 'includes/auth_functions.php';
             }
         }
         
-        /* Footer */
+     
         footer {
             background-color: #ffffff;
             padding: 40px 0 20px;
@@ -796,9 +794,20 @@ require_once 'includes/auth_functions.php';
             font-size: 1.2rem;
             font-weight: 700;
         }
-        .contact-list { list-style: none; }
-        .contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; color: #666; }
-        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #e8ecf1; color: #666; }
+        
+        .contact-item { 
+            display: flex;
+             align-items: center; 
+             gap: 10px;
+             margin-bottom: 15px; 
+             color: #666; 
+            }
+        .footer-bottom { 
+            text-align: center;
+             padding-top: 20px; 
+             border-top: 1px solid #e8ecf1; 
+             color: #666; 
+            }
     </style>
 </head>
 <body>
@@ -955,7 +964,7 @@ require_once 'includes/auth_functions.php';
                         reviews: 342,
                         description: 'Авторская кухня с северным колоритом. Уютная атмосфера и лучшая пивная карта в городе.',
                         review: 'Лучший оленина в моей жизни! Обязательно попробуйте.',
-                        image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600',
+                        image: 'img/sever.webp',
                         price: '2500-4000 ₽'
                     },
                     {
@@ -967,7 +976,7 @@ require_once 'includes/auth_functions.php';
                         reviews: 218,
                         description: 'Современное бистро с европейской кухней. Отличный выбор вин и коктейлей.',
                         review: 'Прекрасное место для романтического вечера.',
-                        image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600',
+                        image: 'img/ambar.webp',
                         price: '1500-3000 ₽'
                     },
                     {
@@ -979,7 +988,7 @@ require_once 'includes/auth_functions.php';
                         reviews: 156,
                         description: 'Специальties кофе и домашняя выпечка. Идеальное место для утреннего кофе.',
                         review: 'Лучший капучино в Санкт-Петербурге!',
-                        image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600',
+                        image: 'img/zerno.jpg',
                         price: '300-800 ₽'
                     }
                 ],
@@ -993,7 +1002,7 @@ require_once 'includes/auth_functions.php';
                         reviews: 15420,
                         description: 'Один из крупнейших музеев мира. Коллекция насчитывает более 3 миллионов произведений искусства.',
                         review: 'Нужно минимум 3 дня, чтобы всё увидеть!',
-                        image: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=600',
+                        image: 'img/ermitag.jpg',
                         price: '500 ₽'
                     },
                     {
@@ -1005,7 +1014,7 @@ require_once 'includes/auth_functions.php';
                         reviews: 8934,
                         description: 'Крупнейшая коллекция русского искусства от древних икон до современного искусства.',
                         review: 'Бриллиант русской культуры.',
-                        image: 'https://images.unsplash.com/photo-1518972458042-16b6830324da?w=600',
+                        image: 'img/myzeirus.jpg',
                         price: '400 ₽'
                     }
                 ],
@@ -1019,7 +1028,7 @@ require_once 'includes/auth_functions.php';
                         reviews: 12543,
                         description: 'Парк в стиле барокко с огромным количеством достопримечательностей и прудов.',
                         review: 'Невероятно красивый парк в любое время года!',
-                        image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600',
+                        image: 'img/parkek.jpg',
                         price: 'Бесплатно'
                     },
                     {
@@ -1031,7 +1040,7 @@ require_once 'includes/auth_functions.php';
                         reviews: 3421,
                         description: 'Центральный городской парк с фонтанами и аллеями для прогулок.',
                         review: 'Отличное место для утренних пробежек.',
-                        image: 'https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?w=600',
+                        image: 'img/alexpark.jpg',
                         price: 'Бесплатно'
                     }
                 ],
@@ -1045,7 +1054,7 @@ require_once 'includes/auth_functions.php';
                         reviews: 18765,
                         description: 'Великолепный храм с уникальными мозаиками и архитектурой в русском стиле.',
                         review: 'Внутри ещё красивее, чем снаружи!',
-                        image: 'https://images.unsplash.com/photo-1564858051047-2f213095da05?w=600',
+                        image: 'img/spas.jpg',
                         price: '250 ₽'
                     },
                     {
@@ -1057,7 +1066,7 @@ require_once 'includes/auth_functions.php';
                         reviews: 21543,
                         description: 'Один из крупнейших соборов мира. Колоннада предлагает лучший вид на город.',
                         review: 'Восхитительная архитектура и история.',
-                        image: 'https://images.unsplash.com/photo-1548685913-fe654f120069?w=600',
+                        image: 'img/sobor.webp',
                         price: '300 ₽'
                     }
                 ],
@@ -1071,7 +1080,7 @@ require_once 'includes/auth_functions.php';
                         reviews: 2341,
                         description: 'Люксовый отель в центре города с богатой историей и безупречным сервисом.',
                         review: 'Пятизвёздочный сервис на высоте.',
-                        image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600',
+                        image: 'img/astoria.jpg',
                         price: 'от 15000 ₽/ночь'
                     }
                 ],
@@ -1085,116 +1094,224 @@ require_once 'includes/auth_functions.php';
                         reviews: 1876,
                         description: 'Популярная булочная с свежей выпечкой и кофе с собой.',
                         review: 'Круассаны просто божественные!',
-                        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600',
+                        image: 'img/bylka.jpg',
                         price: '200-600 ₽'
                     }
                 ]
             },
-            'japan': {
-                center: [35.6762, 139.6503],
-                zoom: 10,
+            'kaliningrad': {
+                center: [54.7104, 20.5110],
+                zoom: 12,
                 restaurants: [
                     {
                         id: 1,
-                        name: 'Ресторан "Суши Мастер"',
-                        location: 'Токио, район Гиндза',
-                        coords: [35.6719, 139.7650],
+                        name: 'Ресторан "Финка"',
+                        location: 'пр. Мира, 8',
+                        coords: [54.7127, 20.5095],
                         rating: 4.8,
-                        reviews: 542,
-                        description: 'Традиционные суши и сашими от шеф-повара.',
-                        review: 'Лучшие суши в Токио!',
-                        image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=600',
-                        price: '5000-10000 ¥'
+                        reviews: 854,
+                        description: 'Авторская кухня с калининградской спецификой. Свежие морепродукты и местные деликатесы.',
+                        review: 'Лучшие рыбные блюда в городе!',
+                        image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600',
+                        price: '2000-4000 ₽'
+                    },
+                    {
+                        id: 2,
+                        name: 'Рыбная деревня',
+                        location: 'наб. Петра Великого',
+                        coords: [54.7104, 20.5200],
+                        rating: 4.6,
+                        reviews: 1243,
+                        description: 'Традиционные рыбные блюда в атмосферном месте у реки.',
+                        review: 'Свежая рыба и отличная атмосфера!',
+                        image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600',
+                        price: '1500-3000 ₽'
                     }
                 ],
                 museums: [
                     {
                         id: 101,
-                        name: 'Национальный музей Токио',
-                        location: 'Парк Уэно',
-                        coords: [35.7188, 139.7767],
+                        name: 'Музей Мирового океана',
+                        location: 'наб. Петра Великого, 1',
+                        coords: [54.7136, 20.5226],
+                        rating: 4.9,
+                        reviews: 12421,
+                        description: 'Крупнейший морской музей России. Корабли, подводная лодка, планетарий.',
+                        review: 'Нужен целый день, чтобы всё осмотреть!',
+                        image: 'https://images.unsplash.com/photo-1569407713080-7e4a5e218d87?w=600',
+                        price: '500 ₽'
+                    },
+                    {
+                        id: 102,
+                        name: 'Дом Канта',
+                        location: 'остров Канта, 1',
+                        coords: [54.7189, 20.5235],
                         rating: 4.7,
-                        reviews: 3421,
-                        description: 'Крупнейшая коллекция японского искусства.',
-                        review: 'Невероятная экспозиция!',
-                        image: 'https://images.unsplash.com/photo-1524413840807-0c3cb6fa165d?w=600',
-                        price: '1000 ¥'
+                        reviews: 3241,
+                        description: 'Музей великого философа Иммануила Канта в историческом здании.',
+                        review: 'Интересная экспозиция о жизни и философии Канта.',
+                        image: 'https://images.unsplash.com/photo-1580040398138-6f470fc880b7?w=600',
+                        price: '300 ₽'
+                    },
+                    {
+                        id: 103,
+                        name: 'Калининградский художественный музей',
+                        location: 'пр. Мира, 22',
+                        coords: [54.7095, 20.5080],
+                        rating: 4.6,
+                        reviews: 2156,
+                        description: 'Коллекция русского и западноевропейского искусства, местная живопись.',
+                        review: 'Отличная галерея с приятной атмосферой.',
+                        image: 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=600',
+                        price: '400 ₽'
                     }
                 ],
                 parks: [
                     {
                         id: 201,
-                        name: 'Парк Уэно',
-                        location: 'Токио',
-                        coords: [35.7148, 139.7739],
-                        rating: 4.8,
-                        reviews: 12543,
-                        description: 'Знаменитый парк с сакурой весной.',
-                        review: 'Лучшее место для ханами!',
-                        image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600',
+                        name: 'Парк Юности',
+                        location: 'ул. А. Невского, 42',
+                        coords: [54.6950, 20.5300],
+                        rating: 4.5,
+                        reviews: 4521,
+                        description: 'Один из крупнейших парков города с аттракционами, прудом и зонами отдыха.',
+                        review: 'Отличное место для семейного отдыха!',
+                        image: 'https://images.unsplash.com/photo-1496065180762-6af07237a2cc?w=600',
+                        price: 'Бесплатно'
+                    },
+                    {
+                        id: 202,
+                        name: 'Лесной парк',
+                        location: 'ул. Лесная',
+                        coords: [54.7250, 20.4950],
+                        rating: 4.7,
+                        reviews: 2341,
+                        description: 'Уютный парк в лесной зоне с тропами для прогулок и беговыми дорожками.',
+                        review: 'Идеально для утренних пробежек и прогулок.',
+                        image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600',
                         price: 'Бесплатно'
                     }
                 ],
                 attractions: [
                     {
                         id: 301,
-                        name: 'Храм Сэнсо-дзи',
-                        location: 'Асакуса',
-                        coords: [35.7148, 139.7967],
+                        name: 'Кёнигсбергский собор',
+                        location: 'остров Канта, 1',
+                        coords: [54.7192, 20.5242],
                         rating: 4.9,
-                        reviews: 25432,
-                        description: 'Древнейший храм Токио.',
-                        review: 'Великолепная атмосфера!',
-                        image: 'https://images.unsplash.com/photo-1528360983277-13d9b152c6d4?w=600',
+                        reviews: 18765,
+                        description: 'Великолепный готический собор XIII века. Могила философа Канта.',
+                        review: 'Величественная архитектура и богатая история!',
+                        image: 'https://images.unsplash.com/photo-1548625361-987716b31d7d?w=600',
+                        price: 'Бесплатно'
+                    },
+                    {
+                        id: 302,
+                        name: 'Форт №5 "Король Фридрих-Вильгельм III"',
+                        location: 'ул. Генерала Оленичева',
+                        coords: [54.6820, 20.4750],
+                        rating: 4.8,
+                        reviews: 5432,
+                        description: 'Сохранившийся форт XIX века. Музей военной истории и подземные ходы.',
+                        review: 'Уникальный исторический памятник!',
+                        image: 'https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?w=600',
+                        price: '350 ₽'
+                    },
+                    {
+                        id: 303,
+                        name: 'Африка',
+                        location: 'ул. Дмитрия Онуфриева, 7',
+                        coords: [54.7280, 20.5350],
+                        rating: 4.6,
+                        reviews: 3214,
+                        description: 'Уникальный комплекс зданий в стиле африканской архитектуры.',
+                        review: 'Необычное и красивое место!',
+                        image: 'https://images.unsplash.com/photo-1558250234-29b070c34c84?w=600',
+                        price: 'Бесплатно'
+                    },
+                    {
+                        id: 304,
+                        name: 'Зелёный мост',
+                        location: 'река Преголя',
+                        coords: [54.7070, 20.5150],
+                        rating: 4.4,
+                        reviews: 1876,
+                        description: 'Исторический мост через реку Преголю с панорамными видами.',
+                        review: 'Отличное место для фотографий!',
+                        image: 'https://images.unsplash.com/photo-1565102324686-42af581f0f8f?w=600',
                         price: 'Бесплатно'
                     }
                 ],
                 hotels: [
                     {
                         id: 401,
-                        name: 'Отель "Цукишира"',
-                        location: 'Токио',
-                        coords: [35.6654, 139.7830],
-                        rating: 4.6,
-                        reviews: 1876,
-                        description: 'Современный отель в центре.',
-                        review: 'Отличный сервис!',
+                        name: 'Royal Hotel',
+                        location: 'ул. А. Невского, 34',
+                        coords: [54.6980, 20.5200],
+                        rating: 4.7,
+                        reviews: 1543,
+                        description: 'Современный отель в центре города с комфортными номерами.',
+                        review: 'Отличный сервис и удобное расположение!',
                         image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600',
-                        price: 'от 15000 ¥/ночь'
+                        price: 'от 5000 ₽/ночь'
+                    },
+                    {
+                        id: 402,
+                        name: 'Хаятт Ридженци Калининград',
+                        location: 'ул. Октябрьская, 2',
+                        coords: [54.7050, 20.5080],
+                        rating: 4.8,
+                        reviews: 2341,
+                        description: 'Премиум отель в историческом здании с спа-центром и рестораном.',
+                        review: 'Пятизвёздочный сервис на высоте!',
+                        image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600',
+                        price: 'от 10000 ₽/ночь'
                     }
                 ],
                 cafes: [
                     {
                         id: 501,
-                        name: 'Кафе "Антенна"',
-                        location: 'Сибуя',
-                        coords: [35.6595, 139.7004],
-                        rating: 4.5,
+                        name: 'Кофемания',
+                        location: 'ул. Профессора Баранова, 8',
+                        coords: [54.7115, 20.5105],
+                        rating: 4.6,
                         reviews: 987,
-                        description: 'Традиционные японские десерты.',
-                        review: 'Вкусный моти!',
-                        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600',
-                        price: '500-1500 ¥'
+                        description: 'Сеть популярных кофеен с авторским кофе и десертами.',
+                        review: 'Лучший кофе в городе!',
+                        image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600',
+                        price: '300-800 ₽'
+                    },
+                    {
+                        id: 502,
+                        name: 'Кафе "Рыбачий кот"',
+                        location: 'наб. Петра Великого',
+                        coords: [54.7108, 20.5195],
+                        rating: 4.5,
+                        reviews: 765,
+                        description: 'Уютное кафе с видом на реку и рыбой в меню.',
+                        review: 'Отличный вид и вкусная рыба!',
+                        image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600',
+                        price: '400-1000 ₽'
                     }
                 ]
             }
         };
 
-        // Инициализация
+// Инициализация
         document.addEventListener('DOMContentLoaded', function() {
             // Получаем данные из localStorage
             const savedData = JSON.parse(localStorage.getItem('selected_city'));
             const cityId = savedData?.cityId || 'saint-petersburg';
-            const city = placesData[cityId];
+            const city = placesData[cityId] || placesData['saint-petersburg'];
             
             // Заполняем информацию о поездке
             if (savedData) {
-                document.getElementById('cityName').textContent = savedData.cityName || 'Санкт-Петербург';
+                document.getElementById('cityName').textContent = savedData.cityName || 'Калининград';
                 document.getElementById('travelersCount').textContent = (savedData.travelers || '1') + ' чел.';
                 document.getElementById('budgetAmount').textContent = (savedData.budgetFormatted || '30 000') + ' ₽';
                 document.getElementById('travelDates').textContent = savedData.dates || 'не выбраны';
             } else {
-                document.getElementById('cityName').textContent = 'Санкт-Петербург';
+                document.getElementById('cityName').textContent = 'Калининград';
             }
             
             let map;
@@ -1226,15 +1343,16 @@ require_once 'includes/auth_functions.php';
                 map.routeMarkers = [];
             }
             
-            // Инициализация карточек
+// Инициализация карточек
             function initCards() {
+                const currentCityData = placesData[cityId] || placesData['saint-petersburg'];
                 allPlaces = [
-                    ...placesData[cityId].restaurants.map(p => ({...p, category: 'restaurants'})),
-                    ...placesData[cityId].museums.map(p => ({...p, category: 'museums'})),
-                    ...placesData[cityId].parks.map(p => ({...p, category: 'parks'})),
-                    ...placesData[cityId].attractions.map(p => ({...p, category: 'attractions'})),
-                    ...placesData[cityId].hotels.map(p => ({...p, category: 'hotels'})),
-                    ...placesData[cityId].cafes.map(p => ({...p, category: 'cafes'}))
+                    ...currentCityData.restaurants.map(p => ({...p, category: 'restaurants'})),
+                    ...currentCityData.museums.map(p => ({...p, category: 'museums'})),
+                    ...currentCityData.parks.map(p => ({...p, category: 'parks'})),
+                    ...currentCityData.attractions.map(p => ({...p, category: 'attractions'})),
+                    ...currentCityData.hotels.map(p => ({...p, category: 'hotels'})),
+                    ...currentCityData.cafes.map(p => ({...p, category: 'cafes'}))
                 ];
                 
                 cardStack = [...allPlaces];
@@ -1577,12 +1695,14 @@ require_once 'includes/auth_functions.php';
                 
                 let savedRoutes = JSON.parse(localStorage.getItem('saved_routes')) || [];
                 savedRoutes.push({
+                    id: null, // null означает, что это маршрут из конструктора
                     name: `Маршрут - ${new Date().toLocaleDateString('ru-RU')}`,
                     places: selectedPlaces,
-                    date: new Date().toISOString()
+                    date: new Date().toISOString(),
+                    source: 'planner' // источник: конструктор маршрутов
                 });
                 localStorage.setItem('saved_routes', JSON.stringify(savedRoutes));
-                showNotification('✓ Маршрут сохранён!');
+                showNotification('✓ Маршрут сохранён в личный кабинет!');
             });
             
             // Фильтрация карты

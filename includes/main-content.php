@@ -50,9 +50,6 @@
                             <button class="city-option" data-city="kaliningrad">
                                 <i class="bi bi-tree"></i> Калининград
                             </button>  
-                            <button class="city-option" data-city="japan">
-                                <i class="bi bi-flag"></i> Япония
-                            </button>
                             <button class="city-option" data-city="moscow">
                                 <i class="bi bi-star"></i> Москва
                             </button>
@@ -239,39 +236,39 @@
         <!-- Ряд 1 -->
         <div class="stat-card">
             <div class="stat-icon">
-                <i class="bi bi-calendar-check"></i>
+                <i  style="color: #236938;" class="bi bi-calendar-check"></i>
             </div>
-            <div class="stat-value" id="statDuration">6 дней</div>
-            <div class="stat-label">Рекомендуемая длительность</div>
-            <div class="stat-desc" id="statDurationDesc">максимальное комфортное число дней</div>
+            <div  style="color: #236938;" class="stat-value" id="statDuration">6 дней</div>
+            <div  style="color: #236938;" class="stat-label">Рекомендуемая длительность</div>
+            <div  style="color:black;" class="stat-desc" id="statDurationDesc">максимальное комфортное число дней</div>
         </div>
 
         <div class="stat-card">
             <div class="stat-icon">
-                <i class="bi bi-chat-dots"></i>
+                <i  style="color: #236938;" class="bi bi-chat-dots"></i>
             </div>
-            <div class="stat-value" id="statReviews">85+</div>
-            <div class="stat-label">Отзывы клиентов</div>
-            <div class="stat-desc">положительных отзывов о турах</div>
+            <div  style="color: #236938;" class="stat-value" id="statReviews">85+</div>
+            <div  style="color: #236938;" class="stat-label">Отзывы клиентов</div>
+            <div style="color:black;" class="stat-desc">положительных отзывов о турах</div>
         </div>
 
         <div class="stat-card">
             <div class="stat-icon">
-                <i class="bi bi-star-fill"></i>
+                <i  style="color: #236938;" class="bi bi-star-fill"></i>
             </div>
-            <div class="stat-value" id="statRating">8.7</div>
-            <div class="stat-label">Уровень удовлетворенности</div>
-            <div class="stat-desc">средняя оценка туров (из 10)</div>
+            <div  style="color: #236938;" class="stat-value" id="statRating">8.7</div>
+            <div  style="color: #236938;" class="stat-label">Уровень удовлетворенности</div>
+            <div  style="color:black;" class="stat-desc">средняя оценка туров (из 10)</div>
         </div>
 
         <!-- Ряд 2 -->
         <div class="stat-card">
             <div class="stat-icon">
-                <i class="bi bi-graph-up"></i>
+                <i  style="color: #236938;" class="bi bi-graph-up"></i>
             </div>
-            <div class="stat-value" id="statFillRate">65%</div>
-            <div class="stat-label">Заполненность туров</div>
-            <div class="stat-desc">туров заполнены на ближайший месяц</div>
+            <div style="color: #236938;" class="stat-value" id="statFillRate">65%</div>
+            <div style="color: #236938;" class="stat-label">Заполненность туров</div>
+            <div style="color:black;" class="stat-desc">туров заполнены на ближайший месяц</div>
             <div class="stat-bars">
                 <div class="stat-bar">
                     <span>Весна</span>
@@ -293,11 +290,11 @@
 
         <div class="stat-card">
             <div class="stat-icon">
-                <i class="bi bi-pie-chart"></i>
+                <i  style="color: #236938;" class="bi bi-pie-chart"></i>
             </div>
-            <div class="stat-value" id="statTopCategory">Город 42%</div>
-            <div class="stat-label">Предпочтения туристов</div>
-            <div class="stat-desc">распределение по типам туров</div>
+            <div  style="color: #236938;" class="stat-value" id="statTopCategory">Город 42%</div>
+            <div  style="color: #236938;" class="stat-label">Предпочтения туристов</div>
+            <div style="color:black;" class="stat-desc">распределение по типам туров</div>
             <div class="stat-pie" id="categoriesPie">
                 <div class="pie-item">
                     <div class="pie-color" style="background: #29e486"></div>
@@ -308,7 +305,7 @@
                     <span id="pieCategory2">Поселки 28%</span>
                 </div>
                 <div class="pie-item">
-                    <div class="pie-color" style="background: #1e7036"></div>
+                    <div class="pie-color" style="background: #183621"></div>
                     <span id="pieCategory3">Область 30%</span>
                 </div>
             </div>
@@ -316,16 +313,16 @@
 
         <div class="stat-card">
             <div class="stat-icon">
-                <i class="bi bi-check-circle"></i>
+                <i  style="color: #236938;" class="bi bi-check-circle"></i>
             </div>
-            <div class="stat-value">Критерии выбора</div>
-            <div class="stat-label">Что важно для туристов</div>
-            <ul class="criteria-list">
-                <li><i class="bi bi-check-lg"></i> Соответствие цены и качества</li>
-                <li><i class="bi bi-check-lg"></i> Положительные отзывы</li>
-                <li><i class="bi bi-check-lg"></i> Комфортные условия</li>
-                <li><i class="bi bi-check-lg"></i> Интересная программа</li>
-                <li><i class="bi bi-check-lg"></i> Безопасность и надежность</li>
+            <div  style="color: #236938;" class="stat-value">Критерии выбора</div>
+            <div  style="color: #236938;" class="stat-label">Что важно для туристов</div>
+            <ul  class="criteria-list">
+                <li style="color:black;"><i  class="bi bi-check-lg"></i> Соответствие цены и качества</li>
+                <li style="color:black;"><i  class="bi bi-check-lg"></i> Положительные отзывы</li>
+                <li style="color:black;"><i  class="bi bi-check-lg"></i> Комфортные условия</li>
+                <li style="color:black;"><i  class="bi bi-check-lg"></i> Интересная программа</li>
+                <li style="color:black;"><i  class="bi bi-check-lg"></i> Безопасность и надежность</li>
             </ul>
         </div>
     </div>

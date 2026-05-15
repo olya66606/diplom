@@ -304,7 +304,7 @@ body{
 }
 
 .step.active {
-    background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+    background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
     color: white;
     box-shadow: 0 5px 15px rgba(46,141,83,0.3);
 }
@@ -379,7 +379,7 @@ body{
 }
 
 .city-option.selected, .travelers-option.selected, .interest-option.selected {
-    background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+    background:  linear-gradient(135deg, #266d59 0%, #3a8340 100%);
     border-color: transparent;
     color: white;
     box-shadow: 0 5px 15px rgba(46,141,83,0.3);
@@ -658,7 +658,7 @@ body{
 }
 
 .tour-badge {
-    background: linear-gradient(135deg, #265a3a 0%, #337a76 100%);
+    background:  linear-gradient(135deg, #266d59 0%, #3a8340 100%);
     color: white;
     padding: 6px 16px;
     border-radius: 30px;
@@ -826,7 +826,7 @@ body.modal-open {
 }
 
 .modal-header-custom {
-    background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+    background:  linear-gradient(135deg, #266d59 0%, #3a8340 100%);
     padding: 30px 35px 25px;
     text-align: center;
 }
@@ -888,7 +888,7 @@ body.modal-open {
 }
 
 .modal-btn-primary {
-    background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+    background:  linear-gradient(135deg, #266d59 0%, #3a8340 100%);
     color: white;
     border: none;
     box-shadow: 0 5px 15px rgba(46,141,83,0.3);
@@ -949,7 +949,7 @@ body.modal-open {
 }
 
 .modal-content h3 {
-    color: #1b5031;
+    color: #ffffff;
     margin-bottom: 20px;
     font-size: 1.5rem;
 }
@@ -1250,21 +1250,18 @@ body.modal-open {
 
 .stat-icon {
     font-size: 2.5rem;
-    color: #1b5031;
     margin-bottom: 20px;
 }
 
 .stat-value {
     font-size: 2.5rem;
     font-weight: 800;
-    color: #2e8d53;
     margin-bottom: 10px;
 }
 
 .stat-label {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #333;
     margin-bottom: 8px;
 }
 
@@ -1290,7 +1287,7 @@ body.modal-open {
 .stat-bar span:first-child {
     width: 45px;
     font-weight: 600;
-    color: #555;
+   
 }
 
 .stat-bar .bar {
@@ -1303,7 +1300,7 @@ body.modal-open {
 
 .stat-bar .bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #2e8d53, #4ecdc4);
+    background:  linear-gradient(135deg, #266d59 0%, #3d9444 100%);
     border-radius: 10px;
 }
 
@@ -1524,7 +1521,7 @@ body.modal-open {
 
         .newsletter-btn {
             padding: 12px 15px;
-            background-color:  #3a805f;
+            background:  linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: #264436;
             border: none;
             border-radius: 4px;
@@ -2247,7 +2244,7 @@ body.modal-open {
 }
 
 .tour-modal-meta .tour-badge {
-    background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+    background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
     padding: 6px 16px;
     border-radius: 20px;
     font-size: 0.9rem;
@@ -2326,7 +2323,7 @@ body.modal-open {
     gap: 15px;
     margin: 30px 0;
     padding: 20px;
-    background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+    background:  linear-gradient(135deg, #266d59 0%, #3a8340 100%);
     border-radius: 16px;
     color: white;
 }
@@ -2376,7 +2373,7 @@ body.modal-open {
 }
 
 .tour-modal-btn-save {
-    background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+    background:  linear-gradient(135deg, #266d59 0%, #3a8340 100%);
     color: white;
 }
 

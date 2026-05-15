@@ -113,59 +113,59 @@ const toursData = {
                     difficulty: 'Средний'
                 }
             ],
-            'japan': [
+            'kaliningrad': [
                 {
                     id: 7,
-                    title: 'Токио - Сердце Японии',
-                    image: 'img/tokio.webp',
-                    location: 'Токио, Япония',
-                    rating: 4.9,
-                    reviews: 234,
-                    description: 'Погрузитесь в мир неоновых огней, древних храмов и современной культуры.',
-                    price: '85000',
-                    duration: 7,
+                    title: 'Калининград - Наследие Восточной Пруссии',
+                    image: 'img/kaliningrad1.jpg',
+                    location: 'Калининград',
+                    rating: 4.8,
+                    reviews: 456,
+                    description: 'Уникальный город на стыке европейской и российской культуры. Собор, форты, янтарь.',
+                    price: '25000',
+                    duration: 3,
                     badge: 'Популярный',
-                    places: ['Храм Сэнсо-дзи', 'Башня Токио', 'Район Шибуя', 'Императорский дворец'],
-                    includes: ['Проживание в отеле 4*', 'Экскурсии с гидом', 'Входные билеты', 'Обеды'],
-                    schedule: ['День 1: Прибытие в Токио, Кремль', 'День 2: Шибуя и Харадзюку', 'День 3: Отправление'],
-                    totalTime: '16-18 часов',
+                    places: ['Кёнигсбергский собор', 'Форт №5', 'Музей Мирового океана', 'Остров Канта'],
+                    includes: ['Проживание в отеле 3*', 'Экскурсии с гидом', 'Входные билеты', 'Завтраки'],
+                    schedule: ['День 1: Собор и остров Канта', 'День 2: Музей Мирового океана', 'День 3: Форт №5'],
+                    totalTime: '18-20 часов',
                     groupSize: 'до 15 человек',
                     difficulty: 'Легкий'
                 },
                 {
                     id: 8,
-                    title: 'Киото - Древняя столица',
-                    image: 'img/kioto.jpg',
-                    location: 'Киото, Япония',
+                    title: 'Янтарный край - Полное погружение',
+                    image: 'img/kaliningrad2.jpg',
+                    location: 'Калининград и область',
                     rating: 4.9,
-                    reviews: 198,
-                    description: 'Тысячи храмов, сады дзен и район гейш Гион.',
-                    price: '95000',
-                    duration: 7,
+                    reviews: 378,
+                    description: 'Куршская коса, янтарный завод, форты и соборы. Полное погружение в историю региона.',
+                    price: '35000',
+                    duration: 4,
                     badge: 'Хит',
-                    places: ['Золотой павильон', 'Бамбуковый лес', 'Храм Фусими Инари', 'Район Гион'],
-                    includes: ['Проживание 4*', 'Трансфер', 'Экскурсии с гидом', 'Питание'],
-                    schedule: ['День 1: Храмы Киото', 'День 2: Бамбуковый лес', 'День 3: Музеи', 'День 4: Отправление'],
-                    totalTime: '20-22 часа',
+                    places: ['Куршская коса', 'Янтарный завод', 'Зелёный мост', 'Форт №11'],
+                    includes: ['Проживание 3*', 'Трансфер', 'Экскурсии с гидом', 'Питание'],
+                    schedule: ['День 1: Куршская коса', 'День 2: Янтарь и заводы', 'День 3: Форты города', 'День 4: Отправление'],
+                    totalTime: '22-24 часа',
                     groupSize: 'до 12 человек',
                     difficulty: 'Средний'
                 },
                 {
                     id: 9,
-                    title: 'Осака - Кухня Японии',
-                    image: 'img/osaka.jpg',
-                    location: 'Осака, Япония',
-                    rating: 4.8,
-                    reviews: 176,
-                    description: 'Уличная еда, современный шопинг и замок Осаки.',
-                    price: '78000',
-                    duration: 6,
-                    badge: 'Гастрономический',
-                    places: ['Замок Осаки', 'Район Дотонбори', 'Аквариум', 'Университетский район'],
-                    includes: ['Проживание', 'Трансфер на автобусе', 'Экскурсии', 'Трапеза в ресторане'],
-                    schedule: ['День 1: Замок Осаки', 'День 2: Дотонбори'],
-                    totalTime: '14-16 часов',
-                    groupSize: 'до 20 человек',
+                    title: 'Военная история Калининграда',
+                    image: 'img/kaliningrad3.jpg',
+                    location: 'Калининград',
+                    rating: 4.7,
+                    reviews: 289,
+                    description: 'Система фортов Кёнигсберга, бункеры и военная архитектура.',
+                    price: '22000',
+                    duration: 3,
+                    badge: 'Эксклюзивный',
+                    places: ['Форт №5', 'Форт №11', 'Башня Врангеля', 'Замковый холм'],
+                    includes: ['Проживание', 'Трансфер на автобусе', 'Экскурсии с военным историком', 'Трапеза в ресторане'],
+                    schedule: ['День 1: Форт №5 и №11', 'День 2: Башни города', 'День 3: Замок и отправление'],
+                    totalTime: '16-18 часов',
+                    groupSize: 'до 10 человек',
                     difficulty: 'Средний'
                 }
             ]
@@ -176,7 +176,6 @@ function getCityDisplayName(cityId) {
     const cities = {
         'saint-petersburg': 'Санкт-Петербург',
         'kaliningrad': 'Калининград',
-        'japan': 'Япония',
     };
     return cities[cityId] || 'Санкт-Петербург';
 }
@@ -1246,15 +1245,17 @@ function showTourDetails(tourId) {
 }
 
 function saveTour(tourId) {
+    // Проверяем авторизацию
     fetch('/api/check_auth.php')
         .then(response => response.json())
         .then(data => {
             if (!data.authenticated) {
-                alert('Пожалуйста, войдите в аккаунт, чтобы сохранить тур');
-                window.location.href = 'auth/login.php';
+                // Если не авторизован, сохраняем в localStorage
+                saveTourToLocal(tourId);
                 return;
             }
             
+            // Если авторизован, сохраняем через API
             const allTours = Object.values(toursData).flat();
             const tour = allTours.find(t => t.id === tourId);
             if (!tour) return;
@@ -1273,12 +1274,80 @@ function saveTour(tourId) {
             .then(response => response.json())
             .then(result => {
                 if (result.success) {
-                  
+                    // Также сохраняем в localStorage для резерва
+                    saveTourToLocal(tourId);
+                    showTourNotification('Тур сохранён в личном кабинете!');
                 } else {
-                   
+                    // Если API не работает, сохраняем в localStorage
+                    saveTourToLocal(tourId);
+                    showTourNotification('Тур сохранён (локально)');
                 }
             })
-            .catch(error => alert('Ошибка при сохранении'));
+            .catch(error => {
+                // При ошибке сохраняем в localStorage
+                saveTourToLocal(tourId);
+                showTourNotification('Тур сохранён (локально)');
+            });
         })
-        .catch(error => alert('Ошибка проверки авторизации'));
+        .catch(error => {
+            // Если не можем проверить авторизацию, сохраняем в localStorage
+            saveTourToLocal(tourId);
+            showTourNotification('Тур сохранён (локально)');
+        });
+}
+
+// Сохранение тура в localStorage
+function saveTourToLocal(tourId) {
+    const allTours = Object.values(toursData).flat();
+    const tour = allTours.find(t => t.id === tourId);
+    if (!tour) return;
+    
+    let savedTours = JSON.parse(localStorage.getItem('saved_routes')) || [];
+    
+    // Проверяем, нет ли уже такого тура
+    const exists = savedTours.find(t => t.id === tourId);
+    if (exists) {
+        showTourNotification('Тур уже сохранён!', true);
+        return;
+    }
+    
+    // Добавляем тур
+    savedTours.push({
+        id: tour.id,
+        name: tour.title,
+        image: tour.image,
+        price: tour.price,
+        duration: tour.duration,
+        places: tour.places || [],
+        date: new Date().toISOString(),
+        source: 'main-page' // источник: главная страница
+    });
+    
+    localStorage.setItem('saved_routes', JSON.stringify(savedTours));
+    showTourNotification('Тур сохранён в личный кабинет!');
+}
+
+// Уведомление о сохранении
+function showTourNotification(message) {
+    // Удаляем старые уведомления
+    const oldNotifications = document.querySelectorAll('.tour-save-notification');
+    oldNotifications.forEach(n => n.remove());
+    
+    const notification = document.createElement('div');
+    notification.className = 'tour-save-notification';
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        z-index: 9999;
+        animation: slideIn 0.3s ease;
+    `;
+    notification.innerHTML = `<i class="bi bi-check-circle-fill"></i> ${message}`;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 3000);
 }

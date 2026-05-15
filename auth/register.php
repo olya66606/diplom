@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Mulish', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background:  linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -63,10 +63,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             padding: 40px;
             width: 100%;
-            max-width: 450px;
+            max-width: 550px;
             animation: fadeIn 0.5s ease;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn {
+             from { 
+                opacity: 0; 
+                transform: translateY(-20px); 
+            } 
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            } 
+        }
         h2 {
             color: #1b5031;
             margin-bottom: 30px;
