@@ -69,7 +69,7 @@ if (isset($_GET['edit'])) {
         .admin-form-group input:focus, .admin-form-group select:focus, .admin-form-group textarea:focus { border-color: #2e8d53; outline: none; box-shadow: 0 0 0 3px rgba(46,141,83,0.1); }
         .admin-form-group textarea { height: 100px; resize: vertical; }
         .admin-btn { padding: 14px 32px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: 'Mulish', sans-serif; display: inline-flex; align-items: center; gap: 10px; font-size: 1rem; border: none; text-decoration: none; }
-        .admin-btn-success { background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%); color: white; }
+        .admin-btn-success { background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);color: white; }
         .admin-btn-success:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(46,141,83,0.4); }
         .admin-btn-secondary { background: #f8f9fc; color: #666; border: 2px solid #e8ecf1; }
         .admin-btn-secondary:hover { background: #e8ecf1; transform: translateY(-2px); }
@@ -81,7 +81,7 @@ if (isset($_GET['edit'])) {
         .admin-table td { padding: 18px 15px; border-bottom: 1px solid #e8ecf1; color: #555; font-size: 0.95rem; }
         .admin-table tr:hover { background: #f8f9fc; }
         .card-status { padding: 6px 16px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; }
-        .card-status-active { background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%); color: white; }
+        .card-status-active { background: linear-gradient(135deg, #266d59 0%, #3a8340 100%); color: white; }
         .card-status-inactive { background: #f0f2f5; color: #999; }
         .card-actions { display: flex; gap: 10px; }
         .card-action-btn { width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; font-size: 1.1rem; }

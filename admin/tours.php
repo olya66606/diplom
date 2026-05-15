@@ -183,7 +183,7 @@ if (isset($_GET['edit'])) {
         }
         
         .admin-btn-success {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: white;
         }
         
@@ -193,7 +193,7 @@ if (isset($_GET['edit'])) {
         }
         
         .admin-btn-primary {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: white;
         }
         

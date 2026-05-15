@@ -15,10 +15,6 @@ $usersCount = $stmt->fetch()['count'];
 $stmt = $pdo->query("SELECT COUNT(*) as count FROM tours");
 $toursCount = $stmt->fetch()['count'];
 
-// Количество отзывов на модерации
-$stmt = $pdo->query("SELECT COUNT(*) as count FROM reviews WHERE is_approved = 0");
-$reviewsPending = $stmt->fetch()['count'];
-
 // Последние регистрации
 $stmt = $pdo->query("SELECT id, name, email, role, created_at FROM users ORDER BY created_at DESC LIMIT 5");
 $recentUsers = $stmt->fetchAll();
@@ -96,7 +92,7 @@ $recentUsers = $stmt->fetchAll();
         }
         
         .admin-stat-icon.green {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background:linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: white;
         }
         
@@ -168,7 +164,7 @@ $recentUsers = $stmt->fetchAll();
             justify-content: center;
             gap: 15px;
             padding: 30px 20px;
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: white;
             text-decoration: none;
             border-radius: 20px;
@@ -223,7 +219,7 @@ $recentUsers = $stmt->fetchAll();
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: white;
             display: flex;
             align-items: center;
@@ -282,7 +278,7 @@ $recentUsers = $stmt->fetchAll();
         }
         
         .admin-nav-btn-primary {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: white;
         }
         
@@ -363,11 +359,11 @@ $recentUsers = $stmt->fetchAll();
             
             <div class="admin-stat-card">
                 <div class="admin-stat-icon orange">
-                    <i class="bi bi-chat-dots-fill"></i>
+                    <i class="bi bi-journal-text"></i>
                 </div>
                 <div class="admin-stat-content">
-                    <div class="admin-stat-value"><?= $reviewsPending ?></div>
-                    <div class="admin-stat-label">Отзывов на модерации</div>
+                    <div class="admin-stat-value" id="adminStoriesCount">—</div>
+                    <div class="admin-stat-label"> Истории мод</div>
                 </div>
             </div>
             
@@ -403,59 +399,12 @@ $recentUsers = $stmt->fetchAll();
                     <span>Пользователи</span>
                 </a>
                 <a href="reviews.php" class="admin-action-btn">
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span>Модерация отзывов</span>
+                    <i class="bi bi-journal-text"></i>
+                    <span>Модерация историй</span>
                 </a>
-            </div>
-        </div>
-
-        <div class="admin-section">
-            <div class="admin-section-header">
-                <h2 class="admin-section-title">
-                    <i class="bi bi-clock-history"></i> Последние пользователи
-                </h2>
-                <p class="admin-section-subtitle">Недавно зарегистрировавшиеся</p>
-            </div>
-            <div style="overflow-x: auto;">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Пользователь</th>
-                            <th>Email</th>
-                            <th>Роль</th>
-                            <th>Дата регистрации</th>
-                            <th>Действия</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($recentUsers as $u): ?>
-                        <tr>
-                            <td><?= $u['id'] ?></td>
-                            <td>
-                                <div class="admin-user-info">
-                                    <div class="admin-user-avatar">
-                                        <?= strtoupper(substr($u['name'], 0, 1)) ?>
-                                    </div>
-                                    <div>
-                                        <div class="admin-user-name"><?= htmlspecialchars($u['name']) ?></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="admin-user-email"><?= htmlspecialchars($u['email']) ?></td>
-                            <td>
-                                <span class="admin-role-badge admin-role-badge-<?= $u['role'] ?>">
-                                    <?= $u['role'] === 'admin' ? 'Админ' : 'Пользователь' ?>
-                                </span>
-                            </td>
-                            <td><?= date('d.m.Y H:i', strtotime($u['created_at'])) ?></td>
-                            <td>
-                                <a href="users.php?edit=<?= $u['id'] ?>" class="admin-nav-btn admin-nav-btn-secondary" style="padding: 8px 16px;">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
                             </td>
                         </tr>
-                        <?php endforeach; ?>
+                       
                     </tbody>
                 </table>
             </div>
@@ -465,10 +414,12 @@ $recentUsers = $stmt->fetchAll();
             <a href="../index.php" class="admin-nav-btn admin-nav-btn-primary">
                 <i class="bi bi-house-door"></i> На сайт
             </a>
-            <a href="logout.php" class="admin-nav-btn admin-nav-btn-secondary">
-                <i class="bi bi-box-arrow-right"></i> Выйти
-            </a>
         </div>
     </div>
+
+    <script>
+        const stories = JSON.parse(localStorage.getItem('locals_stories')) || [];
+        document.getElementById('adminStoriesCount').textContent = stories.length;
+    </script>
 </body>
 </html>

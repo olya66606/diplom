@@ -8,408 +8,684 @@ require_once 'includes/auth_functions.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Места от жителей | Туры Везде</title>
+    <title>Истории местных | Туры Везде</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Mulish', sans-serif; background: linear-gradient(135deg, #bcddff54, #98dbb8a1); }
-        .banner { background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%); width: 100%; min-height: 350px; margin-top: 70px; display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 60px 20px; }
-        .banner-content { max-width: 800px; }
-        .banner h1 { font-size: 3rem; margin-bottom: 20px; font-weight: 700; }
-        .banner p { font-size: 1.2rem; opacity: 0.95; margin-bottom: 30px; }
-        .city-badge { display: inline-block; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding: 12px 35px; border-radius: 50px; font-weight: 600; font-size: 1.2rem; border: 2px solid rgba(255,255,255,0.3); }
-        .places-section { max-width: 1400px; margin: 80px auto; padding: 0 20px; }
-        .places-section h2 { font-size: 2.5rem; color: #1b5031; margin-bottom: 50px; text-align: center; font-weight: 700; }
-        .swiper { padding: 20px 0 60px; }
-        .place-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); height: 100%; transition: all 0.3s ease; }
-        .place-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
-        .place-card.liked { border: 3px solid #2e8d53; }
-        .place-card.liked .like-btn { background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%); color: white; border-color: transparent; }
-        .like-btn { position: absolute; bottom: 15px; right: 15px; width: 50px; height: 50px; border-radius: 50%; border: 2px solid white; background: white; color: #ff6b6b; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 3; }
-        .like-btn:hover { transform: scale(1.15); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
-        .like-btn i { transition: all 0.3s; }
-        .place-card.liked .like-btn i { transform: scale(1.2); }
-        .like-count { position: absolute; bottom: 15px; left: 15px; background: rgba(255,255,255,0.95); padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; color: #2e8d53; box-shadow: 0 3px 10px rgba(0,0,0,0.15); z-index: 3; display: flex; align-items: center; gap: 5px; }
+        body { font-family: 'Mulish', sans-serif; background: linear-gradient(135deg, #bcddff54, #98dbb8a1);  }
+
+        .banner {
+            background: url(img/fonbaner.jpg);
+            background-size: cover;
+            background-position: center;
+            width: 100%; min-height: 320px; 
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+        }
         
-        /* Коллекции и фильтры */
-        .collections-tabs { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
-        .collection-tab { padding: 12px 28px; border-radius: 50px; border: 2px solid #e8ecf1; background: white; cursor: pointer; font-weight: 600; font-family: 'Mulish', sans-serif; transition: all 0.3s; color: #666; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
-        .collection-tab:hover { border-color: #2e8d53; background: #f0fff4; transform: translateY(-2px); }
-        .collection-tab.active { background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%); border-color: transparent; color: white; box-shadow: 0 8px 25px rgba(46,141,83,0.35); transform: translateY(-3px); }
-        .collection-tab .tab-badge { background: rgba(255,255,255,0.3); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; }
-        
-        /* Дополнительная информация о месте */
-        .place-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e8ecf1; }
-        .place-info-item { background: #f8f9fc; padding: 10px; border-radius: 12px; text-align: center; }
-        .place-info-item i { font-size: 1.3rem; color: #2e8d53; margin-bottom: 5px; display: block; }
-        .place-info-item span { font-size: 0.75rem; color: #666; font-weight: 500; display: block; }
-        .place-info-item .value { font-size: 0.85rem; font-weight: 700; color: #1b5031; margin-top: 3px; display: block; }
-        .peak-hours { display: flex; gap: 4px; margin-top: 8px; justify-content: center; }
-        .peak-bar { width: 12px; height: 20px; border-radius: 3px; background: #e8ecf1; }
-        .peak-bar.high { background: linear-gradient(180deg, #ff6b6b 0%, #ee5253 100%); }
-        .peak-bar.medium { background: linear-gradient(180deg, #ffc107 0%, #ff9800 100%); }
-        .peak-bar.low { background: linear-gradient(180deg, #2e8d53 0%, #4ecdc4 100%); }
-        .peak-label { font-size: 0.7rem; color: #999; margin-top: 4px; }
-        .place-image { height: 230px; background-size: cover; background-position: center; position: relative; }
-        .place-city { position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%); color: white; padding: 6px 18px; border-radius: 30px; font-weight: 600; font-size: 0.8rem; }
-        .place-content { padding: 25px; }
-        .place-content h3 { font-size: 1.5rem; color: #1b5031; margin-bottom: 10px; font-weight: 700; }
-        .place-location { display: flex; align-items: center; gap: 8px; color: #2e8d53; margin-bottom: 15px; font-size: 0.9rem; }
-        .place-rating { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-        .stars { color: #ffc107; }
-        .rating-value { font-weight: 600; color: #333; }
-        .reviews-count { color: #98dbb8; font-weight: 500; }
-        .place-description { color: #666; line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem; }
-        .reviews-section { border-top: 1px solid #e8ecf1; padding-top: 20px; margin-top: 10px; }
-        .review-item { background: #f8f9fc; padding: 15px; border-radius: 16px; margin-bottom: 12px; border-left: 3px solid #2e8d53; }
-        .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
-        .review-author { font-weight: 600; color: #333; font-size: 0.9rem; }
-        .review-date { color: #999; font-size: 0.8rem; }
-        .review-text { color: #555; font-style: italic; font-size: 0.9rem; line-height: 1.5; }
-        .review-form-section { max-width: 700px; margin: 80px auto; padding: 40px; background: white; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
-        .review-form-section h2 { font-size: 2rem; color: #1b5031; margin-bottom: 15px; text-align: center; font-weight: 700; }
-        .review-form-section p { text-align: center; color: #666; margin-bottom: 30px; }
+        .foto4{
+            width: 500px;
+            height: 500px;
+            border-radius: 50px;
+            margin: -13px -28px 100px 50px;
+        }
+        .foto5{
+            width: 500px;
+            height: 300px;
+            border-radius: 50px;
+            margin: 35px -400px 500px 100px;
+        }
+        .foto6{
+            width: 500px;
+            height: 300px;
+            border-radius: 50px;
+            margin: 500px 10px 100px 101px;
+        }
+
+        .banner-content { max-width: 800px; color:black; margin-left:200px;}
+        .banner h1 { font-size: 2.8rem; margin-bottom: 16px; font-weight: 800; }
+        .banner p { font-size: 1.15rem; opacity: 0.95; margin-bottom: 28px; line-height: 1.6; }
+        .banner-stats { display: flex; gap: 70px; justify-content: center; flex-wrap: wrap; }
+        .banner-stat { background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 12px 28px; border-radius: 50px; font-weight: 600; border: 1px solid rgba(255,255,255,0.25); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .section { margin: 50px 0; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 15px; }
+        .section-header h2 { color: #1b5031; font-size: 1.8rem; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+
+        /* Карусель историй */
+        .carousel-nav { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px; }
+        .carousel-btn { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #e8ecf1; background: white;
+            color: #2e8d53; font-size: 1.3rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+        .carousel-btn:hover { background: linear-gradient(135deg, #266d59 0%, #3a8340 100%); border-color: transparent; color: white; }
+        .carousel-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+        .carousel-counter { font-size: 1.1rem; font-weight: 700; color: #2e8d53; }
+        .carousel-wrapper { overflow: hidden; padding: 10px 0; }
+        .carousel-track { display: flex; gap: 20px; transition: transform 0.4s ease; }
+
+        .story-card { flex: 0 0 380px; background: white; border-radius: 24px; padding: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: all 0.3s; border: 2px solid transparent; display: flex; flex-direction: column; }
+        .story-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); border-color: #d4f0e4; }
+
+        .story-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+        .story-avatar { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; font-weight: 800; color: white; flex-shrink: 0; }
+        .story-meta { flex: 1; }
+        .story-author { font-weight: 700; color: #1b5031; font-size: 1rem; }
+        .story-city-date { font-size: 0.8rem; color: #888; margin-top: 2px; }
+        .story-category-badge { padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+            background: #f0fff4; color: #2e8d53; border: 1px solid #d4f0e4; }
+
+        .story-title { font-size: 1.25rem; color: #1b5031; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
+        .story-text { color: #555; font-size: 0.92rem; line-height: 1.7; margin-bottom: 18px; flex: 1; }
+
+        .story-place { background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf1 100%); padding: 14px 18px; border-radius: 16px; margin-bottom: 18px; }
+        .story-place-name { font-weight: 700; color: #1b5031; font-size: 0.95rem; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+        .story-place-address { font-size: 0.82rem; color: #666; }
+
+        .story-actions { display: flex; gap: 10px; padding-top: 16px; border-top: 1px solid #f0f2f5; }
+        .story-btn { flex: 1; padding: 10px; border-radius: 14px; border: none; cursor: pointer; font-weight: 600;
+            font-family: 'Mulish', sans-serif; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.85rem; }
+        .btn-like { background: #fff5f5; color: #ff6b6b; border: 2px solid #ffe0e0; }
+        .btn-like:hover, .btn-like.liked { background: #ff6b6b; color: white; border-color: transparent; }
+        .btn-save { background: #f0fff4; color: #2e8d53; border: 2px solid #d4f0e4; }
+        .btn-save:hover { background: linear-gradient(135deg, #266d59 0%, #3a8340 100%); color: white; border-color: transparent; }
+
+        /* Блогеры */
+        .bloggers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+        .blogger-card { background: white; border-radius: 24px; padding: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: all 0.3s; border: 2px solid transparent; }
+        .blogger-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); border-color: #d4f0e4; }
+
+        .blogger-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .blogger-avatar { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; font-weight: 800; color: white; flex-shrink: 0; }
+        .blogger-info { flex: 1; }
+        .blogger-name { font-weight: 800; color: #1b5031; font-size: 1.15rem; }
+        .blogger-role { font-size: 0.85rem; color: #2e8d53; font-weight: 600; margin-top: 2px; }
+
+        .blogger-title { font-size: 1.1rem; color: #1b5031; font-weight: 700; margin-bottom: 14px; }
+        .blogger-places { display: flex; flex-direction: column; gap: 10px; }
+        .blogger-place { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: #f8f9fc; border-radius: 14px; transition: all 0.3s; }
+        .blogger-place:hover { background: #f0fff4; }
+        .blogger-place-num { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
+            color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0; }
+        .blogger-place-info { flex: 1; }
+        .blogger-place-name { font-weight: 700; color: #1b5031; font-size: 0.92rem; }
+        .blogger-place-desc { font-size: 0.8rem; color: #888; margin-top: 2px; }
+        .blogger-place-save { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #d4f0e4; background: white;
+            color: #2e8d53; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s; flex-shrink: 0; }
+        .blogger-place-save:hover { background: linear-gradient(135deg, #266d59 0%, #3a8340 100%); color: white; border-color: transparent; }
+
+        /* Форма */
+        .form-section { background: white; border-radius: 24px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-bottom: 60px; }
+        .form-section h2 { color: #1b5031; font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; text-align: center; }
+        .form-section > p { text-align: center; color: #666; margin-bottom: 30px; font-size: 0.95rem; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-weight: 600; color: #333; margin-bottom: 8px; font-size: 0.95rem; }
-        .form-control { width: 100%; padding: 14px 18px; border: 2px solid #e8ecf1; border-radius: 16px; font-size: 1rem; font-family: 'Mulish', sans-serif; background: white; transition: all 0.3s; }
+        .form-group label { display: block; font-weight: 600; color: #333; margin-bottom: 8px; font-size: 0.9rem; }
+        .form-control { width: 100%; padding: 14px 18px; border: 2px solid #e8ecf1; border-radius: 16px; font-size: 1rem;
+            font-family: 'Mulish', sans-serif; background: white; transition: all 0.3s; }
         .form-control:focus { outline: none; border-color: #2e8d53; box-shadow: 0 0 0 3px rgba(46,141,83,0.1); }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .submit-btn { background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%); color: white; border: none; padding: 16px 30px; border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; width: 100%; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Mulish', sans-serif; }
+        textarea.form-control { resize: vertical; min-height: 100px; }
+        .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 42px; }
+        .submit-btn { background: linear-gradient(135deg, #266d59 0%, #3a8340 100%); color: white; border: none; padding: 16px 30px;
+            border-radius: 50px; font-size: 1.05rem; font-weight: 600; cursor: pointer; width: 100%; transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Mulish', sans-serif; margin-top: 10px; }
         .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(46,141,83,0.3); }
-        .swiper-button-next, .swiper-button-prev { color: #2e8d53; background: white; width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .swiper-button-next:after, .swiper-button-prev:after { font-size: 18px; font-weight: bold; }
-        .swiper-pagination-bullet { background: #2e8d53; opacity: 0.5; }
-        .swiper-pagination-bullet-active { background: #2e8d53; opacity: 1; }
-        .no-places { text-align: center; padding: 50px; background: white; border-radius: 24px; }
-        .no-places i { font-size: 4rem; color: #2e8d53; margin-bottom: 20px; }
-        .no-places h3 { font-size: 1.8rem; color: #1b5031; margin-bottom: 15px; }
-        .no-places p { color: #666; margin-bottom: 25px; }
-        .no-places .btn { display: inline-block; padding: 12px 35px; background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s; }
-        .no-places .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(46,141,83,0.3); }
-        .places-filter-info { background: #f0fff4; padding: 15px 25px; border-radius: 16px; display: inline-block; margin: 0 auto; }
-        .places-filter-info i { margin-right: 8px; }
-        @media (max-width: 768px) { 
-            .banner h1 { font-size: 2rem; } 
-            .form-row { grid-template-columns: 1fr; } 
-            .places-section h2 { font-size: 1.8rem; }
-            .collections-tabs { gap: 8px; }
-            .collection-tab { padding: 10px 20px; font-size: 0.85rem; }
-            .collection-tab .tab-badge { display: none; }
-            .place-info-grid { grid-template-columns: repeat(2, 1fr); }
-            .place-info-item { padding: 8px; }
-            .peak-hours { gap: 2px; }
-            .peak-bar { width: 8px; }
-            .places-filter-info { font-size: 0.9rem; padding: 10px 15px; }
+
+        .toast-notification { position: fixed; bottom: 30px; right: 30px; background: #2e8d53; color: white;
+            padding: 14px 24px; border-radius: 50px; font-weight: 500; z-index: 2000;
+            animation: slideInRight 0.3s ease; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        .empty-state { text-align: center; padding: 60px 20px; background: white; border-radius: 24px; }
+        .empty-state i { font-size: 3.5rem; color: #2e8d53; margin-bottom: 20px; }
+        .empty-state h3 { font-size: 1.5rem; color: #1b5031; margin-bottom: 10px; }
+        .empty-state p { color: #666; }
+
+        @media (max-width: 768px) {
+            .banner h1 { font-size: 2rem; }
+            .section-header h2 { font-size: 1.4rem; }
+            .story-card { flex: 0 0 300px; padding: 20px; }
+            .form-section { padding: 24px; }
+            .carousel-nav { gap: 12px; }
+            .bloggers-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-
     <?php include 'includes/header.php'; ?>
+
     <section class="banner">
+        <img class="foto4" src="img/tokio.webp" alt="">
+           
+            
         <div class="banner-content">
-            <h1>✨ Секретные места от жителей</h1>
-            <p>Только аутентичные локации, которые знают местные. Никаких туристических троп — только настоящие жемчужины.</p>
-            <div class="city-badge" id="cityBadge">
-                <i class="bi bi-geo-alt-fill"></i> Санкт-Петербург
+            <h1>📖 Истории местных</h1>
+            <p>Не гидбуки, а настоящие истории от людей, которые живут в этом городе. Где пить кофе, гулять ночью и находить себя.</p>
+            <div class="banner-stats">
+                <div class="banner-stat"><i class="bi bi-people-fill"></i> <span id="authorsCount">12</span> авторов</div>
+                <div class="banner-stat"><i class="bi bi-journal-text"></i> <span id="storiesCount">48</span> историй</div>
+                <div class="banner-stat"><i class="bi bi-geo-alt-fill"></i> <span id="citiesCount">4</span> города</div>
             </div>
         </div>
+        <img class="foto5" src="img/sever.webp" alt="">
+         <img class="foto6" src="img/osaka.jpg" alt="">
     </section>
 
-    <section class="places-section">
-        <h2>🏠 <span id="placesTitle">Санкт-Петербург</span> глазами местных</h2>
-        
-        <!-- Коллекции от жителей -->
-        <div class="collections-tabs" id="collectionsTabs">
-            <button class="collection-tab active" data-collection="all">
-                <i class="bi bi-grid-3x3"></i> Все места
-            </button>
-            <button class="collection-tab" data-collection="first-visit">
-                <i class="bi bi-star"></i> Для первого визита <span class="tab-badge" id="firstVisitCount">0</span>
-            </button>
-            <button class="collection-tab" data-collection="romantic">
-                <i class="bi bi-heart"></i> Романтические <span class="tab-badge" id="romanticCount">0</span>
-            </button>
-            <button class="collection-tab" data-collection="photospot">
-                <i class="bi bi-camera"></i> Для фотосессий <span class="tab-badge" id="photoCount">0</span>
-            </button>
-            <button class="collection-tab" data-collection="family">
-                <i class="bi bi-people"></i> Детские <span class="tab-badge" id="familyCount">0</span>
-            </button>
-            <button class="collection-tab" data-collection="quiet">
-                <i class="bi bi-moon"></i> Спокойные <span class="tab-badge" id="quietCount">0</span>
-            </button>
-            <button class="collection-tab" data-collection="top-week">
-                <i class="bi bi-trophy-fill"></i> Топ недели 🔥 <span class="tab-badge" id="topWeekCount">0</span>
-            </button>
-        </div>
-        
-        <div class="swiper placesSwiper">
-            <div class="swiper-wrapper" id="placesWrapper">
-                <!-- Места будут загружаться динамически -->
+    <div class="container">
+        <!-- Подборки от блогеров -->
+        <section class="section">
+            <div class="section-header">
+                <h2><i class="bi bi-stars"></i> Места от жителей</h2>
             </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
-    </section>
+            <div class="bloggers-grid" id="bloggersGrid"></div>
+        </section>
+
+        <!-- Форма -->
+        <section class="section">
+            <div class="form-section">
+                <h2><i class="bi bi-pen-fill"></i> Поделись своей историей</h2>
+                <p>Расскажи о любимом месте в твоём городе. Почему оно особенное?</p>
+                <form id="storyForm">
+                    <p style="text-align: center; color: #2e8d53; font-weight: 600; margin-bottom: 20px;">
+                        <i class="bi bi-geo-alt-fill"></i> Твоя история будет опубликована для <span id="formCityName">Санкт-Петербурга</span>
+                    </p>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Твоё имя</label>
+                            <input type="text" class="form-control" id="authorName" placeholder="Например, Аня" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Категория</label>
+                            <select class="form-control form-select" id="storyCategory" required>
+                                <option value="">Выбери категорию</option>
+                                <option value="coffee">☕ Кофе и завтраки</option>
+                                <option value="walk">🚶 Прогулки</option>
+                                <option value="secret">🔒 Секретные места</option>
+                                <option value="romantic">💕 Романтика</option>
+                                <option value="food">🍽 Еда</option>
+                                <option value="view">🌅 Виды</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Название места</label>
+                            <input type="text" class="form-control" id="placeName" placeholder="Например, кофейня Дабл Би" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Адрес</label>
+                            <input type="text" class="form-control" id="placeAddress" placeholder="Например, Невский проспект, 10" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Заголовок истории</label>
+                        <input type="text" class="form-control" id="storyTitle" placeholder="Например, Где я пью лучший капучино" required>
+                    </div>
+                    <div class="form-group">
+                        <label>История</label>
+                        <textarea class="form-control" id="storyText" placeholder="Расскажи, почему это место тебе дорого. Что здесь особенного? Когда лучше приходить?" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="bi bi-send-fill"></i> Опубликовать историю</button>
+                </form>
+            </div>
+        </section>
+    </div>
 
     <?php include 'includes/footer.php'; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const citiesPlaces = {
-                'saint-petersburg': {
-                    name: 'Санкт-Петербург',
-                    places: [
-                        { id: 1, name: 'Двор Капеллы', image: 'https://images.unsplash.com/photo-1559598467-f8b76c8155d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'ул. Большая Конюшенная, 11', rating: 4.8, reviews: 43, likes: 156, description: 'Скрытый от глаз туристов дворик в самом центре города.', collections: ['quiet', 'photospot', 'winter', 'christmas'], bestTime: 'Утро (8-10)', peakHours: [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2], accessible: true, parking: false, petFriendly: true, reviewsList: [{ author: 'Анна С.', date: '2 дня назад', rating: 5, text: 'Потрясающее место!' }, { author: 'Михаил', date: '1 неделя назад', rating: 4, text: 'Красиво, но в выходные много людей.' }] },
-                        { id: 2, name: 'Новая Голландия', image: 'https://images.unsplash.com/photo-1513326738677-b964603b136d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'наб. Адмиралтейского канала, 2', rating: 4.9, reviews: 67, likes: 234, description: 'Остров с парком, арт-пространством и кафе.', collections: ['first-visit', 'family', 'photospot', 'spring', 'summer', 'terraces'], bestTime: 'День (12-16)', peakHours: [1, 2, 3, 5, 7, 8, 8, 7, 6, 5, 4, 3], accessible: true, parking: true, petFriendly: true, reviewsList: [{ author: 'Дмитрий', date: '3 дня назад', rating: 5, text: 'Живу рядом, хожу сюда каждый день.' }] },
-                        { id: 3, name: 'Севкабель Порт', image: 'https://images.unsplash.com/photo-1514912885225-b8c7c2b44b2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'Кожевенная линия, 40', rating: 4.7, reviews: 89, likes: 189, description: 'Креативное пространство на Васильевском острове.', collections: ['first-visit', 'photospot', 'romantic', 'spring', 'summer', 'autumn', 'terraces', 'winterwalks'], bestTime: 'Вечер (17-20)', peakHours: [1, 1, 2, 3, 4, 6, 8, 9, 8, 7, 5, 3], accessible: true, parking: true, petFriendly: false, reviewsList: [{ author: 'Екатерина', date: '5 дней назад', rating: 5, text: 'Отличное место для прогулок!' }] },
-                        { id: 4, name: 'Крыша Hotel Indigo', image: 'https://images.unsplash.com/photo-1530521954074-e64f6810b32d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'Набережная Макалова, 2', rating: 4.9, reviews: 45, likes: 312, description: 'Панорамная смотровая площадка с видом на город.', collections: ['romantic', 'photospot', 'first-visit', 'spring', 'summer', 'autumn', 'terraces'], bestTime: 'Вечер (19-22)', peakHours: [1, 1, 1, 2, 3, 4, 6, 8, 9, 9, 8, 6], accessible: false, parking: false, petFriendly: false, reviewsList: [{ author: 'Алексей', date: '1 день назад', rating: 5, text: 'Лучший вид на закат!' }] },
-                        { id: 5, name: 'Музей-мастерская М.В. Ломоносова', image: 'https://images.unsplash.com/photo-1565060169197-9f8da0877f0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'Михайловский сад, 2', rating: 4.8, reviews: 38, likes: 98, description: 'Уникальная коллекция фаянсовых изделий.', collections: ['first-visit', 'quiet', 'family', 'spring', 'autumn'], bestTime: 'День (11-15)', peakHours: [1, 1, 2, 4, 6, 7, 6, 5, 4, 3, 2, 1], accessible: true, parking: false, petFriendly: false, reviewsList: [{ author: 'Ольга', date: '4 дня назад', rating: 5, text: 'Великолепные изделия ручной работы!' }] }
-                    ]
-                },
-                'kaliningrad': {
-                    name: 'Калининград',
-                    places: [
-                        { id: 101, name: 'Рыбная деревня', image: 'https://images.unsplash.com/photo-1598908311172-d99e5e9b8c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'ул. Октябрьская', rating: 4.8, reviews: 56, likes: 178, description: 'Квартал в довоенном стиле.', collections: ['first-visit', 'photospot', 'family', 'spring', 'summer', 'autumn', 'christmas'], bestTime: 'День (10-16)', peakHours: [1, 2, 3, 5, 7, 8, 8, 7, 6, 4, 3, 2], accessible: true, parking: true, petFriendly: true, reviewsList: [{ author: 'Алексей', date: '1 неделя назад', rating: 5, text: 'Очень атмосферное место.' }] },
-                        { id: 102, name: 'Амалиенау', image: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'район Амалиенау', rating: 4.9, reviews: 34, likes: 145, description: 'Старый немецкий район с виллами.', collections: ['quiet', 'photospot', 'romantic', 'spring', 'autumn', 'winterwalks'], bestTime: 'Утро (8-12)', peakHours: [1, 1, 2, 3, 4, 5, 5, 4, 3, 3, 2, 1], accessible: true, parking: true, petFriendly: true, reviewsList: [{ author: 'Иван', date: '3 дня назад', rating: 5, text: 'Лучшее место для прогулок.' }] }
-                    ]
-                },
-                'japan': {
-                    name: 'Япония',
-                    places: [
-                        { id: 201, name: 'Храм Сэнсо-дзи', image: 'https://images.unsplash.com/photo-1564858051047-2f213095da05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'Асакуса, Токио', rating: 4.9, reviews: 1234, likes: 2456, description: 'Древнейший храм Токио с воротами Раймон.', collections: ['first-visit', 'photospot', 'quiet', 'spring', 'autumn', 'christmas'], bestTime: 'Раннее утро (6-8)', peakHours: [3, 5, 7, 8, 8, 7, 6, 5, 5, 6, 7, 6], accessible: true, parking: false, petFriendly: false, reviewsList: [{ author: 'Yuki', date: '2 дня назад', rating: 5, text: 'Невероятная атмосфера!' }, { author: 'Takeshi', date: '1 неделя назад', rating: 5, text: 'Лучший храм в Токио.' }] },
-                        { id: 202, name: 'Район Шибуя', image: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'Шибуя, Токио', rating: 4.8, reviews: 2345, likes: 3789, description: 'Знаменитый перекресток и неоновые огни.', collections: ['first-visit', 'photospot', 'romantic', 'spring', 'summer', 'autumn', 'winter', 'christmas', 'terraces'], bestTime: 'Вечер (18-22)', peakHours: [2, 2, 3, 4, 5, 7, 8, 9, 9, 8, 7, 6], accessible: true, parking: false, petFriendly: false, reviewsList: [{ author: 'Hiroshi', date: '3 дня назад', rating: 5, text: 'Очень красиво вечером!' }] },
-                        { id: 203, name: 'Бамбуковый лес Араторити', image: 'https://images.unsplash.com/photo-1493976040807-0c3cb6fa165d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'Арасияма, Киото', rating: 4.9, reviews: 987, likes: 1876, description: 'Уникальный бамбуковый лес в Киото.', collections: ['quiet', 'romantic', 'photospot', 'spring', 'summer', 'autumn', 'winterwalks'], bestTime: 'Утро (7-9)', peakHours: [2, 4, 6, 8, 8, 7, 6, 5, 4, 3, 2, 2], accessible: true, parking: true, petFriendly: true, reviewsList: [{ author: 'Kenji', date: '5 дней назад', rating: 5, text: 'Успокаивающая атмосфера!' }] },
-                        { id: 204, name: 'Храм Кийомидзу-дера', image: 'https://images.unsplash.com/photo-1528360983277-13d9b152c6d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', address: 'Киото', rating: 4.9, reviews: 1567, likes: 2234, description: 'Древний буддийский храм с деревянной террасой.', collections: ['first-visit', 'photospot', 'family', 'spring', 'summer', 'autumn', 'winter'], bestTime: 'Утро (6-9)', peakHours: [3, 5, 7, 8, 8, 7, 6, 5, 4, 3, 2, 1], accessible: false, parking: true, petFriendly: false, reviewsList: [{ author: 'Akiko', date: '2 дня назад', rating: 5, text: 'Великолепно в сезон сакуры!' }] }
-                    ]
-                }
+        // ====== ДАННЫЕ ======
+        const categoryConfig = {
+            coffee:  { icon: 'bi-cup-hot', label: 'Кофе', color: '#8B4513', bg: '#fdf5ef' },
+            walk:    { icon: 'bi-person-walking', label: 'Прогулки', color: '#2e8d53', bg: '#f0fff4' },
+            secret:  { icon: 'bi-key', label: 'Секретное', color: '#9b59b6', bg: '#f9f0ff' },
+            romantic:{ icon: 'bi-heart', label: 'Романтика', color: '#e91e63', bg: '#fff0f5' },
+            food:    { icon: 'bi-shop', label: 'Еда', color: '#e67e22', bg: '#fff8f0' },
+            view:    { icon: 'bi-sunset', label: 'Виды', color: '#3498db', bg: '#f0f8ff' }
+        };
+
+        const avatarColors = ['#2e8d53', '#e67e22', '#9b59b6', '#e91e63', '#3498db', '#16a085', '#d35400'];
+
+        let stories = JSON.parse(localStorage.getItem('locals_stories')) || [];
+        let likedStories = JSON.parse(localStorage.getItem('liked_stories')) || {};
+        let carouselIndex = 0;
+
+        // Определяем выбранный город
+        const savedData = JSON.parse(localStorage.getItem('selected_city'));
+        const currentCityId = savedData?.cityId || 'saint-petersburg';
+        const cityNames = {
+            'saint-petersburg': 'Санкт-Петербург',
+            'kaliningrad': 'Калининград',
+            'moscow': 'Москва',
+            'sochi': 'Сочи'
+        };
+        const currentCityName = cityNames[currentCityId] || 'Санкт-Петербург';
+
+        // Фильтруем истории по городу
+        function getCityStories() {
+            return stories.filter(s => s.city === currentCityId);
+        }
+
+        // ====== БЛОГЕРЫ ======
+        const bloggersData = [
+            {
+                id: 'anna-spb', name: 'Анна Петрова', city: 'saint-petersburg', cityName: 'Санкт-Петербург',
+                role: 'Гид по Питеру · 5 лет в городе', avatarColor: '#e91e63',
+                socials: {},
+                title: 'Топ-5 мест для вдохновения',
+                places: [
+                    { name: 'Эрмитаж', desc: 'Лучшее время — четверг утром, без очередей' },
+                    { name: 'Петропавловская крепость', desc: 'Закат здесь волшебный' },
+                    { name: 'Новая Голландия', desc: 'Современное искусство и кофе' },
+                    { name: 'Кунсткамера', desc: 'Самая необычная коллекция города' },
+                    { name: 'Смежный мост', desc: 'Мой секретный вид на Неву' }
+                ]
+            },
+            {
+                id: 'dima-spb', name: 'Дмитрий Козлов', city: 'saint-petersburg', cityName: 'Санкт-Петербург',
+                role: 'Фотограф · Знаю каждый двор', avatarColor: '#3498db',
+                socials: {},
+                title: '5 фотолокаций, о которых мало кто знает',
+                places: [
+                    { name: 'Двор-колодец на Рубинштейна', desc: 'Идеальная симметрия' },
+                    { name: 'Крыша Галереи', desc: 'Панорама всего центра' },
+                    { name: 'Мало-Калинкин мост', desc: 'Отражения в воде' },
+                    { name: 'Парадная на Васильевском', desc: 'Винтажный интерьер' },
+                    { name: 'Заброшенная фабрика', desc: 'Индустриальная эстетика' }
+                ]
+            },
+            {
+                id: 'masha-spb', name: 'Мария Лебедева', city: 'saint-petersburg', cityName: 'Санкт-Петербург',
+                role: 'Архитектор · Обожаю старину', avatarColor: '#9b59b6',
+                socials: {},
+                title: 'Тайны старых доходных домов',
+                places: [
+                    { name: 'Дом Бака на Вознесенском', desc: 'Готика в центре Питера' },
+                    { name: 'Доходный дом Лидваль', desc: 'Северный модерн' },
+                    { name: 'Дом со львами', desc: 'Скульптуры на фасаде' },
+                    { name: 'Дворец Белосельских-Белозерских', desc: 'Малоизвестный дворец' },
+                    { name: 'Дом компании Зингер', desc: 'Не только книжный магазин' }
+                ]
+            },
+            {
+                id: 'oleg-spb', name: 'Олег Смирнов', city: 'saint-petersburg', cityName: 'Санкт-Петербург',
+                role: 'Бариста · Ищу лучший кофе', avatarColor: '#e67e22',
+                socials: {},
+                title: '5 кофеен, где варят с душой',
+                places: [
+                    { name: '«Дабл Би» на Рубинштейна', desc: 'Обжарка на месте' },
+                    { name: '«Север» на Грибоедова', desc: 'Молочные альтернативы' },
+                    { name: '«Птичка» на Восстания', desc: 'Уютный дворик' },
+                    { name: '«ДоМо» на Лиговском', desc: 'Рисовый латте' },
+                    { name: '«Кофе и книги»', desc: 'Тихое место для чтения' }
+                ]
+            },
+            {
+                id: 'sveta-spb', name: 'Светлана Иванова', city: 'saint-petersburg', cityName: 'Санкт-Петербург',
+                role: 'Ночная сова · Знаю тайные бары', avatarColor: '#9b59b6',
+                socials: {},
+                title: '5 мест для вечерних прогулок',
+                places: [
+                    { name: 'Бар «Кабинет»', desc: 'Тайный вход через книжный' },
+                    { name: 'Крыша на Лиговском', desc: 'Вид на огни ночного города' },
+                    { name: 'Набережная Фонтанки', desc: 'Фонари и отражения в воде' },
+                    { name: 'Дворец Танцев', desc: 'Джаз по четвергам' },
+                    { name: 'Лофт «Этажи»', desc: 'Молодёжная атмосфера' }
+                ]
+            },
+            {
+                id: 'igor-spb', name: 'Игорь Волков', city: 'saint-petersburg', cityName: 'Санкт-Петербург',
+                role: 'Велогид · Возлю по крышам', avatarColor: '#16a085',
+                socials: {},
+                title: '5 лучших смотровых площадок',
+                places: [
+                    { name: 'Колоннада Исаакия', desc: 'Классика, но стоит того' },
+                    { name: 'Мансарда на Невском', desc: '360 градусов центра' },
+                    { name: 'Стрелка Васильевского', desc: 'Бесплатно и красиво' },
+                    { name: 'Лахта Центр', desc: 'Современный вид на залив' },
+                    { name: 'Новая Голландия', desc: 'Крыша с видом на канал' }
+                ]
+            },
+            {
+                id: 'katya-kgd', name: 'Екатерина Волкова', city: 'kaliningrad', cityName: 'Калининград',
+                role: 'Блогер · Люблю свой город', avatarColor: '#e91e63',
+                socials: {},
+                title: 'Калининград глазами местной',
+                places: [
+                    { name: 'Куршская коса', desc: 'Топ-1 для меня — природа балтики' },
+                    { name: 'Форт №5', desc: 'История, которая трогает' },
+                    { name: 'Рыбная деревня', desc: 'Атмосфера старого Кёнигсберга' },
+                    { name: 'Музей янтаря', desc: 'Гордость региона' },
+                    { name: 'Озеро Верхнее', desc: 'Лучшие закаты в городе' }
+                ]
+            },
+            {
+                id: 'sergey-kgd', name: 'Сергей Панов', city: 'kaliningrad', cityName: 'Калининград',
+                role: 'Рыбак и гурман', avatarColor: '#2e8d53',
+                socials: {},
+                title: 'Где поесть настоящую балтийку',
+                places: [
+                    { name: 'Рыбный рынок на Октябрьской', desc: 'Свежайшая рыба с утра' },
+                    { name: 'Кафе «Балтика»', desc: 'Лучший уха в городе' },
+                    { name: 'Закусочная у моста', desc: 'Копчёный лосось — бомба' },
+                    { name: 'Ресторан на набережной', desc: 'Вид + креветки' },
+                    { name: 'Домашняя кухня бабы Нины', desc: 'Секретное место местных' }
+                ]
+            },
+            {
+                id: 'lena-kgd', name: 'Елена Кравцова', city: 'kaliningrad', cityName: 'Калининград',
+                role: 'Историк · Знаю каждый камень', avatarColor: '#3498db',
+                socials: {},
+                title: '5 исторических мест, о которых не пишут путеводители',
+                places: [
+                    { name: 'Бранденбургские ворота', desc: 'Малоизвестные, но красивые' },
+                    { name: 'Дом советов', desc: 'История недостроя' },
+                    { name: 'Фридландские ворота', desc: 'Музей внутри' },
+                    { name: 'Руины кирхи', desc: 'Атмосфера старой Пруссии' },
+                    { name: 'Парк победы', desc: 'Тихое место для размышлений' }
+                ]
+            },
+            {
+                id: 'anton-kgd', name: 'Антон Морозов', city: 'kaliningrad', cityName: 'Калининград',
+                role: 'Велосипедист · Исследую окрестности', avatarColor: '#16a085',
+                socials: {},
+                title: '5 маршрутов для вело-прогулок',
+                places: [
+                    { name: 'Вдоль Преголи', desc: 'Ровная дорога и виды' },
+                    { name: 'Куршская коса', desc: 'Лес и море рядом' },
+                    { name: 'Светлогорск', desc: 'Холмы и канатная дорога' },
+                    { name: 'Зеленоградск', desc: 'Набережная и коты' },
+                    { name: 'Янтарный', desc: 'Пляж и карьер' }
+                ]
+            },
+            {
+                id: 'nina-kgd', name: 'Нина Соколова', city: 'kaliningrad', cityName: 'Калининград',
+                role: 'Морячка · Люблю Балтику', avatarColor: '#e74c3c',
+                socials: {},
+                title: '5 лучших пляжей области',
+                places: [
+                    { name: 'Пляж в Янтарном', desc: 'Белый песок и чистейшая вода' },
+                    { name: 'Светлогорск', desc: 'Пляж с пирсом и променад' },
+                    { name: 'Зеленоградск', desc: 'Пляж с видом на мол' },
+                    { name: 'Балтийская коса', desc: 'Дикий пляж без толп' },
+                    { name: 'Пионерский', desc: 'Спокойное море для детей' }
+                ]
+            },
+            {
+                id: 'maxim-kgd', name: 'Максим Лебедев', city: 'kaliningrad', cityName: 'Калининград',
+                role: 'Охотник за закатами · Фотограф', avatarColor: '#f39c12',
+                socials: {},
+                title: '5 мест для идеального заката',
+                places: [
+                    { name: 'Маяк в Балтийске', desc: 'Последний луч над морем' },
+                    { name: 'Озеро Верхнее', desc: 'Отражение в воде' },
+                    { name: 'Куршская коса', desc: 'Закат над дюнами' },
+                    { name: 'Набережная у Рыбной деревни', desc: 'Городской закат с бокалом' },
+                    { name: 'Пирс в Светлогорске', desc: 'Романтика у моря' }
+                ]
+            }
+        ];
+
+        function renderBloggers() {
+            const grid = document.getElementById('bloggersGrid');
+            const cityBloggers = bloggersData.filter(b => b.city === currentCityId);
+
+            if (cityBloggers.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="bi bi-stars"></i>
+                        <h3>Пока нет подборок от блогеров</h3>
+                        <p>Скоро добавим!</p>
+                    </div>`;
+                return;
+            }
+
+            grid.innerHTML = cityBloggers.map(blogger => `
+                <div class="blogger-card">
+                    <div class="blogger-header">
+                        <div class="blogger-avatar" style="background: ${blogger.avatarColor};">${blogger.name.charAt(0)}</div>
+                        <div class="blogger-info">
+                            <div class="blogger-name">${blogger.name}</div>
+                            <div class="blogger-role">${blogger.role}</div>
+                        </div>
+                    </div>
+                    <div class="blogger-title">${blogger.title}</div>
+                    <div class="blogger-places">
+                        ${blogger.places.map((place, i) => `
+                            <div class="blogger-place">
+                                <div class="blogger-place-num">${i + 1}</div>
+                                <div class="blogger-place-info">
+                                    <div class="blogger-place-name">${place.name}</div>
+                                    <div class="blogger-place-desc">${place.desc}</div>
+                                </div>
+                                <button class="blogger-place-save" onclick="saveBloggerPlace('${place.name}', '${place.desc}', '${blogger.city}')" title="В маршрут">
+                                    <i class="bi bi-plus-lg"></i>
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.saveBloggerPlace = function(name, desc, city) {
+            let savedPlaces = JSON.parse(localStorage.getItem('selected_places')) || [];
+            const placeId = 'blogger_' + name.replace(/\s+/g, '_').toLowerCase();
+            if (!savedPlaces.find(p => p.id === placeId)) {
+                savedPlaces.push({
+                    id: placeId,
+                    name: name,
+                    location: cityNames[city] || city,
+                    coords: [0, 0],
+                    rating: 5,
+                    reviews: 0,
+                    description: desc,
+                    category: 'attractions'
+                });
+                localStorage.setItem('selected_places', JSON.stringify(savedPlaces));
+                showNotification('✓ Добавлено в маршрут');
+            } else {
+                showNotification('Уже в маршруте', true);
+            }
+        };
+
+        // ====== РЕНДЕР ИСТОРИЙ ======
+        function renderStories() {
+            stories = JSON.parse(localStorage.getItem('locals_stories')) || [];
+            const track = document.getElementById('storiesTrack');
+            const cityStories = getCityStories();
+
+            document.getElementById('cityBadge').innerHTML = `<i class="bi bi-geo-alt-fill"></i> ${currentCityName}`;
+            document.getElementById('placesTitle').textContent = currentCityName;
+            document.getElementById('formCityName').textContent = currentCityName;
+            document.getElementById('storiesCount').textContent = cityStories.length;
+            document.getElementById('authorsCount').textContent = new Set(cityStories.map(s => s.author)).size;
+            document.getElementById('citiesCount').textContent = new Set(stories.map(s => s.city)).size;
+
+            carouselIndex = 0;
+
+            if (cityStories.length === 0) {
+                track.innerHTML = `
+                    <div class="empty-state" style="flex: 0 0 100%;">
+                        <i class="bi bi-journal-x"></i>
+                        <h3>Пока нет историй из ${currentCityName}</h3>
+                        <p>Стань первым — поделись своим местом ниже!</p>
+                    </div>`;
+                document.getElementById('carouselCounter').textContent = '0 / 0';
+                document.getElementById('prevBtn').disabled = true;
+                document.getElementById('nextBtn').disabled = true;
+                return;
+            }
+
+            track.innerHTML = cityStories.map(story => {
+                const cfg = categoryConfig[story.category] || categoryConfig.coffee;
+                const avatarColor = avatarColors[story.author.length % avatarColors.length];
+                const isLiked = likedStories[story.id];
+                return `
+                    <div class="story-card">
+                        <div class="story-header">
+                            <div class="story-avatar" style="background: ${avatarColor};">${story.author.charAt(0)}</div>
+                            <div class="story-meta">
+                                <div class="story-author">${story.author}</div>
+                                <div class="story-city-date">${story.cityName} · ${story.date}</div>
+                            </div>
+                            <div class="story-category-badge" style="background: ${cfg.bg}; color: ${cfg.color}; border-color: ${cfg.color}22;">
+                                <i class="bi ${cfg.icon}"></i> ${cfg.label}
+                            </div>
+                        </div>
+                        <h3 class="story-title">${story.title}</h3>
+                        <p class="story-text">${story.text}</p>
+                        <div class="story-place">
+                            <div class="story-place-name"><i class="bi bi-geo-alt-fill" style="color: #2e8d53;"></i> ${story.placeName}</div>
+                            <div class="story-place-address">${story.placeAddress}</div>
+                        </div>
+                        <div class="story-actions">
+                            <button class="story-btn btn-like ${isLiked ? 'liked' : ''}" onclick="toggleLike(${story.id})">
+                                <i class="bi bi-${isLiked ? 'heart-fill' : 'heart'}"></i> ${story.likes + (isLiked ? 1 : 0)}
+                            </button>
+                            <button class="story-btn btn-save" onclick="savePlace(${story.id})">
+                                <i class="bi bi-bookmark-plus"></i> Сохранить
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            requestAnimationFrame(updateCarouselUI);
+        }
+
+        // ====== КАРУСЕЛЬ ======
+        function updateCarouselUI() {
+            const track = document.getElementById('storiesTrack');
+            const cards = track.querySelectorAll('.story-card');
+            if (cards.length === 0) return;
+
+            const cardWidth = cards[0].offsetWidth + 20;
+            const maxIndex = Math.max(0, cards.length - getVisibleCards());
+
+            carouselIndex = Math.min(Math.max(carouselIndex, 0), maxIndex);
+            track.style.transform = `translateX(-${carouselIndex * cardWidth}px)`;
+
+            document.getElementById('carouselCounter').textContent = `${Math.min(carouselIndex + 1, cards.length)} / ${cards.length}`;
+            document.getElementById('prevBtn').disabled = carouselIndex === 0;
+            document.getElementById('nextBtn').disabled = carouselIndex >= maxIndex;
+        }
+
+        function getVisibleCards() {
+            if (window.innerWidth < 768) return 1;
+            if (window.innerWidth < 1200) return 2;
+            return 3;
+        }
+
+        window.moveCarousel = function(dir) {
+            carouselIndex += dir;
+            updateCarouselUI();
+        };
+
+        window.addEventListener('resize', () => { carouselIndex = 0; updateCarouselUI(); });
+
+        // ====== ДЕЙСТВИЯ ======
+        window.toggleLike = function(id) {
+            const story = stories.find(s => s.id === id);
+            if (!story) return;
+            if (likedStories[id]) {
+                delete likedStories[id];
+            } else {
+                likedStories[id] = true;
+            }
+            localStorage.setItem('liked_stories', JSON.stringify(likedStories));
+            renderStories();
+        };
+
+        window.savePlace = function(id) {
+            const story = stories.find(s => s.id === id);
+            if (!story) return;
+            let savedPlaces = JSON.parse(localStorage.getItem('selected_places')) || [];
+            if (!savedPlaces.find(p => p.id === id + 1000)) {
+                savedPlaces.push({
+                    id: id + 1000,
+                    name: story.placeName,
+                    location: story.placeAddress,
+                    coords: [0, 0],
+                    rating: 5,
+                    reviews: 0,
+                    description: story.text.substring(0, 80) + '...',
+                    category: story.category === 'coffee' ? 'cafes' : story.category === 'food' ? 'restaurants' : 'attractions'
+                });
+                localStorage.setItem('selected_places', JSON.stringify(savedPlaces));
+                showNotification('✓ Место сохранено в маршрут');
+            } else {
+                showNotification('Уже в маршруте', true);
+            }
+        };
+
+        // ====== ФОРМА ======
+        document.getElementById('storyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const newStory = {
+                id: Date.now(),
+                author: document.getElementById('authorName').value,
+                city: currentCityId,
+                cityName: currentCityName,
+                title: document.getElementById('storyTitle').value,
+                text: document.getElementById('storyText').value,
+                placeName: document.getElementById('placeName').value,
+                placeAddress: document.getElementById('placeAddress').value,
+                category: document.getElementById('storyCategory').value,
+                date: 'только что',
+                likes: 0
             };
 
-            const selectedCityId = localStorage.getItem('selected_city_for_locals') || 'saint-petersburg';
-            const cityData = citiesPlaces[selectedCityId] || citiesPlaces['saint-petersburg'];
+            stories.unshift(newStory);
+            localStorage.setItem('locals_stories', JSON.stringify(stories));
 
-            document.getElementById('cityBadge').innerHTML = `<i class="bi bi-geo-alt-fill"></i> ${cityData.name}`;
-            document.getElementById('placesTitle').textContent = cityData.name;
+            this.reset();
+            renderStories();
+            showNotification('✓ История опубликована!');
+        });
 
-            const placesWrapper = document.getElementById('placesWrapper');
-            const placeSelect = document.getElementById('placeSelect');
-            let currentCollection = 'all';
-            let likedPlaces = JSON.parse(localStorage.getItem('liked_places') || '{}');
+        // ====== УТИЛИТЫ ======
+        function showNotification(msg, isError) {
+            const n = document.createElement('div');
+            n.className = 'toast-notification';
+            n.style.background = isError ? '#ff6b6b' : '#2e8d53';
+            n.innerHTML = `<i class="bi ${isError ? 'bi-exclamation-triangle-fill' : 'bi-check-circle-fill'}"></i> ${msg}`;
+            document.body.appendChild(n);
+            setTimeout(() => n.remove(), 2500);
+        }
 
-            if (cityData.places && cityData.places.length > 0) {
-                // Подсчет для бейджей
-                document.getElementById('firstVisitCount').textContent = cityData.places.filter(p => p.collections?.includes('first-visit')).length;
-                document.getElementById('romanticCount').textContent = cityData.places.filter(p => p.collections?.includes('romantic')).length;
-                document.getElementById('photoCount').textContent = cityData.places.filter(p => p.collections?.includes('photospot')).length;
-                document.getElementById('familyCount').textContent = cityData.places.filter(p => p.collections?.includes('family')).length;
-                document.getElementById('quietCount').textContent = cityData.places.filter(p => p.collections?.includes('quiet')).length;
-                document.getElementById('topWeekCount').textContent = cityData.places.filter(p => p.likes > 200).length;
-
-                // Обработчик кликов по коллекциям
-                document.querySelectorAll('.collection-tab').forEach(tab => {
-                    tab.addEventListener('click', function() {
-                        document.querySelectorAll('.collection-tab').forEach(t => t.classList.remove('active'));
-                        this.classList.add('active');
-                        currentCollection = this.dataset.collection || this.dataset.season;
-                        renderPlaces();
-                    });
-                });
-
-                // Подсчет сезонных бейджей
-                function updateSeasonCounts() {
-                    document.getElementById('winterCount').textContent = cityData.places.filter(p => p.collections?.includes('winter')).length;
-                    document.getElementById('springCount').textContent = cityData.places.filter(p => p.collections?.includes('spring')).length;
-                    document.getElementById('summerCount').textContent = cityData.places.filter(p => p.collections?.includes('summer')).length;
-                    document.getElementById('autumnCount').textContent = cityData.places.filter(p => p.collections?.includes('autumn')).length;
-                    document.getElementById('christmasCount').textContent = cityData.places.filter(p => p.collections?.includes('christmas')).length;
-                    document.getElementById('terracesCount').textContent = cityData.places.filter(p => p.collections?.includes('terraces')).length;
-                    document.getElementById('winterwalksCount').textContent = cityData.places.filter(p => p.collections?.includes('winterwalks')).length;
-                }
-                updateSeasonCounts();
-
-                // Функция фильтрации по сезону
-                window.filterBySeason = function(season) {
-                    document.querySelectorAll('.collection-tab').forEach(t => t.classList.remove('active'));
-                    document.querySelector(`[data-season="${season}"]`).classList.add('active');
-                    currentCollection = season;
-                    renderPlaces();
-                };
-
-                renderPlaces();
-
-                function renderPlaces() {
-                    let filteredPlaces = [...cityData.places];
-                    
-                    // Фильтрация по коллекции
-                    if (currentCollection !== 'all') {
-                        if (currentCollection === 'top-week') {
-                            filteredPlaces = filteredPlaces.filter(p => p.likes > 200).sort((a, b) => b.likes - a.likes);
-                        } else {
-                            filteredPlaces = filteredPlaces.filter(p => p.collections?.includes(currentCollection));
-                        }
-                    } else {
-                        // Сортировка по рейтингу по умолчанию
-                        filteredPlaces.sort((a, b) => b.rating - a.rating);
-                    }
-
-                    // Обновление описания сезона
-                    const seasonDescriptions = {
-                        'all': 'Все лучшие места города',
-                        'winter': '❄️ Лучшие места для посещения зимой',
-                        'spring': '🌸 Лучшие места для посещения весной',
-                        'summer': '☀️ Лучшие места для посещения летом',
-                        'autumn': '🍂 Лучшие места для посещения осенью',
-                        'christmas': '🎄 Рождественские огни и новогодняя атмосфера',
-                        'terraces': '🌞 Летние террасы кафе и ресторанов',
-                        'winterwalks': '⛄ Идеальные места для зимних прогулок'
-                    };
-                    document.getElementById('seasonDescription').textContent = seasonDescriptions[currentCollection] || 'Лучшие места';
-
-                    placesWrapper.innerHTML = '';
-                    
-                    filteredPlaces.forEach(place => {
-                        const isLiked = likedPlaces[place.id];
-                        const fullStars = Math.floor(place.rating);
-                        const hasHalf = place.rating % 1 >= 0.5;
-                        let starsHtml = '';
-                        for (let i = 0; i < fullStars; i++) starsHtml += '<i class="bi bi-star-fill"></i>';
-                        if (hasHalf) starsHtml += '<i class="bi bi-star-half"></i>';
-                        
-                        const reviewsHtml = place.reviewsList.map(review => {
-                            let reviewStars = '';
-                            for (let i = 0; i < review.rating; i++) reviewStars += '<i class="bi bi-star-fill"></i>';
-                            return `<div class="review-item"><div class="review-header"><span class="review-author"><i class="bi bi-person-circle"></i> ${review.author}</span><span class="review-date">${review.date}</span></div><div class="stars" style="font-size: 0.85rem;">${reviewStars}</div><div class="review-text">${review.text}</div></div>`;
-                        }).join('');
-                        
-                        // Часы пик
-                        const peakHoursHtml = place.peakHours ? `
-                            <div class="peak-hours">
-                                ${place.peakHours.slice(0, 12).map((level, i) => {
-                                    let className = 'low';
-                                    if (level >= 7) className = 'high';
-                                    else if (level >= 4) className = 'medium';
-                                    return `<div class="peak-bar ${className}" style="height: ${level * 3}px;" title="${i}:00 - ${level * 10}%"></div>`;
-                                }).join('')}
-                            </div>
-                            <div class="peak-label">08:00 - 19:00</div>
-                        ` : '';
-                        
-                        const placeInfoHtml = `
-                            <div class="place-info-grid">
-                                <div class="place-info-item">
-                                    <i class="bi bi-clock-history"></i>
-                                    <span>Лучшее время</span>
-                                    <div class="value">${place.bestTime || 'Любое'}</div>
-                                </div>
-                                <div class="place-info-item">
-                                    <i class="bi bi-calendar-week"></i>
-                                    <span>Часы пик</span>
-                                    ${peakHoursHtml}
-                                </div>
-                                <div class="place-info-item">
-                                    <i class="bi bi-wheelchair"></i>
-                                    <span>Доступность</span>
-                                    <div class="value">${place.accessible ? 'Да' : 'Нет'}</div>
-                                </div>
-                                <div class="place-info-item">
-                                    <i class="bi bi-car-front"></i>
-                                    <span>Парковка</span>
-                                    <div class="value">${place.parking ? 'Есть' : 'Нет'}</div>
-                                </div>
-                                <div class="place-info-item">
-                                    <i class="bi bi-paw-fill"></i>
-                                    <span>Pet-friendly</span>
-                                    <div class="value">${place.petFriendly ? 'Да' : 'Нет'}</div>
-                                </div>
-                            </div>
-                        `;
-                        
-                        const slide = document.createElement('div');
-                        slide.className = 'swiper-slide';
-                        slide.innerHTML = `
-                            <div class="place-card ${isLiked ? 'liked' : ''}" data-place-id="${place.id}">
-                                <div class="place-image" style="background-image: url('${place.image}')">
-                                    <span class="place-city"><i class="bi bi-geo-alt-fill"></i> ${cityData.name}</span>
-                                    <button class="like-btn" onclick="toggleLike(${place.id})">
-                                        <i class="bi bi-${isLiked ? 'heart-fill' : 'heart'}"></i>
-                                    </button>
-                                    <div class="like-count">
-                                        <i class="bi bi-heart-fill"></i>
-                                        <span>${place.likes + (isLiked ? 1 : 0)}</span>
-                                    </div>
-                                </div>
-                                <div class="place-content">
-                                    <h3>${place.name}</h3>
-                                    <div class="place-location"><i class="bi bi-pin-map-fill"></i><span>${place.address}</span></div>
-                                    <div class="place-rating">
-                                        <div class="stars">${starsHtml}</div>
-                                        <span class="rating-value">${place.rating}</span>
-                                        <span class="reviews-count">(${place.reviews} отзывов)</span>
-                                    </div>
-                                    <p class="place-description">${place.description}</p>
-                                    ${placeInfoHtml}
-                                    <div class="reviews-section">${reviewsHtml}</div>
-                                </div>
-                            </div>
-                        `;
-                        placesWrapper.appendChild(slide);
-                        
-                        const option = document.createElement('option');
-                        option.value = place.id;
-                        option.textContent = `${cityData.name}: ${place.name}`;
-                        if(placeSelect) placeSelect.appendChild(option);
-                    });
-
-                    // Перезапуск Swiper
-                    if (window.placesSwiper) {
-                        window.placesSwiper.destroy();
-                    }
-                    window.placesSwiper = new Swiper('.placesSwiper', { 
-                        slidesPerView: 1, 
-                        spaceBetween: 25, 
-                        loop: false,
-                        pagination: { el: '.swiper-pagination', clickable: true }, 
-                        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, 
-                        breakpoints: { 
-                            768: { slidesPerView: 2 }, 
-                            1024: { slidesPerView: 2 } 
-                        } 
-                    });
-                }
-
-                // Функция лайка
-                window.toggleLike = function(placeId) {
-                    const place = cityData.places.find(p => p.id === placeId);
-                    if (!place) return;
-
-                    if (likedPlaces[placeId]) {
-                        delete likedPlaces[placeId];
-                    } else {
-                        likedPlaces[placeId] = true;
-                    }
-
-                    localStorage.setItem('liked_places', JSON.stringify(likedPlaces));
-                    renderPlaces();
-                };
-            } else {
-                placesWrapper.innerHTML = `<div class="swiper-slide"><div class="no-places"><i class="bi bi-geo-alt-fill"></i><h3>Нет мест для этого города</h3><p>Мы пока собираем секретные места для ${cityData.name}.</p><a href="index.php#surveyBlock" class="btn">Выбрать другой город</a></div></div>`;
+        // ====== ИНИЦИАЛИЗАЦИЯ ======
+        document.addEventListener('DOMContentLoaded', function() {
+            const saved = localStorage.getItem('locals_stories');
+            if (!saved || saved === '[]') {
+                const defaults = [
+                    { id: 1, author: 'Аня М.', city: 'saint-petersburg', cityName: 'Санкт-Петербург', title: 'Где я пью лучший капучино по утрам', text: 'Каждое воскресенье я прихожу сюда в 9 утра. Пока город ещё спит, сажусь у окна с видом на канал. Кофе здесь варят с любовью, а круассаны — хрустящие, как во Франции. Это мой личный ритуал перед новой неделей.', placeName: 'Кофейня «Зерно»', placeAddress: 'Лиговский проспект, 53', category: 'coffee', date: '3 дня назад', likes: 24 },
+                    { id: 2, author: 'Дима К.', city: 'saint-petersburg', cityName: 'Санкт-Петербург', title: 'Секретный двор, который не найти на карте', text: 'Между двух старых домов на Васильевском есть проход. Если свернуть туда — попадаешь во двор с настоящим виноградом и коваными скамейками. Здесь тихо, хотя в 50 метрах — оживлённая улица. Местные старики играют в шахматы, а я читаю книги.', placeName: 'Двор на 7-й линии', placeAddress: '7-я линия В.О., д. 16', category: 'secret', date: '5 дней назад', likes: 56 },
+                    { id: 3, author: 'Маша Л.', city: 'saint-petersburg', cityName: 'Санкт-Петербург', title: 'Прогулка, которая лечит от грусти', text: 'Когда на душе тяжело — я иду от Летнего сада до стрелки Васильевского. Путь занимает час, но за ним — целая жизнь. Мосты, вода, фонари. Особенно в дождь. Питер не красив несмотря на дождь — он красив благодаря ему.', placeName: 'Набережная Невы', placeAddress: 'от Летнего сада до стрелки В.О.', category: 'walk', date: '4 дня назад', likes: 67 },
+                    { id: 4, author: 'Катя В.', city: 'kaliningrad', cityName: 'Калининград', title: 'Наше место для закатов', text: 'Мы с парнем каждую пятницу едем на набережную. Там есть одна скамейка — наша. С неё видно мост и реку, и когда солнце садится, всё заливает оранжевым. Мы приносим пиццу, садимся и молча смотрим. Это лучше любого кино.', placeName: 'Набережная озера Верхнее', placeAddress: 'ул. Дзержинского', category: 'romantic', date: '1 неделю назад', likes: 41 },
+                    { id: 5, author: 'Сергей П.', city: 'kaliningrad', cityName: 'Калининград', title: 'Рыбный рынок, где всё по-настоящему', text: 'Забудьте про супермаркеты. В субботу утром я еду на рынок у Рыбной деревни. Прямо с причала — копчёная рыба, свежие креветки, домашний хлеб. Продавцы знают меня по имени. Это душа города, не только еда.', placeName: 'Рыбный рынок', placeAddress: 'ул. Октябрьская, рядом с Рыбной деревней', category: 'food', date: '2 дня назад', likes: 33 },
+                    { id: 6, author: 'Игорь Н.', city: 'kaliningrad', cityName: 'Калининград', title: 'Крыша, откуда видно весь город', text: 'Мало кто знает, что в торговом центре на площади Победы есть выход на крышу. Бесплатно. Сверху видно собор, озеро и закат. Я привёл туда друзей из Москвы — они обалдели. Главное — приходить до 20:00, пока не закрыли.', placeName: 'Смотровая на крыше', placeAddress: 'пл. Победы, ТЦ «Европа»', category: 'view', date: '1 день назад', likes: 89 }
+                ];
+                localStorage.setItem('locals_stories', JSON.stringify(defaults));
             }
 
-            const reviewForm = document.getElementById('reviewFormElement');
-            if (reviewForm) {
-                reviewForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Спасибо! Ваш отзыв будет опубликован после проверки модератором.');
-                    reviewForm.reset();
-                });
-            }
+            document.getElementById('formCityName').textContent = currentCityName;
+
+            renderBloggers();
+            renderStories();
+
+            const authBtn = document.getElementById('authButton');
+            const user = JSON.parse(localStorage.getItem('current_user'));
+            if (user && authBtn) { authBtn.textContent = user.name || 'Профиль'; authBtn.href = 'profile.php'; }
         });
     </script>
 </body>

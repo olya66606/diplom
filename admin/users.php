@@ -194,7 +194,7 @@ $users = $stmt->fetchAll();
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: white;
             display: flex;
             align-items: center;
@@ -239,7 +239,7 @@ $users = $stmt->fetchAll();
         }
         
         .admin-nav-btn-primary {
-            background: linear-gradient(135deg, #2e8d53 0%, #4ecdc4 100%);
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
             color: white;
         }
         
@@ -357,7 +357,7 @@ $users = $stmt->fetchAll();
                                 <?php if ($u['id'] != $currentUserId): ?>
                                     <a href="?delete=<?= $u['id'] ?>" 
                                        class="user-action-btn btn-delete" 
-                                       onclick="return confirm('Вы уверены, что хотите удалить этого пользователя?')">
+                                       onclick="return ">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 <?php else: ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 09 2026 г., 14:13
+-- Время создания: Май 15 2026 г., 22:40
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -38,6 +38,15 @@ CREATE TABLE `reviews` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Дамп данных таблицы `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `user_id`, `place_name`, `review_text`, `rating`, `is_approved`, `created_at`, `updated_at`) VALUES
+(1, 4, 'Эрмитаж', 'Потрясающий музей! Можно провести там весь день. Коллекция просто невероятная, особенно впечатлили египетская коллекция и картины Леонардо да Винчи. Обязательно возьмите экскурсию или аудиогид - так намного интереснее!', 5, 0, '2026-05-08 07:30:00', '2026-05-08 07:30:00'),
+(3, 4, 'Севкабель Порт', 'Отличное место для прогулок! Много классных кафе, есть что посмотреть. Особенно понравился вид на воду и современные инсталляции. Вечером здесь очень атмосферно, но лучше приходить в хорошую погоду - летом здесь просто замечательно.', 4, 0, '2026-05-08 11:20:00', '2026-05-08 11:20:00'),
+(4, 4, 'Рыбная деревня (Калининград)', 'Очень атмосферное место с немецкой архитектурой. Красиво особенно вечером, когда зажигается подсветка. Советуем зайти в рыбные лавки - свежая рыба и копчености просто потрясающие. Цены умеренные, сервис хороший.', 4, 0, '2026-05-08 13:00:00', '2026-05-08 13:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +67,14 @@ CREATE TABLE `route_cards` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `route_cards`
+--
+
+INSERT INTO `route_cards` (`id`, `title`, `description`, `image`, `city_id`, `category`, `price`, `duration`, `is_active`, `sort_order`, `created_at`, `updated_at`) VALUES
+(1, 'ddddddd', 'ddddd', NULL, 'saint-petersburg', '45', '33.00', 33, 0, 1, '2026-05-11 14:36:55', '2026-05-11 14:36:55'),
+(2, 'dd', 'dd', NULL, 'saint-petersburg', 'dd', '22.00', 2, 0, 0, '2026-05-15 19:33:21', '2026-05-15 19:33:21');
 
 -- --------------------------------------------------------
 
@@ -82,6 +99,14 @@ CREATE TABLE `tours` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Дамп данных таблицы `tours`
+--
+
+INSERT INTO `tours` (`id`, `title`, `location`, `city_id`, `description`, `image`, `price`, `duration`, `rating`, `reviews_count`, `badge`, `is_active`, `created_at`, `updated_at`) VALUES
+(4, 'ddd', 'ddd', 'saint-petersburg', 'eee', NULL, '333.00', 4, '5.0', 0, 'eee', 0, '2026-05-11 14:33:53', '2026-05-11 14:33:53'),
+(5, 'dd', 'dd', 'saint-petersburg', 'dd', NULL, '22.00', 2, '5.0', 0, 'ee', 0, '2026-05-15 19:33:11', '2026-05-15 19:33:11');
+
 -- --------------------------------------------------------
 
 --
@@ -105,17 +130,6 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES
 (2, 'admin', 'admin@tours.local', '$2y$10$XsM30JKrBwA9G0E6h9T5v.L8F/pNT3z6iJ8V1CXC7I754tOmOwgIm', 'admin', '2026-05-08 14:44:01', '2026-05-08 14:44:27'),
 (4, 'Ольга', '39kukol@gmail.com', '$2y$10$JLZKGXv6kKFoDSMKQ3E.XOSEbmRy/uafBmkmqh2FQe31gJik0zRX2', 'user', '2026-05-08 14:57:28', '2026-05-08 14:57:28');
-
---
--- Дамп данных таблицы `reviews`
---
-
-INSERT INTO `reviews` (`id`, `user_id`, `place_name`, `review_text`, `rating`, `is_approved`, `created_at`, `updated_at`) VALUES
-(1, 4, 'Эрмитаж', 'Потрясающий музей! Можно провести там весь день. Коллекция просто невероятная, особенно впечатлили египетская коллекция и картины Леонардо да Винчи. Обязательно возьмите экскурсию или аудиогид - так намного интереснее!', 5, 0, '2026-05-08 10:30:00', '2026-05-08 10:30:00'),
-(2, 4, 'Храм Сэнсо-дзи', 'Древнейший храм Токио в районе Асакуса. Потрясающая атмосфера и великолепная архитектура. Обязательно посетите главный зал и ворота Раймон!', 5, 0, '2026-05-08 11:45:00', '2026-05-08 11:45:00'),
-(3, 4, 'Севкабель Порт', 'Отличное место для прогулок! Много классных кафе, есть что посмотреть. Особенно понравился вид на воду и современные инсталляции. Вечером здесь очень атмосферно, но лучше приходить в хорошую погоду - летом здесь просто замечательно.', 4, 0, '2026-05-08 14:20:00', '2026-05-08 14:20:00'),
-(4, 4, 'Рыбная деревня (Калининград)', 'Очень атмосферное место с немецкой архитектурой. Красиво особенно вечером, когда зажигается подсветка. Советуем зайти в рыбные лавки - свежая рыба и копчености просто потрясающие. Цены умеренные, сервис хороший.', 4, 0, '2026-05-08 16:00:00', '2026-05-08 16:00:00'),
-(5, 4, 'Исаакиевский собор', 'Великолепный собор! Внутри просто потрясающие фрески и мозаика. Поднялись на колоннаду - вид на Санкт-Петербург невероятный! Советуем посещать в солнечный день. Вход платный, но того стоит. Осматривайте interior внимательно - детали завораживают!', 5, 0, '2026-05-08 17:30:00', '2026-05-08 17:30:00');
 
 -- --------------------------------------------------------
 
@@ -147,6 +161,15 @@ CREATE TABLE `user_saved_tours` (
   `tour_duration` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `user_saved_tours`
+--
+
+INSERT INTO `user_saved_tours` (`id`, `user_id`, `tour_id`, `tour_title`, `tour_image`, `tour_price`, `tour_duration`, `created_at`) VALUES
+(19, 2, 1, 'Классический Петербург', 'img/piter.jpg', '25000', 3, '2026-05-15 12:46:43'),
+(20, 4, 1, 'Классический Петербург', 'img/piter.jpg', '25000', 3, '2026-05-15 14:24:02'),
+(21, 4, 2, 'Петербург - культурная столица', 'img/dostopro.jpg', '32000', 4, '2026-05-15 15:22:51');
 
 -- --------------------------------------------------------
 
@@ -226,25 +249,25 @@ ALTER TABLE `user_surveys`
 -- AUTO_INCREMENT для таблицы `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `route_cards`
 --
 ALTER TABLE `route_cards`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `tours`
 --
 ALTER TABLE `tours`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `user_routes`
@@ -256,7 +279,7 @@ ALTER TABLE `user_routes`
 -- AUTO_INCREMENT для таблицы `user_saved_tours`
 --
 ALTER TABLE `user_saved_tours`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT для таблицы `user_surveys`
