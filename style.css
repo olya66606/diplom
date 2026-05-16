@@ -4,6 +4,7 @@
     padding: 0;
 }
 body{
+  padding-top: 70px;
   background: linear-gradient(135deg, #bcddff54, #98dbb8a1);
   font-family: "Mulish", sans-serif;
 }
@@ -156,7 +157,6 @@ body{
     height: 880px;
     display: flex;
     justify-content: space-around;
-    margin-top: 70px;
 }
 
 .banner-left{
@@ -1610,28 +1610,40 @@ body.modal-open {
   
     .header {
         width: 100%;
-        padding: 0 20px;
+        padding: 0 15px;
     }
     
     .header-left {
         width: auto;
-        gap: 15px;
+        gap: 12px;
     }
     
-    .header a {
-        font-size: 18px;
+    .header a,
+    .header-link {
+        font-size: 16px;
+    }
+    
+    .header-logo {
+        position: static;
+        transform: none;
+        margin: 0 auto;
     }
     
     .header-logo > img {
         margin-right: 0;
         height: 55px;
-        width: 80px;
+        width: auto;
+    }
+    
+    .header-right {
+        width: auto;
+        gap: 10px;
+        padding-right: 0;
     }
     
     .header-right > .lihka {
-        font-size: 18px;
-        width: 150px;
-        padding: 8px;
+        font-size: 16px;
+        padding: 8px 18px;
     }
     
 
@@ -1767,45 +1779,54 @@ body.modal-open {
 @media (max-width: 768px) {
   
     .header {
-        flex-direction: column;
-        height: auto;
-        padding: 12px 15px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: 55px;
+        min-height: 55px;
+        padding: 0 10px;
+        justify-content: space-between;
     }
     
     .header-left {
-        width: 100%;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 10px;
+        width: auto;
+        justify-content: flex-start;
+        gap: 8px;
+        margin-bottom: 0;
     }
     
-    .header a {
-        font-size: 16px;
+    .header a,
+    .header-link {
+        font-size: 13px;
+        padding: 5px 8px;
     }
     
     .header-logo {
-        margin: 5px 0;
+        position: static;
+        transform: none;
+        margin: 0 auto;
+        order: 0;
     }
     
     .header-logo > img {
-        height: 50px;
-        width: 70px;
+        height: 40px;
+        width: auto;
     }
     
     .header-right {
-        width: 100%;
-        justify-content: center;
-        gap: 15px;
+        width: auto;
+        justify-content: flex-end;
+        gap: 6px;
+        padding-right: 0;
     }
     
     .header-right > .lihka {
-        font-size: 16px;
-        width: 130px;
-        padding: 6px;
+        font-size: 13px;
+        padding: 6px 14px;
+        border-width: 1px;
     }
     
     body {
-        padding-top: 130px;
+        padding-top: 55px;
     }
     
 
@@ -2007,24 +2028,40 @@ body.modal-open {
 
 @media (max-width: 480px) {
   
-    .header-left {
-        gap: 12px;
+    .header {
+        height: 50px;
+        min-height: 50px;
+        padding: 0 8px;
     }
     
-    .header a {
-        font-size: 14px;
+    .header-left {
+        gap: 6px;
+    }
+    
+    .header a,
+    .header-link {
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+    
+    .header-logo > img {
+        height: 35px;
+        width: auto;
+    }
+    
+    .header-right {
+        gap: 4px;
+        padding-right: 0;
     }
     
     .header-right > .lihka {
-        width: 110px;
-        font-size: 14px;
-    }
-    .header-right{
-         margin-left: 200px;
+        width: auto;
+        font-size: 12px;
+        padding: 5px 10px;
     }
     
     body {
-        padding-top: 140px;
+        padding-top: 50px;
     }
     
 
@@ -2124,7 +2161,7 @@ body.modal-open {
     .survey-card-wrapper {
         gap: 20px;
     }
-    
+
     .survey-questions-area {
         width: 60%;
     }

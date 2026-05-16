@@ -22,7 +22,6 @@ require_once 'includes/auth_functions.php';
         body { 
             font-family: 'Mulish', sans-serif; 
             background: linear-gradient(135deg, #bcddff54, #98dbb8a1); 
-            padding-top: 90px; 
         }
         .planner-container {
              max-width: 1400px; 
@@ -438,15 +437,6 @@ require_once 'includes/auth_functions.php';
         }
 
         @media (max-width: 768px) {
-            .header-left { 
-                width: auto; 
-            } 
-            .header-logo>img { 
-                margin-right: auto; 
-            } 
-            .header-right { 
-                display: none; 
-            }
             .carousel-card { 
                 flex: 0 0 280px; 
             }

@@ -25,7 +25,7 @@ $user = getCurrentUser();
         body {
              font-family: 'Mulish', sans-serif;
               background: linear-gradient(135deg, #bcddff54, #98dbb8a1); 
-              padding: 20px; 
+              padding: 0 20px;
             }
         .profile-container { 
             max-width: 800px; 
