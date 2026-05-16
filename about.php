@@ -104,165 +104,154 @@ require_once 'includes/auth_functions.php';
     <script src="script.js"></script>
 </body>
 </html>
+
 <style>
-    
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 150px 20px;
+    }
+
+    .cartochki-container >h2 {
+        font-size: 2.0rem;
+        margin-bottom: 20px;
+        color: #1b5031;
+        margin-top: 100px;
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        color: #555;
+    }
+
+    .about {
+        background-color: #fff;
+    }
+
+    .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+    }
 
 
+    .videlit {
+        background-color: #e3f7ee;
+        padding: 15px;
+        border-left: 4px solid #aff5cf;
+        margin: 25px 0;
+    }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 150px 20px;
-}
+    .videlit p {
+        margin-bottom: 0;
+        font-style: italic;
+    }
 
-.cartochki-container >h2 {
-    font-size: 2.0rem;
-    margin-bottom: 20px;
-    color: #1b5031;
-    margin-top: 100px;
-}
+    .about-image {
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
 
-p {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    color: #555;
-}
-
-.about {
-    background-color: #fff;
-}
-
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-}
+    .about-image:hover {
+        transform: translateY(-5px);
+    }
 
 
-.videlit {
-    background-color: #e3f7ee;
-    padding: 15px;
-    border-left: 4px solid #aff5cf;
-    margin: 25px 0;
-}
-
-.videlit p {
-    margin-bottom: 0;
-    font-style: italic;
-}
-
-.about-image {
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.about-image:hover {
-    transform: translateY(-5px);
-}
-
-
-.about-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
+    .about-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
 
 
 
 
+    .cartochki{
+        display: flex;
+        width: 100%;
+        margin: 0 auto;
+        justify-content: center;
+        margin-bottom: 100px;
+    }
 
+    .cartochki h2 {
+        text-align: center;
+        margin-bottom: 50px;
+    }
 
+    .cartochki h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
+    .cartochki-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
 
+    .cartochki-card {
+        background-color: white;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
+    .cartochki-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
 
+    .cartochki-icon>img  {
+        width: 80px;
+        height: 80px;
+        background-color: #e6f4f9;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        color: #1a5f7a;
+        font-size: 2rem;
+    }
 
+    .cartochki-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #1a5f7a;
+    }
 
-.cartochki{
-    display: flex;
-    width: 100%;
-    margin: 0 auto;
-    justify-content: center;
-    margin-bottom: 100px;
-}
+    .cartochki-card p {
+        color: #666;
+    }
 
-.cartochki h2 {
-    text-align: center;
-    margin-bottom: 50px;
-}
+    .cta-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 500;
+        margin-top: 20px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+    }
 
-.cartochki h2::after {
-    left: 50%;
-    transform: translateX(-50%);
-}
+    .cta-button:hover {
+        background:  linear-gradient(135deg, #266d59 0%, #399741 100%);
+        transform: scale(1.05);
+    }
 
-.cartochki-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.cartochki-card {
-    background-color: white;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.cartochki-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.cartochki-icon>img  {
-    width: 80px;
-    height: 80px;
-    background-color: #e6f4f9;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    color: #1a5f7a;
-    font-size: 2rem;
-}
-
-.cartochki-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #1a5f7a;
-}
-
-.cartochki-card p {
-    color: #666;
-}
-
-.cta-button {
-    display: inline-block;
-    background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
-    color: white;
-    padding: 12px 30px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: 500;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.cta-button:hover {
-    background:  linear-gradient(135deg, #266d59 0%, #399741 100%);
-    transform: scale(1.05);
-}
-
-</style>
+    </style>

@@ -1,21 +1,15 @@
 <?php
 require_once __DIR__ . '/../includes/auth_functions.php';
 requireAdmin();
-
 $user = getCurrentUser();
-
-// Получаем статистику
 $pdo = getDbConnection();
-
-// Количество пользователей
 $stmt = $pdo->query("SELECT COUNT(*) as count FROM users");
 $usersCount = $stmt->fetch()['count'];
 
-// Количество туров
+
 $stmt = $pdo->query("SELECT COUNT(*) as count FROM tours");
 $toursCount = $stmt->fetch()['count'];
 
-// Последние регистрации
 $stmt = $pdo->query("SELECT id, name, email, role, created_at FROM users ORDER BY created_at DESC LIMIT 5");
 $recentUsers = $stmt->fetchAll();
 ?>

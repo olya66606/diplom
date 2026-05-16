@@ -1,7 +1,5 @@
 <?php
 require_once 'includes/auth_functions.php';
-
-// Защита страницы - только для авторизованных пользователей
 requireLogin();
 
 $user = getCurrentUser();
@@ -19,7 +17,11 @@ $user = getCurrentUser();
 <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <title>Личный кабинет | Туры Везде</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
         body {
              font-family: 'Mulish', sans-serif;
               background: linear-gradient(135deg, #bcddff54, #98dbb8a1); 
@@ -225,20 +227,20 @@ $user = getCurrentUser();
                 window.location.href = 'auth/logout.php';
             });
             
-            // Загрузка сохраненных маршрутов из конструктора
+           
             loadSavedRoutes();
             
-            // Загрузка сохраненных туров с главной страницы
+           
             loadSavedTours();
         });
             
-// Загрузка сохранённых маршрутов из конструктора
+
         function loadSavedRoutes() {
             const userRoute = document.getElementById('userRoute');
             
-            // Загружаем маршруты из конструктора
+         
             let savedRoutes = JSON.parse(localStorage.getItem('saved_routes')) || [];
-            // Фильтруем: либо source === 'planner', либо это маршрут с places (без id - значит из конструктора)
+            
             const plannerRoutes = savedRoutes.filter(route => 
                 route.source === 'planner' || 
                 (route.places && route.places.length > 0 && !route.id)
@@ -310,7 +312,7 @@ $user = getCurrentUser();
             }
         }
         
-        // Удалить сохранённый маршрут
+    
         function deleteSavedRoute(routeIndex) {
             let savedRoutes = JSON.parse(localStorage.getItem('saved_routes')) || [];
             const plannerRoutes = savedRoutes.filter(route => 
@@ -319,7 +321,7 @@ $user = getCurrentUser();
             );
             const routeToDelete = plannerRoutes[routeIndex];
             
-            // Находим индекс в оригинальном массиве по уникальным полям
+         
             const originalIndex = savedRoutes.findIndex(r => r.name === routeToDelete.name && r.date === routeToDelete.date);
             
             if (originalIndex !== -1) {
@@ -330,11 +332,11 @@ $user = getCurrentUser();
             }
         }
         
-        // Загрузка сохранённых туров с главной страницы
+    
         function loadSavedTours() {
             const container = document.getElementById('savedTours');
             
-            // Загружаем только туры с главной страницы (source === 'main-page')
+        
             let savedTours = JSON.parse(localStorage.getItem('saved_routes')) || [];
             const mainPageTours = savedTours.filter(tour => tour.source === 'main-page');
             
@@ -381,7 +383,7 @@ $user = getCurrentUser();
             const tour = mainPageTours[index];
             
             if (tour && tour.id) {
-                // Переходим на главную страницу с указанием тура
+             
                 showNotification('Открываю страницу тура...');
                 setTimeout(() => {
                     window.location.href = 'index.php?tour=' + tour.id;
@@ -389,12 +391,12 @@ $user = getCurrentUser();
             }
         }
         
-function deleteSavedTour(index) {
+        function deleteSavedTour(index) {
             let savedTours = JSON.parse(localStorage.getItem('saved_routes')) || [];
             const mainPageTours = savedTours.filter(tour => tour.source === 'main-page');
             const tourToDelete = mainPageTours[index];
             
-            // Находим индекс в оригинальном массиве по уникальным полям
+         
             const originalIndex = savedTours.findIndex(t => t.id === tourToDelete.id && t.name === tourToDelete.name);
             
             if (originalIndex !== -1) {

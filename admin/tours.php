@@ -6,7 +6,6 @@ $pdo = getDbConnection();
 $message = '';
 $messageType = '';
 
-// Обработка добавления/редактирования тура
 if (isset($_POST['save_tour'])) {
     $title = $_POST['title'];
     $location = $_POST['location'];
@@ -29,7 +28,6 @@ if (isset($_POST['save_tour'])) {
     $messageType = 'success';
 }
 
-// Обработка удаления
 if (isset($_GET['delete'])) {
     $deleteId = (int)$_GET['delete'];
     $stmt = $pdo->prepare("DELETE FROM tours WHERE id = ?");
@@ -38,11 +36,11 @@ if (isset($_GET['delete'])) {
     $messageType = 'success';
 }
 
-// Получение всех туров
+
 $stmt = $pdo->query("SELECT * FROM tours ORDER BY created_at DESC");
 $tours = $stmt->fetchAll();
 
-// Получение данных для редактирования
+
 $editTour = null;
 if (isset($_GET['edit'])) {
     $editId = (int)$_GET['edit'];

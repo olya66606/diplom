@@ -1,33 +1,21 @@
 <?php
-/**
- * Функции для аутентификации и работы с пользователями
- */
-
-// Запускаем сессию в самом начале
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
 require_once __DIR__ . '/../config/db.php';
 
-/**
- * Регистрация нового пользователя
- */
 function registerUser($name, $email, $password) {
     $pdo = getDbConnection();
     
-    // Проверка существования email
+
     $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
     $stmt->execute([$email]);
     
     if ($stmt->fetch()) {
         return ['success' => false, 'message' => 'Пользователь с таким email уже существует'];
     }
-    
-    // Хеширование пароля
+ 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    
-    // Вставка пользователя в БД
     $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
     
     try {
@@ -38,9 +26,6 @@ function registerUser($name, $email, $password) {
     }
 }
 
-/**
- * Авторизация пользователя
- */
 function loginUser($email, $password) {
     $pdo = getDbConnection();
     
@@ -55,8 +40,7 @@ function loginUser($email, $password) {
     if (!password_verify($password, $user['password'])) {
         return ['success' => false, 'message' => 'Неверный email или пароль'];
     }
-    
-    // Создаем сессию
+
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['user_name'] = $user['name'];
     $_SESSION['user_email'] = $user['email'];
@@ -68,16 +52,11 @@ function loginUser($email, $password) {
     ]];
 }
 
-/**
- * Проверка, авторизован ли пользователь
- */
+
 function isLoggedIn() {
     return isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
 }
 
-/**
- * Получение данных текущего пользователя
- */
 function getCurrentUser() {
     if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
         return null;
@@ -98,9 +77,6 @@ function getCurrentUser() {
     return null;
 }
 
-/**
- * Выход из системы
- */
 function logoutUser() {
     if (session_status() !== PHP_SESSION_NONE) {
         $_SESSION = array();
@@ -108,9 +84,7 @@ function logoutUser() {
     }
 }
 
-/**
- * Проверка, является ли пользователь администратором
- */
+
 function isAdmin() {
     if (!isLoggedIn()) {
         return false;
@@ -124,9 +98,7 @@ function isAdmin() {
     return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
 }
 
-/**
- * Защита админ-страницы - только для администраторов
- */
+
 function requireAdmin() {
     if (!isAdmin()) {
         header('Location: /index.php');
@@ -134,9 +106,6 @@ function requireAdmin() {
     }
 }
 
-/**
- * Защита страницы - перенаправление на вход если не авторизован
- */
 function requireLogin() {
     if (!isLoggedIn()) {
         header('Location: /auth/login.php');
@@ -144,26 +113,20 @@ function requireLogin() {
     }
 }
 
-/**
- * Сохранение маршрута пользователя
- */
 function saveUserRoute($userId, $placeName, $placeOrder) {
     $pdo = getDbConnection();
     
-    // Удаляем старый маршрут для этого пользователя
+
     $stmt = $pdo->prepare("DELETE FROM user_routes WHERE user_id = ?");
     $stmt->execute([$userId]);
-    
-    // Сохраняем новый маршрут
+
     $stmt = $pdo->prepare("INSERT INTO user_routes (user_id, place_name, place_order) VALUES (?, ?, ?)");
     $stmt->execute([$userId, $placeName, $placeOrder]);
     
     return true;
 }
 
-/**
- * Получение маршрута пользователя
- */
+
 function getUserRoute($userId) {
     $pdo = getDbConnection();
     
@@ -173,17 +136,14 @@ function getUserRoute($userId) {
     return $stmt->fetchAll();
 }
 
-/**
- * Сохранение ответа на опрос
- */
+
 function saveUserSurvey($userId, $data) {
     $pdo = getDbConnection();
     
-    // Удаляем старый опрос пользователя
+   
     $stmt = $pdo->prepare("DELETE FROM user_surveys WHERE user_id = ?");
     $stmt->execute([$userId]);
     
-    // Сохраняем новый
     $stmt = $pdo->prepare("INSERT INTO user_surveys (user_id, city, travelers, budget, start_date, end_date, interests) 
                            VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([

@@ -13,9 +13,16 @@ require_once 'includes/auth_functions.php';
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Истории местных | Туры Везде</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Mulish', sans-serif; background: linear-gradient(135deg, #bcddff54, #98dbb8a1);  }
+    <style> 
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        body { 
+            font-family: 'Mulish', sans-serif; 
+            background: linear-gradient(135deg, #bcddff54, #98dbb8a1);  
+        }
 
         .banner {
             background: url(img/fonbaner.jpg);
@@ -45,117 +52,495 @@ require_once 'includes/auth_functions.php';
             margin: 500px 10px 100px 101px;
         }
 
-        .banner-content { max-width: 800px; color:black; margin-left:200px;}
-        .banner h1 { font-size: 2.8rem; margin-bottom: 16px; font-weight: 800; }
-        .banner p { font-size: 1.15rem; opacity: 0.95; margin-bottom: 28px; line-height: 1.6; }
-        .banner-stats { display: flex; gap: 70px; justify-content: center; flex-wrap: wrap; }
-        .banner-stat { background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 12px 28px; border-radius: 50px; font-weight: 600; border: 1px solid rgba(255,255,255,0.25); }
+        .banner-content { 
+            max-width: 800px; 
+            color:black; 
+            margin-left:100px;
+        }
+        .banner h1 { 
+            font-size: 2.8rem; 
+            margin-bottom: 16px; 
+            font-weight: 800; 
+        }
+        .banner p { 
+            font-size: 1.15rem; 
+            opacity: 0.95; 
+            margin-bottom: 28px; 
+            line-height: 1.6; 
+        }
+        .banner-stats { 
+            display: flex; 
+            gap: 70px; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+        }
+        .banner-stat { 
+            background: rgba(255,255,255,0.15); 
+            backdrop-filter: blur(10px); 
+            padding: 12px 28px; 
+            border-radius: 50px; 
+            font-weight: 600; 
+            border: 1px solid rgba(255,255,255,0.25); 
+        }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+        }
 
-        .section { margin: 50px 0; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 15px; }
-        .section-header h2 { color: #1b5031; font-size: 1.8rem; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .section { 
+            margin: 50px 0; 
+        }
+        .section-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 28px; flex-wrap: 
+            wrap; gap: 15px; 
+        }
+        .section-header h2 { 
+            color: #1b5031; 
+            font-size: 1.8rem; 
+            font-weight: 700; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
 
-        /* Карусель историй */
-        .carousel-nav { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px; }
-        .carousel-btn { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #e8ecf1; background: white;
-            color: #2e8d53; font-size: 1.3rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
-        .carousel-btn:hover { background: linear-gradient(135deg, #266d59 0%, #3a8340 100%); border-color: transparent; color: white; }
-        .carousel-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
-        .carousel-counter { font-size: 1.1rem; font-weight: 700; color: #2e8d53; }
-        .carousel-wrapper { overflow: hidden; padding: 10px 0; }
-        .carousel-track { display: flex; gap: 20px; transition: transform 0.4s ease; }
+   
 
-        .story-card { flex: 0 0 380px; background: white; border-radius: 24px; padding: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            transition: all 0.3s; border: 2px solid transparent; display: flex; flex-direction: column; }
-        .story-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); border-color: #d4f0e4; }
+        .carousel-nav { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 20px; 
+            margin-bottom: 20px; 
+        }
+        .carousel-btn { 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            border: 2px solid #e8ecf1; 
+            background: white;
+            color: #2e8d53; 
+            font-size: 1.3rem; 
+            cursor: pointer;
+            transition: all 0.3s; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .carousel-btn:hover { 
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%); 
+            border-color: transparent; 
+            color: white; 
+        }
+        .carousel-btn:disabled { 
+            opacity: 0.3; 
+            cursor: not-allowed; 
+            transform: none; 
+        }
+        .carousel-counter { 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: #2e8d53; 
+        }
+        .carousel-wrapper { 
+            overflow: hidden; 
+            padding: 10px 0; 
+        }
+        .carousel-track { 
+            display: flex; 
+            gap: 20px; 
+            transition: transform 0.4s ease; 
+        }
 
-        .story-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-        .story-avatar { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem; font-weight: 800; color: white; flex-shrink: 0; }
-        .story-meta { flex: 1; }
-        .story-author { font-weight: 700; color: #1b5031; font-size: 1rem; }
-        .story-city-date { font-size: 0.8rem; color: #888; margin-top: 2px; }
-        .story-category-badge { padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
-            background: #f0fff4; color: #2e8d53; border: 1px solid #d4f0e4; }
+        .story-card { 
+            flex: 0 0 380px; 
+            background: white; 
+            border-radius: 24px; 
+            padding: 28px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: all 0.3s; 
+            border: 2px solid transparent; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .story-card:hover { 
+            transform: translateY(-6px); 
+            box-shadow: 0 16px 40px rgba(0,0,0,0.1); 
+            border-color: #d4f0e4; 
+        }
 
-        .story-title { font-size: 1.25rem; color: #1b5031; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
-        .story-text { color: #555; font-size: 0.92rem; line-height: 1.7; margin-bottom: 18px; flex: 1; }
+        .story-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 14px; 
+            margin-bottom: 18px; 
+        }
+        .story-avatar { 
+            width: 52px; height: 52px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: white; 
+            lex-shrink: 0; 
+        }
+        .story-meta { 
+            flex: 1; 
+        }
+        .story-author { 
+            font-weight: 700; 
+            color: #1b5031; 
+            font-size: 1rem; 
+        }
+        .story-city-date { 
+            font-size: 0.8rem; 
+            color: #888; 
+            margin-top: 2px; 
+        }
+        .story-category-badge { 
+            padding: 5px 14px; 
+            border-radius: 20px; 
+            font-size: 0.75rem; 
+            font-weight: 700;
+            background: #f0fff4; 
+            color: #2e8d53; 
+            border: 1px solid #d4f0e4; 
+        }
 
-        .story-place { background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf1 100%); padding: 14px 18px; border-radius: 16px; margin-bottom: 18px; }
-        .story-place-name { font-weight: 700; color: #1b5031; font-size: 0.95rem; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-        .story-place-address { font-size: 0.82rem; color: #666; }
+        .story-title { 
+            font-size: 1.25rem; 
+            color: #1b5031; 
+            font-weight: 800; 
+            margin-bottom: 10px; 
+            line-height: 1.3; 
+        }
+        .story-text { 
+            color: #555; 
+            font-size: 0.92rem; 
+            line-height: 1.7; 
+            margin-bottom: 18px; 
+            flex: 1; 
+        }
 
-        .story-actions { display: flex; gap: 10px; padding-top: 16px; border-top: 1px solid #f0f2f5; }
-        .story-btn { flex: 1; padding: 10px; border-radius: 14px; border: none; cursor: pointer; font-weight: 600;
-            font-family: 'Mulish', sans-serif; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.85rem; }
-        .btn-like { background: #fff5f5; color: #ff6b6b; border: 2px solid #ffe0e0; }
-        .btn-like:hover, .btn-like.liked { background: #ff6b6b; color: white; border-color: transparent; }
-        .btn-save { background: #f0fff4; color: #2e8d53; border: 2px solid #d4f0e4; }
-        .btn-save:hover { background: linear-gradient(135deg, #266d59 0%, #3a8340 100%); color: white; border-color: transparent; }
+        .story-place { 
+            background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf1 100%); 
+            padding: 14px 18px; 
+            border-radius: 16px; 
+            margin-bottom: 18px; 
+        }
+        .story-place-name { 
+            font-weight: 700; 
+            color: #1b5031; 
+            font-size: 0.95rem; 
+            margin-bottom: 4px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+    
+        .story-place-address { 
+        font-size: 0.82rem; 
+        color: #666; 
+    }
 
-        /* Блогеры */
-        .bloggers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-        .blogger-card { background: white; border-radius: 24px; padding: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            transition: all 0.3s; border: 2px solid transparent; }
-        .blogger-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); border-color: #d4f0e4; }
+        .story-actions { 
+            display: flex; 
+            gap: 10px; 
+            padding-top: 16px; 
+            border-top: 1px solid #f0f2f5; 
+        }
+        .story-btn { 
+            flex: 1; 
+            padding: 10px; 
+            border-radius: 14px; 
+            border: none; 
+            cursor: pointer; 
+            font-weight: 600;
+            font-family: 'Mulish', sans-serif; 
+            transition: all 0.3s; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 6px; 
+            font-size: 0.85rem; 
+        }
+        .btn-like { 
+            background: #fff5f5; 
+            color: #ff6b6b; 
+            border: 2px solid #ffe0e0; 
+        }
+        .btn-like:hover, .btn-like.liked { 
+            background: #ff6b6b; 
+            color: white; 
+            border-color: transparent; 
+        }
+        .btn-save { 
+            background: #f0fff4; 
+            color: #2e8d53; 
+            border: 2px solid #d4f0e4; 
+        }
+        .btn-save:hover { b
+        ackground: linear-gradient(135deg, #266d59 0%, #3a8340 100%); 
+        color: white; 
+        border-color: transparent; 
+    }
 
-        .blogger-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-        .blogger-avatar { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 1.6rem; font-weight: 800; color: white; flex-shrink: 0; }
-        .blogger-info { flex: 1; }
-        .blogger-name { font-weight: 800; color: #1b5031; font-size: 1.15rem; }
-        .blogger-role { font-size: 0.85rem; color: #2e8d53; font-weight: 600; margin-top: 2px; }
+        .bloggers-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+            gap: 24px; 
+        }
+        .blogger-card { 
+            background: white; 
+            border-radius: 24px; 
+            padding: 28px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: all 0.3s; 
+            border: 2px solid transparent; 
+        }
+        .blogger-card:hover { 
+            transform: translateY(-6px); 
+            box-shadow: 0 16px 40px rgba(0,0,0,0.1); 
+            border-color: #d4f0e4; 
+        }
 
-        .blogger-title { font-size: 1.1rem; color: #1b5031; font-weight: 700; margin-bottom: 14px; }
-        .blogger-places { display: flex; flex-direction: column; gap: 10px; }
-        .blogger-place { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: #f8f9fc; border-radius: 14px; transition: all 0.3s; }
-        .blogger-place:hover { background: #f0fff4; }
-        .blogger-place-num { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
-            color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0; }
-        .blogger-place-info { flex: 1; }
-        .blogger-place-name { font-weight: 700; color: #1b5031; font-size: 0.92rem; }
-        .blogger-place-desc { font-size: 0.8rem; color: #888; margin-top: 2px; }
-        .blogger-place-save { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #d4f0e4; background: white;
-            color: #2e8d53; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: all 0.3s; flex-shrink: 0; }
-        .blogger-place-save:hover { background: linear-gradient(135deg, #266d59 0%, #3a8340 100%); color: white; border-color: transparent; }
+        .blogger-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 16px; 
+            margin-bottom: 20px; 
+        }
+        .blogger-avatar { 
+            width: 64px; 
+            height: 64px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-size: 1.6rem; 
+            font-weight: 800; 
+            color: white; 
+            flex-shrink: 0; 
+        }
+        .blogger-info { 
+            flex: 1; 
+        }
+        .blogger-name { 
+            font-weight: 800; 
+            color: #1b5031; 
+            font-size: 1.15rem; 
+        }
+        .blogger-role { 
+            font-size: 0.85rem; 
+            color: #2e8d53; 
+            font-weight: 600; 
+            margin-top: 2px; 
+        }
 
-        /* Форма */
-        .form-section { background: white; border-radius: 24px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-bottom: 60px; }
-        .form-section h2 { color: #1b5031; font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; text-align: center; }
-        .form-section > p { text-align: center; color: #666; margin-bottom: 30px; font-size: 0.95rem; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-weight: 600; color: #333; margin-bottom: 8px; font-size: 0.9rem; }
-        .form-control { width: 100%; padding: 14px 18px; border: 2px solid #e8ecf1; border-radius: 16px; font-size: 1rem;
-            font-family: 'Mulish', sans-serif; background: white; transition: all 0.3s; }
-        .form-control:focus { outline: none; border-color: #2e8d53; box-shadow: 0 0 0 3px rgba(46,141,83,0.1); }
-        textarea.form-control { resize: vertical; min-height: 100px; }
-        .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 42px; }
-        .submit-btn { background: linear-gradient(135deg, #266d59 0%, #3a8340 100%); color: white; border: none; padding: 16px 30px;
-            border-radius: 50px; font-size: 1.05rem; font-weight: 600; cursor: pointer; width: 100%; transition: all 0.3s;
-            display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Mulish', sans-serif; margin-top: 10px; }
-        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(46,141,83,0.3); }
+        .blogger-title { 
+            font-size: 1.1rem; 
+            color: #1b5031; 
+            font-weight: 700; 
+            margin-bottom: 14px; 
+        }
+        .blogger-places { 
+            display: flex; 
+            flex-direction: 
+            column; 
+            gap: 10px; }
+        .blogger-place { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            padding: 12px 14px; 
+            background: #f8f9fc; 
+            border-radius: 14px; 
+            transition: all 0.3s; 
+        }
+        .blogger-place:hover { 
+            background: #f0fff4; 
+        }
+        .blogger-place-num { 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%;
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 800; 
+            font-size: 0.85rem; 
+            flex-shrink: 0; 
+        }
+        .blogger-place-info { 
+            flex: 1; 
+        }
+        .blogger-place-name { 
+            font-weight: 700; 
+            color: #1b5031; 
+            font-size: 0.92rem; 
+        }
+        .blogger-place-desc { 
+            font-size: 0.8rem; 
+            color: #888; 
+            margin-top: 2px; 
+        }
+        .blogger-place-save { 
+            width: 36px; height: 36px;
+            border-radius: 50%; 
+            border: 2px solid #d4f0e4; 
+            background: white;
+            color: #2e8d53; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            transition: all 0.3s; 
+            flex-shrink: 0; 
+        }
+        .blogger-place-save:hover { 
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%); 
+            color: white; 
+            border-color: transparent; 
+        }
 
-        .toast-notification { position: fixed; bottom: 30px; right: 30px; background: #2e8d53; color: white;
-            padding: 14px 24px; border-radius: 50px; font-weight: 500; z-index: 2000;
-            animation: slideInRight 0.3s ease; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
-        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    
+        .form-section { 
+            background: white; 
+            border-radius: 24px; 
+            padding: 40px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
+            margin-bottom: 60px; 
+        }
+        .form-section h2 { 
+            color: #1b5031; 
+            font-size: 1.6rem; 
+            font-weight: 700; 
+            margin-bottom: 8px; 
+            text-align: center; 
+        }
+        .form-section > p { 
+            text-align: center; 
+            color: #666; 
+            margin-bottom: 30px; 
+            font-size: 0.95rem; 
+        }
+        .form-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr;
+            gap: 20px; 
+            }
+        .form-group { 
+            margin-bottom: 20px; 
+        }
+        .form-group label { 
+            display: block; 
+            font-weight: 600; 
+            color: #333; 
+            margin-bottom: 8px; 
+            font-size: 0.9rem; 
+        }
+        .form-control { 
+            width: 100%; 
+            padding: 14px 18px; 
+            border: 2px solid #e8ecf1; 
+            border-radius: 16px; 
+            font-size: 1rem;
+            font-family: 'Mulish', sans-serif; 
+            background: white; 
+            transition: all 0.3s; 
+        }
 
-        .empty-state { text-align: center; padding: 60px 20px; background: white; border-radius: 24px; }
-        .empty-state i { font-size: 3.5rem; color: #2e8d53; margin-bottom: 20px; }
-        .empty-state h3 { font-size: 1.5rem; color: #1b5031; margin-bottom: 10px; }
-        .empty-state p { color: #666; }
+    
+        .submit-btn { 
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%); 
+            color: white; 
+            border: none; 
+            padding: 16px 30px;
+            border-radius: 50px; 
+            font-size: 1.05rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            width: 100%; 
+            transition: all 0.3s;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            font-family: 'Mulish', sans-serif; 
+            margin-top: 10px; 
+        }
+
+        .toast-notification { 
+            position: fixed; 
+            bottom: 30px; right: 30px;
+             background: #2e8d53; 
+            color: white;
+            padding: 14px 24px; 
+            border-radius: 50px; 
+            font-weight: 500; 
+            z-index: 2000;
+            animation: slideInRight 0.3s ease; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2); 
+        }
+        @keyframes slideInRight { 
+            from { 
+                transform: translateX(100%); 
+                opacity: 0; } 
+                to { 
+                    transform: translateX(0); 
+                    opacity: 1; 
+                } 
+            }
+
+        .empty-state { 
+            text-align: center; 
+            padding: 60px 20px; 
+            background: white; 
+            border-radius: 24px; 
+        }
+        .empty-state i { 
+            font-size: 3.5rem; 
+            color: #2e8d53; 
+            margin-bottom: 20px; 
+        }
+        .empty-state h3 { 
+            ont-size: 1.5rem; 
+            color: #1b5031; 
+            margin-bottom: 10px; 
+        }
+        .empty-state p { 
+            color: #666; 
+        }
 
         @media (max-width: 768px) {
-            .banner h1 { font-size: 2rem; }
-            .section-header h2 { font-size: 1.4rem; }
-            .story-card { flex: 0 0 300px; padding: 20px; }
-            .form-section { padding: 24px; }
-            .carousel-nav { gap: 12px; }
-            .bloggers-grid { grid-template-columns: 1fr; }
+            .banner h1 { 
+                font-size: 2rem; 
+            }
+            .section-header h2 { 
+                font-size: 1.4rem; 
+            }
+            .story-card { 
+                flex: 0 0 300px; 
+                padding: 20px; 
+            }
+            .form-section { 
+                padding: 24px; 
+            }
+            .carousel-nav { 
+                gap: 12px; 
+            }
+
+            .bloggers-grid { 
+                grid-template-columns: 1fr; 
+            }
         }
     </style>
 </head>
@@ -172,7 +557,6 @@ require_once 'includes/auth_functions.php';
             <div class="banner-stats">
                 <div class="banner-stat"><i class="bi bi-people-fill"></i> <span id="authorsCount">12</span> авторов</div>
                 <div class="banner-stat"><i class="bi bi-journal-text"></i> <span id="storiesCount">48</span> историй</div>
-                <div class="banner-stat"><i class="bi bi-geo-alt-fill"></i> <span id="citiesCount">4</span> города</div>
             </div>
         </div>
         <img class="foto5" src="img/sever.webp" alt="">
@@ -206,12 +590,12 @@ require_once 'includes/auth_functions.php';
                             <label>Категория</label>
                             <select class="form-control form-select" id="storyCategory" required>
                                 <option value="">Выбери категорию</option>
-                                <option value="coffee">☕ Кофе и завтраки</option>
-                                <option value="walk">🚶 Прогулки</option>
-                                <option value="secret">🔒 Секретные места</option>
-                                <option value="romantic">💕 Романтика</option>
-                                <option value="food">🍽 Еда</option>
-                                <option value="view">🌅 Виды</option>
+                                <option value="coffee">Кофе и завтраки</option>
+                                <option value="walk">Прогулки</option>
+                                <option value="secret">Секретные места</option>
+                                <option value="romantic">Романтика</option>
+                                <option value="food">Еда</option>
+                                <option value="view">Виды</option>
                             </select>
                         </div>
                     </div>
@@ -242,7 +626,7 @@ require_once 'includes/auth_functions.php';
     <?php include 'includes/footer.php'; ?>
 
     <script>
-        // ====== ДАННЫЕ ======
+       
         const categoryConfig = {
             coffee:  { icon: 'bi-cup-hot', label: 'Кофе', color: '#8B4513', bg: '#fdf5ef' },
             walk:    { icon: 'bi-person-walking', label: 'Прогулки', color: '#2e8d53', bg: '#f0fff4' },
@@ -274,7 +658,7 @@ require_once 'includes/auth_functions.php';
             return stories.filter(s => s.city === currentCityId);
         }
 
-        // ====== БЛОГЕРЫ ======
+
         const bloggersData = [
             {
                 id: 'anna-spb', name: 'Анна Петрова', city: 'saint-petersburg', cityName: 'Санкт-Петербург',
@@ -562,7 +946,7 @@ require_once 'includes/auth_functions.php';
             requestAnimationFrame(updateCarouselUI);
         }
 
-        // ====== КАРУСЕЛЬ ======
+  
         function updateCarouselUI() {
             const track = document.getElementById('storiesTrack');
             const cards = track.querySelectorAll('.story-card');
@@ -592,7 +976,7 @@ require_once 'includes/auth_functions.php';
 
         window.addEventListener('resize', () => { carouselIndex = 0; updateCarouselUI(); });
 
-        // ====== ДЕЙСТВИЯ ======
+
         window.toggleLike = function(id) {
             const story = stories.find(s => s.id === id);
             if (!story) return;
@@ -627,7 +1011,7 @@ require_once 'includes/auth_functions.php';
             }
         };
 
-        // ====== ФОРМА ======
+
         document.getElementById('storyForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -653,7 +1037,7 @@ require_once 'includes/auth_functions.php';
             showNotification('✓ История опубликована!');
         });
 
-        // ====== УТИЛИТЫ ======
+  
         function showNotification(msg, isError) {
             const n = document.createElement('div');
             n.className = 'toast-notification';
