@@ -50,13 +50,6 @@
                             <button class="city-option" data-city="kaliningrad">
                                 <i class="bi bi-tree"></i> Калининград
                             </button>  
-                            <button class="city-option" data-city="moscow">
-                                <i class="bi bi-star"></i> Москва
-                            </button>
-                          
-                            <button class="city-option" data-city="sochi">
-                                <i class="bi bi-sun"></i> Сочи
-                            </button>
                         </div>
                     </div>
                 </div>
