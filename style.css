@@ -933,6 +933,17 @@ body.modal-open {
     }
 }
     
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 .close-modal {
     position: absolute;
     right: 20px;
@@ -1019,7 +1030,7 @@ body.modal-open {
         transform: translateY(0);
     }
 }
-
+    
 .tour-places-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

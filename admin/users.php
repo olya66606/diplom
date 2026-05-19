@@ -33,6 +33,41 @@ if (isset($_POST['update_role'])) {
     $messageType = 'success';
 }
 
+// Обработка редактирования пользователя
+if (isset($_POST['edit_user'])) {
+    $userId = (int)$_POST['user_id'];
+    $newName = trim($_POST['name']);
+    $newEmail = trim($_POST['email']);
+    $newRole = $_POST['role'];
+    
+    if (!empty($newName) && !empty($newEmail)) {
+        // Проверка email на уникальность
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? AND id != ?");
+        $stmt->execute([$newEmail, $userId]);
+        if ($stmt->rowCount() > 0) {
+            $message = 'Email уже используется';
+            $messageType = 'error';
+        } else {
+            $stmt = $pdo->prepare("UPDATE users SET name = ?, email = ?, role = ? WHERE id = ?");
+            $stmt->execute([$newName, $newEmail, $newRole, $userId]);
+            $message = 'Пользователь обновлён';
+            $messageType = 'success';
+        }
+    } else {
+        $message = 'Заполните все поля';
+        $messageType = 'error';
+    }
+}
+
+// Получение данных пользователя для редактирования
+$editUser = null;
+if (isset($_GET['edit'])) {
+    $editId = (int)$_GET['edit'];
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->execute([$editId]);
+    $editUser = $stmt->fetch();
+}
+
 // Получение всех пользователей
 $stmt = $pdo->query("SELECT * FROM users ORDER BY created_at DESC");
 $users = $stmt->fetchAll();

@@ -864,7 +864,12 @@ const totalSteps = 5;
 function updateSurveySummary() {
     const cityName = answers.city ? getCityDisplayName(answers.city) : 'не выбран';
     document.getElementById('summary-country').textContent = cityName;
-    document.getElementById('summary-travelers').textContent = answers.travelers || 'не выбрано';
+    document.getElementById('summary-country').style.color = answers.city ? '#1b5031' : '#999';
+    
+    const travelersText = answers.travelers || 'не выбрано';
+    document.getElementById('summary-travelers').textContent = travelersText;
+    document.getElementById('summary-travelers').style.color = answers.travelers ? '#1b5031' : '#999';
+    
     document.getElementById('summary-budget').textContent = answers.budget.toLocaleString('ru-RU');
     
     let datesText = 'не выбраны';
@@ -872,9 +877,11 @@ function updateSurveySummary() {
         datesText = `${answers.startDate} — ${answers.endDate}`;
     }
     document.getElementById('summary-dates').textContent = datesText;
+    document.getElementById('summary-dates').style.color = (answers.startDate && answers.endDate) ? '#1b5031' : '#999';
     
     let interestsText = answers.interests.length > 0 ? answers.interests.join(', ') : 'не выбраны';
     document.getElementById('summary-interests').textContent = interestsText;
+    document.getElementById('summary-interests').style.color = answers.interests.length > 0 ? '#1b5031' : '#999';
 }
 
 // Переход на шаг
@@ -1070,6 +1077,10 @@ function initNewSurvey() {
     
     // Кнопка сброса
     document.getElementById('reset-form')?.addEventListener('click', function() {
+        // Анимация кнопки
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => this.style.transform = '', 150);
+        
         // Сброс данных
         answers = {
             city: null,
@@ -1099,6 +1110,9 @@ function initNewSurvey() {
         if (toursContainer) {
             toursContainer.classList.add('hidden');
         }
+        
+        // Показываем уведомление о сбросе
+        showNotification('✏️ Все параметры сброшены');
     });
     
     // Установка минимальных дат
