@@ -382,13 +382,101 @@ $user = getCurrentUser();
             const mainPageTours = savedTours.filter(tour => tour.source === 'main-page');
             const tour = mainPageTours[index];
             
-            if (tour && tour.id) {
-             
-                showNotification('Открываю страницу тура...');
-                setTimeout(() => {
-                    window.location.href = 'index.php?tour=' + tour.id;
-                }, 500);
+            if (!tour) return;
+            
+            // Создаем модальное окно если нет
+            let tourModal = document.getElementById('tourModal');
+            if (!tourModal) {
+                tourModal = document.createElement('div');
+                tourModal.id = 'tourModal';
+                tourModal.className = 'tour-modal';
+                tourModal.innerHTML = `
+                    <div class="tour-modal-content">
+                        <span class="tour-modal-close">&times;</span>
+                        <div class="tour-modal-body"></div>
+                    </div>
+                `;
+                document.body.appendChild(tourModal);
+                
+                tourModal.querySelector('.tour-modal-close').addEventListener('click', () => {
+                    tourModal.style.display = 'none';
+                    document.body.style.overflow = '';
+                });
+                
+                tourModal.addEventListener('click', (e) => {
+                    if (e.target === tourModal) {
+                        tourModal.classList.remove('show');
+                        document.body.style.overflow = '';
+                    }
+                });
             }
+            
+            const modalBody = tourModal.querySelector('.tour-modal-body');
+            modalBody.innerHTML = `
+                <div class="tour-modal-header">
+                    <div class="tour-modal-image" style="background-image: url('${tour.image}')"></div>
+                    <div class="tour-modal-info">
+                        <h2>${tour.title || tour.name}</h2>
+                        <div class="tour-modal-meta">
+                            ${tour.badge ? `<span class="tour-badge">${tour.badge}</span>` : ''}
+                            ${tour.rating ? `<span class="tour-rating"><i class="bi bi-star-fill"></i> ${tour.rating} ${tour.reviews ? `(${tour.reviews})` : ''}</span>` : ''}
+                        </div>
+                    </div>
+                </div>
+                <div class="tour-modal-body-content">
+                    ${tour.places && tour.places.length > 0 ? `
+                    <div class="tour-modal-section">
+                        <h3><i class="bi bi-map"></i> Места программы</h3>
+                        <ul class="tour-places-list">
+                            ${tour.places.map(p => `<li><i class="bi bi-geo-alt"></i> ${p}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ` : ''}
+                    ${tour.includes && tour.includes.length > 0 ? `
+                    <div class="tour-modal-section">
+                        <h3><i class="bi bi-check-circle"></i> Что входит</h3>
+                        <ul class="tour-includes-list">
+                            ${tour.includes.map(i => `<li><i class="bi bi-check-lg"></i> ${i}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ` : ''}
+                    ${tour.schedule && tour.schedule.length > 0 ? `
+                    <div class="tour-modal-section">
+                        <h3><i class="bi bi-calendar-event"></i> Программа по дням</h3>
+                        <div class="tour-schedule">
+                            ${tour.schedule.map((d, i) => `<div class="schedule-day"><strong>День ${i+1}:</strong> ${d}</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    <div class="tour-modal-stats">
+                        ${tour.totalTime ? `
+                        <div class="tour-stat"><i class="bi bi-clock-history"></i><div><strong>Время</strong><span>${tour.totalTime}</span></div></div>
+                        ` : ''}
+                        ${tour.groupSize ? `
+                        <div class="tour-stat"><i class="bi bi-people"></i><div><strong>Группа</strong><span>${tour.groupSize}</span></div></div>
+                        ` : ''}
+                        ${tour.difficulty ? `
+                        <div class="tour-stat"><i class="bi bi-pedestrian"></i><div><strong>Нагрузка</strong><span>${tour.difficulty}</span></div></div>
+                        ` : ''}
+                        ${tour.price ? `
+                        <div class="tour-stat"><i class="bi bi-cash-coin"></i><div><strong>Цена</strong><span>${parseInt(tour.price).toLocaleString('ru-RU')} ₽</span></div></div>
+                        ` : ''}
+                    </div>
+                    <div class="tour-modal-actions">
+                        <button class="tour-modal-btn-close" id="closeTourModal">
+                            <i class="bi bi-x-lg"></i> Закрыть
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            tourModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            document.getElementById('closeTourModal').addEventListener('click', () => {
+                tourModal.style.display = 'none';
+                document.body.style.overflow = '';
+            });
         }
         
         function deleteSavedTour(index) {

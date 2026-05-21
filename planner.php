@@ -436,7 +436,274 @@ require_once 'includes/auth_functions.php';
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5253 100%); 
         }
 
+        /* ===== Модальное окно параметров ===== */
+        .edit-params-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 20px auto 0;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Mulish', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(46,141,83,0.3);
+        }
+        .edit-params-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46,141,83,0.4);
+        }
+        .params-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 80px;
+            backdrop-filter: blur(5px);
+        }
+        .params-modal.show {
+            display: flex;
+            animation: modalFadeIn 0.3s ease;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .params-modal-content {
+            background: white;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 520px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            animation: modalSlideDown 0.3s ease;
+        }
+        @keyframes modalSlideDown {
+            from { transform: translateY(-40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .params-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 28px 16px;
+            border-bottom: 2px solid #e8ecf1;
+        }
+        .params-modal-header h3 {
+            color: #1b5031;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .close-params-modal {
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            width: 36px; height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        .close-params-modal:hover {
+            background: #f0f2f5;
+            color: #333;
+        }
+        .params-modal-body {
+            padding: 24px 28px;
+        }
+        .param-group {
+            margin-bottom: 22px;
+        }
+        .param-group label {
+            display: block;
+            font-weight: 600;
+            color: #1b5031;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .param-group label i {
+            color: #2e8d53;
+        }
+        .param-select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e8ecf1;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: 'Mulish', sans-serif;
+            background: white;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .param-select:focus {
+            border-color: #2e8d53;
+            box-shadow: 0 0 0 3px rgba(46,141,83,0.1);
+            outline: none;
+        }
+        .travelers-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .traveler-option {
+            flex: 1;
+            min-width: 60px;
+            padding: 12px;
+            border: 2px solid #e8ecf1;
+            border-radius: 14px;
+            background: white;
+            font-family: 'Mulish', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #444;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .traveler-option:hover {
+            border-color: #2e8d53;
+            background: #f0fff4;
+        }
+        .traveler-option.selected {
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 5px 15px rgba(46,141,83,0.3);
+        }
+        .param-group input[type="range"] {
+            width: 100%;
+            height: 6px;
+            -webkit-appearance: none;
+            background: #e8ecf1;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .param-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px; height: 22px;
+            background: #2e8d53;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(46,141,83,0.4);
+        }
+        .budget-display {
+            text-align: center;
+            font-weight: 700;
+            color: #2e8d53;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        .budget-presets {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .budget-preset {
+            padding: 8px 16px;
+            border: 2px solid #e8ecf1;
+            border-radius: 12px;
+            background: white;
+            font-family: 'Mulish', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .budget-preset:hover {
+            border-color: #2e8d53;
+            background: #f0fff4;
+            color: #2e8d53;
+        }
+        .dates-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .param-date {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e8ecf1;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: 'Mulish', sans-serif;
+            transition: all 0.3s;
+        }
+        .param-date:focus {
+            border-color: #2e8d53;
+            outline: none;
+        }
+        .params-modal-footer {
+            display: flex;
+            gap: 12px;
+            padding: 16px 28px 24px;
+            border-top: 1px solid #e8ecf1;
+        }
+        .modal-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 50px;
+            font-family: 'Mulish', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(46,141,83,0.3);
+        }
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46,141,83,0.4);
+        }
+        .modal-btn-secondary {
+            background: #f8f9fc;
+            color: #666;
+            border: 2px solid #e8ecf1;
+        }
+        .modal-btn-secondary:hover {
+            background: #e8ecf1;
+        }
+
         @media (max-width: 768px) {
+            .params-modal {
+                padding-top: 60px;
+                align-items: flex-end;
+            }
+            .params-modal-content {
+                border-radius: 24px 24px 0 0;
+                max-height: 90vh;
+                width: 100%;
+            }
+            .dates-grid {
+                grid-template-columns: 1fr;
+            }
             .carousel-card { 
                 flex: 0 0 280px; 
             }
@@ -444,7 +711,7 @@ require_once 'includes/auth_functions.php';
                 height: 180px; 
             }
             .route-stats { 
-                rid-template-columns: 1fr; 
+                grid-template-columns: 1fr; 
             }
             .action-buttons { 
                 flex-direction: column; 
@@ -484,6 +751,61 @@ require_once 'includes/auth_functions.php';
                 <div class="city-info-item">
                     <i class="bi bi-calendar-fill"></i>
                     <div class="city-info-text"><h4>Даты</h4><p id="travelDates">не выбраны</p></div>
+                </div>
+            </div>
+            <button class="edit-params-btn" id="editParamsBtn">
+                <i class="bi bi-pencil-square"></i> Изменить параметры
+            </button>
+        </div>
+
+        <!-- Модальное окно изменения параметров -->
+        <div id="paramsModal" class="params-modal">
+            <div class="params-modal-content">
+                <div class="params-modal-header">
+                    <h3><i class="bi bi-sliders"></i> Параметры поездки</h3>
+                    <span class="close-params-modal">&times;</span>
+                </div>
+                <div class="params-modal-body">
+                    <div class="param-group">
+                        <label><i class="bi bi-geo-alt-fill"></i> Город</label>
+                        <select id="modalCitySelect" class="param-select">
+                            <option value="saint-petersburg">Санкт-Петербург</option>
+                            <option value="kaliningrad">Калининград</option>
+                        </select>
+                    </div>
+                    <div class="param-group">
+                        <label><i class="bi bi-people-fill"></i> Количество гостей</label>
+                        <div class="travelers-options">
+                            <button class="traveler-option" data-value="1">1</button>
+                            <button class="traveler-option" data-value="2">2</button>
+                            <button class="traveler-option" data-value="3-5">3-5</button>
+                            <button class="traveler-option" data-value="6+">6+</button>
+                        </div>
+                    </div>
+                    <div class="param-group">
+                        <label><i class="bi bi-wallet2-fill"></i> Бюджет (₽)</label>
+                        <input type="range" id="modalBudgetSlider" min="10000" max="200000" value="30000" step="5000">
+                        <div class="budget-display"><span id="modalBudgetValue">30 000</span> ₽</div>
+                        <div class="budget-presets">
+                            <button class="budget-preset" data-value="20000">20 000</button>
+                            <button class="budget-preset" data-value="50000">50 000</button>
+                            <button class="budget-preset" data-value="100000">100 000</button>
+                            <button class="budget-preset" data-value="150000">150 000</button>
+                        </div>
+                    </div>
+                    <div class="param-group">
+                        <label><i class="bi bi-calendar-fill"></i> Даты</label>
+                        <div class="dates-grid">
+                            <input type="date" id="modalStartDate" class="param-date">
+                            <input type="date" id="modalEndDate" class="param-date">
+                        </div>
+                    </div>
+                </div>
+                <div class="params-modal-footer">
+                    <button class="modal-btn modal-btn-secondary" id="cancelParamsBtn">Отмена</button>
+                    <button class="modal-btn modal-btn-primary" id="saveParamsBtn">
+                        <i class="bi bi-check-lg"></i> Сохранить
+                    </button>
                 </div>
             </div>
         </div>
@@ -858,6 +1180,104 @@ require_once 'includes/auth_functions.php';
             document.body.appendChild(n);
             setTimeout(() => n.remove(), 2500);
         }
+
+        // ====== МОДАЛЬНОЕ ОКНО ПАРАМЕТРОВ ======
+        let currentParams = {};
+
+        document.getElementById('editParamsBtn')?.addEventListener('click', function() {
+            const savedData = JSON.parse(localStorage.getItem('selected_city')) || {};
+            currentParams = {
+                cityId: savedData.cityId || 'saint-petersburg',
+                travelers: savedData.travelers || '1',
+                budget: savedData.budget || 30000,
+                startDate: savedData.startDate || '',
+                endDate: savedData.endDate || ''
+            };
+
+            document.getElementById('modalCitySelect').value = currentParams.cityId;
+            document.getElementById('modalBudgetSlider').value = currentParams.budget;
+            document.getElementById('modalBudgetValue').textContent = Number(currentParams.budget).toLocaleString('ru-RU');
+            document.getElementById('modalStartDate').value = currentParams.startDate;
+            document.getElementById('modalEndDate').value = currentParams.endDate;
+
+            document.querySelectorAll('.traveler-option').forEach(btn => {
+                btn.classList.toggle('selected', btn.dataset.value === currentParams.travelers);
+            });
+
+            document.getElementById('paramsModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        });
+
+        function closeParamsModal() {
+            document.getElementById('paramsModal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelector('.close-params-modal')?.addEventListener('click', closeParamsModal);
+        document.getElementById('cancelParamsBtn')?.addEventListener('click', closeParamsModal);
+        document.getElementById('paramsModal')?.addEventListener('click', function(e) {
+            if (e.target === this) closeParamsModal();
+        });
+
+        document.querySelectorAll('.traveler-option').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.traveler-option').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                currentParams.travelers = this.dataset.value;
+            });
+        });
+
+        document.getElementById('modalBudgetSlider')?.addEventListener('input', function() {
+            document.getElementById('modalBudgetValue').textContent = Number(this.value).toLocaleString('ru-RU');
+            currentParams.budget = this.value;
+        });
+
+        document.querySelectorAll('.budget-preset').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const val = this.dataset.value;
+                document.getElementById('modalBudgetSlider').value = val;
+                document.getElementById('modalBudgetValue').textContent = Number(val).toLocaleString('ru-RU');
+                currentParams.budget = val;
+            });
+        });
+
+        document.getElementById('modalStartDate')?.addEventListener('change', function() {
+            currentParams.startDate = this.value;
+        });
+        document.getElementById('modalEndDate')?.addEventListener('change', function() {
+            currentParams.endDate = this.value;
+        });
+
+        document.getElementById('saveParamsBtn')?.addEventListener('click', function() {
+            const cityId = document.getElementById('modalCitySelect').value;
+            const cityNames = { 'saint-petersburg': 'Санкт-Петербург', 'kaliningrad': 'Калининград' };
+            
+            const surveyData = {
+                cityId: cityId,
+                cityName: cityNames[cityId] || 'Санкт-Петербург',
+                travelers: currentParams.travelers || '1',
+                budget: currentParams.budget || 30000,
+                budgetFormatted: Number(currentParams.budget).toLocaleString('ru-RU'),
+                startDate: currentParams.startDate || '',
+                endDate: currentParams.endDate || '',
+                dates: (currentParams.startDate && currentParams.endDate) 
+                    ? `${currentParams.startDate} — ${currentParams.endDate}` 
+                    : 'не выбраны',
+                interests: currentParams.interests || 'Достопримечательности'
+            };
+
+            localStorage.setItem('selected_city', JSON.stringify(surveyData));
+
+            document.getElementById('cityName').textContent = surveyData.cityName;
+            document.getElementById('travelersCount').textContent = surveyData.travelers + ' чел.';
+            document.getElementById('budgetAmount').textContent = surveyData.budgetFormatted + ' ₽';
+            document.getElementById('travelDates').textContent = surveyData.dates;
+
+            closeParamsModal();
+            showNotification('✓ Параметры обновлены');
+
+            setTimeout(() => location.reload(), 500);
+        });
     </script>
 </body>
 </html>

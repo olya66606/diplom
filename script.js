@@ -1325,16 +1325,25 @@ function saveTourToLocal(tourId) {
         return;
     }
     
-    // Добавляем тур
+    // Добавляем тур со всеми данными для модалки
     savedTours.push({
         id: tour.id,
         name: tour.title,
+        title: tour.title,
         image: tour.image,
         price: tour.price,
         duration: tour.duration,
+        badge: tour.badge,
+        rating: tour.rating,
+        reviews: tour.reviews,
         places: tour.places || [],
+        includes: tour.includes || [],
+        schedule: tour.schedule || [],
+        totalTime: tour.totalTime || '',
+        groupSize: tour.groupSize || '',
+        difficulty: tour.difficulty || '',
         date: new Date().toISOString(),
-        source: 'main-page' // источник: главная страница
+        source: 'main-page'
     });
     
     localStorage.setItem('saved_routes', JSON.stringify(savedTours));

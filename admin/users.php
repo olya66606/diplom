@@ -225,6 +225,18 @@ $users = $stmt->fetchAll();
             transform: scale(1.1);
         }
         
+        .btn-edit {
+            background: #f8f9fc;
+            color: #2196f3;
+            border: 2px solid #2196f3;
+        }
+        
+        .btn-edit:hover {
+            background: #2196f3;
+            color: white;
+            transform: scale(1.1);
+        }
+        
         .user-avatar {
             width: 40px;
             height: 40px;
@@ -301,6 +313,128 @@ $users = $stmt->fetchAll();
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
+        }
+        
+        /* Модальное окно редактирования */
+        .edit-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        .edit-modal.show {
+            display: flex;
+            animation: modalFadeIn 0.3s ease;
+        }
+        .edit-modal-content {
+            background: white;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 480px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            animation: modalSlideUp 0.3s ease;
+        }
+        @keyframes modalSlideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .edit-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 28px 16px;
+            border-bottom: 2px solid #e8ecf1;
+        }
+        .edit-modal-header h3 {
+            color: #1b5031;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .close-edit-modal {
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            width: 36px; height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        .close-edit-modal:hover {
+            background: #f0f2f5;
+            color: #333;
+        }
+        .edit-modal-body {
+            padding: 24px 28px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #1b5031;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e8ecf1;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: 'Mulish', sans-serif;
+            transition: all 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #2e8d53;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(46,141,83,0.1);
+        }
+        .edit-modal-footer {
+            display: flex;
+            gap: 12px;
+            padding: 16px 28px 24px;
+            border-top: 1px solid #e8ecf1;
+        }
+        .modal-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 50px;
+            font-family: 'Mulish', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(46,141,83,0.3);
+        }
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46,141,83,0.4);
+        }
+        .modal-btn-secondary {
+            background: #f8f9fc;
+            color: #666;
+            border: 2px solid #e8ecf1;
+        }
+        .modal-btn-secondary:hover {
+            background: #e8ecf1;
         }
         
         @media (max-width: 768px) {
@@ -390,9 +524,12 @@ $users = $stmt->fetchAll();
                         <td>
                             <div class="user-actions">
                                 <?php if ($u['id'] != $currentUserId): ?>
+                                    <button class="user-action-btn btn-edit" onclick="openEditModal(<?= $u['id'] ?>, '<?= htmlspecialchars($u['name'], ENT_QUOTES) ?>', '<?= htmlspecialchars($u['email'], ENT_QUOTES) ?>', '<?= $u['role'] ?>')">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
                                     <a href="?delete=<?= $u['id'] ?>" 
                                        class="user-action-btn btn-delete" 
-                                       onclick="return ">
+                                       onclick="return confirm('Вы уверены?')">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 <?php else: ?>
@@ -415,5 +552,61 @@ $users = $stmt->fetchAll();
             </a>
         </div>
     </div>
+
+    <!-- Модальное окно редактирования пользователя -->
+    <div id="editModal" class="edit-modal">
+        <div class="edit-modal-content">
+            <div class="edit-modal-header">
+                <h3><i class="bi bi-pencil-square"></i> Редактировать пользователя</h3>
+                <span class="close-edit-modal" onclick="closeEditModal()">&times;</span>
+            </div>
+            <form method="POST" action="">
+                <div class="edit-modal-body">
+                    <input type="hidden" name="user_id" id="editUserId">
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" name="name" id="editUserName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" id="editUserEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Роль</label>
+                        <select name="role" id="editUserRole">
+                            <option value="user">Пользователь</option>
+                            <option value="admin">Админ</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="edit-modal-footer">
+                    <button type="button" class="modal-btn modal-btn-secondary" onclick="closeEditModal()">Отмена</button>
+                    <button type="submit" name="edit_user" class="modal-btn modal-btn-primary">
+                        <i class="bi bi-check-lg"></i> Сохранить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openEditModal(id, name, email, role) {
+            document.getElementById('editUserId').value = id;
+            document.getElementById('editUserName').value = name;
+            document.getElementById('editUserEmail').value = email;
+            document.getElementById('editUserRole').value = role;
+            document.getElementById('editModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('editModal').addEventListener('click', function(e) {
+            if (e.target === this) closeEditModal();
+        });
+    </script>
 </body>
 </html>
