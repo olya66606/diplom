@@ -13,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Валидация
     if (empty($name) || empty($email) || empty($password)) {
         $error = 'Все поля обязательны для заполнения';
+    } elseif (!isset($_POST['agree_policy'])) {
+        $error = 'Необходимо принять политику конфиденциальности';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Неверный формат email';
     } elseif (strlen($password) < 6) {
@@ -160,6 +162,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #777;
             text-decoration: none;
         }
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            margin-top: 3px;
+            accent-color: #1b5031;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: #555;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+        .checkbox-group label a {
+            color: #1b5031;
+            text-decoration: underline;
+        }
+        .checkbox-group label a:hover {
+            color: #2e8d53;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-content h3 {
+            color: #1b5031;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        .modal-content p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #999;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s;
+        }
+        .modal-close:hover {
+            color: #1b5031;
+        }
     </style>
 </head>
 <body>
@@ -188,6 +271,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="password_confirm">Повторите пароль</label>
                 <input type="password" id="password_confirm" name="password_confirm" placeholder="Повторите пароль" required>
             </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="agree_policy" name="agree_policy" required>
+                <label for="agree_policy">Я соглашаюсь с <a href="#" onclick="document.getElementById('policyModal').classList.add('active'); return false;">политику конфиденциальности</a></label>
+            </div>
             <button type="submit" class="btn">Зарегистрироваться</button>
         </form>
         <div class="auth-link">
@@ -197,5 +284,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="../index.php"><i class="bi bi-arrow-left"></i> На главную</a>
         </div>
     </div>
+
+    <div id="policyModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('active')">
+        <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('policyModal').classList.remove('active')">&times;</button>
+            <h3>Политика конфиденциальности</h3>
+            <p><strong>1. Сбор данных.</strong> Мы собираем имя и email, указанные при регистрации, исключительно для создания и управления учётной записью.</p>
+            <p><strong>2. Использование данных.</strong> Ваши персональные данные не передаются третьим лицам и не используются для маркетинговых рассылок без вашего согласия.</p>
+            <p><strong>3. Хранение данных.</strong> Мы храним ваши данные до момента удаления учётной записи. Вы можете запросить удаление данных в любой момент.</p>
+            <p><strong>4. Безопасность.</strong> Мы принимаем необходимые меры для защиты ваших данных от несанкционированного доступа.</p>
+            <p><strong>5. Изменения политики.</strong> Мы оставляем за собой право вносить изменения в настоящую политику с уведомлением через сайт.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('policyModal').classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
