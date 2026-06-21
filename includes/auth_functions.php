@@ -158,3 +158,16 @@ function saveUserSurvey($userId, $data) {
     
     return true;
 }
+
+function getApprovedStories($city = null) {
+    $pdo = getDbConnection();
+    
+    if ($city) {
+        $stmt = $pdo->prepare("SELECT * FROM user_stories WHERE city = ? AND is_approved = 1 ORDER BY created_at DESC");
+        $stmt->execute([$city]);
+    } else {
+        $stmt = $pdo->query("SELECT * FROM user_stories WHERE is_approved = 1 ORDER BY created_at DESC");
+    }
+    
+    return $stmt->fetchAll();
+}

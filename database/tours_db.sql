@@ -190,6 +190,44 @@ CREATE TABLE `user_surveys` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Структура таблицы `user_stories`
+--
+
+CREATE TABLE `user_stories` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` int UNSIGNED DEFAULT NULL,
+  `author` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `place_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `place_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `likes` int DEFAULT '0',
+  `is_approved` tinyint(1) DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_city` (`city`),
+  KEY `idx_approved` (`is_approved`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Индексы сохраненных таблиц
+--
+
+CREATE TABLE `user_surveys` (
+  `id` int UNSIGNED NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
+  `city` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `travelers` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `budget` int DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `interests` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
 -- Индексы сохранённых таблиц
 --
 
@@ -283,6 +321,20 @@ ALTER TABLE `user_saved_tours`
 
 --
 -- AUTO_INCREMENT для таблицы `user_surveys`
+--
+
+ALTER TABLE `user_surveys`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `user_stories`
+--
+
+ALTER TABLE `user_stories`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
 --
 ALTER TABLE `user_surveys`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;

@@ -1,5 +1,7 @@
 <?php
 require_once 'includes/auth_functions.php';
+
+$stories = getApprovedStories();
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -638,7 +640,7 @@ require_once 'includes/auth_functions.php';
 
         const avatarColors = ['#2e8d53', '#e67e22', '#9b59b6', '#e91e63', '#3498db', '#16a085', '#d35400'];
 
-        let stories = JSON.parse(localStorage.getItem('locals_stories')) || [];
+        let stories = [];
         let likedStories = JSON.parse(localStorage.getItem('liked_stories')) || {};
         let carouselIndex = 0;
 
@@ -656,6 +658,30 @@ require_once 'includes/auth_functions.php';
         // Фильтруем истории по городу
         function getCityStories() {
             return stories.filter(s => s.city === currentCityId);
+        }
+
+        // Загрузка историй с сервера
+        async function loadStories() {
+            try {
+                const response = await fetch(`api/save_story.php?city=${currentCityId}&approved=1`);
+                const data = await response.json();
+                stories = data.map(s => ({
+                    id: s.id,
+                    author: s.author,
+                    city: s.city,
+                    cityName: cityNames[s.city] || s.city,
+                    title: s.title,
+                    text: s.text,
+                    placeName: s.place_name,
+                    placeAddress: s.place_address,
+                    category: s.category,
+                    date: new Date(s.created_at).toLocaleDateString('ru-RU'),
+                    likes: s.likes || 0
+                }));
+                renderStories();
+            } catch (e) {
+                console.error('Ошибка загрузки историй:', e);
+            }
         }
 
 
@@ -1012,29 +1038,36 @@ require_once 'includes/auth_functions.php';
         };
 
 
-        document.getElementById('storyForm').addEventListener('submit', function(e) {
+        document.getElementById('storyForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const newStory = {
-                id: Date.now(),
+            const formData = {
                 author: document.getElementById('authorName').value,
                 city: currentCityId,
-                cityName: currentCityName,
                 title: document.getElementById('storyTitle').value,
                 text: document.getElementById('storyText').value,
                 placeName: document.getElementById('placeName').value,
                 placeAddress: document.getElementById('placeAddress').value,
-                category: document.getElementById('storyCategory').value,
-                date: 'только что',
-                likes: 0
+                category: document.getElementById('storyCategory').value
             };
 
-            stories.unshift(newStory);
-            localStorage.setItem('locals_stories', JSON.stringify(stories));
-
-            this.reset();
-            renderStories();
-            showNotification('✓ История опубликована!');
+            try {
+                const response = await fetch('api/save_story.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const result = await response.json();
+                
+                if (result.success) {
+                    showNotification('✓ История отправлена на модерацию!');
+                    this.reset();
+                } else {
+                    showNotification(result.message || 'Ошибка отправки', true);
+                }
+            } catch (e) {
+                showNotification('Ошибка соединения', true);
+            }
         });
 
   
@@ -1049,23 +1082,10 @@ require_once 'includes/auth_functions.php';
 
         // ====== ИНИЦИАЛИЗАЦИЯ ======
         document.addEventListener('DOMContentLoaded', function() {
-            const saved = localStorage.getItem('locals_stories');
-            if (!saved || saved === '[]') {
-                const defaults = [
-                    { id: 1, author: 'Аня М.', city: 'saint-petersburg', cityName: 'Санкт-Петербург', title: 'Где я пью лучший капучино по утрам', text: 'Каждое воскресенье я прихожу сюда в 9 утра. Пока город ещё спит, сажусь у окна с видом на канал. Кофе здесь варят с любовью, а круассаны — хрустящие, как во Франции. Это мой личный ритуал перед новой неделей.', placeName: 'Кофейня «Зерно»', placeAddress: 'Лиговский проспект, 53', category: 'coffee', date: '3 дня назад', likes: 24 },
-                    { id: 2, author: 'Дима К.', city: 'saint-petersburg', cityName: 'Санкт-Петербург', title: 'Секретный двор, который не найти на карте', text: 'Между двух старых домов на Васильевском есть проход. Если свернуть туда — попадаешь во двор с настоящим виноградом и коваными скамейками. Здесь тихо, хотя в 50 метрах — оживлённая улица. Местные старики играют в шахматы, а я читаю книги.', placeName: 'Двор на 7-й линии', placeAddress: '7-я линия В.О., д. 16', category: 'secret', date: '5 дней назад', likes: 56 },
-                    { id: 3, author: 'Маша Л.', city: 'saint-petersburg', cityName: 'Санкт-Петербург', title: 'Прогулка, которая лечит от грусти', text: 'Когда на душе тяжело — я иду от Летнего сада до стрелки Васильевского. Путь занимает час, но за ним — целая жизнь. Мосты, вода, фонари. Особенно в дождь. Питер не красив несмотря на дождь — он красив благодаря ему.', placeName: 'Набережная Невы', placeAddress: 'от Летнего сада до стрелки В.О.', category: 'walk', date: '4 дня назад', likes: 67 },
-                    { id: 4, author: 'Катя В.', city: 'kaliningrad', cityName: 'Калининград', title: 'Наше место для закатов', text: 'Мы с парнем каждую пятницу едем на набережную. Там есть одна скамейка — наша. С неё видно мост и реку, и когда солнце садится, всё заливает оранжевым. Мы приносим пиццу, садимся и молча смотрим. Это лучше любого кино.', placeName: 'Набережная озера Верхнее', placeAddress: 'ул. Дзержинского', category: 'romantic', date: '1 неделю назад', likes: 41 },
-                    { id: 5, author: 'Сергей П.', city: 'kaliningrad', cityName: 'Калининград', title: 'Рыбный рынок, где всё по-настоящему', text: 'Забудьте про супермаркеты. В субботу утром я еду на рынок у Рыбной деревни. Прямо с причала — копчёная рыба, свежие креветки, домашний хлеб. Продавцы знают меня по имени. Это душа города, не только еда.', placeName: 'Рыбный рынок', placeAddress: 'ул. Октябрьская, рядом с Рыбной деревней', category: 'food', date: '2 дня назад', likes: 33 },
-                    { id: 6, author: 'Игорь Н.', city: 'kaliningrad', cityName: 'Калининград', title: 'Крыша, откуда видно весь город', text: 'Мало кто знает, что в торговом центре на площади Победы есть выход на крышу. Бесплатно. Сверху видно собор, озеро и закат. Я привёл туда друзей из Москвы — они обалдели. Главное — приходить до 20:00, пока не закрыли.', placeName: 'Смотровая на крыше', placeAddress: 'пл. Победы, ТЦ «Европа»', category: 'view', date: '1 день назад', likes: 89 }
-                ];
-                localStorage.setItem('locals_stories', JSON.stringify(defaults));
-            }
-
             document.getElementById('formCityName').textContent = currentCityName;
 
             renderBloggers();
-            renderStories();
+            loadStories();
 
             const authBtn = document.getElementById('authButton');
             const user = JSON.parse(localStorage.getItem('current_user'));

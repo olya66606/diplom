@@ -6,6 +6,32 @@ $pdo = getDbConnection();
 $message = '';
 $messageType = '';
 
+// Создаём папку для изображений туров
+$uploadDir = __DIR__ . '/../img/tours/';
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+}
+
+function uploadTourImage($file, $uploadDir) {
+    if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
+        return null;
+    }
+    
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    if (!in_array($file['type'], $allowedTypes)) {
+        return null;
+    }
+    
+    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $filename = 'tour_' . time() . '_' . uniqid() . '.' . $ext;
+    $destination = $uploadDir . $filename;
+    
+    if (move_uploaded_file($file['tmp_name'], $destination)) {
+        return 'img/tours/' . $filename;
+    }
+    return null;
+}
+
 if (isset($_POST['save_tour'])) {
     $title = $_POST['title'];
     $location = $_POST['location'];
@@ -16,13 +42,39 @@ if (isset($_POST['save_tour'])) {
     $badge = $_POST['badge'];
     $is_active = isset($_POST['is_active']) ? 1 : 0;
     
+    $existingTour = null;
     if (isset($_POST['tour_id']) && $_POST['tour_id']) {
-        $stmt = $pdo->prepare("UPDATE tours SET title=?, location=?, city_id=?, description=?, price=?, duration=?, badge=?, is_active=? WHERE id=?");
-        $stmt->execute([$title, $location, $city_id, $description, $price, $duration, $badge, $is_active, $_POST['tour_id']]);
+        $existingTour = $_POST['tour_id'];
+        
+        // Получаем текущее изображение
+        $stmt = $pdo->prepare("SELECT image FROM tours WHERE id = ?");
+        $stmt->execute([$_POST['tour_id']]);
+        $currentImage = $stmt->fetchColumn();
+    }
+    
+    // Обработка загрузки изображения
+    $imagePath = null;
+    if (isset($_FILES['tour_image']) && $_FILES['tour_image']['error'] === UPLOAD_ERR_OK) {
+        $imagePath = uploadTourImage($_FILES['tour_image'], $uploadDir);
+        // Удаляем старое изображение, если загружено новое
+        if ($existingTour && $currentImage && file_exists(__DIR__ . '/../' . $currentImage)) {
+            unlink(__DIR__ . '/../' . $currentImage);
+        }
+    }
+    
+    if ($existingTour) {
+        if ($imagePath !== null) {
+            $stmt = $pdo->prepare("UPDATE tours SET title=?, location=?, city_id=?, description=?, price=?, duration=?, badge=?, is_active=?, image=? WHERE id=?");
+            $stmt->execute([$title, $location, $city_id, $description, $price, $duration, $badge, $is_active, $imagePath, $_POST['tour_id']]);
+        } else {
+            $stmt = $pdo->prepare("UPDATE tours SET title=?, location=?, city_id=?, description=?, price=?, duration=?, badge=?, is_active=? WHERE id=?");
+            $stmt->execute([$title, $location, $city_id, $description, $price, $duration, $badge, $is_active, $_POST['tour_id']]);
+        }
         $message = 'Тур обновлен';
     } else {
-        $stmt = $pdo->prepare("INSERT INTO tours (title, location, city_id, description, price, duration, badge, is_active) VALUES (?,?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$title, $location, $city_id, $description, $price, $duration, $badge, $is_active]);
+        $finalImagePath = $imagePath ?? null;
+        $stmt = $pdo->prepare("INSERT INTO tours (title, location, city_id, description, price, duration, badge, is_active, image) VALUES (?,?,?,?,?,?,?,?,?)");
+        $stmt->execute([$title, $location, $city_id, $description, $price, $duration, $badge, $is_active, $finalImagePath]);
         $message = 'Тур добавлен';
     }
     $messageType = 'success';
@@ -157,6 +209,24 @@ if (isset($_GET['edit'])) {
         .admin-form-group textarea {
             height: 120px;
             resize: vertical;
+        }
+        
+        .admin-form-group input[type="file"] {
+            padding: 10px;
+            cursor: pointer;
+        }
+        
+        .image-preview {
+            margin-top: 10px;
+            max-width: 200px;
+            border-radius: 12px;
+            border: 2px solid #e8ecf1;
+        }
+        
+        .current-image {
+            margin-top: 10px;
+            max-width: 200px;
+            border-radius: 12px;
         }
         
         .admin-form-actions {
@@ -375,9 +445,15 @@ if (isset($_GET['edit'])) {
             <h2 class="admin-card-title">
                 <?= $editTour ? 'Редактировать тур' : 'Добавить новый тур' ?>
             </h2>
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <?php if ($editTour): ?>
                     <input type="hidden" name="tour_id" value="<?= $editTour['id'] ?>">
+                    <?php if ($editTour['image']): ?>
+                        <div style="margin-bottom: 20px;">
+                            <label>Текущее изображение</label>
+                            <img src="../<?= htmlspecialchars($editTour['image']) ?>" alt="Тур" class="current-image">
+                        </div>
+                    <?php endif; ?>
                 <?php endif; ?>
                 
                 <div class="admin-form-grid">
@@ -411,6 +487,11 @@ if (isset($_GET['edit'])) {
                         <label>Бейдж</label>
                         <input type="text" name="badge" placeholder="Например: Хит, Популярный" value="<?= htmlspecialchars($editTour['badge'] ?? '') ?>">
                     </div>
+                    <div class="admin-form-group">
+                        <label>Изображение</label>
+                        <input type="file" name="tour_image" accept="image/jpeg,image/png,image/webp,image/gif">
+                        <small style="color: #999; font-size: 0.85rem;">JPG, PNG, WEBP или GIF</small>
+                    </div>
                 </div>
                 
                 <div class="admin-form-group">
@@ -438,6 +519,7 @@ if (isset($_GET['edit'])) {
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Фото</th>
                             <th>Название</th>
                             <th>Город</th>
                             <th>Цена</th>
@@ -449,6 +531,13 @@ if (isset($_GET['edit'])) {
                         <?php foreach ($tours as $tour): ?>
                         <tr>
                             <td><?= $tour['id'] ?></td>
+                            <td>
+                                <?php if ($tour['image']): ?>
+                                    <img src="../<?= htmlspecialchars($tour['image']) ?>" alt="" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
+                                <?php else: ?>
+                                    <span style="color: #ccc;">—</span>
+                                <?php endif; ?>
+                            </td>
                             <td><?= htmlspecialchars($tour['title']) ?></td>
                             <td><?= htmlspecialchars($tour['location']) ?></td>
                             <td><?= number_format($tour['price'], 0, '.', ' ') ?> ₽</td>
