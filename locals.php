@@ -678,7 +678,7 @@ $stories = getApprovedStories();
                     date: new Date(s.created_at).toLocaleDateString('ru-RU'),
                     likes: s.likes || 0
                 }));
-                renderStories();
+                renderBloggers();
             } catch (e) {
                 console.error('Ошибка загрузки историй:', e);
             }
@@ -749,19 +749,6 @@ $stories = getApprovedStories();
                     { name: 'Набережная Фонтанки', desc: 'Фонари и отражения в воде' },
                     { name: 'Дворец Танцев', desc: 'Джаз по четвергам' },
                     { name: 'Лофт «Этажи»', desc: 'Молодёжная атмосфера' }
-                ]
-            },
-            {
-                id: 'igor-spb', name: 'Игорь Волков', city: 'saint-petersburg', cityName: 'Санкт-Петербург',
-                role: 'Велогид · Возлю по крышам', avatarColor: '#16a085',
-                socials: {},
-                title: '5 лучших смотровых площадок',
-                places: [
-                    { name: 'Колоннада Исаакия', desc: 'Классика, но стоит того' },
-                    { name: 'Мансарда на Невском', desc: '360 градусов центра' },
-                    { name: 'Стрелка Васильевского', desc: 'Бесплатно и красиво' },
-                    { name: 'Лахта Центр', desc: 'Современный вид на залив' },
-                    { name: 'Новая Голландия', desc: 'Крыша с видом на канал' }
                 ]
             },
             {
@@ -844,11 +831,14 @@ $stories = getApprovedStories();
             }
         ];
 
+        // Убираем последнего блогера, заменяем на карточку одобренных историй
+        bloggersData.pop();
+
         function renderBloggers() {
             const grid = document.getElementById('bloggersGrid');
             const cityBloggers = bloggersData.filter(b => b.city === currentCityId);
 
-            if (cityBloggers.length === 0) {
+            if (cityBloggers.length === 0 && stories.length === 0) {
                 grid.innerHTML = `
                     <div class="empty-state" style="grid-column: 1 / -1;">
                         <i class="bi bi-stars"></i>
@@ -858,7 +848,7 @@ $stories = getApprovedStories();
                 return;
             }
 
-            grid.innerHTML = cityBloggers.map(blogger => `
+            let html = cityBloggers.map(blogger => `
                 <div class="blogger-card">
                     <div class="blogger-header">
                         <div class="blogger-avatar" style="background: ${blogger.avatarColor};">${blogger.name.charAt(0)}</div>
@@ -884,6 +874,40 @@ $stories = getApprovedStories();
                     </div>
                 </div>
             `).join('');
+
+            // Добавляем карточку одобренных историй
+            const cityStories = stories.filter(s => s.city === currentCityId);
+            if (cityStories.length > 0) {
+                html += `
+                    <div class="blogger-card">
+                        <div class="blogger-header">
+                            <div class="blogger-avatar" style="background: linear-gradient(135deg, #266d59 0%, #3a8340 100%);"><i class="bi bi-check-circle-fill"></i></div>
+                            <div class="blogger-info">
+                                <div class="blogger-name">Одобренные истории</div>
+                                <div class="blogger-role">От местных жителей</div>
+                            </div>
+                        </div>
+                        <div class="blogger-title">Места от жителей ${currentCityName}</div>
+                        <div class="blogger-places">
+                            ${cityStories.slice(0, 5).map((story, i) => {
+                                const cfg = categoryConfig[story.category] || categoryConfig.coffee;
+                                return `
+                                    <div class="blogger-place">
+                                        <div class="blogger-place-num" style="background: ${cfg.color};">${i + 1}</div>
+                                        <div class="blogger-place-info">
+                                            <div class="blogger-place-name">${story.placeName}</div>
+                                            <div class="blogger-place-desc">${story.title} — ${story.author}</div>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                            ${cityStories.length > 5 ? `<div style="text-align: center; margin-top: 15px; color: #666; font-size: 0.9rem;">+${cityStories.length - 5} ещё</div>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+
+            grid.innerHTML = html;
         }
 
         window.saveBloggerPlace = function(name, desc, city) {
@@ -1062,6 +1086,8 @@ $stories = getApprovedStories();
                 if (result.success) {
                     showNotification('✓ История отправлена на модерацию!');
                     this.reset();
+                    // Обновляем список одобренных историй
+                    loadStories();
                 } else {
                     showNotification(result.message || 'Ошибка отправки', true);
                 }
@@ -1084,8 +1110,10 @@ $stories = getApprovedStories();
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('formCityName').textContent = currentCityName;
 
-            renderBloggers();
             loadStories();
+
+            // Периодическое обновление списка одобренных историй (каждые 30 секунд)
+            setInterval(loadStories, 30000);
 
             const authBtn = document.getElementById('authButton');
             const user = JSON.parse(localStorage.getItem('current_user'));
