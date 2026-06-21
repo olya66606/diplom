@@ -511,27 +511,6 @@ function loadTours(cityId) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             
 // Отправка формы - СОХРАНЯЕМ ВСЕ ДАННЫЕ В localStorage
 submitBtn.addEventListener('click', function() {
@@ -630,9 +609,9 @@ submitBtn.addEventListener('click', function() {
   
 
 document.addEventListener('DOMContentLoaded', function() {
-    // =========================================
+
     // ПОЛУЧАЕМ ССЫЛКИ НА ЭЛЕМЕНТЫ ФОРМЫ
-    // =========================================
+
     const countrySelect = document.getElementById('country');
     const travelersRadios = document.querySelectorAll('input[name="travelers"]');
     const budgetRange = document.getElementById('budget');
@@ -642,9 +621,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const interestCheckboxes = document.querySelectorAll('input[name="interests"]');
     const additionalInfo = document.getElementById('additional-info');
 
-    // =========================================
     // ЭЛЕМЕНТЫ ДЛЯ ДУБЛИРОВАНИЯ (САММАРИ)
-    // =========================================
+ 
     const summaryCountry = document.getElementById('summary-country');
     const summaryTravelers = document.getElementById('summary-travelers');
     const summaryBudget = document.getElementById('summary-budget');
@@ -652,9 +630,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const summaryInterests = document.getElementById('summary-interests');
     const summaryAdditional = document.getElementById('summary-additional');
 
-    // =========================================
     // КНОПКИ И МОДАЛКА
-    // =========================================
+
     const resetBtn = document.getElementById('reset-form');
     const submitBtn = document.getElementById('submit-btn');
     const detailsBtn = document.getElementById('details-btn');
@@ -662,9 +639,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalBody = document.getElementById('modal-body');
     const closeModal = document.querySelector('.close-modal');
 
-    // =========================================
     // ФУНКЦИИ ОБНОВЛЕНИЯ
-    // =========================================
+  
 
     /**
      * Обновляет значение бегунка и дублирует его
@@ -735,9 +711,8 @@ document.addEventListener('DOMContentLoaded', function() {
         summaryAdditional.textContent = additionalInfo.value.trim() || '—';
     }
 
-    // =========================================
     // ОБРАБОТЧИКИ СОБЫТИЙ ДЛЯ АКТУАЛИЗАЦИИ SUMMARY
-    // =========================================
+
     countrySelect.addEventListener('change', updateSummary);
     travelersRadios.forEach(radio => radio.addEventListener('change', updateSummary));
     budgetRange.addEventListener('input', updateSummary); // input для плавного обновления
@@ -746,9 +721,7 @@ document.addEventListener('DOMContentLoaded', function() {
     interestCheckboxes.forEach(cb => cb.addEventListener('change', updateSummary));
     additionalInfo.addEventListener('input', updateSummary);
 
-    // =========================================
     // КНОПКА СБРОСА
-    // =========================================
     resetBtn.addEventListener('click', function() {
         // Сбрасываем форму до исходного состояния (можно и form.reset(), но проще вручную задать начальные)
         countrySelect.value = 'Италия';
@@ -1181,9 +1154,9 @@ window.addEventListener('click', function(event) {
 
 
 
-// =========================================
+
 // МОДАЛЬНОЕ ОКНО ТУРА + СОХРАНЕНИЕ
-// =========================================
+
 
 let tourModal = null;
 
@@ -1385,9 +1358,6 @@ function showTourNotification(message) {
 
 
 
-/**
- * JS Функции для работы с API аутентификации
- */
 
 // Сохранение данных опроса
 async function saveSurveyData(data) {
