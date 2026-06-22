@@ -171,6 +171,7 @@ $user = getCurrentUser();
             border-radius: 20px; 
             color: #999; 
         }
+        
         .tour-source-badge {
             position: absolute;
             top: 10px;
@@ -181,6 +182,120 @@ $user = getCurrentUser();
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
+        }
+      
+           /* АДАПТИВНОСТЬ ЛИЧНЫЙ КАБИНЕТ */
+
+        
+        @media (max-width: 1024px) {
+            .profile-container {
+                max-width: 90%;
+                padding: 30px;
+                margin: 80px auto 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 0 10px;
+            }
+            
+            .profile-container {
+                max-width: 95%;
+                padding: 20px;
+                border-radius: 20px;
+                margin: 70px auto 20px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+                padding-bottom: 10px;
+            }
+            
+            .user-info {
+                padding: 15px;
+            }
+            
+            .user-info p {
+                font-size: 1rem;
+            }
+            
+            .route-section h2 {
+                font-size: 1.3rem;
+            }
+            
+            .route-item {
+                padding: 12px;
+            }
+            
+            .saved-tours-section h2 {
+                font-size: 1.3rem;
+            }
+            
+            .saved-tours-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .saved-tour-image {
+                height: 150px;
+            }
+            
+            .logout-btn {
+                width: 100%;
+                padding: 12px;
+            }
+            
+            .back-link {
+                display: block;
+                text-align: center;
+                margin-top: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 0 5px;
+            }
+            
+            .profile-container {
+                padding: 15px;
+                margin: 65px auto 10px;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .user-info p {
+                font-size: 0.95rem;
+            }
+            
+            .route-section h2,
+            .saved-tours-section h2 {
+                font-size: 1.2rem;
+            }
+            
+            .saved-tour-content {
+                padding: 15px;
+            }
+            
+            .saved-tour-title {
+                font-size: 1.1rem;
+            }
+            
+            .saved-tour-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .saved-tour-actions {
+                flex-direction: column;
+            }
+            
+            .tour-action-btn {
+                width: 100%;
+            }
         }
     </style>
 </head>

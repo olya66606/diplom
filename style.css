@@ -1400,31 +1400,32 @@ body.modal-open {
         margin-top: auto;
     }
 
-     .footer-container {
-        width: 1800px;
+.footer-container {
+        width: 100%;
+        max-width: 1800px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-b;
+        justify-content: space-between;
         margin: 0 auto;
         padding: 0 20px;
     }
-
+    
      .footer-top {
         display: flex;
         gap: 30px;
         margin-bottom: 40px;
     }
-
+    
      .footer-section {
         display: flex;
         flex-direction: column;
     }
-
+    
      .footer-logo {
         margin-bottom: 20px;
     }
-
+    
      .logo-link {
         display: flex;
         align-items: center;
@@ -1435,7 +1436,7 @@ body.modal-open {
         margin-bottom: 15px;
         transition: color 0.3s;
     }
-
+    
      .contact-list{
         width: 300px;
         text-align: center;
@@ -1444,13 +1445,13 @@ body.modal-open {
     .logo-link:hover {
         color: #273f3c;
     }
-
+    
      .logo-icon {
         font-size: 2.2rem;
         margin-right: 10px;
         color: #273f3c;
     }
-
+    
      .logo-text {
         font-size: 1.8rem;
     }
@@ -2486,8 +2487,202 @@ body.modal-open {
         grid-template-columns: 1fr;
     }
     
-    .tour-modal-actions {
+.tour-modal-actions {
         flex-direction: column;
+    }
+}
+
+   /* ДОПОЛНИТЕЛЬНАЯ АДАПТИВНОСТЬ */
+
+
+@media (max-width: 1024px) {
+    .header-left {
+        width: auto !important;
+    }
+    
+    .header-right {
+        width: auto !important;
+    }
+    
+    .banner-left p {
+        width: 100% !important;
+        font-size: clamp(20px, 4vw, 60px);
+    }
+    
+    .banner-left {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-left {
+        width: auto !important;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .header-right {
+        width: auto !important;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .banner-left p {
+        width: 100% !important;
+        font-size: clamp(18px, 3.5vw, 40px);
+    }
+    
+    .banner-left {
+        width: 100% !important;
+        margin: 20px auto;
+    }
+    
+    .oprosbtn {
+        width: auto;
+        padding: 15px 30px;
+        font-size: 18px;
+    }
+    
+    .tours-grid {
+        height: auto;
+    }
+    
+    .tour-card {
+        min-height: auto;
+    }
+    
+    .footer-container {
+        padding: 0 15px;
+    }
+    
+    .contact-list {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+    
+    .vivod {
+        padding: 0 10px;
+    }
+    
+    .stats-grid {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 0 10px;
+    }
+    
+    .header-left {
+        gap: 8px;
+    }
+    
+    .header a,
+    .header-link {
+        font-size: 11px;
+        padding: 4px 6px;
+    }
+    
+    .header-logo > img {
+        height: 30px;
+    }
+    
+    .header-right > .lihka {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+    
+    .banner {
+        padding: 20px 10px;
+    }
+    
+    .banner-left p {
+        width: 100% !important;
+        font-size: clamp(16px, 4vw, 28px);
+    }
+    
+    .banner-left p:last-of-type {
+        font-size: clamp(14px, 3vw, 20px);
+    }
+    
+    .banner-right {
+        margin: 20px auto 0;
+    }
+    
+    .foto1, .foto2, .foto3 {
+        width: 100% !important;
+        max-width: 250px;
+        height: auto;
+        margin: 10px auto !important;
+    }
+    
+    .oprosbtn {
+        width: 100%;
+        max-width: 280px;
+        font-size: 16px;
+        padding: 12px 20px;
+    }
+    
+    .survey-block {
+        padding: 0 10px;
+    }
+    
+    .survey-card-wrapper {
+        flex-direction: column;
+    }
+    
+    .survey-questions-area {
+        padding: 15px;
+    }
+    
+    .survey-summary-container {
+        padding: 15px;
+    }
+    
+    .dates-container {
+        flex-direction: column;
+    }
+    
+    .date-input {
+        width: 100%;
+    }
+    
+    .tours-grid {
+        padding: 0 10px;
+    }
+    
+    .tour-card {
+        width: 100%;
+    }
+    
+    .vivod {
+        padding: 0 5px;
+    }
+    
+    .stats-grid {
+        gap: 10px;
+    }
+    
+    .stat-card {
+        padding: 15px;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .footer-top {
+        flex-direction: column;
+    }
+    
+    .footer-section {
+        width: 100% !important;
+        margin-bottom: 20px;
+    }
+    
+    .newsletter-form {
+        width: 100%;
     }
 }
 

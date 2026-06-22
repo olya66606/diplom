@@ -254,4 +254,124 @@ require_once 'includes/auth_functions.php';
         transform: scale(1.05);
     }
 
+
+       /* АДАПТИВНОСТЬ О НАС */
+  
+    
+    @media (max-width: 1024px) {
+        .container {
+            padding: 120px 30px;
+        }
+        
+        .about-content {
+            gap: 30px;
+        }
+        
+        .cartochki-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .container {
+            padding: 100px 20px;
+        }
+        
+        .cartochki-container > h2 {
+            font-size: 1.5rem;
+            margin-top: 60px;
+        }
+        
+        .about-content {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .about-text h2 {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .about-text p {
+            font-size: 1rem;
+        }
+        
+        .videlit {
+            padding: 12px;
+            margin: 20px 0;
+        }
+        
+        .cta-button {
+            display: block;
+            text-align: center;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto 0;
+        }
+        
+        .cartochki {
+            margin-bottom: 60px;
+        }
+        
+        .cartochki h2 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .cartochki-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .cartochki-card {
+            padding: 20px;
+        }
+        
+        .cartochki-icon > img {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .cartochki-card h3 {
+            font-size: 1.3rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .container {
+            padding: 80px 15px;
+        }
+        
+        .cartochki-container > h2 {
+            font-size: 1.3rem;
+            margin-top: 40px;
+        }
+        
+        .about-text h2 {
+            font-size: 1.3rem;
+        }
+        
+        .about-text p {
+            font-size: 0.95rem;
+        }
+        
+        .cartochki h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .cartochki-card {
+            padding: 15px;
+        }
+        
+        .cartochki-card h3 {
+            font-size: 1.2rem;
+        }
+        
+        .cta-button {
+            padding: 10px 25px;
+            font-size: 0.95rem;
+        }
+    }
+
     </style>

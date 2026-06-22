@@ -726,6 +726,260 @@ require_once 'includes/auth_functions.php';
             #map { 
                 height: 350px; 
             }
+            
+            .carousel-card { 
+                flex: 0 0 260px; 
+            }
+        }
+        
+           /* АДАПТИВНОСТЬ КОНСТРУКТОР МАРШРУТОВ */
+   
+        
+        @media (max-width: 1024px) {
+            .planner-container {
+                padding: 0 15px;
+                margin: 20px auto;
+            }
+            
+            .city-info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .carousel-card {
+                flex: 0 0 280px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .planner-container {
+                padding: 0 10px;
+                margin: 10px auto;
+            }
+            
+            .info-block, .map-section, .cards-section, .selected-places-section {
+                padding: 15px;
+                border-radius: 16px;
+                margin-bottom: 15px;
+            }
+            
+            .city-info-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .city-info-item {
+                padding: 12px;
+            }
+            
+            .city-info-item i {
+                font-size: 1.5rem;
+            }
+            
+            .city-info-text h4 {
+                font-size: 0.7rem;
+            }
+            
+            .city-info-text p {
+                font-size: 0.9rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .section-header h2 {
+                font-size: 1.3rem;
+            }
+            
+            #map {
+                height: 300px;
+                border-radius: 12px;
+            }
+            
+            .category-tabs {
+                gap: 6px;
+                flex-wrap: wrap;
+            }
+            
+            .category-tab {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+            
+            .carousel-card {
+                flex: 0 0 250px;
+            }
+            
+            .card-title {
+                font-size: 1rem;
+            }
+            
+            .route-stats {
+                grid-template-columns: repeat(3, 1fr);
+                padding: 12px;
+                gap: 8px;
+            }
+            
+            .stat-value {
+                font-size: 1.3rem;
+            }
+            
+            .stat-label {
+                font-size: 0.7rem;
+            }
+            
+            .selected-place-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 10px;
+            }
+            
+            .remove-place-btn {
+                align-self: flex-end;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .action-btn {
+                width: 100%;
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            
+            .edit-params-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .params-modal {
+                padding-top: 60px;
+                align-items: flex-end;
+            }
+            
+            .params-modal-content {
+                width: 100%;
+                max-width: 100%;
+                border-radius: 24px 24px 0 0;
+                max-height: 85vh;
+            }
+            
+            .travelers-options {
+                flex-wrap: wrap;
+            }
+            
+            .traveler-option {
+                min-width: calc(50% - 5px);
+            }
+            
+            .dates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .params-modal-footer {
+                flex-direction: column;
+            }
+            
+            .modal-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .planner-container {
+                padding: 0 5px;
+                margin: 5px auto;
+            }
+            
+            .info-block, .map-section, .cards-section, .selected-places-section {
+                padding: 12px;
+                margin-bottom: 10px;
+            }
+            
+            .city-info-item {
+                padding: 10px;
+            }
+            
+            .section-header h2 {
+                font-size: 1.2rem;
+            }
+            
+            #map {
+                height: 250px;
+                border-radius: 8px;
+            }
+            
+            .category-tab {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+            
+            .carousel-card {
+                flex: 0 0 230px;
+                padding: 15px;
+            }
+            
+            .card-title {
+                font-size: 0.95rem;
+            }
+            
+            .card-description {
+                font-size: 0.8rem;
+            }
+            
+            .route-stats {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .stat-item {
+                padding: 5px 0;
+            }
+            
+            .stat-value {
+                font-size: 1.2rem;
+            }
+            
+            .selected-place-item {
+                padding: 8px;
+            }
+            
+            .place-number {
+                width: 24px;
+                height: 24px;
+                font-size: 0.75rem;
+            }
+            
+            .toast-notification {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+            
+            .params-modal-content {
+                padding: 15px;
+            }
+            
+            .param-group {
+                margin-bottom: 15px;
+            }
+            
+            .param-select, .param-date {
+                padding: 10px;
+                font-size: 0.95rem;
+            }
+            
+            .traveler-option {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>

@@ -551,7 +551,7 @@ if (isset($_GET['edit'])) {
                                     <a href="?edit=<?= $tour['id'] ?>" class="tour-action-btn tour-btn-edit" title="Редактировать">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <a href="?delete=<?= $tour['id'] ?>" class="tour-action-btn tour-btn-delete" onclick="return confirm('Удалить этот тур?')" title="Удалить">
+                                    <a href="?delete=<?= $tour['id'] ?>" class="tour-action-btn tour-btn-delete" title="Удалить">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </div>
